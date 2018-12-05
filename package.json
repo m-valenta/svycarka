@@ -1,0 +1,14 @@
+{
+  "name": "chata_svycarka",
+  "version": "1.0.0",
+  "description": "Web horské chaty Švýcarka",
+  "main": "index.js",
+  "repository": "https://github.com/m-valenta/svycarka.git",
+  "author": "valenta001@gmail.com",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "bobril": "^8.17.0",
+    "bobx": "^0.19.0"
+  }
+}
