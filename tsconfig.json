@@ -21,7 +21,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "sourceMap": true,
-    "target": "es5"
+    "target": "es5",
+    "resolveJsonModule": true
   },
   "files": [
     "node_modules/bobril/jsx.d.ts"

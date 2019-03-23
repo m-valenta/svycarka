@@ -2,9 +2,13 @@
 # yarn lockfile v1
 
 
-bobril@*, bobril@^8.17.0:
+bobril@*:
   version "8.17.0"
   resolved "https://registry.yarnpkg.com/bobril/-/bobril-8.17.0.tgz#fc13f3c0ad7b1f67cab26bc9595290ab8436b8fd"
+
+bobril@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/bobril/-/bobril-9.6.0.tgz#685b66f0021e0162393ba51610118884b88da5ac"
 
 bobx@^0.19.0:
   version "0.19.0"
