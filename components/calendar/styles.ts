@@ -19,6 +19,14 @@ export const columnStyle = b.styleDef({
     border: "solid 1px red"
 });
 
+export const columnStyleOtherMonth = b.styleDefEx(columnStyle, {
+    color: "silver"
+})
+
+export const columnStyleReserved = b.styleDefEx(columnStyleOtherMonth, {
+    textDecoration: "line-through"
+});
+
 export const dayLine = b.styleDefEx(rowStyle, [rowStyle, {
     fontWeight: 700
 }]);

@@ -1,16 +1,21 @@
 import { observable } from "bobx";
 import * as b from "bobril";
-import { IMonthInfo, getMonthInfo, getPreviousMonthInfo, getNextMonthInfo, DayOfWeek, translateDay } from "../../utils/dateUtils";
+import { IMonthInfo, getMonthInfo, getPreviousMonthInfo, getNextMonthInfo, DayOfWeek, translateDay, translateMonth } from "../../utils/dateUtils";
 import * as styles from "./styles"
 
 class MonthDay {
-    constructor(text: string, day: DayOfWeek) {
+
+    constructor(text: string, day: DayOfWeek, isInCurrentMonth: boolean, isReserved: boolean) {
         this.text = text;
         this.day = day; 
+        this.isInCurrentMonth = isInCurrentMonth;
+        this.isReserved = isReserved;
     }
 
-    text: string;
-    day: DayOfWeek;
+    readonly text: string;
+    readonly day: DayOfWeek;
+    readonly isInCurrentMonth: boolean;
+    readonly isReserved: boolean;
 }
 
 class CalendarComponent extends b.Component<ICalendarData> {
@@ -45,12 +50,13 @@ class CalendarComponent extends b.Component<ICalendarData> {
         window["calender"] = this;
     }
 
-    render(data: ICalendarData): b.IBobrilNode {
+    render(): b.IBobrilNode {
         const me: b.IBobrilNode = {
             tag: "div"
         };
 
         me.children= [
+            calendarHeader(this),
             this.dayHeader(),
             this.dayRows()
         ];
@@ -59,19 +65,23 @@ class CalendarComponent extends b.Component<ICalendarData> {
         return me;
     }
 
-    protected goToNextMonth(): void {
+    goToNextMonth(): void {
         this._previousMonth = this._currentMonth;
         this._currentMonth = this._nextMonth;
         this._nextMonth = getNextMonthInfo(this._currentMonth);
         this.initMonthDays();
     }
 
-    protected goToPreviousMoth(): void {
+    goToPreviousMoth(): void {
         
         this._nextMonth = this._currentMonth;
         this._currentMonth = this._previousMonth;
         this._previousMonth = getPreviousMonthInfo(this._currentMonth);
         this.initMonthDays();
+    }
+
+    get currentMonth(): IMonthInfo {
+        return this._currentMonth;
     }
 
     protected initMonthDays() {
@@ -80,12 +90,12 @@ class CalendarComponent extends b.Component<ICalendarData> {
 
         const prevDays = Math.abs(this._startDay - this._currentMonth.startDay);
         for(let i = this._previousMonth.daysCount - prevDays + 1; i <= this._previousMonth.daysCount; i++) {
-            this._monthDays.push(new MonthDay(i.toString(), day));
+            this._monthDays.push(new MonthDay(i.toString(), day, false, false));
             day = (day + 1) % 7;    
         }    
 
         for(let i = 1; i <= this._currentMonth.daysCount; i++) {
-            this._monthDays.push(new MonthDay(i.toString(), day));
+            this._monthDays.push(new MonthDay(i.toString(), day, true, false));
             
             if(i === this._currentMonth.daysCount) {
                 continue;
@@ -95,7 +105,7 @@ class CalendarComponent extends b.Component<ICalendarData> {
 
         const nextDays = 6 - Math.abs(day - this._startDay);
         for(let i = 1; i <= nextDays; i++) {
-            this._monthDays.push(new MonthDay(i.toString(), day));
+            this._monthDays.push(new MonthDay(i.toString(), day, false, false));
             day = (day + 1) % 7;    
         }
     }
@@ -110,7 +120,8 @@ class CalendarComponent extends b.Component<ICalendarData> {
         let line: b.IBobrilChildren = [];
 
         for(let i = 0; i < this._monthDays.length; i++) {
-            line.push(b.styledDiv(this._monthDays[i].text, styles.columnStyle));
+            const currentDay = this._monthDays[i];
+            line.push(b.styledDiv(currentDay.text, this.getDayStyle(currentDay)));
             if(line.length !== 7) {
                 continue;
             }
@@ -122,10 +133,82 @@ class CalendarComponent extends b.Component<ICalendarData> {
         return children;
     }
 
+    getDayStyle(day: MonthDay): b.IBobrilStyle[] {
+        var style = [ styles.columnStyle ];
+        !day.isInCurrentMonth && style.push(styles.columnStyleOtherMonth);
+        day.isReserved && style.push(styles.columnStyleReserved);
+
+        return style;
+    }
+
     onClick(): boolean {
         this.goToNextMonth();
         return true;
     }
+}
+
+class CalendarHeader extends b.Component<ICalendarHeaderData> {
+    render(data: ICalendarHeaderData): b.IBobrilNode {
+        const me: b.IBobrilNode = {
+            tag: "div"
+        };
+
+        me.children= [
+            this.leftButton(),
+            this.month(),
+            this.rightButton(),
+            b.styledDiv(null, { clear: "both"})
+        ];
+
+        b.style(me, {
+            margin: "0 auto 5px auto"
+        });
+        return me;
+    }
+
+    protected month(): b.IBobrilNode {
+        return b.styledDiv(translateMonth(this.data.currentMonth.month), {
+            cssFloat: "left",
+            textAlign: "center",
+            width: "26.8%"
+        });
+    }
+
+    protected leftButton(): b.IBobrilNode {
+        return b.style(this.button(() => this.data.goToPreviousMoth()), {
+            backgroundColor: "red",
+            width: 25,
+            height: 25,
+            cssFloat: "left"
+        });
+    }
+
+    protected rightButton(): b.IBobrilNode {
+        return b.style(this.button(() => this.data.goToNextMonth()), {
+            backgroundColor: "green",
+            width: 25,
+            height: 25,
+            cssFloat: "left"
+        });
+    }
+
+    protected button(action: () =>void): b.IBobrilNode {
+        return {
+            tag: "div",
+            component: {
+                onClick() {
+                    action();
+                    return true;
+                }
+            }
+        };
+    }
+}
+
+interface ICalendarHeaderData {
+    goToNextMonth(): void;
+    goToPreviousMoth(): void;
+    currentMonth: IMonthInfo;
 }
 
 export interface ICalendarData {
@@ -133,4 +216,5 @@ export interface ICalendarData {
     referencedDate?: Date;
 }
 
-export const calendar = b.component(CalendarComponent);
+const calendarHeader = b.component(CalendarHeader);
+export const calendar = b.component(CalendarComponent);1

@@ -1,3 +1,5 @@
+import { t } from "bobril-g11n";
+
 export enum DayOfWeek {
     sunday,
     monday, 
@@ -52,8 +54,26 @@ export function getNextMonthInfo(monthInfo: IMonthInfo): IMonthInfo {
 }
 
 export function translateDay(day: DayOfWeek): string {
-    const days = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"];
+    const days = [t("Sun"), t("Mon"), t("Tue"), t("Thr"), t("Wed"), t("Fry"), t("Sat")];
     return days[day];
+}
+
+export function translateMonth(month: Month): string {
+    const months = [
+        t("January"),
+        t("February"),
+        t("March"),
+        t("April"),
+        t("May"),
+        t("June"),
+        t("July"),
+        t("August"),
+        t("September"),
+        t("October"),
+        t("November"),
+        t("December")
+    ];
+    return months[month];
 }
 
 function daysInMonth (date: Date): number {

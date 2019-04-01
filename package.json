@@ -9,6 +9,7 @@
   "private": false,
   "dependencies": {
     "bobril": "^9.6.0",
+    "bobril-g11n": "^4.4.1",
     "bobx": "^0.19.0"
   }
 }
