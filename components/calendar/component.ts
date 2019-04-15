@@ -1,17 +1,21 @@
 import { observable } from "bobx";
 import * as b from "bobril";
-import { IMonthInfo, getMonthInfo, getPreviousMonthInfo, getNextMonthInfo, DayOfWeek, translateDay, translateMonth } from "../../utils/dateUtils";
+import { IMonthInfo, getMonthInfo, getPreviousMonthInfo, getNextMonthInfo, DayOfWeek, translateDay, translateMonth, dateItem } from "../../utils/dateUtils";
 import * as styles from "./styles"
+import { IReservationStore } from "../../data/reservation/types";
+import { rightArrow, leftArrow } from "../../styleConstants";
+
 
 class MonthDay {
-
-    constructor(text: string, day: DayOfWeek, isInCurrentMonth: boolean, isReserved: boolean) {
+    constructor(date: dateItem, text: string, day: DayOfWeek, isInCurrentMonth: boolean, isReserved: boolean) {
+        this.date = date;
         this.text = text;
         this.day = day; 
         this.isInCurrentMonth = isInCurrentMonth;
         this.isReserved = isReserved;
     }
 
+    readonly date: dateItem;
     readonly text: string;
     readonly day: DayOfWeek;
     readonly isInCurrentMonth: boolean;
@@ -46,8 +50,6 @@ class CalendarComponent extends b.Component<ICalendarData> {
         }
 
         this.initMonthDays();
-        
-        window["calender"] = this;
     }
 
     render(): b.IBobrilNode {
@@ -90,12 +92,12 @@ class CalendarComponent extends b.Component<ICalendarData> {
 
         const prevDays = Math.abs(this._startDay - this._currentMonth.startDay);
         for(let i = this._previousMonth.daysCount - prevDays + 1; i <= this._previousMonth.daysCount; i++) {
-            this._monthDays.push(new MonthDay(i.toString(), day, false, false));
+            this._monthDays.push(new MonthDay([this._previousMonth.year, this._previousMonth.month, i], `${i.toString()}.`, day, false, false));
             day = (day + 1) % 7;    
         }    
 
         for(let i = 1; i <= this._currentMonth.daysCount; i++) {
-            this._monthDays.push(new MonthDay(i.toString(), day, true, false));
+            this._monthDays.push(new MonthDay([this._currentMonth.year, this._currentMonth.month, i], `${i.toString()}.`, day, true, false));
             
             if(i === this._currentMonth.daysCount) {
                 continue;
@@ -105,7 +107,7 @@ class CalendarComponent extends b.Component<ICalendarData> {
 
         const nextDays = 6 - Math.abs(day - this._startDay);
         for(let i = 1; i <= nextDays; i++) {
-            this._monthDays.push(new MonthDay(i.toString(), day, false, false));
+            this._monthDays.push(new MonthDay([this._nextMonth.year, this._nextMonth.month, i],`${i.toString()}.`, day, false, false));
             day = (day + 1) % 7;    
         }
     }
@@ -154,15 +156,18 @@ class CalendarHeader extends b.Component<ICalendarHeaderData> {
         };
 
         me.children= [
-            this.leftButton(),
-            this.month(),
-            this.rightButton(),
-            b.styledDiv(null, { clear: "both"})
+            b.styledDiv([
+                this.leftButton(),
+                this.month(),
+                this.rightButton(),
+                b.styledDiv(undefined, {clear: "both"})
+            ], {
+                marginLeft: "32.5%",
+                marginBottom: 5
+            })
         ];
 
-        b.style(me, {
-            margin: "0 auto 5px auto"
-        });
+        b.style(me, {width: "100%"})
         return me;
     }
 
@@ -175,25 +180,15 @@ class CalendarHeader extends b.Component<ICalendarHeaderData> {
     }
 
     protected leftButton(): b.IBobrilNode {
-        return b.style(this.button(() => this.data.goToPreviousMoth()), {
-            backgroundColor: "red",
-            width: 25,
-            height: 25,
-            cssFloat: "left"
-        });
+        return b.style(this.button(() => this.data.goToPreviousMoth()), leftArrow);
     }
 
     protected rightButton(): b.IBobrilNode {
-        return b.style(this.button(() => this.data.goToNextMonth()), {
-            backgroundColor: "green",
-            width: 25,
-            height: 25,
-            cssFloat: "left"
-        });
+        return b.style(this.button(() => this.data.goToNextMonth()), rightArrow);
     }
 
     protected button(action: () =>void): b.IBobrilNode {
-        return {
+        return b.style({
             tag: "div",
             component: {
                 onClick() {
@@ -201,7 +196,12 @@ class CalendarHeader extends b.Component<ICalendarHeaderData> {
                     return true;
                 }
             }
-        };
+        }, {
+            width: 25,
+            height: 25,
+            cursor: "pointer",
+            cssFloat: "left" 
+        });
     }
 }
 
@@ -212,6 +212,7 @@ interface ICalendarHeaderData {
 }
 
 export interface ICalendarData {
+    store: IReservationStore;
     startDay?: DayOfWeek;
     referencedDate?: Date;
 }

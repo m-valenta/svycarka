@@ -1,5 +1,7 @@
 import { t } from "bobril-g11n";
 
+export declare type dateItem = [number, number, number];  // [year, month, day]
+
 export enum DayOfWeek {
     sunday,
     monday, 
@@ -74,6 +76,15 @@ export function translateMonth(month: Month): string {
         t("December")
     ];
     return months[month];
+}
+
+export function getCurrentDate(): dateItem {
+    const date = new Date();
+    return [date.getFullYear(), date.getMonth(), date.getDay()];
+}
+
+export function isOlder(referencedDate: dateItem, testDate: dateItem): boolean {
+    return testDate[0] < referencedDate[0] || testDate[1] < referencedDate[1] || testDate[2] < referencedDate[2];
 }
 
 function daysInMonth (date: Date): number {

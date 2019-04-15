@@ -13,10 +13,8 @@ export const rowStyle = b.styleDef({
 
 export const columnStyle = b.styleDef({
     width: "13%",
-    marginLeft: "0.8%",
     cssFloat: "left",
-    textAlign: "center",
-    border: "solid 1px red"
+    textAlign: "center"
 });
 
 export const columnStyleOtherMonth = b.styleDefEx(columnStyle, {
@@ -30,4 +28,3 @@ export const columnStyleReserved = b.styleDefEx(columnStyleOtherMonth, {
 export const dayLine = b.styleDefEx(rowStyle, [rowStyle, {
     fontWeight: 700
 }]);
-
