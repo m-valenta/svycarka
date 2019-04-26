@@ -19,6 +19,9 @@ class ReservationStore implements ReservationStore {
   private _connector: IAjaxConnector | undefined;
 
   @observable.ref
+  currentReservation: IReservation | undefined;
+
+  @observable.ref
   private _reservations: IReservation[] | undefined;
 
   get reservationList(): IReservation[] | undefined {

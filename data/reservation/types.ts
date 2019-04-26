@@ -11,6 +11,7 @@ export interface IReservationListResponse extends IAjaxResponse {
 }
 
 export interface IReservationStore {
+  currentReservation: IReservation | undefined;
   reservationList: IReservation[] | undefined;
   loadReservationList(month: Month, year: number): void;
 }
