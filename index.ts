@@ -1,9 +1,8 @@
 import * as b from "bobril";
 import { initGlobalization, setLocale } from "bobril-g11n";
 import { locales } from "./constants";
-import { calendar } from "./components/calendar/component";
-import { initAppStore, IAppStore, appStore } from "./data/appStore";
-import { basicReservationtrategy } from "./components/calendar/reservationStrategies/basicStrategy";
+import { initAppStore, appStore } from "./data/appStore";
+import { dateInput } from "./components/dateInput/component";
 
 initGlobalization({
   defaultLocale: locales.default
@@ -11,10 +10,5 @@ initGlobalization({
   setLocale(locales.czech);
   initAppStore();
 
-  b.init(() =>
-    calendar({
-      store: appStore.reservationStore,
-      reservationStrategy: basicReservationtrategy
-    })
-  );
+  b.init(() => [dateInput({ store: appStore.reservationStore })]);
 });

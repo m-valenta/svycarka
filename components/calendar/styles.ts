@@ -1,9 +1,5 @@
 import * as b from "bobril";
-
-const colors = {
-  silver: "#8c8c8c",
-  red: "#a01a22"
-};
+import { colors } from "../../styleConstants";
 
 export const wrapperStyle = b.styleDef({
   width: "100%",
@@ -16,7 +12,7 @@ export const rowStyle = b.styleDef({
 
 export const columnStyle = b.styleDef({
   height: 43,
-  width: "13%",
+  width: "14%",
   cssFloat: "left",
   textAlign: "center",
   cursor: "default",
@@ -24,13 +20,13 @@ export const columnStyle = b.styleDef({
 });
 
 export const columnStyleOtherMonth = b.styleDefEx(columnStyle, {
-  color: colors.silver
+  color: colors.calendarSilver
 });
 
 export const columnStyleReserved = b.styleDefEx(
   [columnStyleOtherMonth, columnStyle],
   {
-    color: colors.silver,
+    color: colors.calendarSilver,
     textDecoration: "line-through"
   }
 );
@@ -68,29 +64,29 @@ export const monthWrapper = b.styleDef({
 });
 
 export const mouseSelection = b.styleDef({
-  borderTop: `solid 2px ${colors.red}`,
-  borderBottom: `solid 2px ${colors.red}`
+  borderTop: `solid 2px ${colors.calendarRed}`,
+  borderBottom: `solid 2px ${colors.calendarRed}`
 });
 
 export const mouseSelectionStart = b.styleDefEx(
   [columnStyle, columnStyleOtherMonth],
   {
-    borderLeft: `solid 2px ${colors.red}`,
+    borderLeft: `solid 2px ${colors.calendarRed}`,
     borderRadius: "2px 0 0 2px",
-    backgroundColor: colors.red,
+    backgroundColor: colors.calendarRed,
     color: "white"
   }
 );
 
 export const mouseSelectionEnd = b.styleDef({
-  borderRight: `solid 2px ${colors.red}`,
+  borderRight: `solid 2px ${colors.calendarRed}`,
   borderRadius: "0 2px 2px 0"
 });
 
 export const currentSelection = b.styleDefEx(
   [columnStyle, columnStyleOtherMonth, mouseSelectionStart],
   {
-    backgroundColor: colors.red,
+    backgroundColor: colors.calendarRed,
     color: "black"
   }
 );

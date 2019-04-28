@@ -10,7 +10,8 @@ import {
   translateMonth,
   dateItem,
   getCurrentDateItem,
-  Month
+  Month,
+  datItemParts
 } from "../../utils/dateUtils";
 import * as styles from "./styles";
 import { IReservationStore, IReservation } from "../../data/reservation/types";
@@ -32,7 +33,14 @@ const clearSelectionMask =
   SelectionState.offeredFirst |
   SelectionState.offeredLast;
 
-class CalendarComponent extends b.Component<ICalendarData> {
+export interface ICalendarData {
+  store: IReservationStore;
+  reservationStrategy: ICalendarReservationStrategy;
+  startDay?: DayOfWeek;
+  referencedDate?: Date;
+}
+
+export class Calendar extends b.Component<ICalendarData> {
   @observable.ref
   protected _currentMonth: IMonthInfo;
 
@@ -45,7 +53,21 @@ class CalendarComponent extends b.Component<ICalendarData> {
   constructor(data: ICalendarData) {
     super(data);
 
-    this._currentMonth = getMonthInfo(data.referencedDate);
+    let refDate: Date | undefined;
+    refDate =
+      data.referencedDate !== undefined
+        ? data.referencedDate
+        : data.store.currentReservation !== undefined
+        ? new Date(
+            Date.UTC(
+              data.store.currentReservation.dateItem[datItemParts.year],
+              data.store.currentReservation.dateItem[datItemParts.month],
+              data.store.currentReservation.dateItem[datItemParts.day]
+            )
+          )
+        : undefined;
+
+    this._currentMonth = getMonthInfo(refDate);
     this._previousMonth = getPreviousMonthInfo(this._currentMonth);
     this._nextMonth = getNextMonthInfo(this._currentMonth);
 
@@ -320,13 +342,12 @@ class CalendarHeader extends b.Component<ICalendarHeaderData> {
 
 class CalendarDayHeader extends b.Component<{ daysOfWeek: DayOfWeek[] }> {
   render() {
-    return (
-      <div style={styles.dayLine}>
-        {this.data.daysOfWeek.map(day => (
-          <div style={styles.columnStyle}>{translateDay(day)}</div>
-        ))}
-      </div>
-    );
+    const children = this.data.daysOfWeek.map(day => (
+      <div style={styles.columnStyle}>{translateDay(day)}</div>
+    ));
+    children.push(<div style={{ clear: "both" }} />);
+
+    return <div style={styles.dayLine}>{children}</div>;
   }
 }
 
@@ -447,12 +468,3 @@ export interface ICalendarReservationStrategy {
     reservations: ReadonlyArray<IReservation>
   ): IRangeInfo;
 }
-
-export interface ICalendarData {
-  store: IReservationStore;
-  reservationStrategy: ICalendarReservationStrategy;
-  startDay?: DayOfWeek;
-  referencedDate?: Date;
-}
-
-export const calendar = b.component(CalendarComponent);

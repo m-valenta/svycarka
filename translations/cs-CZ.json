@@ -1,117 +1,24 @@
 [
   "cs-CZ",
-  [
-    "Sun",
-    null,
-    0,
-    "Ne"
-  ],
-  [
-    "Mon",
-    null,
-    0,
-    "Po"
-  ],
-  [
-    "Tue",
-    null,
-    0,
-    "Út"
-  ],
-  [
-    "Thr",
-    null,
-    0,
-    "St"
-  ],
-  [
-    "Wed",
-    null,
-    0,
-    "Čt"
-  ],
-  [
-    "Fry",
-    null,
-    0,
-    "Pá"
-  ],
-  [
-    "Sat",
-    null,
-    0,
-    "So"
-  ],
-  [
-    "January",
-    null,
-    0,
-    "Leden"
-  ],
-  [
-    "February",
-    null,
-    0,
-    "Únor"
-  ],
-  [
-    "March",
-    null,
-    0,
-    "Březen"
-  ],
-  [
-    "April",
-    null,
-    0,
-    "Duben"
-  ],
-  [
-    "May",
-    null,
-    0,
-    "Květen"
-  ],
-  [
-    "June",
-    null,
-    0,
-    "Červen"
-  ],
-  [
-    "July",
-    null,
-    0,
-    "Červenec"
-  ],
-  [
-    "August",
-    null,
-    0,
-    "Srpen"
-  ],
-  [
-    "September",
-    null,
-    0,
-    "Září"
-  ],
-  [
-    "October",
-    null,
-    0,
-    "Říjen"
-  ],
-  [
-    "November",
-    null,
-    0,
-    "Listopad"
-  ],
-  [
-    "December",
-    null,
-    0, 
-    "Prosinec"
-  ]
+  ["Sun", null, 0, "Ne"],
+  ["Mon", null, 0, "Po"],
+  ["Tue", null, 0, "Út"],
+  ["Thr", null, 0, "St"],
+  ["Wed", null, 0, "Čt"],
+  ["Fry", null, 0, "Pá"],
+  ["Sat", null, 0, "So"],
+  ["January", null, 0, "Leden"],
+  ["February", null, 0, "Únor"],
+  ["March", null, 0, "Březen"],
+  ["April", null, 0, "Duben"],
+  ["May", null, 0, "Květen"],
+  ["June", null, 0, "Červen"],
+  ["July", null, 0, "Červenec"],
+  ["August", null, 0, "Srpen"],
+  ["September", null, 0, "Září"],
+  ["October", null, 0, "Říjen"],
+  ["November", null, 0, "Listopad"],
+  ["December", null, 0, "Prosinec"],
+  ["Arrival", null, 0, "Příjezd"],
+  ["Departure", null, 0, "Odjezd"]
 ]

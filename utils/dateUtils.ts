@@ -1,4 +1,4 @@
-import { t } from "bobril-g11n";
+import { t, getLocale } from "bobril-g11n";
 
 export enum datItemParts {
   year,
@@ -106,6 +106,25 @@ export function getDateItem(
   day: number
 ): dateItem {
   return [year, month, day];
+}
+
+export function localizeDateItem(
+  dateItem: dateItem,
+  dayOffset: number = 0
+): string {
+  const date = new Date(
+    Date.UTC(
+      dateItem[datItemParts.year],
+      dateItem[datItemParts.month],
+      dateItem[datItemParts.day] + dayOffset,
+      0,
+      0,
+      0
+    )
+  );
+  const locale = getLocale();
+
+  return date.toLocaleDateString(locale);
 }
 
 export function clone(dateItem: dateItem, day?: number): dateItem {
