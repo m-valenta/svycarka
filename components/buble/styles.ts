@@ -6,7 +6,8 @@ export const arrowWrapper = b.styleDef(
     padding: 5,
     background: "#ffffff",
     border: "1px solid #bababa",
-    borderRadius: 2
+    borderRadius: 2,
+    marginBottom: "-20%"
   },
   {
     after: {

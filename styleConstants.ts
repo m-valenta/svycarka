@@ -34,7 +34,9 @@ export const dateArrow = b.styleDef({
 export const colors = {
   calendarSilver: "#8c8c8c",
   calendarRed: "#a01a22",
-  inputSilver: "#d2c6b8"
+  inputSilver: "#d2c6b8",
+  buttonYellow: "#a47b21",
+  buttonRed: "#a01a22"
 };
 
 b.injectCss(`
