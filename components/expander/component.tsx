@@ -23,8 +23,8 @@ export class Expander extends b.Component<IData> {
     this.step = 0;
     this.isExpanded = false;
 
-    this.widthStepChange = Math.ceil(this.data.expandedWidth / 100);
-    this.heightStepChange = Math.ceil(this.data.expandedHeight / 100);
+    this.widthStepChange = this.data.expandedWidth / 100;
+    this.heightStepChange = this.data.expandedHeight / 100;
   }
 
   render() {
@@ -42,8 +42,12 @@ export class Expander extends b.Component<IData> {
           style={[
             styles.content,
             {
-              width: animationRun ? this.step * this.widthStepChange : "auto",
-              height: animationRun ? this.step * this.heightStepChange : "auto"
+              width: animationRun
+                ? this.step * this.widthStepChange
+                : this.step * this.widthStepChange, //auto",
+              height: animationRun
+                ? this.step * this.heightStepChange
+                : this.step * this.heightStepChange //"auto"
             }
           ]}
         >
@@ -66,7 +70,7 @@ export class Expander extends b.Component<IData> {
   protected tryAnimate(): boolean {
     if (this.step < 100) {
       setTimeout(() => {
-        this.step = this.step + (100 - this.step / 2);
+        this.step = this.step + 20;
       }, 60);
       return true;
     }

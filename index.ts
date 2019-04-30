@@ -5,7 +5,11 @@ import { initAppStore, appStore } from "./data/appStore";
 import { dateInput } from "./components/dateInput/component";
 import { button } from "./components/button/buton";
 import { colors } from "./styleConstants";
-import { expander } from "./components/expander/component";
+import * as component from "./components/expander/component";
+import { headerComp } from "./components/header/headerComponent";
+import { map } from "./components/map/component";
+import { contact } from "./components/contact/component";
+import { copyRight } from "./components/copyright/component";
 
 initGlobalization({
   defaultLocale: locales.default
@@ -28,15 +32,23 @@ initGlobalization({
       onClick: () => alert("Rezervovat termín (red)")
     }),
     { tag: "br" },
-    expander({
-      expandedHeight: 176,
-      expandedWidth: 440,
+    component.expander({
+      expandedWidth: 414,
+      expandedHeight: 69,
       headerText: "Mám zájem o doplňkové služby",
       children: b.styledDiv("", {
         width: 414,
         height: 69,
         border: "solid 1px silver"
       })
-    })
+    }),
+    { tag: "br" },
+    headerComp({
+      showReservation: true,
+      showTree: true
+    }),
+    map(),
+    contact(),
+    copyRight()
   ]);
 });

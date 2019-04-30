@@ -16,5 +16,6 @@ export const header = b.styleDef({
 });
 
 export const content = b.styleDef({
-  marginTop: 41
+  marginTop: 41,
+  boxSizing: "border-box"
 });
