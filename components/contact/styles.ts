@@ -25,7 +25,7 @@ export const kubaFoto = b.styleDef({
   height: 159,
   borderRadius: "50%",
   transform: "rotate(-35deg)",
-  marginTop: 70.5,
+  marginTop: 40.5,
   cssFloat: "left"
 });
 
@@ -33,7 +33,7 @@ export const contaInfo = b.styleDef({
   width: 200,
   height: 70,
   cssFloat: "left",
-  marginTop: 115,
+  marginTop: 85,
   marginLeft: 14
 });
 
@@ -58,6 +58,13 @@ export const contactContent = b.styleDef({
 export const contentItem = b.styleDef({
   height: 32,
   marginBottom: 10
+});
+
+export const contactHeader = b.styleDef({
+  fontSize: 30,
+  marginTop: 10,
+  marginBottom: -40,
+  textAlign: "center"
 });
 
 export const content = [contentSize, contentStyle];

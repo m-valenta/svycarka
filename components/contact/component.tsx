@@ -1,6 +1,7 @@
 import * as b from "bobril";
 import * as styles from "./styles";
 import { contacsBackgrounds } from "../../styleConstants";
+import { t } from "bobril-g11n";
 
 export class Contact extends b.Component {
   render() {
@@ -8,6 +9,7 @@ export class Contact extends b.Component {
       <div style={styles.wrapper}>
         <div style={styles.content}>
           <div style={styles.contactContent}>
+            <div style={styles.contactHeader}>{t("Contact")}</div>
             <div style={styles.kubaFoto} />
             <div style={styles.contaInfo}>
               <ContactItem
