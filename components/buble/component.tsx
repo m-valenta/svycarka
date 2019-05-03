@@ -29,21 +29,28 @@ export class Buble extends b.Component<IData> {
     return (
       <div
         style={[
-          styles.arrowWrapper,
+          styles.wrapper,
           {
-            width: this.data.width,
-            top: this.data.top + 10,
-            left: this.data.left,
-            height: animationRun ? this.step * this.heightStep : "auto"
+            left: this.data.left
           }
         ]}
       >
-        {animationRun
-          ? []
-          : [
-              <div>{this.data.children.mainContent}</div>,
-              <div>{this.data.children.toolBar}</div>
-            ]}
+        <div
+          style={[
+            styles.arrowWrapper,
+            {
+              width: this.data.width,
+              height: animationRun ? this.step * this.heightStep : "auto"
+            }
+          ]}
+        >
+          {animationRun
+            ? []
+            : [
+                <div>{this.data.children.mainContent}</div>,
+                <div>{this.data.children.toolBar}</div>
+              ]}
+        </div>
       </div>
     );
   }

@@ -43,7 +43,7 @@ export const socialButtonContent = b.styleDef({
 
 export const menuButton = b.styleDef({
   height: 80,
-  width: 30,
+  width: 41,
   marginTop: 25,
   marginLeft: 23,
   cursor: "pointer",

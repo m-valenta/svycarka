@@ -11,8 +11,7 @@ export const wrapper = b.styleDef({
 
 const contentStyle = b.styleDefEx(contentSize, {
   paddingBottom: "21.4%",
-  backgroundColor: "white",
-  opacity: 0.95,
+  backgroundColor: "rgba(255, 255, 255, 0.9)",
   position: "relative",
   margin: "0 auto"
 });

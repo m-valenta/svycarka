@@ -34,12 +34,14 @@ export class HeaderComponent extends b.Component<IData> {
     );
     children.push(<MenuButton />);
     children.push(<LanguageButton />);
-    children.push(<div style={{ clear: "both" }} />);
     this.data.showTree && children.push(<Logo />);
     return (
-      <div>
-        <div style={styles.content}>{children}</div>
-      </div>
+      <>
+        <div style>
+          <div style={styles.content}>{children}</div>
+          <div style={{ clear: "both" }} />
+        </div>
+      </>
     );
   }
 }

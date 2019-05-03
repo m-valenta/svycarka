@@ -1,4 +1,12 @@
 import * as b from "bobril";
+import { zIndex } from "../../styleConstants";
+
+export const wrapper = b.styleDef({
+  position: "absolute",
+  botom: 0,
+  marginTop: 8,
+  zIndex: zIndex.buble
+});
 
 export const arrowWrapper = b.styleDef(
   {
@@ -6,8 +14,7 @@ export const arrowWrapper = b.styleDef(
     padding: 5,
     background: "#ffffff",
     border: "1px solid #bababa",
-    borderRadius: 2,
-    marginBottom: "-20%"
+    borderRadius: 2
   },
   {
     after: {

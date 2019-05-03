@@ -35,6 +35,11 @@ export const contentSize = b.styleDef({
   width: "67%"
 });
 
+export const contentWrapper = b.styleDef({
+  margin: "0 11% 0 14%",
+  padding: 0
+});
+
 export const dateArrow = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(dateArrow_svg)),
   backgroundRepeat: "no-repeat",
@@ -114,3 +119,7 @@ b.injectCss(`
         font-family: ${lucida_sans_unicoderegular}
     }
 `);
+
+export const zIndex = {
+  buble: 10000
+};

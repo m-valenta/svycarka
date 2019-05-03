@@ -10,6 +10,10 @@ import { headerComp } from "./components/header/headerComponent";
 import { map } from "./components/map/component";
 import { contact } from "./components/contact/component";
 import { copyRight } from "./components/copyright/component";
+import { tips } from "./components/tipsSection/component";
+
+// CSS files
+//b.asset("./css/reset.css");
 
 initGlobalization({
   defaultLocale: locales.default
@@ -47,6 +51,7 @@ initGlobalization({
       showReservation: true,
       showTree: true
     }),
+    tips(),
     map(),
     contact(),
     copyRight()
