@@ -7,13 +7,9 @@ const contentOverideStyle = b.styleDefEx(content, {
   boxSizing: "border-box"
 });
 
-export const contentOveride = [contentSize, content, contentOverideStyle];
+export const contentOveride = [content, contentOverideStyle];
 
-const wrapperOverideStyle = b.styleDefEx(wrapper, {
-  backgroundSize: "cover"
-});
-
-export const wrapperOveride = [wrapper, wrapperOverideStyle];
+export const wrapperOveride = [wrapper];
 
 const buttonWraperStyle = b.styleDefEx(contentWrapper, {
   marginTop: 27,

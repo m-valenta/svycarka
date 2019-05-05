@@ -6,7 +6,7 @@ import { contentSize } from "../../styleConstants";
 export const wrapper = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(kontakt_background_png)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "contain"
+  backgroundSize: "cover"
 });
 
 const contentStyle = b.styleDefEx(contentSize, {

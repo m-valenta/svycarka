@@ -21,13 +21,11 @@ export class TipsSection extends b.Component {
             }}
           </TextSection>
           <div style={styles.buttonWrapper}>
-            <div>
-              <Button
-                colorScheme={colors.buttonYellow}
-                text={t("More informations")}
-                onClick={() => alert("TIPS")}
-              />
-            </div>
+            <Button
+              colorScheme={colors.buttonYellow}
+              text={t("More informations")}
+              onClick={() => alert("TIPS")}
+            />
           </div>
         </div>
       </div>

@@ -28,31 +28,35 @@ export const rezervationButton = b.styleDef({
 export const sociaButton = b.styleDef({
   height: 80,
   width: 30,
-  marginTop: 25,
   marginLeft: 42,
   cursor: "pointer",
   display: "block",
   textDecoration: "none",
-  cssFloat: "left"
+  cssFloat: "left",
+  position: "relative"
 });
 
 export const socialButtonContent = b.styleDef({
   width: 41,
-  height: 30
+  height: 30,
+  position: "absolute",
+  top: 25
 });
 
 export const menuButton = b.styleDef({
   height: 80,
   width: 41,
-  marginTop: 25,
   marginLeft: 23,
   cursor: "pointer",
-  cssFloat: "right"
+  cssFloat: "right",
+  position: "relative"
 });
 
 export const menuButtonContent = b.styleDef({
   width: 41,
-  height: 30
+  height: 30,
+  position: "absolute",
+  top: 25
 });
 
 export const localeButton = b.styleDef({

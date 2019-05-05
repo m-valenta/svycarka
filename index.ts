@@ -11,6 +11,9 @@ import { map } from "./components/map/component";
 import { contact } from "./components/contact/component";
 import { copyRight } from "./components/copyright/component";
 import { tips } from "./components/tipsSection/component";
+import { rezervationSection } from "./components/rezervationSection/component";
+import { banner } from "./components/banner/component";
+import { modal } from "./components/modal/component";
 
 // CSS files
 //b.asset("./css/reset.css");
@@ -51,9 +54,12 @@ initGlobalization({
       showReservation: true,
       showTree: true
     }),
+    banner(),
+    rezervationSection(),
     tips(),
     map(),
     contact(),
-    copyRight()
+    copyRight(),
+    modal()
   ]);
 });
