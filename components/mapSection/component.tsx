@@ -3,7 +3,7 @@ import { t } from "bobril-g11n";
 import * as styles from "./styles";
 import { contentWrapper } from "../../styleConstants";
 
-export class Map extends b.Component {
+export class MapSection extends b.Component {
   render() {
     const mapHeight = b.getMedia().width * 0.37;
     return (
@@ -28,5 +28,3 @@ export class Map extends b.Component {
     );
   }
 }
-
-export const map = b.component(Map);

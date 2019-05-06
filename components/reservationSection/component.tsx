@@ -14,8 +14,10 @@ import {
 import { Button } from "../button/buton";
 import { colors } from "../../styleConstants";
 import { buttonStyle } from "../button/styles";
+import { appStore } from "../../data/appStore";
+import { Page } from "../../data/pageStore/types";
 
-export class RezervationSection extends b.Component {
+export class ReservationSection extends b.Component {
   render() {
     return (
       <div style={styles.wrapper}>
@@ -69,7 +71,7 @@ export class RezervationSection extends b.Component {
             <Button
               colorScheme={colors.buttonYellow}
               text={t("Reservation")}
-              onClick={() => alert("reservations")}
+              onClick={() => appStore.pageStore.goToPage(Page.Reservation)}
             />
           </div>
         </div>
@@ -121,5 +123,3 @@ export class RezervationSection extends b.Component {
     );
   }
 }
-
-export const rezervationSection = b.component(RezervationSection);

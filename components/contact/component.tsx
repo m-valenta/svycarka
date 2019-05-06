@@ -15,12 +15,12 @@ export class Contact extends b.Component {
               <ContactItem
                 href="tel:+420720630136"
                 imgBackground={contacsBackgrounds.phone}
-                text="info@svycarka.com"
+                text="+420 720 630 136"
               />
               <ContactItem
                 href="mailto:info@svycarka.com"
                 imgBackground={contacsBackgrounds.email}
-                text="+420 720 630 136"
+                text="info@svycarka.com"
                 linkMarginTopCorrection={-3}
               />
             </div>
@@ -56,5 +56,3 @@ export class ContactItem extends b.Component<{
     );
   }
 }
-
-export const contact = b.component(Contact);

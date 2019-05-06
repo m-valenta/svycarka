@@ -18,5 +18,3 @@ export class CopyRight extends b.Component {
     return <div style={[contentSize, style]}>{this.text}</div>;
   }
 }
-
-export const copyRight = b.component(CopyRight);

@@ -9,6 +9,8 @@ import {
 import { socialBackgrounds, menuButton } from "../../styleConstants";
 import { locales } from "../../constants";
 import { observable } from "bobx";
+import { appStore } from "../../data/appStore";
+import { Page } from "../../data/pageStore/types";
 
 export interface IData {
   showReservation: boolean;
@@ -48,11 +50,11 @@ export class HeaderComponent extends b.Component<IData> {
 
 class RezervationButton extends b.Component {
   render() {
-    return <div style={styles.rezervationButton}>{t("Rezervation")}</div>;
+    return <div style={styles.rezervationButton}>{t("Reservation")}</div>;
   }
 
   onClick() {
-    b.runTransition(reservationTransition);
+    appStore.pageStore.goToPage(Page.Reservation);
     return true;
   }
 }
@@ -135,9 +137,7 @@ class Logo extends b.Component {
   }
 
   onClick() {
-    b.runTransition(defaultTransition);
+    appStore.pageStore.goToPage(Page.Home);
     return true;
   }
 }
-
-export const headerComp = b.component(HeaderComponent);

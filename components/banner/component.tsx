@@ -18,5 +18,3 @@ export class Banner extends b.Component {
     );
   }
 }
-
-export const banner = b.component(Banner);

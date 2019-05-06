@@ -4,6 +4,8 @@ import * as styles from "./styles";
 import { t } from "bobril-g11n";
 import { colors } from "../../styleConstants";
 import { Button } from "../button/buton";
+import { appStore } from "../../data/appStore";
+import { Page } from "../../data/pageStore/types";
 
 export class TipsSection extends b.Component {
   render() {
@@ -24,7 +26,7 @@ export class TipsSection extends b.Component {
             <Button
               colorScheme={colors.buttonYellow}
               text={t("More informations")}
-              onClick={() => alert("TIPS")}
+              onClick={() => appStore.pageStore.goToPage(Page.Tips)}
             />
           </div>
         </div>
@@ -32,5 +34,3 @@ export class TipsSection extends b.Component {
     );
   }
 }
-
-export const tips = b.component(TipsSection);
