@@ -5,7 +5,6 @@ import { observable } from "bobx";
 export interface IData {
   width: number;
   maxHeight: number;
-  top: number;
   left: number;
   children: {
     mainContent: b.IBobrilChild;

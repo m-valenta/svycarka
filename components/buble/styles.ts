@@ -4,7 +4,7 @@ import { zIndex } from "../../styleConstants";
 export const wrapper = b.styleDef({
   position: "absolute",
   botom: 0,
-  marginTop: 8,
+  marginTop: 21,
   zIndex: zIndex.buble
 });
 

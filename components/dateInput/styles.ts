@@ -7,7 +7,8 @@ export const wrapper = b.styleDef({
   cursor: "pointer",
   border: `solid 1px ${colors.inputSilver}`,
   position: "relative",
-  borderRadius: 2
+  borderRadius: 2,
+  display: "inline-block"
 });
 
 export const date = b.styleDef({

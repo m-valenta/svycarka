@@ -22,19 +22,17 @@ export class DateInput extends b.Component<IData> {
 
   render(): b.IBobrilChildren {
     const children = [
-      <div style={styles.wrapper}>
-        <this.arrival currentReservation={this.data.store.currentReservation} />
-        <div style={styles.dateSeprator}> </div>
-        <this.departure
-          currentReservation={this.data.store.currentReservation}
-        />
-        <div style={{ clear: "both" }} />
-      </div>
+      <this.arrival currentReservation={this.data.store.currentReservation} />,
+      <div style={styles.dateSeprator}> </div>,
+      <this.departure
+        currentReservation={this.data.store.currentReservation}
+      />,
+      <div style={{ clear: "both" }} />
     ];
 
     if (this.isSelectionOpen) {
       children.push(
-        <Buble width={574} top={0} left={30} maxHeight={900}>
+        <Buble width={574} left={30} maxHeight={900}>
           {{
             mainContent: (
               <Calendar
@@ -47,7 +45,7 @@ export class DateInput extends b.Component<IData> {
       );
     }
 
-    return <>{children}</>;
+    return <div style={styles.wrapper}>{children}</div>;
   }
 
   postInitDom(me: b.IBobrilCacheNode): void {
