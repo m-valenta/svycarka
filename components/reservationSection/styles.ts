@@ -1,6 +1,7 @@
 import * as b from "bobril";
 import { getResourceCssUrl } from "../../utils/resourceUtils";
 import { zakolik_background_png } from "../../src/assets";
+import { colors } from "../../styleConstants";
 
 export const wrapper = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(zakolik_background_png)),
@@ -45,4 +46,25 @@ export const textContent = b.styleDef({
 
 export const textSpecialContent = b.styleDef({
   fontSize: 10
+});
+
+export const formWrapper = b.styleDef({
+  width: 700,
+  margin: "10% auto"
+});
+
+export const formInputsWrapper = b.styleDef({
+  width: 439,
+  margin: "60px auto"
+});
+
+export const formInput = b.styleDef({
+  width: "100%",
+  height: 59,
+  fontSize: 16,
+  color: colors.calendarSilver,
+  display: "block !important",
+  margin: "0 0 26px 0 !important",
+  padding: "0 !important",
+  textAlign: "center"
 });

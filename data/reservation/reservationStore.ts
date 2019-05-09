@@ -8,21 +8,42 @@ import {
   IReservation,
   IReservationListRequest,
   IReservationListResponse,
-  IReservationStore
+  IReservationStore,
+  FormItem,
+  ReservationFormState
 } from "./types";
 import { observable } from "bobx";
 import { Month } from "../../utils/dateUtils";
 import { debug } from "../../constants";
 import { reservationListDataMock } from "../../debugData";
 
-class ReservationStore implements ReservationStore {
+const phoneNumberRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.compile();
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.compile();
+
+class ReservationStore implements IReservationStore {
   private _connector: IAjaxConnector | undefined;
 
   @observable.ref
-  currentReservation: IReservation | undefined;
-
-  @observable.ref
   private _reservations: IReservation[] | undefined;
+
+  currentReservation: FormItem<IReservation> = new FormItem();
+
+  name: FormItem<string> = new FormItem();
+
+  address: FormItem<string> = new FormItem();
+
+  email: FormItem<string> = new FormItem();
+
+  phone: FormItem<string> = new FormItem();
+
+  aggrement: FormItem<boolean> = new FormItem();
+
+  beer: FormItem<number> = new FormItem();
+
+  meet: FormItem<number> = new FormItem();
+
+  @observable
+  reservationFormState: ReservationFormState = ReservationFormState.hidden;
 
   get reservationList(): IReservation[] | undefined {
     return this._reservations;
@@ -54,6 +75,62 @@ class ReservationStore implements ReservationStore {
       month,
       year
     });
+  }
+
+  clear(): void {
+    this.currentReservation.value = undefined;
+    this.name.value = undefined;
+    this.name.isValid = true;
+    this.address.value = undefined;
+    this.address.isValid = true;
+    this.email.value = undefined;
+    this.email.isValid = true;
+    this.phone.value = undefined;
+    this.phone.isValid = true;
+    this.aggrement.value = false;
+    this.aggrement.isValid = true;
+    this.beer.value = undefined;
+    this.beer.isValid = true;
+    this.meet.value = undefined;
+    this.meet.isValid = true;
+  }
+
+  validate(): boolean {
+    let result = this.validateReservation();
+    result = result && this.validateName();
+    result = result && this.validateAddress();
+    result = result && this.validateEmail();
+    result = result && this.validatePhone();
+    return result;
+  }
+
+  protected validateReservation(): boolean {
+    return (this.currentReservation.isValid =
+      this.currentReservation.value !== undefined);
+  }
+
+  protected validateName(): boolean {
+    return (this.name.isValid =
+      this.name !== undefined && this.name.value.length > 0);
+  }
+
+  protected validateAddress(): boolean {
+    return (this.address.isValid =
+      this.address !== undefined && this.address.value.length > 0);
+  }
+
+  protected validateEmail(): boolean {
+    return (this.email.isValid =
+      this.email.value !== undefined &&
+      this.email.value.length > 0 &&
+      emailRegex.test(this.email.value));
+  }
+
+  protected validatePhone(): boolean {
+    return (this.phone.isValid =
+      this.phone.value !== undefined &&
+      this.phone.value.length > 0 &&
+      phoneNumberRegex.test(this.phone.value));
   }
 }
 

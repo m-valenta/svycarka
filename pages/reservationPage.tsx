@@ -10,6 +10,9 @@ import {
   PriceInfo,
   ReservationIconSet
 } from "../components/reservationSection/component";
+import { ReservationFormState } from "../data/reservation/types";
+import { Modal } from "../components/modal/component";
+import { ReservationForm } from "../components/reservationSection/formComponent";
 
 const contentStyle = b.styleDef({
   margin: "109px auto 0 auto",
@@ -62,7 +65,10 @@ class ReservationPage extends b.Component {
         <div style={buttonWrapper}>
           <Button
             text={t("Reserve date")}
-            onClick={() => alert("Reserve")}
+            onClick={() =>
+              (appStore.reservationStore.reservationFormState =
+                ReservationFormState.visible)
+            }
             colorScheme={colors.buttonYellow}
           />
         </div>
@@ -100,11 +106,32 @@ class ReservationPage extends b.Component {
             "When handing over the cottage, we ask you to clean it. Everything needs to be put into the condition in which the cottage was on your arrival. If not, you will be charged a cleaning fee of CZK 700."
           )}
         </div>
-        <div style={textBlockLowerInternal}>
+        <div
+          style={[
+            textBlockLowerInternal,
+            {
+              marginBottom: 109
+            }
+          ]}
+        >
           {t(
             "Smoking is strictly forbidden throughout the cottage and please leave your four-legged furry friends at home. Thank you in advance for your understanding."
           )}
         </div>
+        {appStore.reservationStore.reservationFormState !==
+        ReservationFormState.hidden ? (
+          <Modal
+            close={() => {
+              appStore.reservationStore.clear();
+              appStore.reservationStore.reservationFormState =
+                ReservationFormState.hidden;
+            }}
+          >
+            {<ReservationForm store={appStore.reservationStore} />}
+          </Modal>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

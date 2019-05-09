@@ -22,10 +22,12 @@ export class DateInput extends b.Component<IData> {
 
   render(): b.IBobrilChildren {
     const children = [
-      <this.arrival currentReservation={this.data.store.currentReservation} />,
+      <this.arrival
+        currentReservation={this.data.store.currentReservation.value}
+      />,
       <div style={styles.dateSeprator}> </div>,
       <this.departure
-        currentReservation={this.data.store.currentReservation}
+        currentReservation={this.data.store.currentReservation.value}
       />,
       <div style={{ clear: "both" }} />
     ];
@@ -45,7 +47,11 @@ export class DateInput extends b.Component<IData> {
       );
     }
 
-    return <div style={styles.wrapper}>{children}</div>;
+    const wrapperStyles: b.IBobrilStyle[] = [styles.wrapper];
+    !this.data.store.currentReservation.isValid &&
+      wrapperStyles.push(styles.wrapperInvalid);
+
+    return <div style={wrapperStyles}>{children}</div>;
   }
 
   postInitDom(me: b.IBobrilCacheNode): void {

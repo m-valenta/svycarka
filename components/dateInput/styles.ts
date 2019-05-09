@@ -8,7 +8,12 @@ export const wrapper = b.styleDef({
   border: `solid 1px ${colors.inputSilver}`,
   position: "relative",
   borderRadius: 2,
-  display: "inline-block"
+  display: "inline-block",
+  backgroundColor: "white"
+});
+
+export const wrapperInvalid = b.styleDefEx(wrapper, {
+  border: `solid 1px ${colors.buttonRed}`
 });
 
 export const date = b.styleDef({

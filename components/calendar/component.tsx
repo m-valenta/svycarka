@@ -57,12 +57,12 @@ export class Calendar extends b.Component<ICalendarData> {
     refDate =
       data.referencedDate !== undefined
         ? data.referencedDate
-        : data.store.currentReservation !== undefined
+        : data.store.currentReservation.value !== undefined
         ? new Date(
             Date.UTC(
-              data.store.currentReservation.dateItem[datItemParts.year],
-              data.store.currentReservation.dateItem[datItemParts.month],
-              data.store.currentReservation.dateItem[datItemParts.day]
+              data.store.currentReservation.value.dateItem[datItemParts.year],
+              data.store.currentReservation.value.dateItem[datItemParts.month],
+              data.store.currentReservation.value.dateItem[datItemParts.day]
             )
           )
         : undefined;
@@ -153,7 +153,7 @@ export class Calendar extends b.Component<ICalendarData> {
           this._previousMonth,
           currentDayItem,
           reservations,
-          this.data.store.currentReservation
+          this.data.store.currentReservation.value
         )
       );
       day = (day + 1) % 7;
@@ -168,7 +168,7 @@ export class Calendar extends b.Component<ICalendarData> {
           this._currentMonth,
           currentDayItem,
           reservations,
-          this.data.store.currentReservation
+          this.data.store.currentReservation.value
         )
       );
 
@@ -189,7 +189,7 @@ export class Calendar extends b.Component<ICalendarData> {
           this._nextMonth,
           currentDayItem,
           reservations,
-          this.data.store.currentReservation
+          this.data.store.currentReservation.value
         )
       );
     }
@@ -280,7 +280,7 @@ export class Calendar extends b.Component<ICalendarData> {
 
     const duration = minimalRange === selectionRange.weekendRange ? 3 : 8;
 
-    this.data.store.currentReservation = {
+    this.data.store.currentReservation.value = {
       dateItem: minimalRange.startInPreviousMonth
         ? [
             this._previousMonth.year,

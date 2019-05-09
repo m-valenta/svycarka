@@ -121,5 +121,6 @@ b.injectCss(`
 `);
 
 export const zIndex = {
+  modal: 9999,
   buble: 10000
 };
