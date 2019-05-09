@@ -15,4 +15,6 @@ export function initAppStore(): void {
     reservationStore: reservationStoreFactory(),
     pageStore: pageStoreFactory()
   };
+
+  window["$as"] = appStore;
 }

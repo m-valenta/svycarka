@@ -24,14 +24,11 @@ export class Spinner extends b.Component<{
             type="number"
             min={0}
             value={item.value}
+            onChange={value => (item.value = value)}
           />
         </div>
         <div style={{ clear: "both" }} />
       </div>
     );
-  }
-
-  onChange(value: number) {
-    this.data.item.value = value;
   }
 }

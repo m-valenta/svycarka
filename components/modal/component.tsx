@@ -2,7 +2,7 @@ import * as b from "bobril";
 import * as styles from "./style";
 
 export interface IData {
-  children: b.IBobrilChildren;
+  children: b.IBobrilChild;
   close: () => void;
 }
 
@@ -12,10 +12,14 @@ export class Modal extends b.Component<IData> {
   }
 
   render() {
+    const children: b.IBobrilChild[] = [
+      <CloseButton onClose={() => this.data.close()} />,
+      this.data.children
+    ];
+
     return (
       <div style={styles.wrapper}>
-        <div style={styles.wrapperContent}>{this.data.children}</div>
-        <CloseButton onClose={() => this.data.close()} />
+        <div style={styles.wrapperContent}>{children}</div>
       </div>
     );
   }
@@ -27,7 +31,7 @@ export class Modal extends b.Component<IData> {
 
 class CloseButton extends b.Component<{ onClose: () => void }> {
   render() {
-    return <div style={styles.closeContent}>X</div>;
+    return <div style={styles.closeContent} />;
   }
   onClick() {
     this.data.onClose();

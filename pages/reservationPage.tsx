@@ -13,6 +13,7 @@ import {
 import { ReservationFormState } from "../data/reservation/types";
 import { Modal } from "../components/modal/component";
 import { ReservationForm } from "../components/reservationSection/formComponent";
+import { FinalizedReservation } from "../components/reservationSection/finalizedComponent";
 
 const contentStyle = b.styleDef({
   margin: "109px auto 0 auto",
@@ -118,8 +119,18 @@ class ReservationPage extends b.Component {
             "Smoking is strictly forbidden throughout the cottage and please leave your four-legged furry friends at home. Thank you in advance for your understanding."
           )}
         </div>
-        {appStore.reservationStore.reservationFormState !==
-        ReservationFormState.hidden ? (
+        {appStore.reservationStore.reservationFormState ===
+        ReservationFormState.visible ? (
+          <Modal
+            close={() => {
+              appStore.reservationStore.reservationFormState =
+                ReservationFormState.hidden;
+            }}
+          >
+            {<ReservationForm store={appStore.reservationStore} />}
+          </Modal>
+        ) : appStore.reservationStore.reservationFormState ===
+          ReservationFormState.finalized ? (
           <Modal
             close={() => {
               appStore.reservationStore.clear();
@@ -127,7 +138,7 @@ class ReservationPage extends b.Component {
                 ReservationFormState.hidden;
             }}
           >
-            {<ReservationForm store={appStore.reservationStore} />}
+            <FinalizedReservation />
           </Modal>
         ) : (
           <></>

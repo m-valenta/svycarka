@@ -96,12 +96,15 @@ class ReservationStore implements IReservationStore {
   }
 
   validate(): boolean {
-    let result = this.validateReservation();
-    result = result && this.validateName();
-    result = result && this.validateAddress();
-    result = result && this.validateEmail();
-    result = result && this.validatePhone();
-    return result;
+    let result = [
+      this.validateReservation(),
+      this.validateName(),
+      this.validateAddress(),
+      this.validateEmail(),
+      this.validatePhone(),
+      this.validateAgreement()
+    ];
+    return result.reduce((prev, current) => prev && current);
   }
 
   protected validateReservation(): boolean {
@@ -111,12 +114,12 @@ class ReservationStore implements IReservationStore {
 
   protected validateName(): boolean {
     return (this.name.isValid =
-      this.name !== undefined && this.name.value.length > 0);
+      this.name.value !== undefined && this.name.value.length > 0);
   }
 
   protected validateAddress(): boolean {
     return (this.address.isValid =
-      this.address !== undefined && this.address.value.length > 0);
+      this.address.value !== undefined && this.address.value.length > 0);
   }
 
   protected validateEmail(): boolean {
@@ -131,6 +134,12 @@ class ReservationStore implements IReservationStore {
       this.phone.value !== undefined &&
       this.phone.value.length > 0 &&
       phoneNumberRegex.test(this.phone.value));
+  }
+
+  protected validateAgreement(): boolean {
+    this.aggrement.isValid =
+      this.aggrement.value !== undefined && this.aggrement.value;
+    return this.aggrement.isValid;
   }
 }
 

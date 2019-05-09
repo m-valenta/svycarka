@@ -1,5 +1,7 @@
 import * as b from "bobril";
 import { zIndex } from "../../styleConstants";
+import { getResourceCssUrl } from "../../utils/resourceUtils";
+import { close_svg } from "../../src/assets";
 
 export const wrapper = b.styleDef({
   width: "100%",
@@ -20,6 +22,11 @@ export const wrapperContent = b.styleDef({
 
 export const closeContent = b.styleDef({
   position: "absolute",
-  top: "10%",
-  right: "10%"
+  top: "0",
+  right: "20.78%",
+  cursor: "pointer",
+  backgroundImage: getResourceCssUrl(b.asset(close_svg)),
+  width: 43,
+  height: 43,
+  marginTop: -43
 });

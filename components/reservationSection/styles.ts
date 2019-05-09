@@ -68,3 +68,53 @@ export const formInput = b.styleDef({
   padding: "0 !important",
   textAlign: "center"
 });
+
+export const formInputWithValue = b.styleDefEx(formInput, {
+  color: "black"
+});
+
+export const formInputInvalid = b.styleDefEx([formInput, formInputWithValue], {
+  border: `solid 1px ${colors.buttonRed}`,
+  color: colors.buttonRed
+});
+
+export const spinnerWrapper = b.styleDef({
+  marginBottom: 11
+});
+
+export const agreement = b.styleDef({
+  margin: "0 auto",
+  lineHeight: "16px",
+  fontSize: 16,
+  display: "inline-block"
+});
+
+export const agreementCheckbox = b.styleDef({
+  width: 20,
+  height: 20,
+  marginRight: 15
+});
+
+export const agreementCheckboxInvalid = b.styleDefEx(agreementCheckbox, {
+  border: `solid 1px ${colors.calendarRed}`
+});
+
+export const agreementCheckboxWrapper = b.styleDef({
+  cssFloat: "left"
+});
+
+export const agreementTextWrapper = b.styleDef({
+  cssFloat: "left",
+  paddingTop: 5,
+  height: 20,
+  display: "inline-block",
+  textAlign: "left"
+});
+
+export const agreementTextWrapperInvalid = b.styleDefEx(agreementTextWrapper, {
+  color: colors.buttonRed
+});
+
+export const aggrementWrapper = b.styleDef({
+  margin: "56px 0 44px 0"
+});

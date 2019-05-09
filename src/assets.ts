@@ -3,6 +3,7 @@
 export const arrow_svg = "../assets/arrow.svg";
 export const banner_jpg = "../assets/banner.jpg";
 export const bannerArrow_svg = "../assets/bannerArrow.svg";
+export const close_svg = "../assets/close.svg";
 export const dateArrow_svg = "../assets/dateArrow.svg";
 export const email_svg = "../assets/email.svg";
 export const fb_svg = "../assets/fb.svg";
