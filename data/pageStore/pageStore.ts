@@ -13,9 +13,13 @@ class PageStore implements IPageStore {
 
   protected _scrollItems: Map<string, number>;
 
+  @observable
+  forceShowTree: boolean;
+
   constructor() {
     this._currentPagePage = Page.Home;
-    this._scrollItems = new Map();
+    this.forceShowTree = false;
+    this.clearScrollItems();
   }
 
   get currentPage(): Page {
@@ -39,6 +43,7 @@ class PageStore implements IPageStore {
     }
 
     b.runTransition(transition);
+    window.scroll(0,0);
   }
 
   setPageInitialized(page: Page): void {
@@ -56,6 +61,7 @@ class PageStore implements IPageStore {
 
   private clearScrollItems(){
     this._scrollItems = new Map();
+    this._scrollItems.set("header", 0);
   }
 }
 

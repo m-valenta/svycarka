@@ -116,7 +116,8 @@ b.injectCss(`
         font-style: normal;
     }
     body {
-        font-family: ${lucida_sans_unicoderegular}
+        margin-top: 50px;
+        font-family: ${lucida_sans_unicoderegular};
     }
 `);
 

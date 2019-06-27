@@ -25,7 +25,7 @@ class MastePage extends b.Component<IData> {
   }
 
   protected get showTree(): boolean {
-    return appStore().pageStore.currentPage !== Page.Home;
+    return appStore().pageStore.forceShowTree || appStore().pageStore.currentPage !== Page.Home;
   }
 
   protected get showReservation(): boolean {

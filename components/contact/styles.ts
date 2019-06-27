@@ -50,7 +50,7 @@ export const contactContent = b.styleDef({
   position: "absolute",
   top: "50%",
   left: "50%",
-  marginTop: -150,
+  marginTop: -110,
   marginLeft: -250
 });
 

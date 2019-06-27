@@ -3,5 +3,5 @@ export const locales = {
     czech: "cs-CZ"
 };
 
-export const resourceVersion = 1;
+export const resourceVersion = 2;
 export const debug = true;

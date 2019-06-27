@@ -1,7 +1,6 @@
 import * as b from "bobril";
 
 export const buttonStyle = b.styleDef({
-  height: 34,
   fontSize: 18,
   textAlign: "center",
   color: "white",

@@ -1,9 +1,17 @@
 import * as b from "bobril";
 import { contentSize, colors, leftArrow, logo } from "../../styleConstants";
-import { button } from "../button/buton";
+
+export const wrapper = b.styleDef({
+  position: "fixed",
+  left: 0,
+  top: 0,
+  zIndex: 2,
+  width: "100%",
+  backgroundColor: "white"
+});
 
 const contentStyle = b.styleDefEx(contentSize, {
-  height: 80,
+  height: 50,
   paddingLeft: 57,
   paddingRight: 43,
   position: "relative",
@@ -14,19 +22,18 @@ export const content = [contentSize, contentStyle];
 
 export const rezervationButton = b.styleDef({
   fontSize: 18,
-  height: 80,
+  height: 50,
   backgroundColor: colors.buttonYellow,
   color: "white",
   textTransform: "uppercase",
-  lineHeight: "28px",
-  padding: "26px 73px",
+  padding: "16px 45px",
   cssFloat: "left",
   cursor: "pointer",
   boxSizing: "border-box"
 });
 
 export const sociaButton = b.styleDef({
-  height: 80,
+  height: 50,
   width: 30,
   marginLeft: 42,
   cursor: "pointer",
@@ -40,11 +47,11 @@ export const socialButtonContent = b.styleDef({
   width: 41,
   height: 30,
   position: "absolute",
-  top: 25
+  top: 10
 });
 
 export const menuButton = b.styleDef({
-  height: 80,
+  height: 50,
   width: 41,
   marginLeft: 23,
   cursor: "pointer",
@@ -56,13 +63,12 @@ export const menuButtonContent = b.styleDef({
   width: 41,
   height: 30,
   position: "absolute",
-  top: 25
+  top: 10
 });
 
 export const localeButton = b.styleDef({
   fontSize: 18,
-  lineHeight: "28px",
-  marginTop: 25,
+  marginTop: 16,
   color: colors.inputSilver,
   cssFloat: "right",
   cursor: "pointer"
@@ -80,8 +86,7 @@ export const logoButton = {
 
 const logoContentStyle = b.styleDef({
   width: 44,
-  height: 50,
-  marginTop: 15
+  height: 50
 });
 
 export const logoContent = [logo, logoContentStyle];

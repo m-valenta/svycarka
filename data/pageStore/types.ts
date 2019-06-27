@@ -11,6 +11,7 @@ export interface IScrollItem {
 
 export interface IPageStore {
   readonly currentPage: Page;
+  forceShowTree: boolean;  
   goToPage(page: Page): void;
   setPageInitialized(page: Page): void;  
   setScroolItemPosition(id: string, yPosition: number);

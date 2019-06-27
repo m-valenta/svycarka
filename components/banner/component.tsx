@@ -1,13 +1,14 @@
 import * as b from "bobril";
 import * as styles from "./styles";
 import { t } from "bobril-g11n";
-import { scrollToWrapper } from "../scrollToWrapper/utils";
+import { scrollToWrapper, debounce } from "../scrollToWrapper/utils";
+import { appStore } from "../../data/appStore";
 
 export class Banner extends b.Component {
   render() {
     return (
       <div style={styles.wrapper}>
-        <div style={styles.logo} />
+        <Logo/>
         <div style={styles.textWrapper}>
           <div style={styles.textContent}>
             {t(
@@ -24,5 +25,44 @@ export class Banner extends b.Component {
   private scrollToTips(): boolean {
     scrollToWrapper("tips");
     return true;
+  }
+}
+
+class Logo extends b.Component
+{
+  private endPosition: number = 0; 
+  private debouncedWindowScroll: () => void;
+
+  init() {
+    this.endPosition = 0; 
+    this.debouncedWindowScroll = debounce(this.onWindowScroll, 100, false);
+    window.addEventListener('scroll', this.debouncedWindowScroll);
+  }
+
+  destroy() {
+    window.removeEventListener("scroll", this.debouncedWindowScroll);
+    appStore().pageStore.forceShowTree = false;
+  }
+
+  render() {
+    return <div style={styles.logo} />
+  }
+
+  postUpdateDom(me: b.IBobrilCacheNode): void {
+    this.getNodeEndPosition(me);
+  }
+
+  postInitDom(me: b.IBobrilCacheNode): void {
+    this.getNodeEndPosition(me);
+  }
+
+  private getNodeEndPosition(me: b.IBobrilCacheNode) {
+    this.endPosition = b.nodePagePos(me)[1];
+    this.endPosition = this.endPosition + (b.getDomNode(me) as Element).getBoundingClientRect().height;
+  }
+
+  @b.bind
+  private onWindowScroll() {
+    appStore().pageStore.forceShowTree = window.scrollY > this.endPosition;
   }
 }

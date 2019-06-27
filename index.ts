@@ -6,6 +6,7 @@ import { masterPage } from "./pages/masterPage";
 import { homePage } from "./pages/homePage";
 import { tipsPage } from "./pages/tipsPage";
 import { reservationPage } from "./pages/reservationPage";
+import { favIconLink } from "./components/links/faviconlink";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -13,6 +14,8 @@ b.asset("./css/reset.css");
 initGlobalization({
   defaultLocale: locales.default
 }).then(() => {
+  document.title = "Švýcarka";
+
   setLocale(locales.czech);
   initAppStore();
   b.routes(
@@ -26,4 +29,8 @@ initGlobalization({
       b.routeDefault({ handler: homePage, name: "home" })
     ])
   );
+
+  b.addRoot(() => {
+    return favIconLink();
+  }, document.head);
 });

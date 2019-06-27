@@ -1,11 +1,7 @@
 import * as b from "bobril";
 import * as styles from "./styles";
 import { t, getLocale, setLocale } from "bobril-g11n";
-import {
-  reservationTransition,
-  tipsTransition,
-  defaultTransition
-} from "../../transitions";
+import { tipsTransition } from "../../transitions";
 import { socialBackgrounds, menuButton } from "../../styleConstants";
 import { locales } from "../../constants";
 import { observable } from "bobx";
@@ -38,12 +34,10 @@ export class HeaderComponent extends b.Component<IData> {
     children.push(<LanguageButton />);
     this.data.showTree && children.push(<Logo />);
     return (
-      <>
-        <div style>
+        <div style={styles.wrapper}>
           <div style={styles.content}>{children}</div>
           <div style={{ clear: "both" }} />
         </div>
-      </>
     );
   }
 }
