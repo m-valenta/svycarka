@@ -62,14 +62,14 @@ export class ReservationForm extends b.Component<IData> {
           <div>
             <div style={styles.spinnerWrapper}>
               <Spinner
-                item={appStore.reservationStore.beer}
+                item={appStore().reservationStore.beer}
                 text={t("Barrel of beer (including bar):")}
                 explicitWidth={230}
               />
             </div>
             <div style={styles.spinnerWrapper}>
               <Spinner
-                item={appStore.reservationStore.meet}
+                item={appStore().reservationStore.meet}
                 text={t("Grill meat for:")}
                 explicitWidth={230}
               />
@@ -84,8 +84,8 @@ export class ReservationForm extends b.Component<IData> {
             colorScheme={colors.buttonRed}
             text={t("Reserve date")}
             onClick={() => {
-              if (appStore.reservationStore.validate()) {
-                appStore.reservationStore.reservationFormState =
+              if (appStore().reservationStore.validate()) {
+                appStore().reservationStore.reservationFormState =
                   ReservationFormState.finalized;
               }
             }}

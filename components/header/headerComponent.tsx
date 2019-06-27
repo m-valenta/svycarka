@@ -54,7 +54,7 @@ class RezervationButton extends b.Component {
   }
 
   onClick() {
-    appStore.pageStore.goToPage(Page.Reservation);
+    appStore().pageStore.goToPage(Page.Reservation);
     return true;
   }
 }
@@ -137,7 +137,7 @@ class Logo extends b.Component {
   }
 
   onClick() {
-    appStore.pageStore.goToPage(Page.Home);
+    appStore().pageStore.goToPage(Page.Home);
     return true;
   }
 }

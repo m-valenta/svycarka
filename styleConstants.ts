@@ -2,8 +2,8 @@ import * as b from "bobril";
 import {
   arrow_svg,
   dateArrow_svg,
-  lucida_sans_unicode_webfont_woff,
-  lucida_sans_unicode_webfont_woff2,
+  lucida_sans_unicode_woff,
+  lucida_sans_unicode_woff2,
   fb_svg,
   instagram_svg,
   menu_svg,
@@ -107,10 +107,10 @@ b.injectCss(`
     @font-face {
         font-family: '${lucida_sans_unicoderegular}';
         src: ${getResourceCssUrl(
-          b.asset(lucida_sans_unicode_webfont_woff2)
+          b.asset(lucida_sans_unicode_woff)
         )} format('woff2'),
             ${getResourceCssUrl(
-              b.asset(lucida_sans_unicode_webfont_woff)
+              b.asset(lucida_sans_unicode_woff2)
             )} format('woff');
         font-weight: normal;
         font-style: normal;

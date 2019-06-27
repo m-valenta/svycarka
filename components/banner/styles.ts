@@ -1,6 +1,6 @@
 import * as b from "bobril";
 import { getResourceCssUrl } from "../../utils/resourceUtils";
-import { banner_jpg, bannerArrow_svg } from "../../src/assets";
+import { banner_jpg, bannerArrow_svg, svycarka_logo_svg } from "../../src/assets";
 
 export const wrapper = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(banner_jpg)),
@@ -8,7 +8,7 @@ export const wrapper = b.styleDef({
   backgroundSize: "cover",
   backgroundAttachment: "fixed",
   backgroundPosition: "center",
-  paddingBottom: "68.75%",
+  paddingBottom: "44.67%",
   position: "relative"
 });
 
@@ -21,7 +21,8 @@ export const arrow = b.styleDef({
   bottom: "9.4%",
   left: "50%",
   marginLeft: -23.89,
-  transform: "rotate(180deg)"
+  transform: "rotate(180deg)",
+  cursor: "pointer" 
 });
 
 export const textWrapper = b.styleDef({
@@ -33,5 +34,17 @@ export const textWrapper = b.styleDef({
 export const textContent = b.styleDef({
   textAlign: "center",
   width: "48.54%",
-  margin: "0 auto"
+  margin: "0 auto",
+  lineHeight: "25px",
+  fontSize: 16
+});
+
+export const logo = b.styleDef({ 
+  backgroundImage: getResourceCssUrl(b.asset(svycarka_logo_svg)),
+  width: "14.5%",
+  paddingBottom: "14.7%",
+  position: "absolute",
+  top: "15%",
+  left: "50%",
+  marginLeft: "-7.25%"
 });

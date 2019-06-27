@@ -45,7 +45,7 @@ const textBlockLowerInternal = b.styleDef({
 
 class ReservationPage extends b.Component {
   init() {
-    appStore.pageStore.setPageInitialized(Page.Reservation);
+    appStore().pageStore.setPageInitialized(Page.Reservation);
   }
   render() {
     return (
@@ -61,13 +61,13 @@ class ReservationPage extends b.Component {
           }}
         </TextSection>
         <div style={dateInputWrapper}>
-          <DateInput store={appStore.reservationStore} />
+          <DateInput store={appStore().reservationStore} />
         </div>
         <div style={buttonWrapper}>
           <Button
             text={t("Reserve date")}
             onClick={() =>
-              (appStore.reservationStore.reservationFormState =
+              (appStore().reservationStore.reservationFormState =
                 ReservationFormState.visible)
             }
             colorScheme={colors.buttonYellow}
@@ -119,22 +119,22 @@ class ReservationPage extends b.Component {
             "Smoking is strictly forbidden throughout the cottage and please leave your four-legged furry friends at home. Thank you in advance for your understanding."
           )}
         </div>
-        {appStore.reservationStore.reservationFormState ===
+        {appStore().reservationStore.reservationFormState ===
         ReservationFormState.visible ? (
           <Modal
             close={() => {
-              appStore.reservationStore.reservationFormState =
+              appStore().reservationStore.reservationFormState =
                 ReservationFormState.hidden;
             }}
           >
-            {<ReservationForm store={appStore.reservationStore} />}
+            {<ReservationForm store={appStore().reservationStore} />}
           </Modal>
-        ) : appStore.reservationStore.reservationFormState ===
+        ) : appStore().reservationStore.reservationFormState ===
           ReservationFormState.finalized ? (
           <Modal
             close={() => {
-              appStore.reservationStore.clear();
-              appStore.reservationStore.reservationFormState =
+              appStore().reservationStore.clear();
+              appStore().reservationStore.reservationFormState =
                 ReservationFormState.hidden;
             }}
           >

@@ -8,13 +8,14 @@ export interface IAppStore {
   pageStore: IPageStore;
 }
 
-export let appStore: IAppStore;
+const appStoreKey = "$appStore";
+window[appStoreKey] = {};
 
 export function initAppStore(): void {
-  appStore = {
-    reservationStore: reservationStoreFactory(),
-    pageStore: pageStoreFactory()
-  };
+  window[appStoreKey].reservationStore = reservationStoreFactory();
+  window[appStoreKey].pageStore = pageStoreFactory();
+}
 
-  window["$as"] = appStore;
+export function appStore(): IAppStore {
+  return window[appStoreKey];
 }

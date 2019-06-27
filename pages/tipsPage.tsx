@@ -44,7 +44,7 @@ const linkStyle = b.styleDef(
 
 class TipsPage extends b.Component {
   init() {
-    appStore.pageStore.setPageInitialized(Page.Tips);
+    appStore().pageStore.setPageInitialized(Page.Tips);
   }
 
   render() {

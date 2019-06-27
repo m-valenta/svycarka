@@ -23,12 +23,13 @@ class MastePage extends b.Component<IData> {
 
     return <div>{children}</div>;
   }
+
   protected get showTree(): boolean {
-    return appStore.pageStore.currentPage !== Page.Home;
+    return appStore().pageStore.currentPage !== Page.Home;
   }
 
   protected get showReservation(): boolean {
-    return appStore.pageStore.currentPage !== Page.Reservation;
+    return appStore().pageStore.currentPage !== Page.Reservation;
   }
 }
 

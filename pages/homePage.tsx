@@ -6,16 +6,17 @@ import { MapSection } from "../components/mapSection/component";
 import { appStore } from "../data/appStore";
 import { Page } from "../data/pageStore/types";
 import { Gallery } from "../components/gallery/component";
+import { ScrollToWrapper } from "../components/scrollToWrapper/component";
 
 class HomePage extends b.Component {
   init() {
-    appStore.pageStore.setPageInitialized(Page.Home);
+    appStore().pageStore.setPageInitialized(Page.Home);
   }
   render() {
     return (
       <div>
         <Banner />
-        <TipsSection />
+        <ScrollToWrapper id="tips"><TipsSection /></ScrollToWrapper>
         <Gallery />
         <ReservationSection />
         <MapSection />

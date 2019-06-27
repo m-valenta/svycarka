@@ -1,11 +1,13 @@
 import * as b from "bobril";
 import * as styles from "./styles";
 import { t } from "bobril-g11n";
+import { scrollToWrapper } from "../scrollToWrapper/utils";
 
 export class Banner extends b.Component {
   render() {
     return (
       <div style={styles.wrapper}>
+        <div style={styles.logo} />
         <div style={styles.textWrapper}>
           <div style={styles.textContent}>
             {t(
@@ -13,8 +15,14 @@ export class Banner extends b.Component {
             )}
           </div>
         </div>
-        <div style={styles.arrow} />
+        <div style={styles.arrow} onClick={this.scrollToTips}/>
       </div>
     );
+  }
+
+  @b.bind
+  private scrollToTips(): boolean {
+    scrollToWrapper("tips");
+    return true;
   }
 }

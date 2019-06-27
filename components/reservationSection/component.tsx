@@ -142,7 +142,7 @@ export class ReservationSection extends b.Component {
             <Button
               colorScheme={colors.buttonYellow}
               text={t("Reservation")}
-              onClick={() => appStore.pageStore.goToPage(Page.Reservation)}
+              onClick={() => appStore().pageStore.goToPage(Page.Reservation)}
             />
           </div>
         </div>

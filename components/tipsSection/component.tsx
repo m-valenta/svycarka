@@ -26,7 +26,7 @@ export class TipsSection extends b.Component {
             <Button
               colorScheme={colors.buttonYellow}
               text={t("More informations")}
-              onClick={() => appStore.pageStore.goToPage(Page.Tips)}
+              onClick={() => appStore().pageStore.goToPage(Page.Tips)}
             />
           </div>
         </div>

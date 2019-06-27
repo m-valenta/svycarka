@@ -8,14 +8,13 @@ import { tipsPage } from "./pages/tipsPage";
 import { reservationPage } from "./pages/reservationPage";
 
 // CSS files
-//b.asset("./css/reset.css");
+b.asset("./css/reset.css");
 
 initGlobalization({
   defaultLocale: locales.default
 }).then(() => {
   setLocale(locales.czech);
   initAppStore();
-
   b.routes(
     b.route({ handler: masterPage }, [
       b.route({ url: "/tips", name: "tips", handler: tipsPage }),
