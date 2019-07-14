@@ -11,7 +11,10 @@ import {
   dateItem,
   getCurrentDateItem,
   Month,
-  datItemParts
+  datItemParts,
+  getNextDayItem,
+  getMonthInfoFromDateItem,
+  compareDateItem
 } from "../../utils/dateUtils";
 import * as styles from "./styles";
 import { IReservationStore, IReservation } from "../../data/reservation/types";
@@ -19,7 +22,6 @@ import { rightArrow, leftArrow } from "../../styleConstants";
 import {
   MonthDay,
   SelectionState,
-  IRangeInfo,
   IRangeState
 } from "./reservationStrategies/baseStrategy";
 
@@ -28,10 +30,10 @@ const clearMouseMask =
   SelectionState.selectedFirst |
   SelectionState.selectedLast;
 
-const clearSelectionMask =
-  SelectionState.offered |
-  SelectionState.offeredFirst |
-  SelectionState.offeredLast;
+const clearPreviewMask =
+  SelectionState.preview |
+  SelectionState.previewFirst |
+  SelectionState.previewLast;
 
 export interface ICalendarData {
   store: IReservationStore;
@@ -121,12 +123,12 @@ export class Calendar extends b.Component<ICalendarData> {
         this.clearSelection(clearMouseMask);
         break;
       case SelectionMode.unSelect:
-        this.data.store.currentReservation = undefined;
+        this.data.store.currentReservation.value = undefined;
       case SelectionMode.mouseIn:
         this.doMouseSelection(day, this.getMonthDays());
         break;
       case SelectionMode.select:
-        this.clearSelection(clearSelectionMask);
+        this.clearSelection(clearPreviewMask);
         this.doClickSelection(day, this.getMonthDays());
         break;
     }
@@ -135,7 +137,7 @@ export class Calendar extends b.Component<ICalendarData> {
   @computed
   protected getMonthDays(): MonthDay[] {
     const currentDayItem = getCurrentDateItem();
-    const reservations = this.data.store.reservationList || [];
+    const reservations = this.data.store.reservations;
     const monthDays: MonthDay[] = [];
 
     let day = this._startDay;
@@ -178,6 +180,10 @@ export class Calendar extends b.Component<ICalendarData> {
       day = (day + 1) % 7;
     }
 
+    if ((day + 1) % 7 === this._startDay) {
+      return monthDays;
+    }
+
     const nextDays = 6 - Math.abs(day - this._startDay);
     for (let i = 1; i <= nextDays; i++) {
       day = (day + 1) % 7;
@@ -213,86 +219,85 @@ export class Calendar extends b.Component<ICalendarData> {
   }
 
   protected doMouseSelection(selectedDay: MonthDay, days: MonthDay[]) {
-    const currentDayItem = getCurrentDateItem();
-    const selectionRange = this.data.reservationStrategy.getSelectionRangeInfo(
+    if (this.data.store.currentReservation.value === undefined) {
+      return;
+    }
+
+    const reservationPreview = this.data.reservationStrategy.getSelectedReservation(
       selectedDay,
-      this._previousMonth,
-      this._nextMonth,
-      currentDayItem,
-      days,
-      this.data.store.reservationList
+      this._currentMonth,
+      getCurrentDateItem(),
+      this.data.store.currentReservation.value,
+      this.data.store.reservations
     );
 
-    selectionRange.weekendRange.isAvailable &&
-      selectRange(selectionRange.weekendRange);
-    selectionRange.weekRange.isAvailable &&
-      selectRange(selectionRange.weekRange);
+    if (reservationPreview === undefined) {
+      this.clearSelection(clearPreviewMask);
+      return;
+    }
 
-    function selectRange(rangeState: IRangeState): void {
-      for (
-        let i = rangeState.startCurrentMonthIndex;
-        i <= rangeState.endCurrentMonthIndex;
-        i++
-      ) {
-        const currentDay = days[i];
-        if (
-          i === rangeState.startCurrentMonthIndex &&
-          (currentDay.selectionState & SelectionState.offered) === 0 &&
-          !rangeState.startInPreviousMonth
-        ) {
-          currentDay.selectionState =
-            currentDay.selectionState | SelectionState.offeredFirst;
+    let workingDay = reservationPreview.dateItem;
+    let workingMonth = getMonthInfoFromDateItem(workingDay);
+    for (let i = 0, mi = -1, psi = -1; i < reservationPreview.duration; i++) {
+      if (selectedDay.date[datItemParts.month] === workingMonth.month) {
+        if(mi = -1) {
+          for(mi = 0; mi < days.length; mi++) {
+            if(compareDateItem(workingDay, days[mi].date) === 0) {
+              psi = mi;
+              break;
+            }
+          }
+        }
+        
+        const mDay = days[mi];
+
+        if (psi == mi && i == 0) {
+          if (compareDateItem(mDay.date, selectedDay.date) === 0) {
+            mDay.selectionState =
+              mDay.selectionState |
+              SelectionState.preview |
+              SelectionState.previewFirst;
+          } else {
+            mDay.selectionState =
+              mDay.selectionState |
+              SelectionState.selected |
+              SelectionState.selectedFirst;
+          }
+        } else if (i === reservationPreview.duration - 1) {
+          if (compareDateItem(mDay.date, selectedDay.date) === 0) {
+            mDay.selectionState =
+              mDay.selectionState |
+              SelectionState.preview |
+              SelectionState.previewLast;
+          } else {
+            mDay.selectionState =
+              mDay.selectionState |
+              SelectionState.selected |
+              SelectionState.selectedLast;
+          }
+        } else {
+          mDay.selectionState = mDay.selectionState | SelectionState.preview;
         }
 
-        if (
-          i === rangeState.endCurrentMonthIndex &&
-          (currentDay.selectionState & SelectionState.offered) === 0 &&
-          !rangeState.endInNextMonth
-        ) {
-          currentDay.selectionState =
-            currentDay.selectionState | SelectionState.offeredLast;
-        }
+        mi++;
+      }
 
-        currentDay.selectionState =
-          currentDay.selectionState | SelectionState.offered;
+      workingDay = getNextDayItem(workingDay, workingMonth);
+      if (workingDay[datItemParts.month] !== workingMonth.month) {
+        workingMonth = getNextMonthInfo(workingMonth);
       }
     }
   }
 
   protected doClickSelection(selectedDay: MonthDay, days: MonthDay[]) {
-    const currentDayItem = getCurrentDateItem();
-    const selectionRange = this.data.reservationStrategy.getSelectionRangeInfo(
+    this.data.store.currentReservation.value = this.data.reservationStrategy.getSelectedReservation(
       selectedDay,
-      this._previousMonth,
-      this._nextMonth,
-      currentDayItem,
-      days,
-      this.data.store.reservationList
+      this._currentMonth,
+      getCurrentDateItem(),
+      this.data.store.currentReservation.value,
+      this.data.store.reservations
     );
-
-    const minimalRange = selectionRange.weekendRange.isAvailable
-      ? selectionRange.weekendRange
-      : selectionRange.weekRange.isAvailable
-      ? selectionRange.weekRange
-      : undefined;
-
-    if (minimalRange === undefined) return;
-
-    const duration = minimalRange === selectionRange.weekendRange ? 3 : 8;
-
-    this.data.store.currentReservation.value = {
-      dateItem: minimalRange.startInPreviousMonth
-        ? [
-            this._previousMonth.year,
-            this._previousMonth.month,
-            this._previousMonth.daysCount -
-              (7 -
-                (minimalRange.endCurrentMonthIndex -
-                  minimalRange.startCurrentMonthIndex))
-          ]
-        : days[minimalRange.startCurrentMonthIndex].date,
-      duration
-    };
+    this.clearSelection(clearPreviewMask);
   }
 }
 
@@ -405,7 +410,10 @@ class CalendarDay extends b.Component<ICalendarDayData> {
   onClick() {
     this.data.selectionHandler(
       this.data.day,
-      this.data.day.isSelectable ? SelectionMode.select : SelectionMode.unSelect
+      this.data.day.isSelectable &&
+        this.data.day.selectionState !== SelectionState.selected
+        ? SelectionMode.select
+        : SelectionMode.unSelect
     );
     return true;
   }
@@ -416,11 +424,11 @@ class CalendarDay extends b.Component<ICalendarDayData> {
     this.data.day.isReserved && style.push(styles.columnStyleReserved);
     this.data.day.isSelectable && style.push(styles.columnStyleSelectable);
 
-    (this.data.day.selectionState & SelectionState.offered) > 0 &&
+    (this.data.day.selectionState & SelectionState.preview) > 0 &&
       style.push(styles.mouseSelection);
-    (this.data.day.selectionState & SelectionState.offeredFirst) > 0 &&
+    (this.data.day.selectionState & SelectionState.previewFirst) > 0 &&
       style.push(styles.mouseSelectionStart);
-    (this.data.day.selectionState & SelectionState.offeredLast) > 0 &&
+    (this.data.day.selectionState & SelectionState.previewLast) > 0 &&
       style.push(styles.mouseSelectionEnd);
 
     (this.data.day.selectionState & SelectionState.selected) > 0 &&
@@ -455,16 +463,21 @@ export interface ICalendarReservationStrategy {
     isInCurrentMonth: boolean,
     monthInfo: IMonthInfo,
     currentDateItem: dateItem,
-    reservations: ReadonlyArray<IReservation>,
+    reservations: ReadonlyMap<
+      number,
+      ReadonlyMap<number, ReadonlyArray<IReservation>>
+    >,
     currentReservation: IReservation | undefined
   ): MonthDay;
 
-  getSelectionRangeInfo(
+  getSelectedReservation(
     selectedDay: MonthDay,
-    previousMonth: IMonthInfo,
-    nextMonth: IMonthInfo,
-    currentDate: dateItem,
-    days: ReadonlyArray<MonthDay>,
-    reservations: ReadonlyArray<IReservation>
-  ): IRangeInfo;
+    currentMonth: IMonthInfo,
+    currentDate: [number, number, number],
+    currentReservation: IReservation,
+    reservations: ReadonlyMap<
+      number,
+      ReadonlyMap<number, ReadonlyArray<IReservation>>
+    >
+  ): IReservation | undefined;
 }

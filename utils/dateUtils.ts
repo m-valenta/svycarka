@@ -39,6 +39,14 @@ export interface IMonthInfo {
   daysCount: number;
 }
 
+export function dateItemToDate(dateItem: dateItem): Date {
+  return new Date(dateItem[0], dateItem[1], dateItem[2]);
+}
+
+export function getMonthInfoFromDateItem(date: dateItem): IMonthInfo {
+  return getMonthInfo(dateItemToDate(date));
+}
+
 export function getMonthInfo(currentDate: Date = new Date()): IMonthInfo {
   return {
     startDay: startDay(currentDate),
@@ -129,6 +137,32 @@ export function localizeDateItem(
 
 export function clone(dateItem: dateItem, day?: number): dateItem {
   return getDateItem(dateItem[0], dateItem[1], day || dateItem[2]);
+}
+
+export function compareDateItem(dayL: dateItem, dayR: dateItem): number {
+  var state = dayL[0] - dayR[0];
+
+  if(state !== 0)
+    return state;
+
+  state = dayL[1] - dayR[1];
+  
+  if(state !== 0)
+    return state;
+
+  return dayL[2] - dayR[2];
+}
+
+export function getNextDayItem(day: dateItem, month: IMonthInfo): dateItem {
+  if (day[datItemParts.day] + 1 <= month.daysCount) {
+    return [day[datItemParts.year], day[datItemParts.month], day[datItemParts.day] + 1];
+  }
+
+  if (day[datItemParts.month] !== Month.December) {
+    return [day[datItemParts.year], day[datItemParts.month] + 1, 1];
+  }
+
+  return [day[datItemParts.year] + 1, 1, 1];
 }
 
 function daysInMonth(date: Date): number {

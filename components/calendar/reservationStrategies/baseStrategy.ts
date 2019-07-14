@@ -7,39 +7,23 @@ import {
   getMonthInfo,
   Month,
   getPreviousMonthInfo,
-  datItemParts
+  datItemParts,
+  compareDateItem,
+  getMonthInfoFromDateItem,
+  getNextMonthInfo,
+  getNextDayItem
 } from "../../../utils/dateUtils";
 import { IReservation } from "../../../data/reservation/types";
 import { observable } from "bobx";
 
 export enum SelectionState {
   none = 0,
-  offered = 1,
-  offeredFirst = 2,
-  offeredLast = 4,
+  preview = 1,
+  previewFirst = 2,
+  previewLast = 4,
   selected = 8,
   selectedFirst = 16,
   selectedLast = 32
-}
-
-export interface ISeasonPrice {
-  months: ReadonlyArray<Month>;
-  priceWeek: number;
-  priceWeekend?: number;
-}
-
-export interface ISpecialDatePrice {
-  readonly day: number;
-  readonly month: number;
-  readonly priceWeek?: number;
-  readonly priceWeekend?: number;
-}
-
-export interface IPriceList {
-  readonly seasons: ReadonlyArray<ISeasonPrice>;
-  readonly specialDates: ReadonlyArray<ISpecialDatePrice>;
-  readonly weekPrice: number;
-  readonly weekendPrice: number;
 }
 
 export interface IRangeState {
@@ -48,11 +32,6 @@ export interface IRangeState {
   endCurrentMonthIndex: number;
   startInPreviousMonth: boolean;
   endInNextMonth: boolean;
-}
-
-export interface IRangeInfo {
-  weekRange: IRangeState;
-  weekendRange: IRangeState;
 }
 
 export class MonthDay {
@@ -86,35 +65,6 @@ export class MonthDay {
 
 export abstract class BaseReservationtrategy
   implements ICalendarReservationStrategy {
-  protected readonly _priceList: IPriceList;
-  protected readonly _seasonMap: (ISeasonPrice | undefined)[] = [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined
-  ];
-
-  constructor(priceList: IPriceList) {
-    this._priceList = priceList;
-    for (let i = 0; i < priceList.seasons.length; i++) {
-      for (
-        let monthIndex = 0;
-        monthIndex < priceList.seasons[i].months.length;
-        monthIndex++
-      ) {
-        this._seasonMap[monthIndex] = priceList.seasons[i];
-      }
-    }
-  }
-
   protected abstract dayFormater(day: number): string;
 
   protected dateIsInHistory(
@@ -134,13 +84,17 @@ export abstract class BaseReservationtrategy
   protected dateIsReserved(
     day: number,
     monthInfo: IMonthInfo,
-    reservations: ReadonlyArray<IReservation>
+    monthReservations: ReadonlyArray<IReservation> | undefined
   ): boolean {
+    if (monthReservations == undefined) {
+      return null;
+    }
+
     const yearNumber = monthInfo.year;
     const monthNumber = monthInfo.month;
 
-    for (let i = 0; i < reservations.length; i++) {
-      const currentReservation = reservations[i];
+    for (let i = 0; i < monthReservations.length; i++) {
+      const currentReservation = monthReservations[i];
       const currentReservationStart = currentReservation.dateItem;
 
       if (
@@ -179,76 +133,17 @@ export abstract class BaseReservationtrategy
     return false;
   }
 
-  protected getRangeState(
-    foundIndex: number,
-    startOffset: number,
-    endOffset: number,
-    previousMonth: IMonthInfo,
-    nextMonth: IMonthInfo,
-    currentDate: dateItem,
-    days: ReadonlyArray<MonthDay>,
-    reservations: ReadonlyArray<IReservation>,
-    checkSeason: boolean = false
-  ): IRangeState {
-    const range: IRangeState = {
-      isAvailable: true,
-      startInPreviousMonth: false,
-      endInNextMonth: false,
-      startCurrentMonthIndex: 32,
-      endCurrentMonthIndex: -1
-    };
-
-    for (let i = foundIndex - startOffset; i < foundIndex + endOffset; i++) {
-      if (i < 0) {
-        const dayNumber =
-          days[0].date[datItemParts.month] === previousMonth.month
-            ? days[0].date[datItemParts.day] - i
-            : previousMonth.daysCount + i;
-
-        const season = this._seasonMap[previousMonth.month];
-        if (
-          (checkSeason && season.priceWeekend === undefined) ||
-          this.dateIsInHistory(dayNumber, previousMonth, currentDate) ||
-          this.dateIsReserved(dayNumber, previousMonth, reservations)
-        ) {
-          range.isAvailable = false;
-          break;
-        }
-
-        range.startInPreviousMonth = true;
-        continue;
-      } else if (i > days.length - 1) {
-        const dayNumber =
-          days[days.length - 1].date[datItemParts.month] === nextMonth.month
-            ? i - days.length + days[days.length - 1].date[dateItemParts.day]
-            : i - days.length;
-        const season = this._seasonMap[nextMonth.month];
-        if (
-          (checkSeason && season.priceWeekend === undefined) ||
-          this.dateIsInHistory(dayNumber, nextMonth, currentDate) ||
-          this.dateIsReserved(dayNumber, nextMonth, reservations)
-        ) {
-          range.isAvailable = false;
-          break;
-        }
-
-        range.endInNextMonth = true;
-        continue;
-      }
-
-      if (days[i].isSelectable) {
-        range.startCurrentMonthIndex =
-          i < range.startCurrentMonthIndex ? i : range.startCurrentMonthIndex;
-        range.endCurrentMonthIndex =
-          i > range.endCurrentMonthIndex ? i : range.startCurrentMonthIndex;
-        continue;
-      }
-
-      range.isAvailable = false;
-      break;
-    }
-
-    return range;
+  protected getMonthReservations(
+    montInfo: IMonthInfo,
+    reservations: ReadonlyMap<
+      number,
+      ReadonlyMap<number, ReadonlyArray<IReservation>>
+    >
+  ): ReadonlyArray<IReservation> | undefined {
+    var yearReservations = reservations.get(montInfo.year);
+    return yearReservations === undefined
+      ? undefined
+      : yearReservations.get(montInfo.month);
   }
 
   getMonthDay(
@@ -257,10 +152,17 @@ export abstract class BaseReservationtrategy
     isInCurrentMonth: boolean,
     monthInfo: IMonthInfo,
     currentDateItem: dateItem,
-    reservations: ReadonlyArray<IReservation>,
+    reservations: ReadonlyMap<
+      number,
+      ReadonlyMap<number, ReadonlyArray<IReservation>>
+    >,
     currentReservation: IReservation | undefined
   ): MonthDay {
-    const isReserved = this.dateIsReserved(day, monthInfo, reservations);
+    const isReserved = this.dateIsReserved(
+      day,
+      monthInfo,
+      this.getMonthReservations(monthInfo, reservations)
+    );
 
     const mDay = new MonthDay(
       [monthInfo.year, monthInfo.month, day],
@@ -318,73 +220,63 @@ export abstract class BaseReservationtrategy
     }
   }
 
-  getSelectionRangeInfo(
+  getSelectedReservation(
     selectedDay: MonthDay,
-    previousMonth: IMonthInfo,
-    nextMonth: IMonthInfo,
-    currentDate: dateItem,
-    days: ReadonlyArray<MonthDay>,
-    reservations: ReadonlyArray<IReservation>
-  ): IRangeInfo {
-    const foundIndex = days.indexOf(selectedDay);
+    currentMonth: IMonthInfo,
+    currentDate: [number, number, number],
+    currentReservation: IReservation,
+    reservations: ReadonlyMap<
+      number,
+      ReadonlyMap<number, ReadonlyArray<IReservation>>
+    >
+  ): IReservation | undefined {
+    // In history
 
-    if (foundIndex < 0) {
-      return;
+    if (this.dateIsInHistory(selectedDay.date[datItemParts.day], currentMonth, currentDate)) {
+      return undefined;
     }
 
-    let endOffset = DayOfWeek.saturday - selectedDay.day;
-    let startOffset = 7 - endOffset;
+    let startDate, endDate: dateItem;
+    if (currentReservation !== undefined) {
+      if (compareDateItem(selectedDay.date, currentReservation.dateItem) < 0) {
+        startDate = selectedDay.date;
+        endDate = currentReservation.dateItem;
+      } else {
+        startDate = currentReservation.dateItem;
+        endDate = selectedDay.date;
+      }
+    } else {
+      startDate = selectedDay.date;
+      endDate = selectedDay.date;
+    }
 
-    const weekRange = this.getRangeState(
-      foundIndex,
-      startOffset,
-      endOffset + 1,
-      previousMonth,
-      nextMonth,
-      currentDate,
-      days,
+    let duration = 0;
+    let workingDate = startDate;
+    let workingMonth = getMonthInfoFromDateItem(workingDate);
+    let workingReservations = this.getMonthReservations(
+      workingMonth,
       reservations
     );
+    while (compareDateItem(workingDate, endDate) <= 0) {
+      if (
+        this.dateIsReserved(workingDate[datItemParts.day], workingMonth, workingReservations)
+      ) {
+        return compareDateItem(workingDate, selectedDay.date) !== 0
+          ? { dateItem: selectedDay.date, duration: 1 }
+          : undefined;
+      }
 
-    let weekendRange: IRangeState = {
-      isAvailable: false,
-      startInPreviousMonth: false,
-      endInNextMonth: false,
-      startCurrentMonthIndex: 32,
-      endCurrentMonthIndex: -1
-    };
-
-    let season: ISeasonPrice | undefined;
-    if (
-      (selectedDay.day === DayOfWeek.friday ||
-        selectedDay.day === DayOfWeek.saturday ||
-        selectedDay.day === DayOfWeek.sunday) &&
-      ((season = this._seasonMap[selectedDay.date[dateItemParts.month]]) ===
-        undefined ||
-        season.priceWeekend !== undefined)
-    ) {
-      let startOffset =
-        selectedDay.day === DayOfWeek.friday
-          ? 0
-          : selectedDay.day === DayOfWeek.saturday
-          ? 1
-          : 2;
-      let endOffset = 3 - startOffset;
-      weekendRange = this.getRangeState(
-        foundIndex,
-        startOffset,
-        endOffset,
-        previousMonth,
-        nextMonth,
-        currentDate,
-        days,
-        reservations
-      );
+      workingDate = getNextDayItem(workingDate, workingMonth);
+      if (workingDate[1] !== workingMonth.month) {
+        workingMonth = getNextMonthInfo(workingMonth);
+        workingReservations = this.getMonthReservations(
+          workingMonth,
+          reservations
+        );
+      }
+      duration++;
     }
 
-    return {
-      weekRange,
-      weekendRange
-    };
+    return {dateItem: startDate, duration};
   }
 }

@@ -19,7 +19,7 @@ export const wrapperInvalid = b.styleDefEx(wrapper, {
 export const date = b.styleDef({
   width: 116,
   height: 23,
-  marginTop: 16,
+  marginTop: 19,
   fontSize: 16,
   cssFloat: "left",
   textAlign: "center"

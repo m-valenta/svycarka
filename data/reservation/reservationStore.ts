@@ -23,8 +23,8 @@ const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.compile();
 class ReservationStore implements IReservationStore {
   private _connector: IAjaxConnector | undefined;
 
-  @observable.ref
-  private _reservations: IReservation[] | undefined;
+  @observable
+  _reservations: Map<number, Map<number, IReservation[]>> = new Map();
 
   currentReservation: FormItem<IReservation> = new FormItem();
 
@@ -45,7 +45,7 @@ class ReservationStore implements IReservationStore {
   @observable
   reservationFormState: ReservationFormState = ReservationFormState.hidden;
 
-  get reservationList(): IReservation[] | undefined {
+  get reservations(): ReadonlyMap<number, ReadonlyMap<number, ReadonlyArray<IReservation>>> {
     return this._reservations;
   }
 
@@ -64,7 +64,13 @@ class ReservationStore implements IReservationStore {
       return;
     }
 
-    this._reservations = response.reservations;
+    let yearReservations = this._reservations.get(response.year);
+    if (yearReservations === undefined) {
+      yearReservations = new Map();
+      this._reservations.set(response.year, yearReservations);
+    }
+
+    yearReservations.set(response.month, response.reservations);
   }
 
   loadReservationList(month: Month, year: number): void {

@@ -8,7 +8,7 @@ export class Banner extends b.Component {
   render() {
     return (
       <div style={styles.wrapper}>
-        <Logo/>
+        <Logo />
         <div style={styles.textWrapper}>
           <div style={styles.textContent}>
             {t(
@@ -16,7 +16,7 @@ export class Banner extends b.Component {
             )}
           </div>
         </div>
-        <div style={styles.arrow} onClick={this.scrollToTips}/>
+        <div style={styles.arrow} onClick={this.scrollToTips} />
       </div>
     );
   }
@@ -28,15 +28,14 @@ export class Banner extends b.Component {
   }
 }
 
-class Logo extends b.Component
-{
-  private endPosition: number = 0; 
+class Logo extends b.Component {
+  private endPosition: number = 0;
   private debouncedWindowScroll: () => void;
 
   init() {
-    this.endPosition = 0; 
-    this.debouncedWindowScroll = debounce(this.onWindowScroll, 100, false);
-    window.addEventListener('scroll', this.debouncedWindowScroll);
+    this.endPosition = 0;
+    this.debouncedWindowScroll = debounce(this.onWindowScroll, 60, false);
+    window.addEventListener("scroll", this.debouncedWindowScroll);
   }
 
   destroy() {
@@ -45,7 +44,7 @@ class Logo extends b.Component
   }
 
   render() {
-    return <div style={styles.logo} />
+    return <div style={styles.logo} />;
   }
 
   postUpdateDom(me: b.IBobrilCacheNode): void {
@@ -58,7 +57,11 @@ class Logo extends b.Component
 
   private getNodeEndPosition(me: b.IBobrilCacheNode) {
     this.endPosition = b.nodePagePos(me)[1];
-    this.endPosition = this.endPosition + (b.getDomNode(me) as Element).getBoundingClientRect().height;
+    this.endPosition = Math.floor(
+      this.endPosition +
+        (b.getDomNode(me) as Element).getBoundingClientRect().height -
+        50
+    );
   }
 
   @b.bind

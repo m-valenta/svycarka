@@ -24,16 +24,7 @@ export function reservationListDataMock(
     reservations = reservations.concat(currentMonthReservation);
   }
 
-  currentMonth = request.month + 1;
-  currentMonthReservation = getReservationData(
-    currentMonth > Month.December ? request.year + 1 : request.year,
-    currentMonth > Month.December ? Month.January : request.month
-  );
-  if (currentMonthReservation !== undefined) {
-    reservations = reservations.concat(currentMonthReservation);
-  }
-
-  return reservations.length > 0 ? { reservations } : undefined;
+  return reservations.length > 0 ? {year: request.year, month: request.month, reservations } : undefined;
 
   function getReservationData(
     year: number,

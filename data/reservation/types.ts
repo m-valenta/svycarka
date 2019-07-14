@@ -14,11 +14,13 @@ export interface IReservationListRequest extends IAjaxRequest {
 }
 
 export interface IReservationListResponse extends IAjaxResponse {
+  month: number;
+  year: number;
   reservations: IReservation[];
 }
 
 export interface IReservationStore {
-  reservationList: IReservation[] | undefined;
+  reservations: ReadonlyMap<number, ReadonlyMap<number, ReadonlyArray<IReservation>>>;
 
   currentReservation: FormItem<IReservation>;
   name: FormItem<string>;
