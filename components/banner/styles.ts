@@ -1,6 +1,7 @@
 import * as b from "bobril";
 import { getResourceCssUrl } from "../../utils/resourceUtils";
 import { banner_jpg, bannerArrow_svg, svycarka_logo_svg } from "../../src/assets";
+import { colors } from "../../styleConstants";
 
 export const wrapper = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(banner_jpg)),
@@ -23,6 +24,12 @@ export const arrow = b.styleDef({
   marginLeft: -23.89,
   transform: "rotate(180deg)",
   cursor: "pointer" 
+}, {
+  hover: {
+    background: colors.hover,
+    "-webkit-mask": getResourceCssUrl(b.asset(bannerArrow_svg)) + " no-repeat",
+    mask: getResourceCssUrl(b.asset(bannerArrow_svg)) + " no-repeat",
+  }
 });
 
 export const textWrapper = b.styleDef({

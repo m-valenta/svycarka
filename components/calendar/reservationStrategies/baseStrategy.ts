@@ -232,7 +232,15 @@ export abstract class BaseReservationtrategy
   ): IReservation | undefined {
     // In history
 
-    if (this.dateIsInHistory(selectedDay.date[datItemParts.day], currentMonth, currentDate)) {
+    if (
+      this.dateIsInHistory(
+        selectedDay.date[datItemParts.day],
+        selectedDay.isInCurrentMonth
+          ? currentMonth
+          : getMonthInfoFromDateItem(selectedDay.date),
+        currentDate
+      )
+    ) {
       return undefined;
     }
 
@@ -259,7 +267,11 @@ export abstract class BaseReservationtrategy
     );
     while (compareDateItem(workingDate, endDate) <= 0) {
       if (
-        this.dateIsReserved(workingDate[datItemParts.day], workingMonth, workingReservations)
+        this.dateIsReserved(
+          workingDate[datItemParts.day],
+          workingMonth,
+          workingReservations
+        )
       ) {
         return compareDateItem(workingDate, selectedDay.date) !== 0
           ? { dateItem: selectedDay.date, duration: 1 }
@@ -277,6 +289,6 @@ export abstract class BaseReservationtrategy
       duration++;
     }
 
-    return {dateItem: startDate, duration};
+    return { dateItem: startDate, duration };
   }
 }

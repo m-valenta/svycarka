@@ -1,4 +1,5 @@
 import * as b from "bobril";
+import { colors, buttonHover } from "../../styleConstants";
 
 export const buttonStyle = b.styleDef({
   fontSize: 18,
@@ -7,6 +8,10 @@ export const buttonStyle = b.styleDef({
   textTransform: "uppercase",
   cursor: "pointer",
   borderRadius: 2,
-  padding: "26px 30px",
-  display: "inline-block"
+  padding: "16px 35px",
+  display: "inline-block",
+  height: 50,
+  boxSizing: "border-box"
+},{
+  hover: buttonHover
 });

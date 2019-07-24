@@ -9,14 +9,25 @@ import {
   menu_svg,
   logo_svg,
   phone_svg,
-  email_svg
+  email_svg,
+  close_svg
 } from "./src/assets";
 import { getResourceCssUrl } from "./utils/resourceUtils";
+
+export const colors = {
+  calendarSilver: "#8c8c8c",
+  calendarRed: "#a01a22",
+  inputSilver: "#d2c6b8",
+  buttonYellow: "#a47b21",
+  buttonRed: "#a01a22",
+  hover: "#286140"
+};
 
 const arrow = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(arrow_svg)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "contain"
+  backgroundSize: "contain",
+  cursor: "pointer"
 });
 
 const arrow_right = b.styleDefEx(arrow, {
@@ -27,8 +38,31 @@ const arrow_left = b.styleDefEx(arrow, {
   transform: "rotate(-90deg)"
 });
 
-export const rightArrow = [arrow, arrow_right];
-export const leftArrow = [arrow, arrow_left];
+const hoverArrow = b.styleDef({
+  background: colors.hover,
+  "-webkit-mask": getResourceCssUrl(b.asset(arrow_svg)) + " no-repeat",
+  mask: getResourceCssUrl(b.asset(arrow_svg)) + " no-repeat",  
+});
+
+export const rightArrow = b.styleDef([arrow, arrow_right], {
+  hover: [hoverArrow, { transform: "rotate(90deg)" }]
+});
+
+export const leftArrow = b.styleDef([arrow, arrow_left], {
+  hover: [hoverArrow, {transform: "rotate(-90deg)"}]
+});
+
+export const closeButton = b.styleDef({
+    background: getResourceCssUrl(b.asset(close_svg)) + " no-repeat",
+    cursor: "pointer"
+}, {
+  hover: {
+    background: colors.hover,
+    "-webkit-mask": getResourceCssUrl(b.asset(close_svg)) + " no-repeat",
+    mask: getResourceCssUrl(b.asset(close_svg)) + " no-repeat"  
+  }
+})
+
 export const lucida_sans_unicoderegular = "lucida_sans_unicoderegular";
 
 export const contentSize = b.styleDef({
@@ -48,15 +82,29 @@ export const dateArrow = b.styleDef({
 
 const socialImage = b.styleDef({
   backgroundRepeat: "no-repeat",
-  backgroundSize: "30px 30px"
+  backgroundSize: "30px 30px",
 });
+
+
 
 const fbImage = b.styleDefEx(socialImage, {
   backgroundImage: getResourceCssUrl(b.asset(fb_svg))
+}, {
+  hover: {
+    background: colors.hover,
+    "-webkit-mask": getResourceCssUrl(b.asset(fb_svg)) + "no-repeat",
+    mask: getResourceCssUrl(b.asset(fb_svg)) + "no-repeat" 
+  }
 });
 
 const instagramImage = b.styleDefEx(socialImage, {
   backgroundImage: getResourceCssUrl(b.asset(instagram_svg))
+}, {
+  hover: {
+    background: colors.hover,
+    "-webkit-mask": getResourceCssUrl(b.asset(instagram_svg)) +  "no-repeat",
+    mask: getResourceCssUrl(b.asset(instagram_svg))+ "no-repeat" 
+  }
 });
 
 export const socialBackgrounds = {
@@ -74,6 +122,11 @@ export const logo = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(logo_svg)),
   backgroundRepeat: "no-repeat",
   backgroundSize: "44px 50px"
+});
+
+export const buttonHover = b.styleDef({
+    color: colors.hover,
+    backgroundColor: colors.calendarSilver + " !important"
 });
 
 export const contacsBackgrounds = {
@@ -95,13 +148,6 @@ export const contacsBackgrounds = {
   })
 };
 
-export const colors = {
-  calendarSilver: "#8c8c8c",
-  calendarRed: "#a01a22",
-  inputSilver: "#d2c6b8",
-  buttonYellow: "#a47b21",
-  buttonRed: "#a01a22"
-};
 
 b.injectCss(`
     @font-face {

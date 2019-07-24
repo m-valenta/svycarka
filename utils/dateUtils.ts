@@ -120,6 +120,8 @@ export function localizeDateItem(
   dateItem: dateItem,
   dayOffset: number = 0
 ): string {
+
+  dayOffset = dayOffset !== 0 ? dayOffset - 1 : dayOffset;
   const date = new Date(
     Date.UTC(
       dateItem[datItemParts.year],

@@ -40,6 +40,7 @@ export class DateInput extends b.Component<IData> {
               <Calendar
                 store={this.data.store}
                 reservationStrategy={basicReservationtrategy}
+                onClose={() => (this.isSelectionOpen = false)}
               />
             )
           }}

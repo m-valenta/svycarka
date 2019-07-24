@@ -10,7 +10,7 @@ const contentStyle = b.styleDef({
 
 const commonText = b.styleDef({
   textAlign: "center",
-  fontSie: 16,
+  fontSize: 16,
   marginBottom: 25
 });
 

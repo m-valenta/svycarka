@@ -1,16 +1,23 @@
 import * as b from "bobril";
 import { colors, dateArrow } from "../../styleConstants";
 
-export const wrapper = b.styleDef({
-  width: 294,
-  height: 54,
-  cursor: "pointer",
-  border: `solid 1px ${colors.inputSilver}`,
-  position: "relative",
-  borderRadius: 2,
-  display: "inline-block",
-  backgroundColor: "white"
-});
+export const wrapper = b.styleDef(
+  {
+    width: 294,
+    height: 54,
+    cursor: "pointer",
+    border: `solid 1px ${colors.inputSilver}`,
+    position: "relative",
+    borderRadius: 2,
+    display: "inline-block",
+    backgroundColor: "white"
+  },
+  {
+    hover: {
+      border: `solid 1px ${colors.hover}`
+    }
+  }
+);
 
 export const wrapperInvalid = b.styleDefEx(wrapper, {
   border: `solid 1px ${colors.buttonRed}`

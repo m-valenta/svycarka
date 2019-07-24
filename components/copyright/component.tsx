@@ -6,7 +6,7 @@ const style = b.styleDef({
   textAlign: "right",
   margin: "0 auto",
   fontSize: 12,
-  color: colors.calendarSilver
+  color: "#D2C6B8"
 });
 
 export class CopyRight extends b.Component {

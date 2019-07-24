@@ -18,28 +18,31 @@ import {
 } from "../../utils/dateUtils";
 import * as styles from "./styles";
 import { IReservationStore, IReservation } from "../../data/reservation/types";
-import { rightArrow, leftArrow } from "../../styleConstants";
+import { rightArrow, leftArrow, closeButton } from "../../styleConstants";
 import {
   MonthDay,
   SelectionState,
   IRangeState
 } from "./reservationStrategies/baseStrategy";
 
-const clearMouseMask =
+const clearSelectionMask = ~(
   SelectionState.selected |
   SelectionState.selectedFirst |
-  SelectionState.selectedLast;
+  SelectionState.selectedLast
+);
 
-const clearPreviewMask =
+const clearPreviewMask = ~(
   SelectionState.preview |
   SelectionState.previewFirst |
-  SelectionState.previewLast;
+  SelectionState.previewLast
+);
 
 export interface ICalendarData {
   store: IReservationStore;
   reservationStrategy: ICalendarReservationStrategy;
   startDay?: DayOfWeek;
   referencedDate?: Date;
+  onClose: () => void;
 }
 
 export class Calendar extends b.Component<ICalendarData> {
@@ -89,6 +92,7 @@ export class Calendar extends b.Component<ICalendarData> {
           goToNextMonth={() => this.goToNextMonth()}
           goToPreviousMonth={() => this.goToPreviousMonth()}
           currentMonth={this._currentMonth}
+          onClose={() => this.data.onClose()}
         />
         <CalendarDayHeader daysOfWeek={this._days} />
         <CalendarDays
@@ -120,16 +124,17 @@ export class Calendar extends b.Component<ICalendarData> {
   daySelectionChange(day: MonthDay, mode: SelectionMode): void {
     switch (mode) {
       case SelectionMode.mouseOut:
-        this.clearSelection(clearMouseMask);
+        this.clearSelection(clearPreviewMask);
         break;
       case SelectionMode.unSelect:
         this.data.store.currentReservation.value = undefined;
+        this.clearSelection(clearSelectionMask);
+        break;
       case SelectionMode.mouseIn:
         this.doMouseSelection(day, this.getMonthDays());
         break;
       case SelectionMode.select:
-        this.clearSelection(clearPreviewMask);
-        this.doClickSelection(day, this.getMonthDays());
+        this.doClickSelection(day);
         break;
     }
   }
@@ -239,16 +244,19 @@ export class Calendar extends b.Component<ICalendarData> {
     let workingDay = reservationPreview.dateItem;
     let workingMonth = getMonthInfoFromDateItem(workingDay);
     for (let i = 0, mi = -1, psi = -1; i < reservationPreview.duration; i++) {
-      if (selectedDay.date[datItemParts.month] === workingMonth.month) {
-        if(mi = -1) {
-          for(mi = 0; mi < days.length; mi++) {
-            if(compareDateItem(workingDay, days[mi].date) === 0) {
+      if (
+        compareDateItem(workingDay, days[0].date) >= 0 ||
+        compareDateItem(workingDay, days[days.length - 1].date) <= 0
+      ) {
+        if ((mi = -1)) {
+          for (mi = 0; mi < days.length; mi++) {
+            if (compareDateItem(workingDay, days[mi].date) === 0) {
               psi = mi;
               break;
             }
           }
         }
-        
+
         const mDay = days[mi];
 
         if (psi == mi && i == 0) {
@@ -289,7 +297,14 @@ export class Calendar extends b.Component<ICalendarData> {
     }
   }
 
-  protected doClickSelection(selectedDay: MonthDay, days: MonthDay[]) {
+  protected doClickSelection(selectedDay: MonthDay) {
+    if ((selectedDay.selectionState & SelectionState.selected) > 0) {
+      this.clearSelection(clearSelectionMask);
+      this.clearSelection(clearPreviewMask);
+      this.data.store.currentReservation.value = undefined;
+      return;
+    }
+
     this.data.store.currentReservation.value = this.data.reservationStrategy.getSelectedReservation(
       selectedDay,
       this._currentMonth,
@@ -320,6 +335,15 @@ class CalendarHeader extends b.Component<ICalendarHeaderData> {
           }}
           styleOveride={rightArrow}
         />
+        <this.headerButton
+          action={() => {
+            this.data.onClose();
+            return true;
+          }}
+          styleOveride={styles.closePosition}
+        >
+          <div style={[closeButton, { height: "100%" }]} />
+        </this.headerButton>
         <div style={{ clear: "both" }}> </div>
       </div>
     );
@@ -395,6 +419,9 @@ class CalendarDay extends b.Component<ICalendarDayData> {
   }
 
   onMouseEnter(_event: b.IBobrilMouseEvent): void {
+    if((this.data.day.selectionState & SelectionState.selected) !== 0) {
+      return;
+    }
     this.data.selectionHandler(
       this.data.day,
       this.data.day.isSelectable
@@ -404,6 +431,9 @@ class CalendarDay extends b.Component<ICalendarDayData> {
   }
 
   onMouseLeave() {
+    if((this.data.day.selectionState & SelectionState.selected) !== 0) {
+      return;
+    }
     this.data.selectionHandler(this.data.day, SelectionMode.mouseOut);
   }
 
@@ -427,9 +457,9 @@ class CalendarDay extends b.Component<ICalendarDayData> {
     (this.data.day.selectionState & SelectionState.preview) > 0 &&
       style.push(styles.mouseSelection);
     (this.data.day.selectionState & SelectionState.previewFirst) > 0 &&
-      style.push(styles.mouseSelectionStart);
+      style.push(styles.mouseSelectionEdge);
     (this.data.day.selectionState & SelectionState.previewLast) > 0 &&
-      style.push(styles.mouseSelectionEnd);
+      style.push(styles.mouseSelectionEdge);
 
     (this.data.day.selectionState & SelectionState.selected) > 0 &&
       style.push(styles.currentSelection);
@@ -448,6 +478,7 @@ enum SelectionMode {
 interface ICalendarHeaderData {
   goToNextMonth(): void;
   goToPreviousMonth(): void;
+  onClose(): void;
   currentMonth: IMonthInfo;
 }
 

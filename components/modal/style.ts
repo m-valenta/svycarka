@@ -1,5 +1,5 @@
 import * as b from "bobril";
-import { zIndex } from "../../styleConstants";
+import { zIndex, closeButton } from "../../styleConstants";
 import { getResourceCssUrl } from "../../utils/resourceUtils";
 import { close_svg } from "../../src/assets";
 
@@ -20,13 +20,12 @@ export const wrapperContent = b.styleDef({
   position: "relative"
 });
 
-export const closeContent = b.styleDef({
+export const closeContent = b.styleDef([{
   position: "absolute",
   top: "0",
   right: "20.78%",
   cursor: "pointer",
-  backgroundImage: getResourceCssUrl(b.asset(close_svg)),
   width: 43,
   height: 43,
   marginTop: -43
-});
+}, closeButton]);

@@ -12,6 +12,7 @@ export const rowStyle = b.styleDef({
 
 export const columnStyle = b.styleDef({
   height: 43,
+  lineHeight: "43px",
   width: "14%",
   cssFloat: "left",
   textAlign: "center",
@@ -60,7 +61,14 @@ export const monthWrapper = b.styleDef({
   cssFloat: "left",
   textAlign: "center",
   width: "26.8%",
-  fontSize: 15
+  height: 25,
+  fontSize: 15,
+  paddingTop: 7.5
+});
+
+export const closePosition = b.styleDefEx(headerButtonStyle, {
+  cssFloat: "right",
+  marginRight: 25,
 });
 
 export const mouseSelection = b.styleDef({
@@ -68,23 +76,18 @@ export const mouseSelection = b.styleDef({
   borderBottom: `solid 2px ${colors.calendarRed}`
 });
 
-export const mouseSelectionStart = b.styleDefEx(
+export const mouseSelectionEdge = b.styleDefEx(
   [columnStyle, columnStyleOtherMonth],
   {
-    borderLeft: `solid 2px ${colors.calendarRed}`,
-    borderRadius: "2px 0 0 2px",
+    // borderLeft: `solid 2px ${colors.calendarRed}`,
+    border: "none",
     backgroundColor: colors.calendarRed,
     color: "white"
   }
 );
 
-export const mouseSelectionEnd = b.styleDef({
-  borderRight: `solid 2px ${colors.calendarRed}`,
-  borderRadius: "0 2px 2px 0"
-});
-
 export const currentSelection = b.styleDefEx(
-  [columnStyle, columnStyleOtherMonth, mouseSelectionStart],
+  [columnStyle, columnStyleOtherMonth, mouseSelectionEdge],
   {
     backgroundColor: colors.calendarRed,
     color: "black"

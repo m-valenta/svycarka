@@ -1,5 +1,6 @@
 import * as b from "bobril";
-import { contentSize, colors, leftArrow, logo } from "../../styleConstants";
+import { contentSize, colors, leftArrow, logo, buttonHover } from "../../styleConstants";
+import { button } from "../button/buton";
 
 export const wrapper = b.styleDef({
   position: "fixed",
@@ -30,6 +31,8 @@ export const rezervationButton = b.styleDef({
   cssFloat: "left",
   cursor: "pointer",
   boxSizing: "border-box"
+}, {
+  hover: buttonHover
 });
 
 export const sociaButton = b.styleDef({
