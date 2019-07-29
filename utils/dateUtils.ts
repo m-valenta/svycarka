@@ -104,7 +104,10 @@ export function translateMonth(month: Month): string {
 }
 
 export function getCurrentDateItem(): dateItem {
-  const date = new Date();
+  return getDateItemFromDate(new Date());
+}
+
+export function getDateItemFromDate(date: Date): dateItem {
   return getDateItem(date.getFullYear(), date.getMonth(), date.getDate());
 }
 

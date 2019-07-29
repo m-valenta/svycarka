@@ -1,4 +1,4 @@
-import { observable, computed } from "bobx";
+import { observable, computed, IObservableMap } from "bobx";
 import * as b from "bobril";
 import {
   IMonthInfo,
@@ -494,7 +494,7 @@ export interface ICalendarReservationStrategy {
     isInCurrentMonth: boolean,
     monthInfo: IMonthInfo,
     currentDateItem: dateItem,
-    reservations: ReadonlyMap<
+    reservations: IObservableMap<
       number,
       ReadonlyMap<number, ReadonlyArray<IReservation>>
     >,
@@ -506,7 +506,7 @@ export interface ICalendarReservationStrategy {
     currentMonth: IMonthInfo,
     currentDate: [number, number, number],
     currentReservation: IReservation,
-    reservations: ReadonlyMap<
+    reservations: IObservableMap<
       number,
       ReadonlyMap<number, ReadonlyArray<IReservation>>
     >

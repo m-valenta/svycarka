@@ -7,6 +7,7 @@ import { homePage } from "./pages/homePage";
 import { tipsPage } from "./pages/tipsPage";
 import { reservationPage } from "./pages/reservationPage";
 import { favIconLink } from "./components/links/faviconlink";
+import { CaptchaScript } from "./components/recaptcha/reCaptcha";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -31,6 +32,6 @@ initGlobalization({
   );
 
   b.addRoot(() => {
-    return favIconLink();
+    return [favIconLink(), CaptchaScript()];
   }, document.head);
 });

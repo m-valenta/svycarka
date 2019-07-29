@@ -2,7 +2,8 @@ import {
   IAjaxConnector,
   AjaxConnector,
   StaticConnector,
-  IAjaxRequest
+  IAjaxRequest,
+  IAjaxResponse
 } from "../ajaxUtils";
 import {
   IReservation,
@@ -10,21 +11,24 @@ import {
   IReservationListResponse,
   IReservationStore,
   FormItem,
-  ReservationFormState
+  ReservationFormState,
+  IReservationSaveRequest,
+  FormExternalItem,
+  IReservationSaveResponse,
+  ReservationResponseState
 } from "./types";
-import { observable } from "bobx";
-import { Month } from "../../utils/dateUtils";
-import { debug } from "../../constants";
-import { reservationListDataMock } from "../../debugData";
+import { observable, IObservableMap } from "bobx";
+import { Month, datItemParts, getDateItemFromDate } from "../../utils/dateUtils";
+import { utils } from "../../components/recaptcha/reCaptcha";
 
 const phoneNumberRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.compile();
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.compile();
 
 class ReservationStore implements IReservationStore {
-  private _connector: IAjaxConnector | undefined;
+  private _loadConnector: IAjaxConnector | undefined;
+  private _saveConnector: IAjaxConnector | undefined;
 
-  @observable
-  _reservations: Map<number, Map<number, IReservation[]>> = new Map();
+  _reservations: IObservableMap<number, Map<number, IReservation[]>> = (new Map() as undefined) as IObservableMap<number, Map<number, IReservation[]>>; // TODO observable.map<number, Map<number, IReservation[]>>();
 
   currentReservation: FormItem<IReservation> = new FormItem();
 
@@ -40,21 +44,37 @@ class ReservationStore implements IReservationStore {
 
   beer: FormItem<number> = new FormItem();
 
-  meet: FormItem<number> = new FormItem();
+  meat: FormItem<number> = new FormItem();
+
+  gc_Response: FormExternalItem<string> = new FormExternalItem(
+    () => (utils.isLoaded() ? utils.getResponse() : undefined),
+    () => utils.isLoaded() && grecaptcha.reset()
+  );
 
   @observable
   reservationFormState: ReservationFormState = ReservationFormState.hidden;
 
-  get reservations(): ReadonlyMap<number, ReadonlyMap<number, ReadonlyArray<IReservation>>> {
+  get reservations(): IObservableMap<
+    number,
+    ReadonlyMap<number, ReadonlyArray<IReservation>>
+  > {
     return this._reservations;
   }
 
   getUrl(request: IReservationListRequest) {
-    return `/reservationList?year=${request.year}&month=${request.month}`;
+    return `api/reservations/getReservations/${request.year}/${request.month}`;
   }
 
-  attachConnector(connector: IAjaxConnector) {
-    this._connector = connector;
+  saveUrl() {
+    return "api/reservations/addReservation";
+  }
+
+  attachLoadConnector(connector: IAjaxConnector) {
+    this._loadConnector = connector;
+  }
+
+  attachSaveConnector(connector: IAjaxConnector) {
+    this._saveConnector = connector;
   }
 
   processReservationListResponse(
@@ -70,16 +90,40 @@ class ReservationStore implements IReservationStore {
       this._reservations.set(response.year, yearReservations);
     }
 
-    yearReservations.set(response.month, response.reservations);
+    yearReservations.set(response.month, response.reservations.map(res => <IReservation> {
+      duration: res.duration,
+      dateItem: getDateItemFromDate(new Date(res.dateFrom))
+    }));
   }
 
   loadReservationList(month: Month, year: number): void {
-    if (this._connector === undefined) {
+    if (this._loadConnector === undefined) {
       throw "Data connector is not provided";
     }
-    this._connector.sendRequest(<IReservationListRequest>{
+    this._loadConnector.sendRequest(<IReservationListRequest>{
       month,
       year
+    });
+  }
+
+  storeReservation(): void {
+    if (this._saveConnector === undefined) {
+      throw "Data connector is not provided";
+    }
+
+    const currentReservation = this.currentReservation.value.dateItem;
+    this._saveConnector.sendRequest(<IReservationSaveRequest>{
+      captchaResponse: this.gc_Response.value,
+      dateFrom: new Date(
+        currentReservation[datItemParts.year],
+        currentReservation[datItemParts.month],
+        currentReservation[datItemParts.day]
+      ),
+      duration: this.currentReservation.value.duration,
+      name: this.email.value,
+      phone: this.phone.value,
+      email: this.email.value,
+      address: this.address.value
     });
   }
 
@@ -97,8 +141,10 @@ class ReservationStore implements IReservationStore {
     this.aggrement.isValid = true;
     this.beer.value = undefined;
     this.beer.isValid = true;
-    this.meet.value = undefined;
-    this.meet.isValid = true;
+    this.meat.value = undefined;
+    this.meat.isValid = true;
+    this.gc_Response.value = undefined;
+    this.gc_Response.isValid = true;
   }
 
   validate(): boolean {
@@ -108,7 +154,8 @@ class ReservationStore implements IReservationStore {
       this.validateAddress(),
       this.validateEmail(),
       this.validatePhone(),
-      this.validateAgreement()
+      this.validateAgreement(),
+      this.validateGC()
     ];
     return result.reduce((prev, current) => prev && current);
   }
@@ -147,25 +194,44 @@ class ReservationStore implements IReservationStore {
       this.aggrement.value !== undefined && this.aggrement.value;
     return this.aggrement.isValid;
   }
+
+  protected validateGC(): boolean {
+    this.gc_Response.isValid =
+      this.gc_Response.value !== undefined && this.gc_Response.value !== "";
+    return this.gc_Response.isValid;
+  }
 }
 
 export function reservationStoreFactory(): IReservationStore {
   const store = new ReservationStore();
-
-  let connector: IAjaxConnector;
-  if (debug) {
-    connector = new StaticConnector(reservationListDataMock, response =>
-      store.processReservationListResponse(response)
-    );
-  } else {
-    connector = new AjaxConnector(
+  store.attachLoadConnector(
+    new AjaxConnector(
       "GET",
       (request: IReservationListRequest) => store.getUrl(request),
       (response: IReservationListResponse) =>
         store.processReservationListResponse(response)
-    );
-  }
-  store.attachConnector(connector);
+    )
+  );
+  store.attachSaveConnector(
+    new AjaxConnector(
+      "POST",
+      (request: IReservationSaveRequest) => store.saveUrl(),
+      (response: IReservationSaveResponse | undefined) => {
+        if (response === undefined) {
+          store.reservationFormState = ReservationFormState.hidden;
+          return;
+        } else if (response.state === ReservationResponseState.Ok) {
+          store.clear();
+          store.reservationFormState = ReservationFormState.finalized;
+          return;
+        } else if (response.state === ReservationResponseState.CaptchaError) {
+          store.gc_Response.isValid = false;
+        } else if (response.state === ReservationResponseState.StorageError) {
+          store.currentReservation.isValid = false;
+        }
+      }
+    )
+  );
 
   return store;
 }

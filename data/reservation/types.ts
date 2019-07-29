@@ -1,6 +1,6 @@
 import { IAjaxRequest, IAjaxResponse } from "../ajaxUtils";
 import { Month, dateItem } from "../../utils/dateUtils";
-import { observable } from "bobx";
+import { observable, IObservableMap } from "bobx";
 
 export enum ReservationFormState {
   hidden,
@@ -13,28 +13,57 @@ export interface IReservationListRequest extends IAjaxRequest {
   year: number;
 }
 
+export interface IServerReservation {
+  dateFrom: string,
+  duration: number
+}
+
 export interface IReservationListResponse extends IAjaxResponse {
   month: number;
   year: number;
-  reservations: IReservation[];
+  reservations: IServerReservation[];
+}
+
+export interface IReservationSaveRequest extends IAjaxRequest {
+  dateFrom: Date;
+  duration: number;
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  captchaResponse: string; 
+}
+
+
+export enum ReservationResponseState {
+  Ok = 0,
+  CaptchaError,
+  StorageError
+};
+
+export interface IReservationSaveResponse extends IAjaxResponse {
+  state: ReservationResponseState
 }
 
 export interface IReservationStore {
-  reservations: ReadonlyMap<number, ReadonlyMap<number, ReadonlyArray<IReservation>>>;
-
+  reservations: IObservableMap<number, ReadonlyMap<number, ReadonlyArray<IReservation>>>;
+  // form
   currentReservation: FormItem<IReservation>;
   name: FormItem<string>;
   address: FormItem<string>;
   email: FormItem<string>;
   phone: FormItem<string>;
   aggrement: FormItem<boolean>;
-  // optional
+  // form-optional
   beer: FormItem<number>;
-  meet: FormItem<number>;
+  meat: FormItem<number>;
 
   reservationFormState: ReservationFormState;
+  gc_Response: FormItem<string>;
 
   loadReservationList(month: Month, year: number): void;
+  storeReservation(): void;
+
   clear(): void;
   validate(): boolean;
 }
@@ -50,4 +79,35 @@ export class FormItem<T> {
 
   @observable
   value?: T = undefined;
+}
+
+export class FormExternalItem<T> {
+  _valueField: T | undefined;
+  _valueGenerator: () => T;
+  _clearHandler: () => void;
+
+  constructor(valueGenerator: () => T, clearHandler: () => void) {
+    this._valueGenerator = valueGenerator;  
+    this._clearHandler = clearHandler;
+  }
+
+  @observable
+  isValid: boolean = true;
+
+  get value(): T {
+    if(this._valueField === undefined) {
+      this._valueField = this._valueGenerator();
+    }
+
+    return this._valueGenerator();
+  }
+
+  set value(value: T | undefined) {
+    this._valueField = value;
+  }
+
+  clear() {
+    this._valueField = undefined;
+    this._clearHandler();
+  }
 }

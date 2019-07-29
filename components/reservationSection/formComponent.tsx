@@ -1,20 +1,19 @@
 import * as b from "bobril";
 import {
   IReservationStore,
-  FormItem,
-  ReservationFormState
-} from "../../data/reservation/types";
+  FormItem} from "../../data/reservation/types";
 import * as styles from "./styles";
 import { TextSection } from "../textSection/component";
 import { t } from "bobril-g11n";
 import { DateInput } from "../dateInput/component";
-import { observableProp, observable } from "bobx";
-import { expander, Expander } from "../expander/component";
+import { observable } from "bobx";
+import { Expander } from "../expander/component";
 import { Spinner } from "../spinner/component";
 import { appStore } from "../../data/appStore";
 import { buttonWrapper } from "../tipsSection/styles";
 import { colors } from "../../styleConstants";
 import { Button } from "../button/buton";
+import Captcha, { utils } from "../recaptcha/reCaptcha";
 export interface IData {
   store: IReservationStore;
 }
@@ -69,13 +68,17 @@ export class ReservationForm extends b.Component<IData> {
             </div>
             <div style={styles.spinnerWrapper}>
               <Spinner
-                item={appStore().reservationStore.meet}
+                item={appStore().reservationStore.meat}
                 text={t("Grill meat for:")}
                 explicitWidth={230}
               />
             </div>
           </div>
         </Expander>
+        <Captcha
+          siteKey="6LfK768UAAAAAAjphbs9g6GErMGX3B7ZmYr9hk-R"
+          isValid={this.data.store.gc_Response.isValid}
+        />
         <div style={styles.aggrementWrapper}>
           <FormAgreement agreementItem={this.data.store.aggrement} />
         </div>
@@ -85,8 +88,7 @@ export class ReservationForm extends b.Component<IData> {
             text={t("Reserve date")}
             onClick={() => {
               if (appStore().reservationStore.validate()) {
-                appStore().reservationStore.reservationFormState =
-                  ReservationFormState.finalized;
+                appStore().reservationStore.storeReservation();
               }
             }}
           />

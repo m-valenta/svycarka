@@ -14,7 +14,7 @@ import {
   getNextDayItem
 } from "../../../utils/dateUtils";
 import { IReservation } from "../../../data/reservation/types";
-import { observable } from "bobx";
+import { observable, IObservableMap } from "bobx";
 
 export enum SelectionState {
   none = 0,
@@ -84,18 +84,26 @@ export abstract class BaseReservationtrategy
   protected dateIsReserved(
     day: number,
     monthInfo: IMonthInfo,
-    monthReservations: ReadonlyArray<IReservation> | undefined
+    monthReservations: ReadonlyArray<IReservation> | undefined,
+    prevMonthReservations: ReadonlyArray<IReservation> | undefined,
   ): boolean {
-    if (monthReservations == undefined) {
+    if (monthReservations == undefined && prevMonthReservations == undefined) {
       return null;
     }
 
     const yearNumber = monthInfo.year;
     const monthNumber = monthInfo.month;
 
-    for (let i = 0; i < monthReservations.length; i++) {
-      const currentReservation = monthReservations[i];
+
+    let combReservations = prevMonthReservations !== undefined ? prevMonthReservations.slice(0) : undefined;
+    combReservations = combReservations === undefined 
+      ? monthReservations.slice()
+      : monthReservations !== undefined && combReservations.concat(monthReservations);
+
+    for (let i = 0; i < combReservations.length; i++) {
+      const currentReservation = combReservations[i];
       const currentReservationStart = currentReservation.dateItem;
+
 
       if (
         currentReservationStart[dateItemParts.year] !== yearNumber ||
@@ -112,7 +120,7 @@ export abstract class BaseReservationtrategy
                 currentReservation.duration)
         )
           return true;
-      } else if (monthNumber > currentReservation[dateItemParts.month]) {
+      } else if (monthNumber > currentReservation.dateItem[dateItemParts.month]) {
         const currentReservationMonth = getMonthInfo(
           new Date(
             currentReservationStart[dateItemParts.year],
@@ -135,7 +143,7 @@ export abstract class BaseReservationtrategy
 
   protected getMonthReservations(
     montInfo: IMonthInfo,
-    reservations: ReadonlyMap<
+    reservations: IObservableMap<
       number,
       ReadonlyMap<number, ReadonlyArray<IReservation>>
     >
@@ -152,7 +160,7 @@ export abstract class BaseReservationtrategy
     isInCurrentMonth: boolean,
     monthInfo: IMonthInfo,
     currentDateItem: dateItem,
-    reservations: ReadonlyMap<
+    reservations: IObservableMap<
       number,
       ReadonlyMap<number, ReadonlyArray<IReservation>>
     >,
@@ -161,7 +169,8 @@ export abstract class BaseReservationtrategy
     const isReserved = this.dateIsReserved(
       day,
       monthInfo,
-      this.getMonthReservations(monthInfo, reservations)
+      this.getMonthReservations(monthInfo, reservations),
+      this.getMonthReservations(getPreviousMonthInfo(monthInfo),reservations)
     );
 
     const mDay = new MonthDay(
@@ -225,7 +234,7 @@ export abstract class BaseReservationtrategy
     currentMonth: IMonthInfo,
     currentDate: [number, number, number],
     currentReservation: IReservation,
-    reservations: ReadonlyMap<
+    reservations: IObservableMap<
       number,
       ReadonlyMap<number, ReadonlyArray<IReservation>>
     >
@@ -265,12 +274,18 @@ export abstract class BaseReservationtrategy
       workingMonth,
       reservations
     );
+    let workingPrevReservations = this.getMonthReservations(
+      getPreviousMonthInfo(workingMonth),
+      reservations
+    );
+
     while (compareDateItem(workingDate, endDate) <= 0) {
       if (
         this.dateIsReserved(
           workingDate[datItemParts.day],
           workingMonth,
-          workingReservations
+          workingReservations,
+          workingPrevReservations
         )
       ) {
         return compareDateItem(workingDate, selectedDay.date) !== 0
@@ -281,6 +296,7 @@ export abstract class BaseReservationtrategy
       workingDate = getNextDayItem(workingDate, workingMonth);
       if (workingDate[1] !== workingMonth.month) {
         workingMonth = getNextMonthInfo(workingMonth);
+        workingPrevReservations = workingPrevReservations;
         workingReservations = this.getMonthReservations(
           workingMonth,
           reservations

@@ -35,7 +35,10 @@ export class AjaxConnector<TRequest extends IAjaxRequest, TResponse extends IAja
     sendRequest(request: TRequest): void {
         Send(request, this._urlGetter(request), this._httpMethod)
             .then(responseString => this._responseHandler(JSON.parse(responseString)))
-            .catch(error => console.error("Requst failed: ", error));
+            .catch(error => {
+                this._responseHandler(undefined);
+                console.error("Requst failed: ", error)
+            });
     }
 }
 
