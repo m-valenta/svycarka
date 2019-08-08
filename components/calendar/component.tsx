@@ -496,7 +496,7 @@ export interface ICalendarReservationStrategy {
     currentDateItem: dateItem,
     reservations: IObservableMap<
       number,
-      ReadonlyMap<number, ReadonlyArray<IReservation>>
+      IObservableMap<number, ReadonlyArray<IReservation>>
     >,
     currentReservation: IReservation | undefined
   ): MonthDay;
@@ -508,7 +508,7 @@ export interface ICalendarReservationStrategy {
     currentReservation: IReservation,
     reservations: IObservableMap<
       number,
-      ReadonlyMap<number, ReadonlyArray<IReservation>>
+      IObservableMap<number, ReadonlyArray<IReservation>>
     >
   ): IReservation | undefined;
 }

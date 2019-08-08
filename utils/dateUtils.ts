@@ -167,7 +167,7 @@ export function getNextDayItem(day: dateItem, month: IMonthInfo): dateItem {
     return [day[datItemParts.year], day[datItemParts.month] + 1, 1];
   }
 
-  return [day[datItemParts.year] + 1, 1, 1];
+  return [day[datItemParts.year] + 1, 0, 1];
 }
 
 function daysInMonth(date: Date): number {

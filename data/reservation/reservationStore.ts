@@ -28,7 +28,7 @@ class ReservationStore implements IReservationStore {
   private _loadConnector: IAjaxConnector | undefined;
   private _saveConnector: IAjaxConnector | undefined;
 
-  _reservations: IObservableMap<number, Map<number, IReservation[]>> = (new Map() as undefined) as IObservableMap<number, Map<number, IReservation[]>>; // TODO observable.map<number, Map<number, IReservation[]>>();
+  _reservations: IObservableMap<number, IObservableMap<number, IReservation[]>> = observable.map<number, IObservableMap<number, IReservation[]>>();
 
   currentReservation: FormItem<IReservation> = new FormItem();
 
@@ -54,10 +54,8 @@ class ReservationStore implements IReservationStore {
   @observable
   reservationFormState: ReservationFormState = ReservationFormState.hidden;
 
-  get reservations(): IObservableMap<
-    number,
-    ReadonlyMap<number, ReadonlyArray<IReservation>>
-  > {
+  get reservations()
+  {
     return this._reservations;
   }
 
@@ -86,7 +84,7 @@ class ReservationStore implements IReservationStore {
 
     let yearReservations = this._reservations.get(response.year);
     if (yearReservations === undefined) {
-      yearReservations = new Map();
+      yearReservations = observable.map();
       this._reservations.set(response.year, yearReservations);
     }
 
@@ -117,9 +115,10 @@ class ReservationStore implements IReservationStore {
       dateFrom: new Date(
         currentReservation[datItemParts.year],
         currentReservation[datItemParts.month],
-        currentReservation[datItemParts.day]
+        currentReservation[datItemParts.day] + 1,
+        0, 0, 0, 0     
       ),
-      duration: this.currentReservation.value.duration,
+      duration: this.currentReservation.value.duration - 1,
       name: this.email.value,
       phone: this.phone.value,
       email: this.email.value,

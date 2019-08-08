@@ -46,7 +46,7 @@ export interface IReservationSaveResponse extends IAjaxResponse {
 }
 
 export interface IReservationStore {
-  reservations: IObservableMap<number, ReadonlyMap<number, ReadonlyArray<IReservation>>>;
+  reservations: IObservableMap<number, IObservableMap<number, IReservation[]>>;
   // form
   currentReservation: FormItem<IReservation>;
   name: FormItem<string>;

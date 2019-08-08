@@ -94,16 +94,17 @@ export abstract class BaseReservationtrategy
     const yearNumber = monthInfo.year;
     const monthNumber = monthInfo.month;
 
+    const prevMonthResLength = prevMonthReservations === undefined ? 0 : prevMonthReservations.length; 
+    const currentMonthResLength = monthReservations === undefined ? 0 : monthReservations.length;
 
-    let combReservations = prevMonthReservations !== undefined ? prevMonthReservations.slice(0) : undefined;
-    combReservations = combReservations === undefined 
-      ? monthReservations.slice()
-      : monthReservations !== undefined && combReservations.concat(monthReservations);
+    if(prevMonthResLength + currentMonthResLength === 0)
+      return;
 
-    for (let i = 0; i < combReservations.length; i++) {
-      const currentReservation = combReservations[i];
+    for (let i = 0; i < prevMonthResLength + currentMonthResLength; i++) {
+      const currentReservation = i < prevMonthResLength 
+        ? prevMonthReservations[i]
+        : monthReservations[i - prevMonthResLength]
       const currentReservationStart = currentReservation.dateItem;
-
 
       if (
         currentReservationStart[dateItemParts.year] !== yearNumber ||
@@ -145,7 +146,7 @@ export abstract class BaseReservationtrategy
     montInfo: IMonthInfo,
     reservations: IObservableMap<
       number,
-      ReadonlyMap<number, ReadonlyArray<IReservation>>
+      IObservableMap<number, ReadonlyArray<IReservation>>
     >
   ): ReadonlyArray<IReservation> | undefined {
     var yearReservations = reservations.get(montInfo.year);
@@ -162,7 +163,7 @@ export abstract class BaseReservationtrategy
     currentDateItem: dateItem,
     reservations: IObservableMap<
       number,
-      ReadonlyMap<number, ReadonlyArray<IReservation>>
+      IObservableMap<number, ReadonlyArray<IReservation>>
     >,
     currentReservation: IReservation | undefined
   ): MonthDay {
@@ -205,9 +206,9 @@ export abstract class BaseReservationtrategy
       }
 
       if (
-        (monthInfo.year - currentReservation.dateItem[dateItemParts.year] ===
-          1 &&
-          currentReservation.dateItem[dateItemParts.year] === Month.December) ||
+        (monthInfo.year - currentReservation.dateItem[dateItemParts.year] === 1 
+        && currentReservation.dateItem[dateItemParts.month] === Month.December
+        && monthInfo.month === Month.January) ||
         monthInfo.month - currentReservation.dateItem[dateItemParts.month] === 1
       ) {
         let previousMonth = getPreviousMonthInfo(monthInfo);
@@ -236,7 +237,7 @@ export abstract class BaseReservationtrategy
     currentReservation: IReservation,
     reservations: IObservableMap<
       number,
-      ReadonlyMap<number, ReadonlyArray<IReservation>>
+      IObservableMap<number, ReadonlyArray<IReservation>>
     >
   ): IReservation | undefined {
     // In history
