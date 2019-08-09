@@ -8,6 +8,8 @@ import { tipsPage } from "./pages/tipsPage";
 import { reservationPage } from "./pages/reservationPage";
 import { favIconLink } from "./components/links/faviconlink";
 import { CaptchaScript } from "./components/recaptcha/reCaptcha";
+import { loginPage } from "./pages/admin/login";
+import { adminHomePage } from "./pages/admin/home";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -19,7 +21,7 @@ initGlobalization({
 
   setLocale(locales.czech);
   initAppStore();
-  b.routes(
+  b.routes([
     b.route({ handler: masterPage }, [
       b.route({ url: "/tips", name: "tips", handler: tipsPage }),
       b.route({
@@ -28,8 +30,18 @@ initGlobalization({
         handler: reservationPage
       }),
       b.routeDefault({ handler: homePage, name: "home" })
-    ])
-  );
+    ]),
+    b.route({
+      url: "/login",
+      name: "login",
+      handler: loginPage
+    }),
+    b.route({
+      url: "/admin/home",
+      name: "adminHome",
+      handler: adminHomePage
+    }),
+  ]);
 
   b.addRoot(() => {
     return [favIconLink(), CaptchaScript()];

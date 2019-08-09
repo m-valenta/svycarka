@@ -5,11 +5,11 @@ import { Page } from "../data/pageStore/types";
 import { Contact } from "../components/contact/component";
 import { CopyRight } from "../components/copyright/component";
 
-export interface IData {
+export interface IDataWithActiveRouteHandler {
   activeRouteHandler: () => b.IBobrilNode;
 }
 
-class MastePage extends b.Component<IData> {
+class MastePage extends b.Component<IDataWithActiveRouteHandler> {
   render() {
     const children: b.IBobrilNode[] = [
       <HeaderComponent

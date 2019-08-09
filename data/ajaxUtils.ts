@@ -4,7 +4,7 @@ export interface IAjaxRequest {};
 export interface IAjaxResponse {};
 
 export interface IAjaxConnector {
-    sendRequest(request: IAjaxRequest);
+    sendRequest(request: IAjaxRequest | undefined);
 }
 
 export class StaticConnector<TRequest extends IAjaxRequest, TResponse extends IAjaxResponse> implements IAjaxConnector {
@@ -34,7 +34,7 @@ export class AjaxConnector<TRequest extends IAjaxRequest, TResponse extends IAja
 
     sendRequest(request: TRequest): void {
         Send(request, this._urlGetter(request), this._httpMethod)
-            .then(responseString => this._responseHandler(JSON.parse(responseString)))
+            .then(responseString => this._responseHandler(responseString === undefined || responseString.length === 0 ? {} : JSON.parse(responseString)))
             .catch(error => {
                 this._responseHandler(undefined);
                 console.error("Requst failed: ", error)
@@ -88,7 +88,7 @@ function Send<T>(data: T, url: string | undefined, method: HttpMethod = "POST"):
         xhr.open(method, url, true);
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
-		// Send the request
-		xhr.send(JSON.stringify(data));
+        // Send the request
+        xhr.send(data === undefined ? undefined : JSON.stringify(data));
 	});
 }

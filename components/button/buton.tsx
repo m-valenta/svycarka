@@ -6,17 +6,18 @@ export interface IData {
   text: string;
   colorScheme: string;
   onClick: () => void;
+  explicitWidth?: number;
 }
 
 export class Button extends b.Component<IData> {
   render() {
-    return (
-      <div
-        style={[styles.buttonStyle, { backgroundColor: this.data.colorScheme }]}
-      >
-        {this.data.text}
-      </div>
-    );
+    const style: b.IBobrilStyle[] = [
+      styles.buttonStyle,
+      { backgroundColor: this.data.colorScheme }
+    ];
+    this.data.explicitWidth !== undefined &&
+      style.push({ width: this.data.explicitWidth });
+    return <div style={style}>{this.data.text}</div>;
   }
 
   onClick(): boolean {
