@@ -56,12 +56,12 @@ export class LoginPage extends b.Component {
         return <div style={styles.loginWrapper}>
             <div style={styles.leftColumn}>
                 <div style={styles.lineStyle}>Login:</div>
-                <div style={styles.lineStyle}>Password:</div>
+                <div style={styles.lineStyle}>Heslo:</div>
             </div>
             <div style={styles.rigthColumn}>
                 <div style={styles.lineStyle}><input type="text" value={observableProp(this, "login")} /></div>
                 <div style={styles.lineStyle}><input type="password" value={observableProp(this, "password")} /></div>
-                <div style={styles.lineStyle}><Button onClick={this.signIn} text="Sign in" colorScheme={colors.buttonYellow}/></div>
+                <div style={styles.lineStyle}><Button onClick={this.signIn} text="Přihlásit" colorScheme={colors.buttonYellow}/></div>
             </div>
         </div>;
     }

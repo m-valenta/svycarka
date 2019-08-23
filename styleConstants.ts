@@ -10,7 +10,10 @@ import {
   logo_svg,
   phone_svg,
   email_svg,
-  close_svg
+  close_svg,
+  add_png,
+  remove_png,
+  edit_png
 } from "./src/assets";
 import { getResourceCssUrl } from "./utils/resourceUtils";
 
@@ -147,6 +150,31 @@ export const contacsBackgrounds = {
     marginRight: 13
   })
 };
+
+const tableButton = b.styleDef({
+  width: 20,
+  height: 20,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "20px 20px",
+  cursor: "pointer",
+  cssFloat: "left"
+});
+
+const addButtonBg = b.styleDefEx(tableButton, {
+  backgroundImage: getResourceCssUrl(b.asset(add_png))
+});
+
+const removeButtonBg = b.styleDefEx(tableButton, {
+  backgroundImage: getResourceCssUrl(b.asset(remove_png))
+});
+
+const editButtonBg = b.styleDefEx(tableButton, {
+  backgroundImage: getResourceCssUrl(b.asset(edit_png))
+});
+
+export const addButton = [tableButton, addButtonBg];
+export const editButton = [tableButton, editButtonBg];
+export const removeButton = [tableButton, removeButtonBg];
 
 
 b.injectCss(`

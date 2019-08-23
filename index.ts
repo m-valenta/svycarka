@@ -10,6 +10,8 @@ import { favIconLink } from "./components/links/faviconlink";
 import { CaptchaScript } from "./components/recaptcha/reCaptcha";
 import { loginPage } from "./pages/admin/login";
 import { adminHomePage } from "./pages/admin/home";
+import { UsersPage, usersPage } from "./pages/admin/users";
+import { reservationsPage } from "./pages/admin/reservations";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -40,7 +42,18 @@ initGlobalization({
       url: "/admin/home",
       name: "adminHome",
       handler: adminHomePage
-    }),
+    }, [
+      b.route({
+        url: "/admin/users",
+        name: "adminUsers",
+        handler: usersPage
+      }),
+      b.route({
+        url: "/admin/resevations",
+        name: "adminReservations",
+        handler: reservationsPage
+      }),
+    ]),
   ]);
 
   b.addRoot(() => {

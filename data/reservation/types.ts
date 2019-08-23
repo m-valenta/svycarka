@@ -31,7 +31,10 @@ export interface IReservationSaveRequest extends IAjaxRequest {
   address: string;
   email: string;
   phone: string;
-  captchaResponse: string; 
+  captchaResponse: string;
+  beer?: number;
+  meat?: number;
+  usedCulture: number; 
 }
 
 

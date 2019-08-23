@@ -7,6 +7,7 @@ export interface IData {
   colorScheme: string;
   onClick: () => void;
   explicitWidth?: number;
+  explicitMargin?: string;
 }
 
 export class Button extends b.Component<IData> {
@@ -17,7 +18,21 @@ export class Button extends b.Component<IData> {
     ];
     this.data.explicitWidth !== undefined &&
       style.push({ width: this.data.explicitWidth });
-    return <div style={style}>{this.data.text}</div>;
+    return (
+      <div
+        style={[
+          style,
+          {
+            margin:
+              this.data.explicitMargin !== undefined
+                ? this.data.explicitMargin
+                : ""
+          }
+        ]}
+      >
+        {this.data.text}
+      </div>
+    );
   }
 
   onClick(): boolean {

@@ -122,7 +122,10 @@ class ReservationStore implements IReservationStore {
       name: this.email.value,
       phone: this.phone.value,
       email: this.email.value,
-      address: this.address.value
+      address: this.address.value,
+      beer: this.beer.value,
+      meat: this.meat.value,
+      usedCulture: 0 // TODO !!
     });
   }
 

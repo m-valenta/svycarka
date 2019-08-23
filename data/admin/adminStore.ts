@@ -1,7 +1,7 @@
 import * as b from "bobril";
 import { observable } from "bobx";
 import { IAjaxConnector, AjaxConnector, IAjaxResponse } from "../ajaxUtils";
-import { IAdminStore, IUserDto } from "./type";
+import { IAdminStore, IUserDto, ILoginRequest } from "./types";
 import { TipsSection } from "../../components/tipsSection/component";
 import { loginTransition, adminHomeTransition } from "../../transitions";
 
@@ -11,7 +11,7 @@ class AdminStore implements IAdminStore {
   private _signOutConnector: IAjaxConnector | undefined;
 
   protected _isLogged?: boolean = undefined;
-
+    
   constructor() {
   }
 
@@ -59,7 +59,7 @@ class AdminStore implements IAdminStore {
   }
 
   SignIn(login: string, password: string): void {
-    this._signInConnector.sendRequest(<IUserDto>{
+    this._signInConnector.sendRequest(<ILoginRequest>{
       Login: login,
       Password: password
     });
