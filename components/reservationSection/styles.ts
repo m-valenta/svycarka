@@ -43,15 +43,11 @@ export const textBlock = b.styleDef({
 });
 
 export const textHeader = b.styleDef({
-  fontSize: 16
-});
-
-export const textContent = b.styleDef({
-  fontSize: 12
+  fontWeight: "bold"
 });
 
 export const textSpecialContent = b.styleDef({
-  fontSize: 10
+  fontSize: 12
 });
 
 export const formWrapper = b.styleDef({

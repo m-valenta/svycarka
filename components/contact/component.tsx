@@ -11,7 +11,7 @@ export class Contact extends b.Component {
           <div style={styles.contactContent}>
             <div style={styles.contactHeader}>{t("Contact")}</div>
             <div style={styles.kubaFoto} />
-            <div style={styles.contaInfo}>
+            <div style={styles.contactInfo}>
               <ContactItem
                 href="tel:+420720630136"
                 imgBackground={contacsBackgrounds.phone}

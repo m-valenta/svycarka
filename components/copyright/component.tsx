@@ -4,7 +4,7 @@ import { contentSize, colors } from "../../styleConstants";
 
 const style = b.styleDef({
   textAlign: "right",
-  margin: "0 auto",
+  margin: "10px auto",
   fontSize: 12,
   color: "#D2C6B8"
 });

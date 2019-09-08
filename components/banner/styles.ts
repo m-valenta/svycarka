@@ -41,9 +41,7 @@ export const textWrapper = b.styleDef({
 export const textContent = b.styleDef({
   textAlign: "center",
   width: "48.54%",
-  margin: "0 auto",
-  lineHeight: "25px",
-  fontSize: 16
+  margin: "0 auto"
 });
 
 export const logo = b.styleDef({ 

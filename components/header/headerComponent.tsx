@@ -114,10 +114,9 @@ class MenuContent extends b.Component<{store: HeaderStore}>{
     if(this.data.store.isMenuOpen){
       children.push(<this.menuItem text={t("Contact")} onClick={() => this.scrollTo("contact")} />);
       children.push(<this.menuItem text={t("Location")} onClick={() => this.navigateTo(Page.Home, "location")}/>);
-      children.push(<this.menuItem text={t("Why")} onClick={() => this.navigateTo(Page.Home, "tips")}/>);
-      //children.push(<this.menuItem text={t("Visit us")} onClick={() => {scrollToWrapper("contact"); return true;}}/>);
       children.push(<this.menuItem text={t("Price")} onClick={() => this.navigateTo(Page.Home, "how_much")}/>);
-      children.push(<this.menuItem text={t("At us")} onClick={() => this.navigateTo(Page.Home, "at_us")}/>);
+      children.push(<this.menuItem text={t("Visit us")} onClick={() => this.navigateTo(Page.Home, "at_us")}/>);
+      children.push(<this.menuItem text={t("Why")} onClick={() => this.navigateTo(Page.Tips,)}/>);
     }
 
     return <>{children}</>;
@@ -129,7 +128,7 @@ class MenuContent extends b.Component<{store: HeaderStore}>{
     return true;
   }
 
-  navigateTo(page: Page, sectionName: scrollSection): boolean {
+  navigateTo(page: Page, sectionName?: scrollSection): boolean {
     this.data.store.closeMenu();
     appStore().pageStore.goToPage(page, sectionName);
     return true;

@@ -6,27 +6,27 @@ import { colors } from "../../styleConstants";
 export class Gallery extends b.Component {
   render() {
     return (
-      <div style={styles.wrapper}>
-        <div style={styles.header}>{t("Take a look at us")}</div>
-        <this.gallery />
-        <this.gallerySlider />
-        <div style={styles.descrition}>
-          {[
-            <div>{t("See photos to see if you like us.")}</div>,
-            <div>
-              {t(
-                "If you missed some of the hilarious corners in our album, we will be happy"
-              )}
-            </div>,
-            <div>
-              {[
-                t("if you add it to facebook or instagram under hastagem"),
-                <span style={styles.hashtag}>#svycarka.com</span>
-              ]}
-            </div>
-          ]}
+        <div style={styles.wrapper}>
+          <div style={styles.header}>{t("Take a look at us")}</div>
+          <this.gallery />
+          <this.gallerySlider />
+          <div style={styles.descrition}>
+            {[
+              <div>{t("See photos to see if you like us.")}</div>,
+              <div>
+                {t(
+                  "If you missed some of the hilarious corners in our album, we will be happy"
+                )}
+              </div>,
+              <div>
+                {[
+                  t("if you add it to facebook or instagram under hastagem"),
+                  <span style={styles.hashtag}>#svycarka.com</span>
+                ]}
+              </div>
+            ]}
+          </div>
         </div>
-      </div>
     );
   }
 
@@ -70,8 +70,15 @@ export class Gallery extends b.Component {
         ]}
       >
         <svg width="100%" height="20">
-          <circle r="7" cx="8" cy="8" fill="red" />
-          <rect x="20" y="8" width="8" height="8" fill="blue" /> 
+          <circle
+            r="7"
+            cx="8"
+            cy="8"
+            fill="red"
+            stroke="black"
+            style={{ dashArray: "0,50," }}
+          />
+          <rect x="20" y="8" width="8" height="8" fill="blue" />
         </svg>
       </div>
     );

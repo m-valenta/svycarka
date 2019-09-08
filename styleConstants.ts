@@ -23,7 +23,11 @@ export const colors = {
   inputSilver: "#d2c6b8",
   buttonYellow: "#a47b21",
   buttonRed: "#a01a22",
-  hover: "#286140"
+  hover: "#286140",
+  hover_menu: "#286140",
+  selected_lang: "#D2C6B8",
+  lang: "#EFEBE6",
+  menu: "#729882"
 };
 
 const arrow = b.styleDef({
@@ -118,13 +122,13 @@ export const socialBackgrounds = {
 export const menuButton = {
   backgroundImage: getResourceCssUrl(b.asset(menu_svg)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "41px 30px"
+  backgroundSize: "35px 30px"
 };
 
 export const logo = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(logo_svg)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "44px 50px"
+  backgroundSize: "31px 35px"
 });
 
 export const buttonHover = b.styleDef({
@@ -135,10 +139,11 @@ export const contacsBackgrounds = {
   phone: b.styleDef({
     backgroundImage: getResourceCssUrl(b.asset(phone_svg)),
     backgroundRepeat: "no-repeat",
-    backgroundSize: "16px 28px",
-    width: 16,
+    backgroundSize: "26px 28px",
+    backgroundPosition: "0 19%",
+    width: 26,
     height: 28,
-    marginRight: 23
+    marginRight: 13
   }),
   email: b.styleDef({
     backgroundImage: getResourceCssUrl(b.asset(email_svg)),
@@ -175,6 +180,7 @@ export const addButton = [tableButton, addButtonBg];
 export const editButton = [tableButton, editButtonBg];
 export const removeButton = [tableButton, removeButtonBg];
 
+export const menuHeight = 50;
 
 b.injectCss(`
     @font-face {
@@ -189,7 +195,9 @@ b.injectCss(`
         font-style: normal;
     }
     body {
-        margin-top: 50px;
+        font-size: 15px;
+        line-height: 25px;
+        margin-top: ${menuHeight}px;
         font-family: ${lucida_sans_unicoderegular};
     }
 `);

@@ -62,9 +62,9 @@ class TextBlock extends b.Component<{
   fontSize?: number;
 }> {
   render(): b.IBobrilNode {
-    const contentStyle: b.IBobrilStyle[] = [styles.textContent];
-    this.data.fontSize !== undefined &&
-      contentStyle.push({ fontSize: this.data.fontSize });
+    let contentStyle: b.IBobrilStyle = this.data.fontSize !== undefined 
+      ? { fontSize: this.data.fontSize }
+      : null;
 
     return (
       <div style={styles.textBlock}>
@@ -101,18 +101,17 @@ export function ReservationIconSet(): b.IBobrilNode {
 export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
   return (
     <>
-      <TextBlock fontSize={data.fontSize} header={t("Week price")}>
+      <TextBlock header={t("Week price")}>
         {[
           t("Winter season: 19 500Kč / for cottage (december - march)"),
           t("Summer season: 17 000Kč / for cottage (july - august)"),
           t("Out of seeson 19000 Kč / for cottage")
         ]}
       </TextBlock>
-      <TextBlock fontSize={data.fontSize} header={t("Weekend price")}>
+      <TextBlock header={t("Weekend price")}>
         {[t("Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu")]}
       </TextBlock>
       <TextBlock
-        fontSize={data.fontSize}
         header={t("New Year's Eve - we're still free")}
         specialInfo={t(
           "(As a bonus Christmas decor and a bottle of champagne)"
@@ -123,7 +122,6 @@ export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
         ]}
       </TextBlock>
       <TextBlock
-        fontSize={data.fontSize}
         header={t("Christmas")}
         specialInfo={t(
           "(As a bonus Christmas decor, candy, christmas tree and carp included)"

@@ -18,9 +18,9 @@ class HomePage extends b.Component {
       <div>
         <Banner />
         <ScrollToWrapper id="tips"><TipsSection /></ScrollToWrapper>
-        <ScrollToWrapper id="at_us"><Gallery /></ScrollToWrapper>
+        <ScrollToWrapper id="at_us" useMenuGap={true}><Gallery /></ScrollToWrapper>
         <ScrollToWrapper id="how_much"><ReservationSection /></ScrollToWrapper>
-        <ScrollToWrapper id="location"><MapSection /></ScrollToWrapper>
+        <ScrollToWrapper id="location" useMenuGap={true}><MapSection /></ScrollToWrapper>
       </div>
     );
   }

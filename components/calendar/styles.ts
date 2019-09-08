@@ -48,7 +48,7 @@ export const columnStyleSelectableWithHover = b.styleDefEx(columnStyleSelectable
 
 
 const dayLineStyle = b.styleDefEx(rowStyle, {
-  fontSize: 7
+  fontSize: 10
 });
 
 export const dayLine = b.styleDef([rowStyle, dayLineStyle]);

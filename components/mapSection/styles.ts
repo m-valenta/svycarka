@@ -21,5 +21,5 @@ export const footer = b.styleDef({
 
 export const wrapper = b.styleDef({
   marginTop: 101,
-  marginBottom: 94
+  marginBottom: 45
 });

@@ -306,14 +306,21 @@ export class Calendar extends b.Component<ICalendarData> {
       return;
     }
 
-    this.data.store.currentReservation.value = this.data.reservationStrategy.getSelectedReservation(
+    const computedReservation = this.data.reservationStrategy.getSelectedReservation(
       selectedDay,
       this._currentMonth,
       getCurrentDateItem(),
       this.data.store.currentReservation.value,
       this.data.store.reservations
     );
-    this.clearSelection(clearPreviewMask);
+
+    if(computedReservation.duration == 1 || computedReservation.duration > 2){
+      this.data.store.currentReservation.value = computedReservation;
+      this.clearSelection(clearPreviewMask);
+    }
+
+    if(computedReservation.duration > 2)
+      this.data.onClose();
   }
 }
 

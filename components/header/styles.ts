@@ -2,9 +2,9 @@ import * as b from "bobril";
 import {
   contentSize,
   colors,
-  leftArrow,
   logo,
-  buttonHover
+  buttonHover,
+  menuHeight
 } from "../../styleConstants";
 import { button } from "../button/buton";
 
@@ -18,7 +18,7 @@ export const wrapper = b.styleDef({
 });
 
 const contentStyle = b.styleDefEx(contentSize, {
-  height: 50,
+  height: menuHeight,
   paddingLeft: 57,
   paddingRight: 43,
   position: "relative",
@@ -29,12 +29,11 @@ export const content = [contentSize, contentStyle];
 
 export const rezervationButton = b.styleDef(
   {
-    fontSize: 18,
-    height: 50,
+    height: menuHeight,
     backgroundColor: colors.buttonYellow,
     color: "white",
     textTransform: "uppercase",
-    padding: "16px 45px",
+    padding: "11px 45px",
     cssFloat: "left",
     cursor: "pointer",
     boxSizing: "border-box"
@@ -45,7 +44,7 @@ export const rezervationButton = b.styleDef(
 );
 
 export const sociaButton = b.styleDef({
-  height: 50,
+  height: menuHeight,
   width: 30,
   marginLeft: 42,
   cursor: "pointer",
@@ -63,7 +62,7 @@ export const socialButtonContent = b.styleDef({
 });
 
 export const menuButton = b.styleDef({
-  height: 50,
+  height: menuHeight,
   width: 41,
   marginLeft: 23,
   cursor: "pointer",
@@ -72,7 +71,7 @@ export const menuButton = b.styleDef({
 });
 
 export const menuButtonContent = b.styleDef({
-  width: 41,
+  width: 35,
   height: 30,
   position: "absolute",
   top: 10
@@ -80,10 +79,9 @@ export const menuButtonContent = b.styleDef({
 
 export const localeButton = b.styleDef(
   {
-    fontSize: 18,
-    marginTop: 16,
+    marginTop: 13,
     marginLeft: 23,
-    color: colors.inputSilver,
+    color: colors.lang,
     cssFloat: "right",
     cursor: "pointer"
   },
@@ -95,7 +93,7 @@ export const localeButton = b.styleDef(
 );
 
 const localeButton_Selected = b.styleDefEx(localeButton, {
-  fontWeight: "bold"
+  color: colors.selected_lang
 });
 
 export const selectedLocaleButton = [localeButton, localeButton_Selected];
@@ -111,19 +109,23 @@ export const logoButton = {
 };
 
 const logoContentStyle = b.styleDef({
-  width: 44,
-  height: 50
+  width: 31,
+  height: 35,
+  marginTop: 6
 });
 
 export const logoContent = [logo, logoContentStyle];
 
 export const MenutItem = b.styleDef(
   {
-    fontSize: 18,
-    marginTop: 16,
+    marginTop: 13,
     marginLeft: 23,
-    color: colors.hover,
+    color: colors.menu,
     cssFloat: "right",
     cursor: "pointer",
     textTransform: "uppercase"
+  }, {
+    hover: {
+      color: colors.hover_menu
+    }
   });

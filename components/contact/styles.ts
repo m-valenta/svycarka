@@ -28,8 +28,8 @@ export const kubaFoto = b.styleDef({
   cssFloat: "left"
 });
 
-export const contaInfo = b.styleDef({
-  width: 200,
+export const contactInfo = b.styleDef({
+  width: 210,
   height: 70,
   cssFloat: "left",
   marginTop: 85,
@@ -56,7 +56,8 @@ export const contactContent = b.styleDef({
 
 export const contentItem = b.styleDef({
   height: 32,
-  marginBottom: 10
+  marginBottom: 10,
+  marginLeft: 19
 });
 
 export const contactHeader = b.styleDef({

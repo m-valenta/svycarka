@@ -3,11 +3,10 @@ import { contentSize } from "../../styleConstants";
 
 export const header = b.styleDef({
   fontSize: 30,
-  marginBottom: 5
+  marginBottom: 15
 });
 
 export const content = b.styleDef({
-  fontSize: 16,
   paddingBottom: 30
 });
 

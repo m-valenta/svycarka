@@ -6,6 +6,7 @@ import { colors } from "../../styleConstants";
 import { Button } from "../button/buton";
 import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";
+import { addLineBreaks } from "../../utils/textUtils";
 
 export class TipsSection extends b.Component {
   render() {
@@ -15,11 +16,11 @@ export class TipsSection extends b.Component {
           <TextSection>
             {{
               header: t("Why to visit"),
-              content: [
+              content: addLineBreaks(
                 t(
-                  "The Švýcarka offers not only a quiet environment, but also the possibility of an active holiday. Would you like to visit nearby places of interest? Here we have recommendations that have reasonable range and are tested directly by the owner of Švýcarka. If you wish, we are able to arrange excellent meat from the organic farm or beer from the brewery."
+                  "The Švýcarka offers not only a quiet environment, but also the possibility of an active holiday.@br@Would you like to visit nearby places of interest? Here we have recommendations that have reasonable range and are tested directly by the owner of Švýcarka. If you wish, we are able to arrange excellent meat from the organic farm or beer from the brewery."
                 )
-              ]
+              )
             }}
           </TextSection>
           <div style={styles.buttonWrapper}>
