@@ -1,5 +1,11 @@
 import * as b from "bobril";
-import { contentSize, colors, leftArrow, logo, buttonHover } from "../../styleConstants";
+import {
+  contentSize,
+  colors,
+  leftArrow,
+  logo,
+  buttonHover
+} from "../../styleConstants";
 import { button } from "../button/buton";
 
 export const wrapper = b.styleDef({
@@ -21,19 +27,22 @@ const contentStyle = b.styleDefEx(contentSize, {
 
 export const content = [contentSize, contentStyle];
 
-export const rezervationButton = b.styleDef({
-  fontSize: 18,
-  height: 50,
-  backgroundColor: colors.buttonYellow,
-  color: "white",
-  textTransform: "uppercase",
-  padding: "16px 45px",
-  cssFloat: "left",
-  cursor: "pointer",
-  boxSizing: "border-box"
-}, {
-  hover: buttonHover
-});
+export const rezervationButton = b.styleDef(
+  {
+    fontSize: 18,
+    height: 50,
+    backgroundColor: colors.buttonYellow,
+    color: "white",
+    textTransform: "uppercase",
+    padding: "16px 45px",
+    cssFloat: "left",
+    cursor: "pointer",
+    boxSizing: "border-box"
+  },
+  {
+    hover: buttonHover
+  }
+);
 
 export const sociaButton = b.styleDef({
   height: 50,
@@ -69,13 +78,27 @@ export const menuButtonContent = b.styleDef({
   top: 10
 });
 
-export const localeButton = b.styleDef({
-  fontSize: 18,
-  marginTop: 16,
-  color: colors.inputSilver,
-  cssFloat: "right",
-  cursor: "pointer"
+export const localeButton = b.styleDef(
+  {
+    fontSize: 18,
+    marginTop: 16,
+    marginLeft: 23,
+    color: colors.inputSilver,
+    cssFloat: "right",
+    cursor: "pointer"
+  },
+  {
+    hover: {
+      color: colors.hover
+    }
+  }
+);
+
+const localeButton_Selected = b.styleDefEx(localeButton, {
+  fontWeight: "bold"
 });
+
+export const selectedLocaleButton = [localeButton, localeButton_Selected];
 
 export const logoButton = {
   width: 44,
@@ -93,3 +116,14 @@ const logoContentStyle = b.styleDef({
 });
 
 export const logoContent = [logo, logoContentStyle];
+
+export const MenutItem = b.styleDef(
+  {
+    fontSize: 18,
+    marginTop: 16,
+    marginLeft: 23,
+    color: colors.hover,
+    cssFloat: "right",
+    cursor: "pointer",
+    textTransform: "uppercase"
+  });

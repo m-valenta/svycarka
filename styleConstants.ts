@@ -128,8 +128,7 @@ export const logo = b.styleDef({
 });
 
 export const buttonHover = b.styleDef({
-    color: colors.hover,
-    backgroundColor: colors.calendarSilver + " !important"
+    backgroundColor: colors.hover + " !important"
 });
 
 export const contacsBackgrounds = {

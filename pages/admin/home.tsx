@@ -23,6 +23,7 @@ const styles = {
   }),
   rightColumn: b.styleDef({
     cssFloat: "left",
+    width: "calc(100% - 260px)",
     paddingTop: 1
   }),
   menuLine: b.styleDef({

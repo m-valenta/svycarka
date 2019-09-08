@@ -150,7 +150,7 @@ class Table extends b.Component<ITableData> {
       );
     }
     return (
-      <div style={[tableStyles.tableWrapper, { width: 410 }]}>{lines}</div>
+      <div style={[tableStyles.tableWrapper, { width: 450 }]}>{lines}</div>
     );
   }
 
@@ -158,7 +158,7 @@ class Table extends b.Component<ITableData> {
     return (
       <div style={[tableStyles.tableLine, tableStyles.headerLine]}>
         <div style={[tableStyles.tableColumn, { width: "70%" }]}>Login</div>
-        <div style={[tableStyles.lastTableColumn, { width: "29%" }]}>
+        <div style={[tableStyles.lastTableColumn, { width: "28%" }]}>
           <div
             style={addButton}
             onClick={() => {
@@ -179,7 +179,7 @@ class Table extends b.Component<ITableData> {
         <div style={[tableStyles.tableColumn, { width: "70%" }]}>
           {data.user.login}
         </div>
-        <div style={[tableStyles.lastTableColumn, { width: "29%" }]}>
+        <div style={[tableStyles.lastTableColumn, { width: "28%" }]}>
           <div
             style={editButton}
             onClick={() => {

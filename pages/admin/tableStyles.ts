@@ -2,8 +2,9 @@ import * as b from "bobril";
 import { colors } from "../../styleConstants";
 
 export const tableWrapper = b.styleDef({
-    margin: "10px 50% 0 50%",
+    margin: "10px auto 0 auto",
     border: `solid 1px ${colors.calendarSilver}`,
+    boxSizing: "border-box",
     borderRadius: 3,
 
 });
@@ -15,7 +16,11 @@ export const tableLine = b.styleDef({
 
 export const tableColumn = b.styleDef({
     cssFloat: "left",
-    borderRight: `solid 1px ${colors.calendarSilver}` 
+    paddingLeft: 2,
+    borderRight: `solid 1px ${colors.calendarSilver}`,
+    textOverflow: "ellipsis",
+    overflow: "hidden", 
+    whiteSpace: "nowrap" 
 });
 
 const lastTableColumnDef = b.styleDefEx(tableColumn,{

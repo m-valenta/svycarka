@@ -39,6 +39,14 @@ export const columnStyleSelectable = b.styleDefEx(
   }
 );
 
+export const columnStyleSelectableWithHover = b.styleDefEx(columnStyleSelectable, {}, {
+  hover: {
+    border: "none",
+    backgroundColor: colors.calendarRed,
+    color: "white"
+  }});
+
+
 const dayLineStyle = b.styleDefEx(rowStyle, {
   fontSize: 7
 });

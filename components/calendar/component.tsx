@@ -98,6 +98,7 @@ export class Calendar extends b.Component<ICalendarData> {
         <CalendarDays
           monthDays={this.getMonthDays()}
           selectionHandler={(day, mode) => this.daySelectionChange(day, mode)}
+          isSelection={this.data.store.currentReservation.value !== undefined}
         />
       </div>
     );
@@ -383,6 +384,7 @@ class CalendarDayHeader extends b.Component<{ daysOfWeek: DayOfWeek[] }> {
 class CalendarDays extends b.Component<{
   monthDays: ReadonlyArray<MonthDay>;
   selectionHandler: (day: MonthDay, mode: SelectionMode) => void;
+  isSelection: boolean;
 }> {
   render() {
     let rows: b.IBobrilNode[] = [];
@@ -395,6 +397,7 @@ class CalendarDays extends b.Component<{
             <CalendarDay
               day={mDay}
               selectionHandler={this.data.selectionHandler}
+              isSelection={this.data.isSelection}
             />
           ))}
         </this.dayRow>
@@ -419,7 +422,7 @@ class CalendarDay extends b.Component<ICalendarDayData> {
   }
 
   onMouseEnter(_event: b.IBobrilMouseEvent): void {
-    if((this.data.day.selectionState & SelectionState.selected) !== 0) {
+    if ((this.data.day.selectionState & SelectionState.selected) !== 0) {
       return;
     }
     this.data.selectionHandler(
@@ -431,7 +434,7 @@ class CalendarDay extends b.Component<ICalendarDayData> {
   }
 
   onMouseLeave() {
-    if((this.data.day.selectionState & SelectionState.selected) !== 0) {
+    if ((this.data.day.selectionState & SelectionState.selected) !== 0) {
       return;
     }
     this.data.selectionHandler(this.data.day, SelectionMode.mouseOut);
@@ -453,6 +456,7 @@ class CalendarDay extends b.Component<ICalendarDayData> {
     !this.data.day.isInCurrentMonth && style.push(styles.columnStyleOtherMonth);
     this.data.day.isReserved && style.push(styles.columnStyleReserved);
     this.data.day.isSelectable && style.push(styles.columnStyleSelectable);
+    this.data.day.isSelectable && !this.data.isSelection && style.push(styles.columnStyleSelectableWithHover);
 
     (this.data.day.selectionState & SelectionState.preview) > 0 &&
       style.push(styles.mouseSelection);
@@ -485,6 +489,7 @@ interface ICalendarHeaderData {
 interface ICalendarDayData {
   day: MonthDay;
   selectionHandler: (day: MonthDay, mode: SelectionMode) => void;
+  isSelection: boolean;
 }
 
 export interface ICalendarReservationStrategy {

@@ -68,7 +68,12 @@ export class Gallery extends b.Component {
             height: 20
           }
         ]}
-      />
+      >
+        <svg width="100%" height="20">
+          <circle r="7" cx="8" cy="8" fill="red" />
+          <rect x="20" y="8" width="8" height="8" fill="blue" /> 
+        </svg>
+      </div>
     );
   }
 }

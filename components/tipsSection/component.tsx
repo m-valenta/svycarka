@@ -14,7 +14,7 @@ export class TipsSection extends b.Component {
         <div style={styles.contentOveride}>
           <TextSection>
             {{
-              header: "Proč právě k nám",
+              header: t("Why to visit"),
               content: [
                 t(
                   "The Švýcarka offers not only a quiet environment, but also the possibility of an active holiday. Would you like to visit nearby places of interest? Here we have recommendations that have reasonable range and are tested directly by the owner of Švýcarka. If you wish, we are able to arrange excellent meat from the organic farm or beer from the brewery."

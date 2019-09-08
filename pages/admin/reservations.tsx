@@ -4,6 +4,8 @@ import {
   IAdminReservation
 } from "../../data/admin/types";
 import { appStore } from "../../data/appStore";
+import * as tableStyles from "./tableStyles";
+import { getMoment } from "bobril-g11n";
 
 export class ReservationsPage extends b.Component {
   store: IAdminReservationStore;
@@ -18,29 +20,46 @@ export class ReservationsPage extends b.Component {
         <div>Reservations</div>
         <div>Rok: {this.store.Year}</div>
         <div>Měsíc {this.store.Month + 1}</div>
-        <Reservations reservations={this.store.Reservations} />
+        <Table reservations={this.store.Reservations} />
       </div>
     );
   }
 }
 
-function Reservations(data: {
-  reservations: IAdminReservation[];
-}): b.IBobrilNode {
-  const children = [];
-  for (let reservation of data.reservations) {
-    children.push(
-      <div style={{borderBottom: "solid 1px black"}}>{`${reservation.id}|${reservation.state}|${reservation.dateFrom}|${
-        reservation.duration
-      }|${reservation.name}||${reservation.address}${reservation.email}|${reservation.phone}|${
-        reservation.price
-      }|${reservation.beer}|${reservation.meat}|${
-        reservation.usedCulture
-      }`}</div>
-    );
+class Table extends b.Component<{reservations: IAdminReservation[]}> {
+  render(): b.IBobrilNode {
+    const lines: b.IBobrilNode[] = this.data.reservations.map(res => <this.Row row={res} />);
+
+
+    return <div style={[tableStyles.tableWrapper, {width: "100%"}]}>
+      <this.HeaderRow />
+      {lines}
+    </div>
   }
 
-  return <div style={{ width: 800 }}>{children}</div>;
+  protected HeaderRow(): b.IBobrilNode {
+    return <div style={[tableStyles.tableLine, tableStyles.headerLine]}>
+        <div style={[tableStyles.tableColumn, { width: "15%" }]}>Datum od</div>
+        <div style={[tableStyles.tableColumn, { width: "8%" }]}>Délka</div>
+        <div style={[tableStyles.tableColumn, { width: "27%" }]}>Jméno</div>
+        <div style={[tableStyles.tableColumn, { width: "28%" }]}>Adresa</div>
+        <div style={[tableStyles.tableColumn, { width: "10%" }]}>Cena</div>
+        <div style={[tableStyles.lastTableColumn, { width: "10%" }]}>Stav</div>
+        <div style={{ clear: "both" }} />
+      </div>;
+  }
+
+  protected Row(data: {row: IAdminReservation}): b.IBobrilNode {
+    return <div style={tableStyles.tableLine}>
+      <div style={[tableStyles.tableColumn, { width: "15%" }]}>{getMoment(data.row.dateFrom).format("DD.MM.YYYY")}</div>
+      <div style={[tableStyles.tableColumn, { width: "8%" }]}>{data.row.duration}</div>
+      <div style={[tableStyles.tableColumn, { width: "27%" }]}>{data.row.name}</div>
+      <div style={[tableStyles.tableColumn, { width: "28%" }]}>{data.row.address}</div>
+      <div style={[tableStyles.tableColumn, { width: "10%" }]}>{data.row.price == undefined ? 0 : data.row.price}</div>
+      <div style={[tableStyles.lastTableColumn, { width: "10%" }]}>{data.row.state}</div>
+      <div style={{ clear: "both" }} />
+    </div>;
+  }
 }
 
 export const reservationsPage = b.component(ReservationsPage);

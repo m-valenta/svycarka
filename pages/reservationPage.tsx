@@ -146,6 +146,10 @@ class ReservationPage extends b.Component {
       </div>
     );
   }
+
+  postInitDom() {
+    appStore().pageStore.setPageRendered(Page.Reservation);
+  }
 }
 
 export const reservationPage = b.component(ReservationPage);

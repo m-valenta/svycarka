@@ -12,16 +12,21 @@ class HomePage extends b.Component {
   init() {
     appStore().pageStore.setPageInitialized(Page.Home);
   }
+  
   render() {
     return (
       <div>
         <Banner />
         <ScrollToWrapper id="tips"><TipsSection /></ScrollToWrapper>
-        <Gallery />
-        <ReservationSection />
-        <MapSection />
+        <ScrollToWrapper id="at_us"><Gallery /></ScrollToWrapper>
+        <ScrollToWrapper id="how_much"><ReservationSection /></ScrollToWrapper>
+        <ScrollToWrapper id="location"><MapSection /></ScrollToWrapper>
       </div>
     );
+  }
+
+  postInitDom() {
+    appStore().pageStore.setPageRendered(Page.Home);
   }
 }
 

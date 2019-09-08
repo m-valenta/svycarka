@@ -18,10 +18,10 @@ b.asset("./css/reset.css");
 
 initGlobalization({
   defaultLocale: locales.default
-}).then(() => {
+}).then(async () => {
   document.title = "Švýcarka";
 
-  setLocale(locales.czech);
+  await setLocale(locales.czech);
   initAppStore();
   b.routes([
     b.route({ handler: masterPage }, [

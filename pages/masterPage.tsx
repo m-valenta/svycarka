@@ -4,6 +4,7 @@ import { initAppStore, appStore } from "../data/appStore";
 import { Page } from "../data/pageStore/types";
 import { Contact } from "../components/contact/component";
 import { CopyRight } from "../components/copyright/component";
+import { ScrollToWrapper } from "../components/scrollToWrapper/component";
 
 export interface IDataWithActiveRouteHandler {
   activeRouteHandler: () => b.IBobrilNode;
@@ -17,7 +18,7 @@ class MastePage extends b.Component<IDataWithActiveRouteHandler> {
         showReservation={this.showReservation}
       />,
       this.data.activeRouteHandler(),
-      <Contact />,
+      <ScrollToWrapper id="contact"><Contact /></ScrollToWrapper>,
       <CopyRight />
     ];
 

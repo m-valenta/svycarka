@@ -17,10 +17,16 @@ import { buttonStyle } from "../button/styles";
 import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";
 
-class IconSet extends b.Component<{ children: string[] }> {
+class IconSet extends b.Component<{
+  children: string[];
+  increaseSize: Set<number>;
+}> {
   render() {
-    const children = this.data.children.map(asset => (
-      <this.icon assetImg={asset} />
+    const children = this.data.children.map((asset, index) => (
+      <this.icon
+        assetImg={asset}
+        increaseSize={this.data.increaseSize.has(index)}
+      />
     ));
     children.push(<div style={{ clear: "both" }} />);
 
@@ -31,19 +37,21 @@ class IconSet extends b.Component<{ children: string[] }> {
     );
   }
 
-  private icon(data: { assetImg: string }): b.IBobrilNode {
-    return (
-      <div
-        style={[
-          styles.icon,
-          {
-            backgroundImage: getResourceCssUrl(data.assetImg),
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover"
-          }
-        ]}
-      />
-    );
+  private icon(data: {
+    assetImg: string;
+    increaseSize: boolean;
+  }): b.IBobrilNode {
+    const style = [
+      styles.icon,
+      {
+        backgroundImage: getResourceCssUrl(data.assetImg),
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
+      }
+    ];
+    data.increaseSize && style.push(styles.increasedSizeIcon);
+
+    return <div style={style} />;
   }
 }
 
@@ -73,8 +81,12 @@ class TextBlock extends b.Component<{
 }
 
 export function ReservationIconSet(): b.IBobrilNode {
+  const increaseSize: Set<number> = new Set();
+  increaseSize.add(3);
+  increaseSize.add(4);
+
   return (
-    <IconSet>
+    <IconSet increaseSize={increaseSize}>
       {[
         b.asset(wifi_svg),
         b.asset(parking_svg),

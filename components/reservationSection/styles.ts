@@ -31,6 +31,12 @@ export const icon = b.styleDef(
   }
 );
 
+export const increasedSizeIcon = b.styleDefEx(icon,
+{
+    width: 66,
+    height: 66,
+});
+
 export const textBlock = b.styleDef({
   textAlign: "center",
   marginBottom: 20

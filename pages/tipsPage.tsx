@@ -178,6 +178,10 @@ class TipsPage extends b.Component {
     );
   }
 
+  postInitDom() {
+    appStore().pageStore.setPageRendered(Page.Tips);
+  }
+
   commonText(data: { children: string }): b.IBobrilNode {
     return <div style={commonText}>{data.children}</div>;
   }

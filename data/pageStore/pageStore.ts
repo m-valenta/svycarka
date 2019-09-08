@@ -6,15 +6,17 @@ import {
   tipsTransition
 } from "../../transitions";
 import { Page, IPageStore, IScrollItem } from "./types";
+import { scrollSection, scrollToWrapper } from "../../components/scrollToWrapper/utils";
 
 class PageStore implements IPageStore {
   @observable
   protected _currentPagePage: Page;
-
-  protected _scrollItems: Map<string, number>;
-
+  
   @observable
   forceShowTree: boolean;
+  
+  protected _scrollItems: Map<string, number>;
+  protected _lastScrollTo?: scrollSection;
 
   constructor() {
     this._currentPagePage = Page.Home;
@@ -26,8 +28,18 @@ class PageStore implements IPageStore {
     return this._currentPagePage;
   }
 
-  goToPage(page: Page): void {
+  goToPage(page: Page, scrollTo?: scrollSection): void {
+    if(page === this._currentPagePage){
+      if(scrollTo === undefined)
+        window.scroll(0,0);
+      else
+        scrollToWrapper(scrollTo);
+        
+      return;
+    }
+
     this._currentPagePage = page;
+    this._lastScrollTo = scrollTo;
 
     let transition: b.IRouteTransition;
     switch (page) {
@@ -43,7 +55,7 @@ class PageStore implements IPageStore {
     }
 
     b.runTransition(transition);
-    window.scroll(0,0);
+    scrollTo == undefined && window.scroll(0,0);
   }
 
   setPageInitialized(page: Page): void {
@@ -57,6 +69,14 @@ class PageStore implements IPageStore {
 
   getScrollItemPosition(id: string): number | undefined {
     return this._scrollItems.get(id);
+  }
+
+  setPageRendered(_page: Page) {
+    if(this._lastScrollTo == undefined)
+      return;
+
+      scrollToWrapper(this._lastScrollTo);
+      this._lastScrollTo = undefined;
   }
 
   private clearScrollItems(){
