@@ -20,6 +20,8 @@ import {
 import { observable, IObservableMap } from "bobx";
 import { Month, datItemParts, getDateItemFromDate } from "../../utils/dateUtils";
 import { utils } from "../../components/recaptcha/reCaptcha";
+import { getBackendLocaleId } from "../../utils/localeUtils";
+import { getLocale } from "bobril-g11n";
 
 const phoneNumberRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.compile();
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.compile();
@@ -125,7 +127,7 @@ class ReservationStore implements IReservationStore {
       address: this.address.value,
       beer: this.beer.value,
       meat: this.meat.value,
-      usedCulture: 0 // TODO !!
+      usedCulture: getBackendLocaleId(getLocale())
     });
   }
 

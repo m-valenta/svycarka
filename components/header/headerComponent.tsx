@@ -9,6 +9,7 @@ import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";
 import { scrollToWrapper, scrollSection } from "../scrollToWrapper/utils";
 import { homePage } from "../../pages/homePage";
+import { getlocaleName } from "../../utils/localeUtils";
 
 export interface IData {
   showReservation: boolean;
@@ -71,8 +72,8 @@ export class HeaderComponent extends b.Component<IData> {
       />
     );
     children.push(<MenuContent key="h-mc" store={this.store} />);
-    children.push(<LanguageSection key="h-ls" store={this.store} />);
-    this.data.showTree && !this.store.isMenuOpen && children.push(<Logo />);
+    children.push(<LanguageSection key={`h-ls${this.store.isMenuOpen}`} store={this.store} />);
+    this.data.showTree && !this.store.isMenuOpen && children.push(<Logo key="h-logo" />);
     return (
       <div style={styles.wrapper}>
         <div style={styles.content}>{children}</div>
@@ -174,7 +175,7 @@ class LanguageSection extends b.Component<{ store: HeaderStore }> {
         let isSelected = locale === this._currentLocale;
         children.push(
           <this.languageButton
-            localeName={this.getlocaleName(locale)}
+            localeName={getlocaleName(locale)}
             isSelected={isSelected}
             onClickHandler={() => {
               if (!isSelected) this.changeLocale(locale);
@@ -187,7 +188,7 @@ class LanguageSection extends b.Component<{ store: HeaderStore }> {
     } else {
       children.push(
         <this.languageButton
-          localeName={this.getlocaleName(this._currentLocale)}
+          localeName={getlocaleName(this._currentLocale)}
           isSelected={false}
           onClickHandler={() => {
             this.data.store.openLanguageSection();
@@ -220,15 +221,6 @@ class LanguageSection extends b.Component<{ store: HeaderStore }> {
   protected async changeLocale(targetLocale: string): Promise<void> {
     await setLocale(targetLocale);
     this._currentLocale = targetLocale;
-  }
-
-  protected getlocaleName(locale: string): string {
-    switch (locale) {
-      case locales.default:
-        return "EN";
-      default:
-        return "CS";
-    }
   }
 }
 

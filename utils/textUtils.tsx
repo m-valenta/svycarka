@@ -2,8 +2,7 @@ import * as b from "bobril"
 
 export const breakInserter = "@br@";
 
-export function addLineBreaks(original: string): b.IBobrilChildren{
-    // TODO    
+export function addLineBreaks(original: string): b.IBobrilChildren{ 
     const splits = original.split(breakInserter);
     const output: b.IBobrilChild[] = []; 
 
