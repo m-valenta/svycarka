@@ -15,6 +15,12 @@ export const iconSetWrapper = b.styleDef({
   textAlign: "center"
 });
 
+const iconSetLowMargin = b.styleDefEx(iconSetWrapper, {
+  marginBottom: 20,
+});
+
+export const iconSetWrapperWithLowMargin = [iconSetWrapper, iconSetLowMargin];
+
 export const iconSetContent = b.styleDef({
   display: "inline-block"
 });
@@ -25,11 +31,12 @@ export const icon = b.styleDef(
     height: 60,
     marginRight: 60,
     cssFloat: "left"
-  },
-  {
-    lastChild: { marginRight: 0 }
   }
 );
+
+export const iconLast = b.styleDefEx(icon, {
+  marginRight: 0
+}); 
 
 export const increasedSizeIcon = b.styleDefEx(icon,
 {

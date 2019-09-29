@@ -17,21 +17,23 @@ import { buttonStyle } from "../button/styles";
 import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";
 
-class IconSet extends b.Component<{
+export class IconSet extends b.Component<{
   children: string[];
   increaseSize: Set<number>;
+  useLowerMargin?: boolean;
 }> {
   render() {
+    const lastIndex = this.data.children.length - 1;
     const children = this.data.children.map((asset, index) => (
       <this.icon
         assetImg={asset}
         increaseSize={this.data.increaseSize.has(index)}
+        isLast={index === lastIndex }
       />
     ));
     children.push(<div style={{ clear: "both" }} />);
-
     return (
-      <div style={styles.iconSetWrapper}>
+      <div style={this.data.useLowerMargin ? styles.iconSetWrapperWithLowMargin : styles.iconSetWrapper}>
         <div style={styles.iconSetContent}>{children}</div>
       </div>
     );
@@ -40,6 +42,7 @@ class IconSet extends b.Component<{
   private icon(data: {
     assetImg: string;
     increaseSize: boolean;
+    isLast: boolean
   }): b.IBobrilNode {
     const style = [
       styles.icon,
@@ -49,6 +52,9 @@ class IconSet extends b.Component<{
         backgroundSize: "cover"
       }
     ];
+
+    data.isLast && style.push(styles.iconLast); 
+
     data.increaseSize && style.push(styles.increasedSizeIcon);
 
     return <div style={style} />;

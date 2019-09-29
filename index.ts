@@ -12,6 +12,7 @@ import { loginPage } from "./pages/admin/login";
 import { adminHomePage } from "./pages/admin/home";
 import { UsersPage, usersPage } from "./pages/admin/users";
 import { reservationsPage } from "./pages/admin/reservations";
+import { accomodationRulesPage } from "./pages/accommodationRulesPage";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -39,6 +40,11 @@ initGlobalization({
       handler: loginPage
     }),
     b.route({
+      url: "/rad",
+      name: "accomodationRules",
+      handler: accomodationRulesPage
+    }),
+    b.route({
       url: "/admin/home",
       name: "adminHome",
       handler: adminHomePage
@@ -55,7 +61,6 @@ initGlobalization({
       }),
     ]),
   ]);
-
   b.addRoot(() => {
     return [favIconLink(), CaptchaScript()];
   }, document.head);

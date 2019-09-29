@@ -38,8 +38,7 @@ export const hashtag = b.styleDef({
 });
 
 export const galleryWrapper = b.styleDef({
-  backgroundColor: "silver",
-  paddingBottom: "65%",
+  paddingBottom: "40%",
   marginBottom: 64
 });
 
