@@ -20,9 +20,9 @@ const descriptionTextStyle = b.styleDefEx(content, {
 });
 
 const gallerySliderStyle = b.styleDefEx(content, {
-  backgroundColor: "silver",
   marginBottom: 55
 });
+
 
 export const wrapper = b.styleDef({
   marginTop: 109,
@@ -44,3 +44,7 @@ export const galleryWrapper = b.styleDef({
 });
 
 export const gallerySlider = [content, gallerySliderStyle];
+
+export const svgStyle = b.styleDef({
+  margin: "0 auto"
+});

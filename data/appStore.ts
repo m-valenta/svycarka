@@ -6,6 +6,8 @@ import { IAdminStore, IAdminReservationStore, IAdminUserStore } from "./admin/ty
 import { adminStoreFactory } from "./admin/adminStore";
 import { adminUserStoreFactory } from "./admin/usersStore";
 import { adminReservationStoreFactory } from "./admin/adminReservationStore";
+import { IGalleryStore } from "./gallery/types";
+import { galletyStoreFactory } from "./gallery/galleryStore";
 
 export interface IAppStore {
   reservationStore: IReservationStore;
@@ -13,6 +15,7 @@ export interface IAppStore {
   adminStore: IAdminStore;
   adminUserStore: IAdminUserStore;
   adminReservationStore: IAdminReservationStore;
+  galleryStore: IGalleryStore;
 }
 
 const appStoreKey = "$appStore";
@@ -26,6 +29,7 @@ export function initAppStore(): void {
   appStore.adminStore = adminStoreFactory();
   appStore.adminUserStore = adminUserStoreFactory();
   appStore.adminReservationStore = adminReservationStoreFactory();
+  appStore.galleryStore = galletyStoreFactory();
 }
 
 export function appStore(): IAppStore {

@@ -2,14 +2,23 @@ import * as b from "bobril";
 import { t } from "bobril-g11n";
 import * as styles from "./styles";
 import { colors } from "../../styleConstants";
+import { observable } from "bobx";
+import { IGalleryStore } from "../../data/gallery/types";
+import { appStore } from "../../data/appStore";
 
 export class Gallery extends b.Component {
+  protected _dataStore: IGalleryStore;
+  init() {
+    this._dataStore = appStore().galleryStore;
+    this._dataStore.loadContent();
+  }
   render() {
     return (
         <div style={styles.wrapper}>
           <div style={styles.header}>{t("Take a look at us")}</div>
+          <div> {this._dataStore.galleryFiles.join(";")} </div>
           <this.gallery />
-          <this.gallerySlider />
+          <GallerySlider height={20} itemsCnt={1} />
           <div style={styles.descrition}>
             {[
               <div>{t("See photos to see if you like us.")}</div>,
@@ -57,30 +66,54 @@ export class Gallery extends b.Component {
       </div>
     );
   }
+}
 
-  // TODO separate component
-  protected gallerySlider(): b.IBobrilNode {
-    return (
-      <div
-        style={[
-          styles.gallerySlider,
-          {
-            height: 20
-          }
-        ]}
-      >
-        <svg width="100%" height="20">
-          <circle
-            r="7"
-            cx="8"
-            cy="8"
-            fill="red"
-            stroke="black"
-            style={{ dashArray: "0,50," }}
-          />
-          <rect x="20" y="8" width="8" height="8" fill="blue" />
+
+interface ISliderData {
+  height: number;
+  itemsCnt: number;
+}
+
+class GallerySlider extends b.Component<ISliderData> {
+  render(): b.IBobrilNode {
+    return <div style={[styles.gallerySlider, {height: this.data.height}]}>
+        <svg style={[styles.svgStyle, {height: this.data.height}]}>
+          <GallerySliderItem height={this.data.height} itemIdx={0} />
         </svg>
       </div>
-    );
+  }
+} 
+
+interface ISliderItemData {
+  height: number;
+  itemIdx: number;
+}
+
+const defaultSize = 2;
+const extendedSize = 4;
+
+class GallerySliderItem extends b.Component<ISliderItemData> {
+  
+  @observable
+  private _isActivated = false;
+
+
+  render():b.IBobrilNode {
+    const diameter = this._isActivated ? extendedSize : defaultSize;
+    return <circle          
+        r={diameter}
+        cx="8"
+        cy={this.data.height / 2 - diameter}
+        fill={this._isActivated ? "black" : colors.inputSilver}
+        style={{cursor: "pointer"}}
+      />;
+  }
+
+  onMouseEnter() {
+    this._isActivated = true;
+  }
+
+  onMouseLeave() {
+    this._isActivated = false;
   }
 }
