@@ -1,5 +1,40 @@
 import { observable } from "bobx";
 
+export function fetchToBlob(url: string): Promise<string> {
+    let xhr = new XMLHttpRequest();    
+    xhr.responseType = 'blob';
+    
+    return new Promise(function(resolve: (value: string) => void, reject: (error) => void) {
+
+		// Setup our listener to process compeleted requests
+		xhr.onreadystatechange = function () {
+
+			// Only run if the request is complete
+			if (xhr.readyState !== 4) return;
+
+			// Process the response
+			if (xhr.status >= 200 && xhr.status < 300) {
+                // If successful
+				resolve(window.URL.createObjectURL(xhr.response));
+			} else {
+				// If failed
+				reject({
+                    url,
+                    method: "GET",
+					status: xhr.status,
+					statusText: xhr.statusText
+				});
+			}
+
+		};
+
+		// Setup our HTTP request
+        xhr.open("GET", url, true);
+        // Send the request
+        xhr.send();
+	});
+} 
+
 export interface IAjaxRequest {};
 export interface IAjaxResponse {};
 

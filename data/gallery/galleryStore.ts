@@ -1,5 +1,5 @@
 import * as b from "bobril";
-import { IAjaxConnector, AjaxConnector } from "../ajaxUtils";
+import { IAjaxConnector, AjaxConnector, fetchToBlob } from "../ajaxUtils";
 import { IGalleryContentResponse, IGalleryStore } from "./types";
 import { observable } from "bobx";
 import { resourceVersion } from "../../constants";
@@ -15,7 +15,7 @@ class GalleryStore implements IGalleryStore {
   }
 
   loadContent() {
-      this._contentConnector.sendRequest(undefined);
+    this._contentConnector.sendRequest(undefined);
   }
 
   attachContentConnector(connector: IAjaxConnector): void {
@@ -23,24 +23,43 @@ class GalleryStore implements IGalleryStore {
   }
 
   @b.bind
-  completeContentLoading(contentResponse: IGalleryContentResponse) {
-    this._contentFiles = contentResponse.fileNames.map(
-      fileName => `/api/gallery/getImage/${fileName}?rw=${resourceVersion}`
+  async completeContentLoading(
+    contentResponse: IGalleryContentResponse
+  ): Promise<void> {
+    const files = contentResponse.fileNames.map(
+      // TODO
+      fileName => {
+        const url = `${
+          location.pathname.indexOf("/test") >= 0 ? "/test" : ""
+        }/api/gallery/getImage/${fileName}?rw=${resourceVersion}`;
+
+        return fetchToBlob(url);
+      }
     );
+
+    const oldContent = this._contentFiles;
+    this._contentFiles = await Promise.all(files);
+
+    oldContent.forEach(blobUrl => URL.revokeObjectURL(blobUrl));
   }
 
   getContentUrl(): string {
-      return "api/gallery/getContent";
+    return location.pathname.indexOf("/test") >= 0
+      ? "/test/api/gallery/getContent"
+      : "/api/gallery/getContent";
   }
-
 }
 
 export function galletyStoreFactory(): IGalleryStore {
-    var store = new GalleryStore();
-  
-    store.attachContentConnector(
-      new AjaxConnector<undefined, IGalleryContentResponse>("GET", store.getContentUrl, store.completeContentLoading)
-    );
-  
-    return store;
-  }
+  var store = new GalleryStore();
+
+  store.attachContentConnector(
+    new AjaxConnector<undefined, IGalleryContentResponse>(
+      "GET",
+      store.getContentUrl,
+      store.completeContentLoading
+    )
+  );
+
+  return store;
+}
