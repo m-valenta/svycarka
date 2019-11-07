@@ -39,7 +39,7 @@ export const hashtag = b.styleDef({
 
 export const galleryWrapper = b.styleDef({
   paddingBottom: "40%",
-  marginBottom: 64
+  marginBottom: 44
 });
 
 export const gallerySlider = [content, gallerySliderStyle];

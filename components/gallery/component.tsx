@@ -17,12 +17,15 @@ const sliderSize = {
 enum stage {
   slowMovement,
   fastMovement,
-  swaping
+  skip,
+  reset
 }
 
 class AnimationStageDispatcher {
   @observable
   private _stage: stage = stage.slowMovement;
+
+  targetIndex: number;
 
   get stage(): stage {
     return this._stage;
@@ -180,11 +183,16 @@ class GalleryContent
 
   @b.bind
   protected onAnimate(): void {
-    if (this._innerLeft > -5) {
+    if (this.data.animationStageDispatcher.stage === stage.skip) {
+      this.skipAnimate();
+      return;
+    }
+
+    if (this._innerLeft > -5  && !this._innerMoveCompleted) {
+      this.data.animationStageDispatcher.stage = stage.slowMovement;
       const inner = this._innerLeft - 0.025;
       this._innerLeft = inner < -5 ? -5 : inner;
       this._outerLeft = this._outerLeft + 0.05;
-      this.data.animationStageDispatcher.stage = stage.slowMovement;
     } else if (
       (this._innerLeft <= -5 || this._innerMoveCompleted) &&
       this._outerLeft < 53
@@ -200,7 +208,29 @@ class GalleryContent
       this.swapImages();
       this._outerLeft = 0;
       this._innerMoveCompleted = false;
-      this.data.animationStageDispatcher.stage = stage.swaping;
+    }
+  }
+
+  protected skipAnimate() {
+    if (
+      this._outerLeft < 53
+    ) {
+      const outer = this._outerLeft + 2.7;
+      this._outerLeft = outer > 53 ? 53 : outer;
+      return;
+    } else {
+      this.swapImages();
+      this._innerLeft = 0;
+      this._outerLeft = 0;
+      this._innerMoveCompleted = false;
+
+      if (
+        this.data.store.currentIndex ===
+        this.data.animationStageDispatcher.targetIndex
+      ) {
+        this.data.animationStageDispatcher.stage = stage.reset;
+      }
+      return;
     }
   }
 }
@@ -268,6 +298,7 @@ interface ISliderData {
 interface ISliderLineState {
   startOffset: number;
   lineLength: number;
+  selectItem(itemIdx: number): void;
 }
 
 class GallerySlider extends b.Component<ISliderData>
@@ -313,6 +344,7 @@ class GallerySlider extends b.Component<ISliderData>
           animationHandler={this.data.animationHandler}
           canAnimateLine={i !== this.data.store.galleryFiles.length - 1}
           lineState={this}
+          animationStageDispatcher={this.data.animationStageDispatcher}
         />
       );
     }
@@ -341,6 +373,15 @@ class GallerySlider extends b.Component<ISliderData>
 
   postInitDom() {
     this.data.animationHandler.registerHandler(this.onAnimate);
+  }
+
+  selectItem(itemIdx: number): void {
+    this._step = 0;
+    this._lineLength = 0;
+    this._startOffset = sliderSize.activeDiameter;
+
+    this.data.animationStageDispatcher.targetIndex = itemIdx;
+    this.data.animationStageDispatcher.stage = stage.skip;
   }
 
   @b.bind
@@ -375,6 +416,7 @@ interface ISliderItemData {
   itemIdx: number;
   store: IGalleryStore;
   animationHandler: AnimationHandler;
+  animationStageDispatcher: AnimationStageDispatcher;
 }
 
 class GallerySliderItem extends b.Component<ISliderItemData> {
@@ -426,8 +468,15 @@ class GallerySliderItem extends b.Component<ISliderItemData> {
     this.data.animationHandler.registerHandler(this.shrinkActiveRadius);
   }
 
+  onClick() {
+    this.data.lineState.selectItem(this.data.itemIdx);
+    return true;
+  }
+
   private get isSelected(): boolean {
-    return this.data.itemIdx == this.data.store.currentIndex;
+    return this.data.animationStageDispatcher.stage === stage.skip
+      ? this.data.itemIdx === this.data.animationStageDispatcher.targetIndex
+      : this.data.itemIdx === this.data.store.currentIndex;
   }
 
   private tryGetLine(): b.IBobrilNode {
