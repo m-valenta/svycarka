@@ -7,14 +7,44 @@ import { IGalleryStore } from "../../data/gallery/types";
 import { appStore } from "../../data/appStore";
 import { AnimationHandler } from "./animationHandler";
 
+const sliderSize = {
+  height: 20,
+  diameter: 2,
+  activeDiameter: 4,
+  connectionWidth: 18
+};
+
+enum stage {
+  slowMovement,
+  fastMovement,
+  swaping
+}
+
+class AnimationStageDispatcher {
+  @observable
+  private _stage: stage = stage.slowMovement;
+
+  get stage(): stage {
+    return this._stage;
+  }
+
+  set stage(stage: stage) {
+    if (stage === this._stage) return;
+
+    this._stage = stage;
+  }
+}
+
 export class Gallery extends b.Component {
   protected _dataStore: IGalleryStore;
+  protected _animationStageDispatcher: AnimationStageDispatcher;
   protected _animationHandler: AnimationHandler;
   init() {
     this._dataStore = appStore().galleryStore;
     this._dataStore.loadContent();
 
     this._animationHandler = new AnimationHandler();
+    this._animationStageDispatcher = new AnimationStageDispatcher();
     b.addDisposable(this, this._animationHandler);
   }
   render() {
@@ -23,9 +53,14 @@ export class Gallery extends b.Component {
         <div style={styles.header}>{t("Take a look at us")}</div>
         <GalleryContent
           store={this._dataStore}
-          animationHandlder={this._animationHandler}
+          animationHandler={this._animationHandler}
+          animationStageDispatcher={this._animationStageDispatcher}
         />
-        <GallerySlider height={20} itemsCnt={1} />
+        <GallerySlider
+          store={this._dataStore}
+          animationHandler={this._animationHandler}
+          animationStageDispatcher={this._animationStageDispatcher}
+        />
         <div style={styles.descrition}>
           {[
             <div>{t("See photos to see if you like us.")}</div>,
@@ -61,7 +96,8 @@ interface IGalleryContentStore {
 class GalleryContent
   extends b.Component<{
     store: IGalleryStore;
-    animationHandlder: AnimationHandler;
+    animationStageDispatcher: AnimationStageDispatcher;
+    animationHandler: AnimationHandler;
   }>
   implements IGalleryContentStore {
   protected _innerMoveCompleted: boolean = false;
@@ -72,9 +108,7 @@ class GalleryContent
   protected _outerLeft: number = 0;
   @observable
   protected readonly _images: string[] = [];
-  @observable
-  protected _step: number = 0;
-  
+
   get innerLeft(): number {
     return this._innerLeft;
   }
@@ -82,14 +116,14 @@ class GalleryContent
     return this._outerLeft;
   }
   get step(): number {
-    return this._step;
+    return this.data.store.currentIndex;
   }
   get images(): string[] {
     return this._images;
   }
   init() {
     b.addDisposable(this, () => {
-      this.data.animationHandlder.unregisterHandler(this.onAnimate);
+      this.data.animationHandler.unregisterHandler(this.onAnimate);
     });
   }
 
@@ -122,25 +156,27 @@ class GalleryContent
   }
 
   postInitDom() {
-    this.data.animationHandlder.registerHandler(this.onAnimate);
+    this.data.animationHandler.registerHandler(this.onAnimate);
   }
 
   protected swapImages() {
     const max = this.data.store.galleryFiles.length;
 
-    let first = this._step - 1;
+    let first = this.data.store.currentIndex - 1;
     this._images[0] = this.data.store.galleryFiles[
       first >= 0 ? first : max - 1
     ];
-    this._images[1] = this.data.store.galleryFiles[this._step];
+    this._images[1] = this.data.store.galleryFiles[
+      this.data.store.currentIndex
+    ];
     this._images[2] = this.data.store.galleryFiles[
-      (this._step + 1) % max
+      (this.data.store.currentIndex + 1) % max
     ];
     this._images[3] = this.data.store.galleryFiles[
-      (this._step + 2) % max
+      (this.data.store.currentIndex + 2) % max
     ];
 
-    this._step = (this._step + 1) % max;
+    this.data.store.currentIndex = (this.data.store.currentIndex + 1) % max;
   }
 
   @b.bind
@@ -149,17 +185,23 @@ class GalleryContent
       const inner = this._innerLeft - 0.025;
       this._innerLeft = inner < -5 ? -5 : inner;
       this._outerLeft = this._outerLeft + 0.05;
-    } else if ((this._innerLeft <= -5 || this._innerMoveCompleted) && this._outerLeft < 53) {
-      if(!this._innerMoveCompleted) {
+      this.data.animationStageDispatcher.stage = stage.slowMovement;
+    } else if (
+      (this._innerLeft <= -5 || this._innerMoveCompleted) &&
+      this._outerLeft < 53
+    ) {
+      if (!this._innerMoveCompleted) {
         this._innerMoveCompleted = true;
         this._innerLeft = 0;
       }
       const outer = this._outerLeft + 2.7;
       this._outerLeft = outer > 53 ? 53 : outer;
+      this.data.animationStageDispatcher.stage = stage.fastMovement;
     } else {
       this.swapImages();
       this._outerLeft = 0;
       this._innerMoveCompleted = false;
+      this.data.animationStageDispatcher.stage = stage.swaping;
     }
   }
 }
@@ -169,7 +211,6 @@ class GalleryContentImage extends b.Component<{
   idx: number;
   store: IGalleryContentStore;
 }> {
-  
   _initialLeft: number;
   _initialStep: number;
   _idx: number;
@@ -180,7 +221,7 @@ class GalleryContentImage extends b.Component<{
   }
 
   render(): b.IBobrilNode {
-    if(this.data.store.step !== this._initialStep) {
+    if (this.data.store.step !== this._initialStep) {
       this._initialStep = this.data.store.step;
       this._idx = this._idx - 1;
       this._idx = this._idx < 0 ? 3 : this._idx;
@@ -210,7 +251,7 @@ class GalleryContentImage extends b.Component<{
               width: "105%",
               height: "100%",
               position: "absolute",
-              left: `${this.data.store.innerLeft}%`,
+              left: `${this.data.store.innerLeft}%`
             }}
           />
         </div>
@@ -220,45 +261,154 @@ class GalleryContentImage extends b.Component<{
 }
 
 interface ISliderData {
-  height: number;
-  itemsCnt: number;
+  store: IGalleryStore;
+  animationHandler: AnimationHandler;
+  animationStageDispatcher: AnimationStageDispatcher;
 }
 
-class GallerySlider extends b.Component<ISliderData> {
+interface ISliderLineState {
+  startOffset: number;
+  lineLength: number;
+}
+
+class GallerySlider extends b.Component<ISliderData>
+  implements ISliderLineState {
+  @observable
+  private _startOffset: number = sliderSize.activeDiameter;
+
+  @observable
+  private _lineLength: number = 0;
+
+  private _step: number = 0;
+
+  private readonly _lineLengthMax =
+    sliderSize.connectionWidth +
+    (sliderSize.activeDiameter - sliderSize.diameter);
+
+  public get startOffset(): number {
+    return this._startOffset;
+  }
+
+  public get lineLength(): number {
+    return this._lineLength;
+  }
+
+  init() {
+    b.addDisposable(this, () => {
+      this.data.animationHandler.unregisterHandler(this.onAnimate);
+    });
+  }
+
   render(): b.IBobrilNode {
+    const totalWidth =
+      2 * sliderSize.activeDiameter +
+      2 * sliderSize.diameter * this.data.store.galleryFiles.length +
+      sliderSize.connectionWidth * (this.data.store.galleryFiles.length - 1);
+
+    const svgContent = [];
+    for (let i = 0; i < this.data.store.galleryFiles.length; i++) {
+      svgContent.push(
+        <GallerySliderItem
+          itemIdx={i}
+          store={this.data.store}
+          animationHandler={this.data.animationHandler}
+          canAnimateLine={i !== this.data.store.galleryFiles.length - 1}
+          lineState={this}
+        />
+      );
+    }
+
     return (
-      <div style={[styles.gallerySlider, { height: this.data.height }]}>
-        <svg style={[styles.svgStyle, { height: this.data.height }]}>
-          <GallerySliderItem height={this.data.height} itemIdx={0} />
+      <div
+        style={[
+          styles.gallerySlider,
+          { height: sliderSize.height, width: totalWidth }
+        ]}
+      >
+        <svg
+          style={[
+            styles.svgStyle,
+            {
+              height: sliderSize.height,
+              width: totalWidth
+            }
+          ]}
+        >
+          {svgContent}
         </svg>
       </div>
     );
   }
+
+  postInitDom() {
+    this.data.animationHandler.registerHandler(this.onAnimate);
+  }
+
+  @b.bind
+  private onAnimate(): void {
+    switch (this.data.animationStageDispatcher.stage) {
+      case stage.slowMovement:
+        this._step = (this._step + 1) % 100;
+
+        if (this._step !== 1) return;
+
+        if (this._lineLength < this._lineLengthMax) this._lineLength++;
+        break;
+      case stage.fastMovement:
+        if (this.lineLength !== this._lineLengthMax)
+          this._lineLength = this._lineLengthMax;
+
+        if (this._startOffset < this._lineLengthMax) this._startOffset++;
+        break;
+      case stage.swaping:
+        this._startOffset = sliderSize.activeDiameter;
+        this._lineLength = 0;
+        this._step = 0;
+        break;
+    }
+  }
 }
 
 interface ISliderItemData {
-  height: number;
+  canAnimateLine: boolean;
+  lineState: ISliderLineState;
   itemIdx: number;
+  store: IGalleryStore;
+  animationHandler: AnimationHandler;
 }
-
-const defaultSize = 2;
-const extendedSize = 4;
 
 class GallerySliderItem extends b.Component<ISliderItemData> {
   @observable
   private _isActivated = false;
+  @observable
+  private _shrinkingDiameter: number = 0;
+
+  private _shrinkingStep: number = 0;
+
+  private readonly _verticalCenter = sliderSize.height / 2;
+  private readonly _startPosition =
+    sliderSize.activeDiameter +
+    (sliderSize.diameter * 2 + sliderSize.connectionWidth) * this.data.itemIdx;
 
   render(): b.IBobrilNode {
-    const diameter = this._isActivated ? extendedSize : defaultSize;
-    return (
+    const active = this.isSelected || this._isActivated;
+
+    const diameter = active
+      ? sliderSize.activeDiameter
+      : Math.max(this._shrinkingDiameter, sliderSize.diameter);
+
+    const content = [
       <circle
         r={diameter}
-        cx="8"
-        cy={this.data.height / 2 - diameter}
-        fill={this._isActivated ? "black" : colors.inputSilver}
+        cx={this._startPosition}
+        cy={this._verticalCenter - sliderSize.activeDiameter}
+        fill={active ? "black" : colors.inputSilver}
         style={{ cursor: "pointer" }}
-      />
-    );
+      />,
+      this.tryGetLine()
+    ];
+
+    return <g>{content}</g>;
   }
 
   onMouseEnter() {
@@ -267,5 +417,62 @@ class GallerySliderItem extends b.Component<ISliderItemData> {
 
   onMouseLeave() {
     this._isActivated = false;
+    if (this.isSelected) {
+      return;
+    }
+
+    this._shrinkingDiameter = sliderSize.activeDiameter;
+    this._shrinkingStep = 0;
+    this.data.animationHandler.registerHandler(this.shrinkActiveRadius);
   }
+
+  private get isSelected(): boolean {
+    return this.data.itemIdx == this.data.store.currentIndex;
+  }
+
+  private tryGetLine(): b.IBobrilNode {
+    if (!this.isSelected || !this.data.canAnimateLine) return <></>;
+
+    const lineTop = this._verticalCenter - sliderSize.activeDiameter;
+    return (
+      <SliderProgressLine
+        key={`g_s_ln_${this.data.itemIdx}`}
+        lineState={this.data.lineState}
+        lineTop={lineTop}
+        startPosition={this._startPosition}
+      />
+    );
+  }
+
+  @b.bind
+  private shrinkActiveRadius(): void {
+    this._shrinkingStep = (this._shrinkingStep + 1) % 5;
+
+    if (this._shrinkingStep !== 0) {
+      return;
+    }
+
+    if (this._shrinkingDiameter > sliderSize.diameter) {
+      this._shrinkingDiameter--;
+      return;
+    }
+
+    this.data.animationHandler.unregisterHandler(this.shrinkActiveRadius);
+  }
+}
+
+function SliderProgressLine(data: {
+  lineTop: number;
+  startPosition: number;
+  lineState: ISliderLineState;
+}): b.IBobrilNode {
+  return (
+    <line
+      x1={data.startPosition + data.lineState.startOffset}
+      x2={data.startPosition + data.lineState.lineLength}
+      y1={data.lineTop}
+      y2={data.lineTop}
+      style={{ stroke: "rgb(0,0,0)", strokeWidth: 1 }}
+    />
+  );
 }

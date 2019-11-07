@@ -5,5 +5,6 @@ export interface IGalleryContentResponse
 
 export interface IGalleryStore {
     galleryFiles: string[];
+    currentIndex: number;
     loadContent(): void;
 }

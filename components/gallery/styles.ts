@@ -20,7 +20,7 @@ const descriptionTextStyle = b.styleDefEx(content, {
 });
 
 const gallerySliderStyle = b.styleDefEx(content, {
-  marginBottom: 55
+  margin: "0 auto 55px auto"
 });
 
 

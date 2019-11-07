@@ -10,6 +10,9 @@ class GalleryStore implements IGalleryStore {
   @observable.ref
   protected _contentFiles: string[] = [];
 
+  @observable
+  currentIndex: number = 0;
+
   get galleryFiles(): string[] {
     return this._contentFiles;
   }
