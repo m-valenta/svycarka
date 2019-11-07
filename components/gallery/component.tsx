@@ -30,7 +30,6 @@ class AnimationStageDispatcher {
 
   set stage(stage: stage) {
     if (stage === this._stage) return;
-
     this._stage = stage;
   }
 }
@@ -348,22 +347,23 @@ class GallerySlider extends b.Component<ISliderData>
   private onAnimate(): void {
     switch (this.data.animationStageDispatcher.stage) {
       case stage.slowMovement:
-        this._step = (this._step + 1) % 100;
+        if (this.startOffset !== sliderSize.activeDiameter) {
+          this._lineLength = 0;
+          this._startOffset = sliderSize.activeDiameter;
+        }
 
+        this._step = (this._step + 1) % 9;
         if (this._step !== 1) return;
 
         if (this._lineLength < this._lineLengthMax) this._lineLength++;
         break;
       case stage.fastMovement:
-        if (this.lineLength !== this._lineLengthMax)
+        if (this.lineLength !== this._lineLengthMax) {
+          this._step = 0;
           this._lineLength = this._lineLengthMax;
+        }
 
         if (this._startOffset < this._lineLengthMax) this._startOffset++;
-        break;
-      case stage.swaping:
-        this._startOffset = sliderSize.activeDiameter;
-        this._lineLength = 0;
-        this._step = 0;
         break;
     }
   }
