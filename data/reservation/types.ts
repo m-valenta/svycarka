@@ -64,6 +64,8 @@ export interface IReservationStore {
   reservationFormState: ReservationFormState;
   gc_Response: FormItem<string>;
 
+  isLoading: boolean;
+
   loadReservationList(month: Month, year: number): void;
   storeReservation(): void;
 

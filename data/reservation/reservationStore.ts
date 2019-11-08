@@ -18,7 +18,11 @@ import {
   ReservationResponseState
 } from "./types";
 import { observable, IObservableMap } from "bobx";
-import { Month, datItemParts, getDateItemFromDate } from "../../utils/dateUtils";
+import {
+  Month,
+  datItemParts,
+  getDateItemFromDate
+} from "../../utils/dateUtils";
 import { utils } from "../../components/recaptcha/reCaptcha";
 import { getBackendLocaleId } from "../../utils/localeUtils";
 import { getLocale } from "bobril-g11n";
@@ -27,10 +31,16 @@ const phoneNumberRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.co
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.compile();
 
 class ReservationStore implements IReservationStore {
+  @observable
+  private _isLoading: boolean;
+
   private _loadConnector: IAjaxConnector | undefined;
   private _saveConnector: IAjaxConnector | undefined;
 
-  _reservations: IObservableMap<number, IObservableMap<number, IReservation[]>> = observable.map<number, IObservableMap<number, IReservation[]>>();
+  _reservations: IObservableMap<
+    number,
+    IObservableMap<number, IReservation[]>
+  > = observable.map<number, IObservableMap<number, IReservation[]>>();
 
   currentReservation: FormItem<IReservation> = new FormItem();
 
@@ -56,8 +66,11 @@ class ReservationStore implements IReservationStore {
   @observable
   reservationFormState: ReservationFormState = ReservationFormState.hidden;
 
-  get reservations()
-  {
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
+  get reservations() {
     return this._reservations;
   }
 
@@ -81,6 +94,7 @@ class ReservationStore implements IReservationStore {
     response: IReservationListResponse | undefined
   ): void {
     if (response === undefined) {
+      this._isLoading = false;
       return;
     }
 
@@ -90,26 +104,58 @@ class ReservationStore implements IReservationStore {
       this._reservations.set(response.year, yearReservations);
     }
 
-    yearReservations.set(response.month, response.reservations.map(res => <IReservation> {
-      duration: res.duration,
-      dateItem: getDateItemFromDate(new Date(res.dateFrom))
-    }));
+    yearReservations.set(
+      response.month,
+      response.reservations.map(
+        res =>
+          <IReservation>{
+            duration: res.duration,
+            dateItem: getDateItemFromDate(new Date(res.dateFrom))
+          }
+      )
+    );
+
+    this._isLoading = false;
   }
 
   loadReservationList(month: Month, year: number): void {
     if (this._loadConnector === undefined) {
       throw "Data connector is not provided";
     }
+
+    this._isLoading = true;
     this._loadConnector.sendRequest(<IReservationListRequest>{
       month,
       year
     });
   }
 
+  processStoreReservationResponse(
+    response: IReservationSaveResponse | undefined
+  ) {
+    if (response === undefined) {
+      this.reservationFormState = ReservationFormState.hidden;
+      this._isLoading = false;
+      return;
+    } else if (response.state === ReservationResponseState.Ok) {
+      this.clear();
+      this.reservationFormState = ReservationFormState.finalized;
+      this._isLoading = false;
+      return;
+    } else if (response.state === ReservationResponseState.CaptchaError) {
+      this.gc_Response.isValid = false;
+    } else if (response.state === ReservationResponseState.StorageError) {
+      this.currentReservation.isValid = false;
+    }
+    this._isLoading = false;
+  }
+
   storeReservation(): void {
     if (this._saveConnector === undefined) {
       throw "Data connector is not provided";
     }
+
+    this._isLoading = true;
 
     const currentReservation = this.currentReservation.value.dateItem;
     this._saveConnector.sendRequest(<IReservationSaveRequest>{
@@ -118,7 +164,10 @@ class ReservationStore implements IReservationStore {
         currentReservation[datItemParts.year],
         currentReservation[datItemParts.month],
         currentReservation[datItemParts.day] + 1,
-        0, 0, 0, 0     
+        0,
+        0,
+        0,
+        0
       ),
       duration: this.currentReservation.value.duration - 1,
       name: this.email.value,
@@ -220,20 +269,8 @@ export function reservationStoreFactory(): IReservationStore {
     new AjaxConnector(
       "POST",
       (request: IReservationSaveRequest) => store.saveUrl(),
-      (response: IReservationSaveResponse | undefined) => {
-        if (response === undefined) {
-          store.reservationFormState = ReservationFormState.hidden;
-          return;
-        } else if (response.state === ReservationResponseState.Ok) {
-          store.clear();
-          store.reservationFormState = ReservationFormState.finalized;
-          return;
-        } else if (response.state === ReservationResponseState.CaptchaError) {
-          store.gc_Response.isValid = false;
-        } else if (response.state === ReservationResponseState.StorageError) {
-          store.currentReservation.isValid = false;
-        }
-      }
+      (response: IReservationSaveResponse | undefined) =>
+        store.processStoreReservationResponse(response)
     )
   );
 

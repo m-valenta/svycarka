@@ -13,6 +13,7 @@ export const fb_svg = "../assets/fb.svg";
 export const instagram_svg = "../assets/instagram.svg";
 export const jakub_jpg = "../assets/jakub.jpg";
 export const kontakt_background_png = "../assets/kontakt-background.png";
+export const loader_gif = "../assets/loader.gif";
 export const logo_svg = "../assets/logo.svg";
 export const lucida_sans_unicode_woff = "../assets/lucida-sans-unicode.woff";
 export const lucida_sans_unicode_woff2 = "../assets/lucida-sans-unicode.woff2";

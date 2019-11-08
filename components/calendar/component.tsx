@@ -24,6 +24,7 @@ import {
   SelectionState,
   IRangeState
 } from "./reservationStrategies/baseStrategy";
+import { Loader } from "../loader/loader";
 
 const clearSelectionMask = ~(
   SelectionState.selected |
@@ -95,11 +96,11 @@ export class Calendar extends b.Component<ICalendarData> {
           onClose={() => this.data.onClose()}
         />
         <CalendarDayHeader daysOfWeek={this._days} />
-        <CalendarDays
+        <Loader storeWithLoading={this.data.store}><CalendarDays
           monthDays={this.getMonthDays()}
           selectionHandler={(day, mode) => this.daySelectionChange(day, mode)}
           isSelection={this.data.store.currentReservation.value !== undefined}
-        />
+        /></Loader>
       </div>
     );
   }
