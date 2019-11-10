@@ -4,7 +4,8 @@ export interface IGalleryContentResponse
 }
 
 export interface IGalleryStore {
-    galleryFiles: string[];
+    readonly galleryFiles: string[];
+    readonly isLoading: boolean;
     currentIndex: number;
     loadContent(): void;
 }

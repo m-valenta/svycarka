@@ -3,6 +3,7 @@ import { IAjaxConnector, AjaxConnector, fetchToBlob } from "../ajaxUtils";
 import { IGalleryContentResponse, IGalleryStore } from "./types";
 import { observable } from "bobx";
 import { resourceVersion } from "../../constants";
+import { ILoaderData } from "../../components/loader/loader";
 
 class GalleryStore implements IGalleryStore {
   protected _contentConnector: IAjaxConnector | undefined;
@@ -13,11 +14,19 @@ class GalleryStore implements IGalleryStore {
   @observable
   currentIndex: number = 0;
 
+  @observable
+  _isLoading: boolean;
+
   get galleryFiles(): string[] {
     return this._contentFiles;
   }
 
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
   loadContent() {
+    this._isLoading = true;
     this._contentConnector.sendRequest(undefined);
   }
 
@@ -35,15 +44,14 @@ class GalleryStore implements IGalleryStore {
         const url = `${
           location.pathname.indexOf("/test") >= 0 ? "/test" : ""
         }/api/gallery/getImage/${fileName}?rw=${resourceVersion}`;
-
         return fetchToBlob(url);
       }
     );
 
     const oldContent = this._contentFiles;
     this._contentFiles = await Promise.all(files);
-
     oldContent.forEach(blobUrl => URL.revokeObjectURL(blobUrl));
+    this._isLoading = false;
   }
 
   getContentUrl(): string {

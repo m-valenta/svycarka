@@ -6,6 +6,7 @@ import { observable } from "bobx";
 import { IGalleryStore } from "../../data/gallery/types";
 import { appStore } from "../../data/appStore";
 import { AnimationHandler } from "./animationHandler";
+import { Loader } from "../loader/loader";
 
 const sliderSize = {
   height: 20,
@@ -51,35 +52,37 @@ export class Gallery extends b.Component {
   }
   render() {
     return (
-      <div style={styles.wrapper}>
-        <div style={styles.header}>{t("Take a look at us")}</div>
-        <GalleryContent
-          store={this._dataStore}
-          animationHandler={this._animationHandler}
-          animationStageDispatcher={this._animationStageDispatcher}
-        />
-        <GallerySlider
-          store={this._dataStore}
-          animationHandler={this._animationHandler}
-          animationStageDispatcher={this._animationStageDispatcher}
-        />
-        <div style={styles.descrition}>
-          {[
-            <div>{t("See photos to see if you like us.")}</div>,
-            <div>
-              {t(
-                "If you missed some of the hilarious corners in our album, we will be happy"
-              )}
-            </div>,
-            <div>
-              {[
-                t("if you add it to facebook or instagram under hastagem"),
-                <span style={styles.hashtag}>#svycarka.com</span>
-              ]}
-            </div>
-          ]}
+      <Loader storeWithLoading={this._dataStore}>
+        <div style={styles.wrapper}>
+          <div style={styles.header}>{t("Take a look at us")}</div>
+          <GalleryContent
+            store={this._dataStore}
+            animationHandler={this._animationHandler}
+            animationStageDispatcher={this._animationStageDispatcher}
+          />
+          <GallerySlider
+            store={this._dataStore}
+            animationHandler={this._animationHandler}
+            animationStageDispatcher={this._animationStageDispatcher}
+          />
+          <div style={styles.descrition}>
+            {[
+              <div>{t("See photos to see if you like us.")}</div>,
+              <div>
+                {t(
+                  "If you missed some of the hilarious corners in our album, we will be happy"
+                )}
+              </div>,
+              <div>
+                {[
+                  t("if you add it to facebook or instagram under hastagem"),
+                  <span style={styles.hashtag}>#svycarka.com</span>
+                ]}
+              </div>
+            ]}
+          </div>
         </div>
-      </div>
+      </Loader>
     );
   }
 
@@ -183,12 +186,14 @@ class GalleryContent
 
   @b.bind
   protected onAnimate(): void {
+    if (this.data.store.isLoading) return;
+
     if (this.data.animationStageDispatcher.stage === stage.skip) {
       this.skipAnimate();
       return;
     }
 
-    if (this._innerLeft > -5  && !this._innerMoveCompleted) {
+    if (this._innerLeft > -5 && !this._innerMoveCompleted) {
       this.data.animationStageDispatcher.stage = stage.slowMovement;
       const inner = this._innerLeft - 0.025;
       this._innerLeft = inner < -5 ? -5 : inner;
@@ -212,9 +217,7 @@ class GalleryContent
   }
 
   protected skipAnimate() {
-    if (
-      this._outerLeft < 53
-    ) {
+    if (this._outerLeft < 53) {
       const outer = this._outerLeft + 2.7;
       this._outerLeft = outer > 53 ? 53 : outer;
       return;
@@ -440,6 +443,14 @@ class GallerySliderItem extends b.Component<ISliderItemData> {
       : Math.max(this._shrinkingDiameter, sliderSize.diameter);
 
     const content = [
+      <rect
+        x={this._startPosition - sliderSize.activeDiameter}
+        y={0}
+        width={2 * sliderSize.activeDiameter}
+        height={sliderSize.height}
+        fill="transparent"
+        style={{ cursor: "pointer" }}
+      />,
       <circle
         r={diameter}
         cx={this._startPosition}

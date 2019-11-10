@@ -17,7 +17,7 @@ export function fetchToBlob(url: string): Promise<string> {
                 // If successful
 				resolve(window.URL.createObjectURL(xhr.response));
 			} else {
-				// If failed
+                // If failed
 				reject({
                     url,
                     method: "GET",
