@@ -1,7 +1,7 @@
 import { appStore } from "../../data/appStore";
 import { menuHeight } from "../../styleConstants";
 
-export declare type scrollSection = "tips" | "header" | "contact" | "at_us" | "how_much" |"location";
+export declare type scrollSection = "tips" | "header" | "contact" | "at_us" | "how_much" |"location" | "admin_edit";
 export const menuGap = menuHeight + 30;
 
 export function scrollToWrapper(id: scrollSection): void {

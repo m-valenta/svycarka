@@ -3,6 +3,7 @@ import {
   IReservationListResponse,
   IServerReservation
 } from "../reservation/types";
+import { ReservationState } from "../../utils/stateUtils";
 
 export interface IAdminStore {
   IsLogged: boolean;
@@ -36,13 +37,17 @@ export interface ILoginRequest extends IAjaxRequest {
 
 export interface IAdminReservationStore {
   Year: number;
-  Month: number;
-  Reservations: IAdminReservation[],
+  Month: number | undefined;
+  readonly Reservations: IAdminReservation[],
+  readonly selectedReservation?: IReservationEditRequest;
   reset(): void;
+  deleteReservation(idReservation: number);
+  selectReservation(reservation?: IAdminReservation): void;
+  saveReservation(): void;
 }
 
 export interface IAdminReservationListRequest extends IAjaxRequest {
-  month: number;
+  month: number | undefined;
   year: number;
 }
 
@@ -60,5 +65,29 @@ export interface IAdminReservation extends IServerReservation {
   meat?: number;
   id: number;
   price: number;
-  state: number;
+  state: ReservationState;
+  arrival: string;
+}
+
+export interface IAdminReservationRequest {
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  usedCulture: number;
+  beer?: number;
+  meat?: number;
+  id: number;
+  price: number;
+  state: ReservationState;
+  arrival: string;
+  dateFrom: Date,
+  duration: number,
+}
+
+
+export interface IReservationEditRequest {
+  Subject: string | undefined;
+  Message: string | undefined;
+  ReservationData: IAdminReservationRequest;
 }

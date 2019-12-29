@@ -14,19 +14,19 @@ class UsersStore implements IAdminUserStore {
 
     @b.bind
     getUsersListUrl(): string {
-      return "/api/users/list";
+      return "api/users/list";
     }
     @b.bind
     getUsersAddUrl(): string {
-      return "/api/users/add";
+      return "api/users/add";
     }
     @b.bind
     getUsersEditUrl(): string {
-      return "/api/users/edit";
+      return "api/users/edit";
     }
     @b.bind
     getUsersDeleteUrl(): string {
-      return "/api/users/delete";
+      return "api/users/delete";
     }
 
     attachUsersListConnector(connector: IAjaxConnector): void {
@@ -82,7 +82,7 @@ export function adminUserStoreFactory(): IAdminUserStore {
         store.loadUserList();
     }));
 
-    store.attachUsersDeleteConnector(new AjaxConnector("POST", store.getUsersDeleteUrl, (response: IUserListResponse) => {
+    store.attachUsersDeleteConnector(new AjaxConnector("POST", store.getUsersDeleteUrl, () => {
         store.loadUserList();
     }));
 

@@ -211,7 +211,7 @@ interface IEditSectionData {
 const editSectionStyle = {
   wrapper: b.styleDef({
     width: 400,
-    margin: "10px 50% 0 50%",
+    margin: "10px auto 0 auto",
     border: `solid 1px ${colors.calendarSilver}`,
     borderRadius: 3,
     padding: 5

@@ -17,15 +17,15 @@ class AdminStore implements IAdminStore {
 
   @b.bind
   getAuthTestUrl(): string {
-    return "/api/users/testAuthentication";
+    return "api/users/testAuthentication";
   }
   @b.bind
   getSignInUrl(): string {
-    return "/api/users/login";
+    return "api/users/login";
   }
   @b.bind
   getSignOutUrl(): string {
-    return "/api/users/logout";
+    return "api/users/logout";
   }
 
   attachAuthTestConnector(connector: IAjaxConnector): void {

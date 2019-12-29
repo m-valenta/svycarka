@@ -8,9 +8,14 @@ bobril-g11n@^4.4.1:
   dependencies:
     moment "^2.10.6"
 
-bobril@*, bobril@^10.1.1:
+bobril@*:
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/bobril/-/bobril-10.1.1.tgz#7626c4785fb356dc396806cc87e7e0593e6e9576"
+
+bobril@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/bobril/-/bobril-14.0.1.tgz#06e242557a8da3aaae192fe3c2bfb86f49534921"
+  integrity sha512-BYWJHmI5eMdvvbMhvEO/hd9Qfd6WFgwJjs3QSWP7UDkNszNqhvqwctRQQTx6j/Zh1x/gWRPeIWPcR6jxmOsW+w==
 
 bobx@^0.19.0:
   version "0.19.0"

@@ -55,9 +55,9 @@ class GalleryStore implements IGalleryStore {
   }
 
   getContentUrl(): string {
-    return location.pathname.indexOf("/test") >= 0
-      ? "/test/api/gallery/getContent"
-      : "/api/gallery/getContent";
+    // return location.pathname.indexOf("/test") >= 0
+    //   ? "/test/api/gallery/getContent"
+    return "api/gallery/getContent";
   }
 }
 

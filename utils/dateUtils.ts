@@ -170,6 +170,22 @@ export function getNextDayItem(day: dateItem, month: IMonthInfo): dateItem {
   return [day[datItemParts.year] + 1, 0, 1];
 }
 
+export function strDateToJsDate(strDate: string): Date {
+  return strDate.indexOf("-") >= 0 
+    ? sqlDateToJsDate(strDate)
+    : czechDateToJsDate(strDate);
+}
+
+export function sqlDateToJsDate(sqlDateStr: string): Date {
+  const dateParts = sqlDateStr.split("-");
+  return new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2].substr(0,2)));
+}
+
+export function czechDateToJsDate(czechDateStr: string): Date {
+  const dateParts = czechDateStr.split(".");
+  return new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]));
+}
+
 function daysInMonth(date: Date): number {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 }

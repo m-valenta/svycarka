@@ -161,7 +161,8 @@ const tableButton = b.styleDef({
   backgroundRepeat: "no-repeat",
   backgroundSize: "20px 20px",
   cursor: "pointer",
-  cssFloat: "left"
+  cssFloat: "left",
+  marginLeft: 5 
 });
 
 const addButtonBg = b.styleDefEx(tableButton, {

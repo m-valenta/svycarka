@@ -8,6 +8,7 @@ export interface IData {
   onClick: () => void;
   explicitWidth?: number;
   explicitMargin?: string;
+  explicitPadding?: string;
 }
 
 export class Button extends b.Component<IData> {
@@ -26,6 +27,10 @@ export class Button extends b.Component<IData> {
             margin:
               this.data.explicitMargin !== undefined
                 ? this.data.explicitMargin
+                : "",
+            padding: 
+              this.data.explicitPadding !== undefined
+                ? this.data.explicitPadding
                 : ""
           }
         ]}

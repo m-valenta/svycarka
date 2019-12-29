@@ -23,6 +23,8 @@ const styles = {
   }),
   rightColumn: b.styleDef({
     cssFloat: "left",
+    minHeight: "100vh",
+    backgroundColor: "white",
     width: "calc(100% - 260px)",
     paddingTop: 1
   }),
@@ -52,7 +54,7 @@ export class AdminHomePage extends b.Component<IDataWithActiveRouteHandler> {
     const activeRouteName = b.getActiveRoutes()[0].name;
 
     return (
-      <div>
+      <div style={{backgroundColor: "black"}}>
         <div style={styles.headerWrapper}>
           <div style={{ cssFloat: "left", marginLeft: 10, marginTop: 15 }}>
             ADMINISTRACE
