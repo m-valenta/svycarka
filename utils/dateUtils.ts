@@ -183,7 +183,7 @@ export function sqlDateToJsDate(sqlDateStr: string): Date {
 
 export function czechDateToJsDate(czechDateStr: string): Date {
   const dateParts = czechDateStr.split(".");
-  return new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]));
+  return new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0], 10), 12);
 }
 
 function daysInMonth(date: Date): number {

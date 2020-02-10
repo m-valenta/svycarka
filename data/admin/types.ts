@@ -43,6 +43,7 @@ export interface IAdminReservationStore {
   reset(): void;
   deleteReservation(idReservation: number);
   selectReservation(reservation?: IAdminReservation): void;
+  setReservationBookmark(idReservation: number, isSet: boolean);
   saveReservation(): void;
 }
 
@@ -67,6 +68,7 @@ export interface IAdminReservation extends IServerReservation {
   price: number;
   state: ReservationState;
   arrival: string;
+  bookmarked: boolean
 }
 
 export interface IAdminReservationRequest {
@@ -90,4 +92,9 @@ export interface IReservationEditRequest {
   Subject: string | undefined;
   Message: string | undefined;
   ReservationData: IAdminReservationRequest;
+}
+
+export interface IReservationBookmarkRequest {
+  ReservationId: Number;
+  IsBookmarked: boolean;
 }

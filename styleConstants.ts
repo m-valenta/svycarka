@@ -13,7 +13,9 @@ import {
   close_svg,
   add_png,
   remove_png,
-  edit_png
+  edit_png,
+  bookmark_on_svg,
+  bookmark_off_svg
 } from "./src/assets";
 import { getResourceCssUrl } from "./utils/resourceUtils";
 
@@ -177,9 +179,23 @@ const editButtonBg = b.styleDefEx(tableButton, {
   backgroundImage: getResourceCssUrl(b.asset(edit_png))
 });
 
+const bookmarkOnBg = b.styleDefEx(tableButton, {
+  backgroundImage: getResourceCssUrl(b.asset(bookmark_on_svg))
+});
+
+const bookmarkOffBg = b.styleDefEx(tableButton, {
+  backgroundImage: getResourceCssUrl(b.asset(bookmark_off_svg))
+});
+
 export const addButton = [tableButton, addButtonBg];
+
+// TODO Remove imgs
 export const editButton = [tableButton, editButtonBg];
 export const removeButton = [tableButton, removeButtonBg];
+
+export const bookmarkOn = [tableButton, bookmarkOnBg];
+export const bookmarkOff = [tableButton, bookmarkOffBg];
+
 
 export const menuHeight = 50;
 

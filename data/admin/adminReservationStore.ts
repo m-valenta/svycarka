@@ -6,7 +6,8 @@ import {
   IAdminReservationListRequest,
   IAdminReservationListResponse,
   IAdminReservation,
-  IReservationEditRequest
+  IReservationEditRequest,
+  IReservationBookmarkRequest
 } from "./types";
 import { strDateToJsDate } from "../../utils/dateUtils";
 
@@ -14,6 +15,7 @@ class AdminReservationStore implements IAdminReservationStore {
   protected _reservationListConnector: IAjaxConnector | undefined;
   protected _editReservationConnector: IAjaxConnector | undefined;
   protected _deleteReservationConnector: IAjaxConnector | undefined;
+  protected _bookMarkConnector: IAjaxConnector | undefined;
 
   @observable
   private _year: number = 0;
@@ -136,6 +138,22 @@ class AdminReservationStore implements IAdminReservationStore {
     if (this._selectedReservation === undefined) return;
     this._editReservationConnector.sendRequest(this._selectedReservation);
   }
+
+  attachBookmarkConnector(connector: IAjaxConnector) {
+    this._bookMarkConnector = connector;
+  }
+
+  getBookMarkUrl(bookmarkDto: IReservationBookmarkRequest): string {
+    return "api/reservations/SetBookmarked";
+  }
+
+  @b.bind
+  setReservationBookmark(reservationId: number, isSet: boolean) {
+    this._bookMarkConnector.sendRequest(<IReservationBookmarkRequest>{
+      ReservationId: reservationId,
+      IsBookmarked: isSet
+    });
+  }
 }
 
 export function adminReservationStoreFactory(): IAdminReservationStore {
@@ -149,21 +167,36 @@ export function adminReservationStoreFactory(): IAdminReservationStore {
   );
 
   store.attachEditConnector(
-    new AjaxConnector("POST", store.getEditReservationUrl, (response: any) => {
-      if(response === undefined) 
-      {
-        return;
-      }
+    new AjaxConnector(
+      "POST",
+      store.getEditReservationUrl,
+      (response: any) => {
+        if (response === undefined) {
+          return;
+        }
 
-      store.selectReservation();
-      store.loadReservations();
-    }, true)
+        store.selectReservation();
+        store.loadReservations();
+      },
+      true
+    )
   );
 
   store.attachDeleteReservationConnector(
-    new AjaxConnector("POST", store.getDeleteReservationUrl, () => {
+    new AjaxConnector(
+      "POST",
+      store.getDeleteReservationUrl,
+      () => {
+        store.loadReservations();
+      },
+      true
+    )
+  );
+
+  store.attachBookmarkConnector(
+    new AjaxConnector("POST", store.getBookMarkUrl, () => {
       store.loadReservations();
-    }, true)
+    })
   );
 
   return store;

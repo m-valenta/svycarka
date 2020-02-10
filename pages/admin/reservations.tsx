@@ -11,7 +11,13 @@ import {
   reservationStateToString,
   ReservationState
 } from "../../utils/stateUtils";
-import { editButton, removeButton, colors } from "../../styleConstants";
+import {
+  editButton,
+  removeButton,
+  colors,
+  bookmarkOn,
+  bookmarkOff
+} from "../../styleConstants";
 import { Button } from "../../components/button/buton";
 import { translateMonth, czechDateToJsDate } from "../../utils/dateUtils";
 import { observableProp, observable } from "bobx";
@@ -19,6 +25,7 @@ import { getLocaleCode, formateToCzechDate } from "../../utils/localeUtils";
 import { ScrollToWrapper } from "../../components/scrollToWrapper/component";
 import { scrollToWrapper } from "../../components/scrollToWrapper/utils";
 import { TipsSection } from "../../components/tipsSection/component";
+import { date } from "../../components/dateInput/styles";
 
 export class ReservationsPage extends b.Component {
   store: IAdminReservationStore;
@@ -32,38 +39,24 @@ export class ReservationsPage extends b.Component {
       <div>
         Rok:
         <YearSelector key="adm_rez_ys" store={this.store} />
-        Měsíc:
-        <MonthSelector key="adm_rez_ms" store={this.store} />
-        <EditSection
-          key={`adm_rez_es_${this.store.selectedReservation?.ReservationData.id}`}
-          store={this.store}
-        />
-        <Table
-          key="adm_rez_ts"
-          reservations={this.store.Reservations}
-          selectedReservation={this.store.selectedReservation}
-          editHandler={this.store.selectReservation}
-          deleteHandler={this.store.deleteReservation}
-        />
+        {/* Měsíc:
+        <MonthSelector key="adm_rez_ms" store={this.store} /> */}
+        <Table key="adm_rez_ts" store={this.store} />
       </div>
     );
   }
 }
 
 class Table extends b.Component<{
-  reservations: IAdminReservation[];
-  selectedReservation: IReservationEditRequest | undefined;
-  editHandler: (row: IAdminReservation) => void;
-  deleteHandler: (id: number) => void;
+  store: IAdminReservationStore;
 }> {
   render(): b.IBobrilNode {
-    const selectedReservation = this.data.selectedReservation;
-    const lines: b.IBobrilNode[] = this.data.reservations.map(res => (
+    const selectedReservation = this.data.store.selectedReservation;
+    const lines: b.IBobrilNode[] = this.data.store.Reservations.map(res => (
       <this.Row
         row={res}
         isSelected={res.id === selectedReservation?.ReservationData.id}
-        deleteHandler={this.data.deleteHandler}
-        editHandler={this.data.editHandler}
+        store={this.data.store}
       />
     ));
 
@@ -92,14 +85,22 @@ class Table extends b.Component<{
   protected Row(data: {
     row: IAdminReservation;
     isSelected: boolean;
-    editHandler: (row: IAdminReservation) => void;
-    deleteHandler: (id: number) => void;
+    store: IAdminReservationStore;
   }): b.IBobrilNode {
-    const tableLineStyle: b.IBobrilStyles = [tableStyles.tableLine];
+    const tableLineStyle: b.IBobrilStyles = [
+      tableStyles.tableLine,
+      { cursor: "pointer" }
+    ];
     data.isSelected && tableLineStyle.push({ fontWeight: "bold" });
 
-    return (
-      <div style={tableLineStyle}>
+    var tableRow = (
+      <div
+        style={tableLineStyle}
+        onClick={() => {
+          this.data.store.selectReservation(data.row);
+          return true;
+        }}
+      >
         <div style={[tableStyles.tableColumn, { width: "13%" }]}>
           {getMoment(data.row.dateFrom).format("DD.MM.YYYY")}
         </div>
@@ -129,16 +130,12 @@ class Table extends b.Component<{
         </div>
         <div style={[tableStyles.lastTableColumn, { width: "15%" }]}>
           <div
-            style={editButton}
+            style={data.row.bookmarked ? bookmarkOn : bookmarkOff}
             onClick={() => {
-              this.data.editHandler(data.row);
-              return true;
-            }}
-          />
-          <div
-            style={removeButton}
-            onClick={() => {
-              this.data.deleteHandler(data.row.id);
+              data.store.setReservationBookmark(
+                data.row.id,
+                !data.row.bookmarked
+              );
               return true;
             }}
           />
@@ -146,6 +143,17 @@ class Table extends b.Component<{
         </div>
         <div style={{ clear: "both" }} />
       </div>
+    );
+
+    if (!data.isSelected) return tableRow;
+
+    return (
+      <>
+        {[
+          tableRow,
+          <EditSection key={`adm_rez_es_${data.row.id}`} store={data.store} />
+        ]}
+      </>
     );
   }
 }
@@ -253,7 +261,12 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
           />
         </this.Section>
         <this.Section label="Počet dní">
-          <NumberInput dataObj={rez.ReservationData} observablePropKey="duration" min={1} max={30}/>
+          <NumberInput
+            dataObj={rez.ReservationData}
+            observablePropKey="duration"
+            min={1}
+            max={30}
+          />
         </this.Section>
         <this.Section label="Jméno">
           <input
@@ -400,7 +413,10 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
   }
 }
 
-class DateInput<T> extends b.Component<{ dateObj: T, observableProp: keyof T }> {
+class DateInput<T> extends b.Component<{
+  dateObj: T;
+  observableProp: keyof T;
+}> {
   private static readonly _simpleDatePattern: RegExp = /^([1-9]{1}|0[1-9]|[12][0-9]|3[01])\.([1-9]{1}|0[1-9]|1[012])\.(19|20)\d{2}$/;
 
   private _originalDateStr = formateToCzechDate(this.ObservableDate);
@@ -415,7 +431,6 @@ class DateInput<T> extends b.Component<{ dateObj: T, observableProp: keyof T }> 
   private set ObservableDate(date: Date) {
     (this.data.dateObj[this.data.observableProp] as any) = date;
   }
-
 
   render() {
     return (
@@ -434,18 +449,22 @@ class DateInput<T> extends b.Component<{ dateObj: T, observableProp: keyof T }> 
 
     // Possibly changed when 31.2 etc. is set as date value
     this.currentDateStr = formateToCzechDate(this.ObservableDate);
+
+    alert(this.ObservableDate.toDateString());
   }
 }
 
-class NumberInput<T> extends b.Component< { dataObj: T
-observablePropKey: keyof T,
-min?: number, max?: number}> {
-
+class NumberInput<T> extends b.Component<{
+  dataObj: T;
+  observablePropKey: keyof T;
+  min?: number;
+  max?: number;
+}> {
   @observable
   valueStr: string = this.observableNumber + "";
 
   private get observableNumber(): number {
-    return ((this.data.dataObj[this.data.observablePropKey] as any) as number);
+    return (this.data.dataObj[this.data.observablePropKey] as any) as number;
   }
 
   private set observableNumber(value: number) {
@@ -454,7 +473,13 @@ min?: number, max?: number}> {
 
   render() {
     return (
-      <input type="number" max={this.data.max} min={this.data.min} value={this.valueStr} onChange={(value) => this.onChange(value)}></input>
+      <input
+        type="number"
+        max={this.data.max}
+        min={this.data.min}
+        value={this.valueStr}
+        onChange={value => this.onChange(value)}
+      ></input>
     );
   }
 
@@ -464,13 +489,17 @@ min?: number, max?: number}> {
   }
 }
 
-
-function DateToField(data: { from: Date; duration: number}): b.IBobrilNode {
+function DateToField(data: { from: Date; duration: number }): b.IBobrilNode {
   const copy = new Date(Number(data.from));
   copy.setDate(data.from.getDate() + data.duration);
 
   return (
-    <input type="text" disabled style={{ marginLeft: 5, colors: colors.calendarSilver }} value={`${formateToCzechDate(copy)}`} />
+    <input
+      type="text"
+      disabled
+      style={{ marginLeft: 5, colors: colors.calendarSilver }}
+      value={`${formateToCzechDate(copy)}`}
+    />
   );
 }
 
