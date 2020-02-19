@@ -13,6 +13,8 @@ import { adminHomePage } from "./pages/admin/home";
 import { UsersPage, usersPage } from "./pages/admin/users";
 import { reservationsPage } from "./pages/admin/reservations";
 import { accomodationRulesPage } from "./pages/accommodationRulesPage";
+import { gdprPage } from "./pages/gdpr";
+import { pageTitle } from "./components/Title/title";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -45,6 +47,11 @@ initGlobalization({
       handler: accomodationRulesPage
     }),
     b.route({
+      url: "/gdpr",
+      name: "gdpr",
+      handler: gdprPage
+    }),
+    b.route({
       url: "/admin/home",
       name: "adminHome",
       handler: adminHomePage
@@ -62,6 +69,10 @@ initGlobalization({
     ]),
   ]);
   b.addRoot(() => {
-    return [favIconLink(), CaptchaScript()];
+    return [
+      pageTitle(),
+      favIconLink(), 
+      CaptchaScript()
+    ];
   }, document.head);
 });

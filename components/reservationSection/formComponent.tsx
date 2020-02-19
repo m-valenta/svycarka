@@ -14,6 +14,7 @@ import { buttonWrapper } from "../tipsSection/styles";
 import { colors } from "../../styleConstants";
 import { Button } from "../button/buton";
 import Captcha, { utils } from "../recaptcha/reCaptcha";
+import { gdprTransition } from "../../transitions";
 export interface IData {
   store: IReservationStore;
 }
@@ -158,10 +159,21 @@ class FormAgreement extends b.Component<{
           />
         </div>
         <div style={textStyle}>
-          {t("I agree to process my personal data in accordance with GDPR.")}
+          {t("I agree to process my personal data in accordance with ")}
+          <GdprLink />
+          {"."}
         </div>
         <div style={{ clear: "both" }} />
       </div>
     );
   }
 }
+
+class GdprLink extends b.Component<{}> {
+  render() {
+    return <span style={styles.linkStyle}>{t("GDPR")}</span>;
+  }
+  onClick() {
+    b.runTransition(gdprTransition);
+  }
+} 

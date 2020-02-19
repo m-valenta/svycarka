@@ -223,3 +223,32 @@ export const zIndex = {
   modal: 9999,
   buble: 10000
 };
+
+export const infoPagesStyle = {
+  wrapperStyle: b.styleDef([contentSize, {
+      textAlign: "center",
+      margin: "0 auto"
+  }]),
+  paragraphStyle: b.styleDef({
+      marginBottom: 20 
+  }),
+  h1Style: b.styleDef({
+    fontSize: 18,
+    marginBottom: 20
+  }),
+  h2Style: b.styleDef({
+    fontSize: 16,
+    marginBottom: 20
+  }),
+  h2StyleBold: b.styleDef({
+    fontWeight: "bold",
+    fontSize: 16,
+    marginBottom: 20
+  }),
+  h2StyleBoldUnderlined: b.styleDef({
+    fontWeight: "bold",
+    textDecoration: "underline",
+    fontSize: 16,
+    marginBottom: 10
+  })
+};

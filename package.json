@@ -11,5 +11,9 @@
     "bobril": "^14.0.1",
     "bobril-g11n": "^4.4.1",
     "bobx": "^0.19.0"
+  },
+  "bobril": {
+    "title": "Švýcarka",
+    "head": "<meta name=\"og:image\" content=\"http://svycarka.com/test/facebook/invitation\"><meta name=\"og:title\" content=\"Chata Švýcarka\"><meta name=\"og:type\" content=\"Website\">"
   }
 }

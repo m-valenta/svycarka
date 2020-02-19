@@ -127,3 +127,5 @@ export const agreementTextWrapperInvalid = b.styleDefEx(agreementTextWrapper, {
 export const aggrementWrapper = b.styleDef({
   margin: "56px 0 44px 0"
 });
+
+export const linkStyle = b.styleDef({ cursor: "pointer", textDecoration: "underline" });
