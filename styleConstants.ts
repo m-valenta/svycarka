@@ -220,6 +220,7 @@ b.injectCss(`
 `);
 
 export const zIndex = {
+  overlay: 10,
   modal: 9999,
   buble: 10000
 };

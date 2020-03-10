@@ -25,6 +25,11 @@ class MastePage extends b.Component<IDataWithActiveRouteHandler> {
     return <div>{children}</div>;
   }
 
+  onClick(): boolean {
+    appStore().headerStore.closeMenu();
+    return false;
+  }
+
   protected get showTree(): boolean {
     return appStore().pageStore.forceShowTree || appStore().pageStore.currentPage !== Page.Home;
   }

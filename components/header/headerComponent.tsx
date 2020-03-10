@@ -10,53 +10,17 @@ import { Page } from "../../data/pageStore/types";
 import { scrollToWrapper, scrollSection } from "../scrollToWrapper/utils";
 import { homePage } from "../../pages/homePage";
 import { getlocaleName } from "../../utils/localeUtils";
+import { IHeaderStore } from "../../data/header/types";
 
 export interface IData {
   showReservation: boolean;
   showTree: boolean;
 }
 
-class HeaderStore {
-  @observable
-  protected languageSelectionOpen: boolean = false;
-  @observable
-  protected menuOpen: boolean = false;
-
-  get isMenuOpen(): boolean {
-    return this.menuOpen;
-  }
-
-  get isLanguageSelectionOpen(): boolean {
-    return this.languageSelectionOpen;
-  }
-
-  openMenu() {
-    this.menuOpen = true;
-    this.languageSelectionOpen = false;
-  }
-
-  closeMenu() {
-    this.menuOpen = false;
-  }
-
-  openLanguageSection() {
-    this.languageSelectionOpen = true;
-    this.menuOpen = false;
-  }
-
-  closeLanguageSection() {
-    this.languageSelectionOpen = false;
-  }
-}
-
 export class HeaderComponent extends b.Component<IData> {
-  protected store: HeaderStore;
-
-  init() {
-    this.store = new HeaderStore();
-  }
-
   render() {
+    const store = appStore().headerStore;
+
     const children = [];
     this.data.showReservation && children.push(<RezervationButton key="h-rez" />);
     children.push(
@@ -71,9 +35,9 @@ export class HeaderComponent extends b.Component<IData> {
         url="https://www.facebook.com/nasvycarku/"
       />
     );
-    children.push(<MenuContent key="h-mc" store={this.store} />);
-    children.push(<LanguageSection key={`h-ls${this.store.isMenuOpen}`} store={this.store} />);
-    this.data.showTree && !this.store.isMenuOpen && children.push(<Logo key="h-logo" />);
+    children.push(<MenuContent key="h-mc" store={store} />);
+    children.push(<LanguageSection key={`h-ls${store.isMenuOpen}`} store={store} />);
+    this.data.showTree && !store.isMenuOpen && children.push(<Logo key="h-logo" />);
     return (
       <div style={styles.wrapper}>
         <div style={styles.content}>{children}</div>
@@ -89,7 +53,9 @@ class RezervationButton extends b.Component {
   }
 
   onClick() {
-    appStore().pageStore.goToPage(Page.Reservation);
+    const store = appStore();
+    store.headerStore.closeMenu();
+    store.pageStore.goToPage(Page.Reservation);
     return true;
   }
 }
@@ -109,7 +75,7 @@ class SocialButton extends b.Component<ISocialButtonData> {
   }
 }
 
-class MenuContent extends b.Component<{store: HeaderStore}>{
+class MenuContent extends b.Component<{store: IHeaderStore}>{
   render() {
     const children = [<MenuButton store={this.data.store}/>];
     if(this.data.store.isMenuOpen){
@@ -140,7 +106,7 @@ class MenuContent extends b.Component<{store: HeaderStore}>{
   }
 }
 
-class MenuButton extends b.Component<{store: HeaderStore}> {
+class MenuButton extends b.Component<{store: IHeaderStore}> {
   render() {
     return (
       <div style={styles.menuButton}>
@@ -159,7 +125,7 @@ class MenuButton extends b.Component<{store: HeaderStore}> {
   }
 }
 
-class LanguageSection extends b.Component<{ store: HeaderStore }> {
+class LanguageSection extends b.Component<{ store: IHeaderStore }> {
   @observable
   protected _currentLocale: string;
 

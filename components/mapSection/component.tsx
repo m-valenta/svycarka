@@ -2,8 +2,17 @@ import * as b from "bobril";
 import { t } from "bobril-g11n";
 import * as styles from "./styles";
 import { contentWrapper } from "../../styleConstants";
+import { date } from "../dateInput/styles";
+import { observable } from "bobx";
+
+class Store {
+  @observable
+  overlayIsActive: boolean
+}
 
 export class MapSection extends b.Component {
+  private readonly store: Store = new Store() ;
+  
   render() {
     const mapHeight = b.getMedia().width * 0.37;
     return (
@@ -17,14 +26,32 @@ export class MapSection extends b.Component {
           style={[
             styles.mapIframeStyle,
             {
-              height: mapHeight
+              height: mapHeight,
             }
           ]}
         />
         <div style={styles.footer}>
           Olešnice v Orlických horách 82, 517 83 Olešnice v Orlických horách.
         </div>
+        <Overlay height={mapHeight} store={this.store}></Overlay>
       </div>
     );
+  }
+
+  onClick() {
+    this.store.overlayIsActive = true;
+    return false;
+  }
+}
+
+class Overlay extends b.Component<{height: number, store: Store}> {
+  
+  render() {
+    return <div style={[styles.overlay, {height: this.data.height, pointerEvents: this.data.store.overlayIsActive ? "auto": "none"}]} />
+  }
+
+  onPointerDown() {
+    this.data.store.overlayIsActive = false;
+    return false;
   }
 }

@@ -23,6 +23,7 @@ export class Banner extends b.Component {
 
   @b.bind
   private scrollToTips(): boolean {
+    appStore().headerStore.closeMenu();
     scrollToWrapper("tips");
     return true;
   }

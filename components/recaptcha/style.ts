@@ -3,7 +3,7 @@ import { colors } from "../../styleConstants";
 
 export const base = b.styleDef({ 
     display: "inline-block",
-    margin: "65px auto 0 auto",
+    margin: "30px auto 0 auto",
     borderRadius: 2
 });
 

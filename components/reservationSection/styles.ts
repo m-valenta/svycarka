@@ -64,7 +64,7 @@ export const formWrapper = b.styleDef({
 
 export const formInputsWrapper = b.styleDef({
   width: 439,
-  margin: "60px auto"
+  margin: "30px auto"
 });
 
 export const formInput = b.styleDef({

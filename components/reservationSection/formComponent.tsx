@@ -54,7 +54,7 @@ export class ReservationForm extends b.Component<IData> {
             type="text"
           />
         </div>
-        <Expander
+        {/* <Expander
           headerText={t("I'm interested in additional services")}
           expandedWidth={440}
           expandedHeight={105}
@@ -75,7 +75,7 @@ export class ReservationForm extends b.Component<IData> {
               />
             </div>
           </div>
-        </Expander>
+        </Expander> */}
         <Captcha
           siteKey="6LfK768UAAAAAAjphbs9g6GErMGX3B7ZmYr9hk-R"
           isValid={this.data.store.gc_Response.isValid}

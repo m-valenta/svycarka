@@ -1,4 +1,5 @@
 import * as b from "bobril";
+import { zIndex } from "../../styleConstants";
 
 export const mapIframeStyle = b.styleDef({
   border: "none",
@@ -21,5 +22,13 @@ export const footer = b.styleDef({
 
 export const wrapper = b.styleDef({
   marginTop: 101,
-  marginBottom: 45
+  marginBottom: 45,
+  position: "relative"
+});
+
+export const overlay = b.styleDef({
+  width: "100%",
+  position: "absolute",
+  top: "90px",
+  zIndex: zIndex.overlay
 });

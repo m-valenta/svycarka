@@ -7,6 +7,7 @@ import { observable } from "bobx";
 import { Buble } from "../buble/component";
 import { Calendar } from "../calendar/component";
 import { basicReservationtrategy } from "../calendar/reservationStrategies/basicStrategy";
+import { appStore } from "../../data/appStore";
 
 export interface IData {
   store: IReservationStore;
@@ -64,6 +65,7 @@ export class DateInput extends b.Component<IData> {
   }
 
   onClick(): boolean {
+    appStore().headerStore.closeMenu();
     this.isSelectionOpen = !this.isSelectionOpen;
     return true;
   }

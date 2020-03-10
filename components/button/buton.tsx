@@ -1,6 +1,7 @@
 import * as b from "bobril";
 import * as styles from "./styles";
 import { colors } from "../../styleConstants";
+import { appStore } from "../../data/appStore";
 
 export interface IData {
   text: string;
@@ -41,6 +42,7 @@ export class Button extends b.Component<IData> {
   }
 
   onClick(): boolean {
+    appStore().headerStore.closeMenu();
     this.data.onClick();
     return true;
   }
