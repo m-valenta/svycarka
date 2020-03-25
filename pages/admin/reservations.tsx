@@ -399,7 +399,6 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
     return (
       <select
         onChange={value => {
-          console.log(value);
           data.rowData.ReservationData.state = value;
         }}
       >

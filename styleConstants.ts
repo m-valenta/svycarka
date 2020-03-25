@@ -222,7 +222,8 @@ b.injectCss(`
 export const zIndex = {
   overlay: 10,
   modal: 9999,
-  buble: 10000
+  buble: 10000,
+  loader: 11000
 };
 
 export const infoPagesStyle = {

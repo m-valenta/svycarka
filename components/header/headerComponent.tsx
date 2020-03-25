@@ -54,7 +54,7 @@ class RezervationButton extends b.Component {
 
   onClick() {
     const store = appStore();
-    store.headerStore.closeMenu();
+    store.resetPageState();
     store.pageStore.goToPage(Page.Reservation);
     return true;
   }
@@ -90,13 +90,11 @@ class MenuContent extends b.Component<{store: IHeaderStore}>{
   }
 
   scrollTo(sectionName: scrollSection): boolean {
-    this.data.store.closeMenu();
     scrollToWrapper(sectionName);
     return true;
   }
 
   navigateTo(page: Page, sectionName?: scrollSection): boolean {
-    this.data.store.closeMenu();
     appStore().pageStore.goToPage(page, sectionName);
     return true;
   }

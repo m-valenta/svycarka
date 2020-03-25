@@ -65,7 +65,7 @@ export class DateInput extends b.Component<IData> {
   }
 
   onClick(): boolean {
-    appStore().headerStore.closeMenu();
+    appStore().resetPageState();
     this.isSelectionOpen = !this.isSelectionOpen;
     return true;
   }

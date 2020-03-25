@@ -24,6 +24,10 @@ export class Modal extends b.Component<IData> {
     );
   }
 
+  postUpdateDom(me: b.IBobrilCacheNode) {
+    (b.getDomNode(me) as Element).scrollTo(0,0);
+  }
+
   destroy() {
     document.body.style["overflow-y"] = "auto";
   }

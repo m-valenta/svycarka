@@ -5,6 +5,8 @@ export declare type scrollSection = "tips" | "header" | "contact" | "at_us" | "h
 export const menuGap = menuHeight + 30;
 
 export function scrollToWrapper(id: scrollSection): void {
+	appStore().resetPageState();
+	
     const wrapperY = appStore().pageStore.getScrollItemPosition(id);
     if(wrapperY === undefined) {
         return;

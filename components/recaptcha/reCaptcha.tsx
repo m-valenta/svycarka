@@ -1,6 +1,8 @@
 /// <reference path="gReCaptcha.d.ts"/>
 import * as b from "bobril";
 import * as styles from "./style";
+import { IReservationStore } from "../../data/reservation/types";
+import { appStore } from "../../data/appStore";
 
 export var utils = {
   getResponse(): string {
@@ -8,7 +10,9 @@ export var utils = {
   },
 
   reset(): void {
-    grecaptcha.reset();
+    try {
+      grecaptcha?.reset();
+    } catch (Error) {}
   },
 
   isLoaded(): boolean {
@@ -35,13 +39,15 @@ export function CaptchaScript(): b.IBobrilNode {
 export class Captcha extends b.Component<IReCaptchaData> {
   captchaFieldId = "#gc_field";
 
+  store: IReservationStore = appStore().reservationStore;
+
   render(): b.IBobrilNode {
-    const applicatedStyles = [styles.base];
-    !this.data.isValid && applicatedStyles.push(styles.invalid);
+    const usedStyles = [styles.base];
+    !this.store.gc_Response.isValid && usedStyles.push(styles.invalid);
 
     return (
       <div>
-        <div id={this.captchaFieldId} style={applicatedStyles} />
+        <div id={this.captchaFieldId} style={usedStyles} />
       </div>
     );
   }
@@ -49,7 +55,8 @@ export class Captcha extends b.Component<IReCaptchaData> {
   postInitDom() {
     grecaptcha.render(document.getElementById(this.captchaFieldId), {
       sitekey: this.data.siteKey,
-      theme: "light"
+      theme: "light",
+      callback: response => (this.store.gc_Response.value = response)
     });
   }
 }

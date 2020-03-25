@@ -61,10 +61,10 @@
     "Kudy"
   ],
   [
-    "Why",
+    "Price",
     null,
     0,
-    "Proč k nám"
+    "Za kolik"
   ],
   [
     "Visit us",
@@ -73,16 +73,10 @@
     "Na návštěvu"
   ],
   [
-    "Price",
+    "Why",
     null,
     0,
-    "Za kolik"
-  ],
-  [
-    "At us",
-    null,
-    0,
-    "U nás"
+    "Proč k nám"
   ],
   [
     "Where to find us",
@@ -175,12 +169,6 @@
     "Švýcarka je schopná ubytovat skupinu 12 osob, má 2 dvoulůžkové pokoje (v jednom z nich se nachází přistýlka), 1 třílůžkový pokoj a 1 čtyřlůžkový. Nabízí 1 koupelnu s bezbariéroovu sprchou a v rámci celého objektu 3 toalety. Zahřeje vás teplo z elektricky vytápěných radiátorů nebo si můžete v hlavní společenské místnosti přitopit dřevem. Nejkratší doba ubytování jsou 2 noci."
   ],
   [
-    "For the successful completion of the reservation, it is necessary to pay a deposit (ie half the rental price), transfer to our account:",
-    null,
-    0,
-    "Pro úspěšné dokončení rezervace je nutné uhradit zálohu (tj. polovina ceny pronájmu), převodem na náš účet:"
-  ],
-  [
     "O průběhu vaší rezervace a dalších důležitých informací vás budeme informovat e-mailem.",
     null,
     0,
@@ -223,22 +211,10 @@
     "Telefon"
   ],
   [
-    "I'm interested in additional services",
+    "*Reservation form contains some validation errors.",
     null,
     0,
-    "Mám zájem o doplňkové služby"
-  ],
-  [
-    "Barrel of beer (including bar):",
-    null,
-    0,
-    "Sud piva (včetně výčepů)"
-  ],
-  [
-    "Grill meat for:",
-    null,
-    0,
-    "Maso na grill pro:"
+    "*Rezervační formulář obsahuje chybně vyplněné požky."
   ],
   [
     "Reserve date",
@@ -247,10 +223,15 @@
     "Rezervovat termín"
   ],
   [
-    "I agree to process my personal data in accordance with GDPR.",
+    "I agree to process my personal data in accordance with ",
     null,
     0,
-    "Souhlasím se zpracováním osobních údajů podle GDPR."
+    "Souhlasím se zpracováním osobních údajů v souladu s "
+  ],
+  [
+    "GDPR",
+    null,
+    0
   ],
   [
     "Why to visit",
@@ -269,6 +250,11 @@
     null,
     0,
     "Chci vědět více"
+  ],
+  [
+    "Chalupa ŠVÝCARKA v Orlických horách",
+    "page title",
+    0
   ],
   [
     "Cottage Švýcarka can be rented only as a whole object, just fill in the date of arrival and departure, and we will take care of everything else.",
@@ -394,7 +380,7 @@
     "The possibility to visit even more distant ski resorts in the Giant Mountains: Areál Buky (60.1km), SkiResort ČERNÁ HORA - PEC (67.3km), Malá Úpa (81.7km) SKI Pec pod Snezkou (75km)",
     null,
     0,
-    "Možnost navštívit i vzdálenější lyžařské areály v Krkonoších: Areál Mladé Buky (60,1km), SkiResort ČERNÁ HORA – PEC (67,3km), Malá Úpa (81,7km), SKI Pec pod Sněžkou (75km)"    
+    "Možnost navštívit i vzdálenější lyžařské areály v Krkonoších: Areál Mladé Buky (60,1km), SkiResort ČERNÁ HORA – PEC (67,3km), Malá Úpa (81,7km), SKI Pec pod Sněžkou (75km)"
   ],
   [
     "Cross-country skiing ",

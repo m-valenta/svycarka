@@ -19,6 +19,8 @@ export interface IAppStore {
   adminReservationStore: IAdminReservationStore;
   galleryStore: IGalleryStore;
   headerStore: IHeaderStore;
+
+  resetPageState(): void;
 }
 
 const appStoreKey = "$appStore";
@@ -28,12 +30,17 @@ export function initAppStore(): void {
   const appStore: IAppStore = window[appStoreKey]; 
   
   appStore.reservationStore = reservationStoreFactory();
-  appStore.pageStore = pageStoreFactory();
+  appStore.pageStore = pageStoreFactory(appStore);
   appStore.adminStore = adminStoreFactory();
   appStore.adminUserStore = adminUserStoreFactory();
   appStore.adminReservationStore = adminReservationStoreFactory();
   appStore.galleryStore = galleryStoreFactory();
   appStore.headerStore = headerStoreFactory();
+
+  appStore.resetPageState = function(this: IAppStore) {
+    this.headerStore.closeMenu();
+    this.pageStore.mapOverlayActive = true;
+  }
 }
 
 export function appStore(): IAppStore {

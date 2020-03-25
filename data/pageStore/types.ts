@@ -14,9 +14,10 @@ export interface IScrollItem {
 export interface IPageStore {
   readonly currentPage: Page;
   forceShowTree: boolean;  
+  mapOverlayActive: boolean;
   goToPage(page: Page, scrollTo?: scrollSection): void;
   setPageInitialized(page: Page): void;
   setPageRendered(page: Page);  
-  setScroolItemPosition(id: string, yPosition: number);
+  setScrollItemPosition(id: string, yPosition: number);
   getScrollItemPosition(id: string): number | undefined;
 }

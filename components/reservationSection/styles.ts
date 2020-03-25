@@ -129,3 +129,9 @@ export const aggrementWrapper = b.styleDef({
 });
 
 export const linkStyle = b.styleDef({ cursor: "pointer", textDecoration: "underline" });
+
+export const validationInfoStyle = b.styleDef({
+  color: colors.buttonRed,
+  fontStyle: "italic",
+  paddingBottom: 5
+});

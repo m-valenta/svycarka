@@ -13,11 +13,11 @@ import {
   FormItem,
   ReservationFormState,
   IReservationSaveRequest,
-  FormExternalItem,
   IReservationSaveResponse,
-  ReservationResponseState
+  ReservationResponseState,
+  IFormItem
 } from "./types";
-import { observable, IObservableMap } from "bobx";
+import { observable, IObservableMap, computed } from "bobx";
 import {
   Month,
   datItemParts,
@@ -26,9 +26,7 @@ import {
 import { utils } from "../../components/recaptcha/reCaptcha";
 import { getBackendLocaleId } from "../../utils/localeUtils";
 import { getLocale } from "bobril-g11n";
-
-const phoneNumberRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.compile();
-const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.compile();
+import { validateReservation, validateName, validateAddress, validateEmail, validatePhone, validateAgreement, validateGC } from "./validations";
 
 class ReservationStore implements IReservationStore {
   @observable
@@ -42,26 +40,30 @@ class ReservationStore implements IReservationStore {
     IObservableMap<number, IReservation[]>
   > = observable.map<number, IObservableMap<number, IReservation[]>>();
 
-  currentReservation: FormItem<IReservation> = new FormItem();
+  currentReservation: FormItem<IReservation> = new FormItem(validateReservation);
 
-  name: FormItem<string> = new FormItem();
+  name: IFormItem<string> = new FormItem(validateName);
 
-  address: FormItem<string> = new FormItem();
+  address: IFormItem<string> = new FormItem(validateAddress);
 
-  email: FormItem<string> = new FormItem();
+  email: IFormItem<string> = new FormItem(validateEmail);
 
-  phone: FormItem<string> = new FormItem();
+  phone: IFormItem<string> = new FormItem(validatePhone);
 
-  aggrement: FormItem<boolean> = new FormItem();
+  agreement: IFormItem<boolean> = new FormItem(validateAgreement);
 
-  beer: FormItem<number> = new FormItem();
+  beer: IFormItem<number> = new FormItem(() => true);
 
-  meat: FormItem<number> = new FormItem();
+  meat: IFormItem<number> = new FormItem(() => true);
 
-  gc_Response: FormExternalItem<string> = new FormExternalItem(
-    () => (utils.isLoaded() ? utils.getResponse() : undefined),
-    () => utils.isLoaded() && grecaptcha.reset()
+  gc_Response: IFormItem<string> = new FormItem(
+    validateGC,
+    utils.reset
   );
+
+  protected get allInputFields(): IFormItem<unknown>[] {
+    return [ this.currentReservation, this.name, this.address, this.email, this.phone, this.agreement, this.beer, this.meat, this.gc_Response ];
+  }  
 
   @observable
   reservationFormState: ReservationFormState = ReservationFormState.hidden;
@@ -143,9 +145,9 @@ class ReservationStore implements IReservationStore {
       this._isLoading = false;
       return;
     } else if (response.state === ReservationResponseState.CaptchaError) {
-      this.gc_Response.isValid = false;
+      this.gc_Response.setInvalid();
     } else if (response.state === ReservationResponseState.StorageError) {
-      this.currentReservation.isValid = false;
+      this.currentReservation.setInvalid();
     }
     this._isLoading = false;
   }
@@ -181,78 +183,27 @@ class ReservationStore implements IReservationStore {
   }
 
   clear(): void {
-    this.currentReservation.value = undefined;
-    this.name.value = undefined;
-    this.name.isValid = true;
-    this.address.value = undefined;
-    this.address.isValid = true;
-    this.email.value = undefined;
-    this.email.isValid = true;
-    this.phone.value = undefined;
-    this.phone.isValid = true;
-    this.aggrement.value = false;
-    this.aggrement.isValid = true;
-    this.beer.value = undefined;
-    this.beer.isValid = true;
-    this.meat.value = undefined;
-    this.meat.isValid = true;
-    this.gc_Response.value = undefined;
-    this.gc_Response.isValid = true;
+    this.allInputFields.forEach(input => input.clear());
   }
 
   validate(): boolean {
-    let result = [
-      this.validateReservation(),
-      this.validateName(),
-      this.validateAddress(),
-      this.validateEmail(),
-      this.validatePhone(),
-      this.validateAgreement(),
-      this.validateGC()
-    ];
-    return result.reduce((prev, current) => prev && current);
+    let isValid = true;
+    this.allInputFields.forEach(input => {
+      let inputResult = input.validate();
+      isValid = isValid && inputResult;
+    });  
+    return isValid;
   }
 
-  protected validateReservation(): boolean {
-    return (this.currentReservation.isValid =
-      this.currentReservation.value !== undefined);
+  @computed
+  test(): boolean {
+    let isValid = true;
+    this.allInputFields.forEach(input => {
+      isValid = isValid && input.isValid;
+    });  
+    return isValid;
   }
 
-  protected validateName(): boolean {
-    return (this.name.isValid =
-      this.name.value !== undefined && this.name.value.length > 0);
-  }
-
-  protected validateAddress(): boolean {
-    return (this.address.isValid =
-      this.address.value !== undefined && this.address.value.length > 0);
-  }
-
-  protected validateEmail(): boolean {
-    return (this.email.isValid =
-      this.email.value !== undefined &&
-      this.email.value.length > 0 &&
-      emailRegex.test(this.email.value));
-  }
-
-  protected validatePhone(): boolean {
-    return (this.phone.isValid =
-      this.phone.value !== undefined &&
-      this.phone.value.length > 0 &&
-      phoneNumberRegex.test(this.phone.value));
-  }
-
-  protected validateAgreement(): boolean {
-    this.aggrement.isValid =
-      this.aggrement.value !== undefined && this.aggrement.value;
-    return this.aggrement.isValid;
-  }
-
-  protected validateGC(): boolean {
-    this.gc_Response.isValid =
-      this.gc_Response.value !== undefined && this.gc_Response.value !== "";
-    return this.gc_Response.isValid;
-  }
 }
 
 export function reservationStoreFactory(): IReservationStore {

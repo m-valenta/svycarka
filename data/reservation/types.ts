@@ -1,6 +1,7 @@
 import { IAjaxRequest, IAjaxResponse } from "../ajaxUtils";
 import { Month, dateItem } from "../../utils/dateUtils";
 import { observable, IObservableMap } from "bobx";
+import { base } from "../../components/recaptcha/style";
 
 export enum ReservationFormState {
   hidden,
@@ -51,26 +52,27 @@ export interface IReservationSaveResponse extends IAjaxResponse {
 export interface IReservationStore {
   reservations: IObservableMap<number, IObservableMap<number, IReservation[]>>;
   // form
-  currentReservation: FormItem<IReservation>;
-  name: FormItem<string>;
-  address: FormItem<string>;
-  email: FormItem<string>;
-  phone: FormItem<string>;
-  aggrement: FormItem<boolean>;
+  currentReservation: IFormItem<IReservation>;
+  name: IFormItem<string>;
+  address: IFormItem<string>;
+  email: IFormItem<string>;
+  phone: IFormItem<string>;
+  agreement: IFormItem<boolean>;
   // form-optional
-  beer: FormItem<number>;
-  meat: FormItem<number>;
+  beer: IFormItem<number>;
+  meat: IFormItem<number>;
 
   reservationFormState: ReservationFormState;
-  gc_Response: FormItem<string>;
+  gc_Response: IFormItem<string>;
 
   isLoading: boolean;
-
+  
   loadReservationList(month: Month, year: number): void;
   storeReservation(): void;
 
   clear(): void;
   validate(): boolean;
+  test(): boolean;
 }
 
 export interface IReservation {
@@ -78,41 +80,57 @@ export interface IReservation {
   duration: number;
 }
 
-export class FormItem<T> {
-  @observable
-  isValid: boolean = true;
+export interface IFormItem<T> {
+  value: T;
+  readonly isValid: boolean;
 
-  @observable
-  value?: T = undefined;
+  validate(): boolean;
+  clear(): void;
+  setInvalid(): void;
 }
 
-export class FormExternalItem<T> {
-  _valueField: T | undefined;
-  _valueGenerator: () => T;
-  _clearHandler: () => void;
+export class FormItem<T> implements IFormItem<T> {
 
-  constructor(valueGenerator: () => T, clearHandler: () => void) {
-    this._valueGenerator = valueGenerator;  
+  protected _validate: (value: T | undefined) => boolean;
+  protected _clearHandler?: ()=> void;
+
+  constructor(validate: (value: T | undefined) => boolean, clearHandler?: ()=> void) {
+    this._validate = validate;
     this._clearHandler = clearHandler;
   }
 
-  @observable
-  isValid: boolean = true;
+  get isValid(): boolean {
+    return this._isValid;
+  }
 
   get value(): T {
-    if(this._valueField === undefined) {
-      this._valueField = this._valueGenerator();
-    }
-
-    return this._valueGenerator();
+    return this._value;
   }
 
   set value(value: T | undefined) {
-    this._valueField = value;
+    this._value = value;
+    this.validate();
+  }
+
+  validate(): boolean {
+    this._isValid = this._validate(this._value);
+    return this._isValid;
   }
 
   clear() {
-    this._valueField = undefined;
-    this._clearHandler();
+    this._isValid = true;
+    this._value = undefined;
+    this._clearHandler && this._clearHandler();
   }
+
+  setInvalid() {
+    this._isValid = false;
+  }
+
+  @observable
+  protected _isValid: boolean = true;
+
+  @observable
+  protected _value?: T = undefined;
 }
+

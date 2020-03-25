@@ -4,15 +4,13 @@ import * as styles from "./styles";
 import { contentWrapper } from "../../styleConstants";
 import { date } from "../dateInput/styles";
 import { observable } from "bobx";
+import { IPageStore } from "../../data/pageStore/types";
+import { appStore } from "../../data/appStore";
 
-class Store {
-  @observable
-  overlayIsActive: boolean
-}
 
-export class MapSection extends b.Component {
-  private readonly store: Store = new Store() ;
-  
+export class MapSection extends b.Component {  
+  private _pageStore: IPageStore = appStore().pageStore;
+
   render() {
     const mapHeight = b.getMedia().width * 0.37;
     return (
@@ -33,25 +31,25 @@ export class MapSection extends b.Component {
         <div style={styles.footer}>
           Olešnice v Orlických horách 82, 517 83 Olešnice v Orlických horách.
         </div>
-        <Overlay height={mapHeight} store={this.store}></Overlay>
+        <Overlay height={mapHeight} store={this._pageStore}></Overlay>
       </div>
     );
   }
 
   onClick() {
-    this.store.overlayIsActive = true;
+    this._pageStore.mapOverlayActive = true;
     return false;
   }
 }
 
-class Overlay extends b.Component<{height: number, store: Store}> {
+class Overlay extends b.Component<{height: number, store: IPageStore}> {
   
   render() {
-    return <div style={[styles.overlay, {height: this.data.height, pointerEvents: this.data.store.overlayIsActive ? "auto": "none"}]} />
+    return <div style={[styles.overlay, {height: this.data.height, pointerEvents: this.data.store.mapOverlayActive ? "auto": "none"}]} />
   }
 
   onPointerDown() {
-    this.data.store.overlayIsActive = false;
+    this.data.store.mapOverlayActive = false;
     return false;
   }
 }

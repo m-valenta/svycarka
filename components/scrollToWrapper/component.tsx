@@ -21,12 +21,12 @@ export class ScrollToWrapper extends b.Component<{
 
   private markScrollPosition(me: b.IBobrilCacheNode): void {
     if (this.data.useMenuGap)
-      appStore().pageStore.setScroolItemPosition(
+      appStore().pageStore.setScrollItemPosition(
         this.data.id,
         b.nodePagePos(me)[1] - menuGap
       );
     else
-      appStore().pageStore.setScroolItemPosition(
+      appStore().pageStore.setScrollItemPosition(
         this.data.id,
         b.nodePagePos(me)[1]
       );

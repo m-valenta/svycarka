@@ -1,24 +1,33 @@
 import * as b from "bobril";
-import { observable, IObservableMap, } from "bobx";
+import { observable, IObservableMap } from "bobx";
 import {
   defaultTransition,
   reservationTransition,
   tipsTransition
 } from "../../transitions";
 import { Page, IPageStore, IScrollItem } from "./types";
-import { scrollSection, scrollToWrapper } from "../../components/scrollToWrapper/utils";
+import {
+  scrollSection,
+  scrollToWrapper
+} from "../../components/scrollToWrapper/utils";
+import { IAppStore } from "../appStore";
 
 class PageStore implements IPageStore {
   @observable
   protected _currentPagePage: Page;
-  
+
   @observable
   forceShowTree: boolean;
-  
+
+  @observable
+  mapOverlayActive: boolean = true;
+
   protected _scrollItems: Map<string, number>;
   protected _lastScrollTo?: scrollSection;
+  protected readonly _parentStore: IAppStore;
 
-  constructor() {
+  constructor(parentStore: IAppStore) {
+    this._parentStore = parentStore;
     this._currentPagePage = Page.Home;
     this.forceShowTree = false;
     this.clearScrollItems();
@@ -29,12 +38,12 @@ class PageStore implements IPageStore {
   }
 
   goToPage(page: Page, scrollTo?: scrollSection): void {
-    if(page === this._currentPagePage){
-      if(scrollTo === undefined)
-        window.scroll(0,0);
-      else
-        scrollToWrapper(scrollTo);
-        
+    if (page === this._currentPagePage) {
+      if (scrollTo === undefined) {
+        this._parentStore.resetPageState();
+        window.scroll(0, 0);
+      } else scrollToWrapper(scrollTo);
+
       return;
     }
 
@@ -55,7 +64,7 @@ class PageStore implements IPageStore {
     }
 
     b.runTransition(transition);
-    scrollTo == undefined && window.scroll(0,0);
+    scrollTo == undefined && window.scroll(0, 0);
   }
 
   setPageInitialized(page: Page): void {
@@ -63,7 +72,7 @@ class PageStore implements IPageStore {
     this.clearScrollItems();
   }
 
-  setScroolItemPosition(id: string, yPosition: number) {
+  setScrollItemPosition(id: string, yPosition: number) {
     this._scrollItems.set(id, yPosition);
   }
 
@@ -72,19 +81,18 @@ class PageStore implements IPageStore {
   }
 
   setPageRendered(_page: Page) {
-    if(this._lastScrollTo == undefined)
-      return;
+    if (this._lastScrollTo == undefined) return;
 
-      scrollToWrapper(this._lastScrollTo);
-      this._lastScrollTo = undefined;
+    scrollToWrapper(this._lastScrollTo);
+    this._lastScrollTo = undefined;
   }
 
-  private clearScrollItems(){
+  private clearScrollItems() {
     this._scrollItems = new Map();
     this._scrollItems.set("header", 0);
   }
 }
 
-export function pageStoreFactory(): IPageStore {
-  return new PageStore();
+export function pageStoreFactory(parentStore: IAppStore): IPageStore {
+  return new PageStore(parentStore);
 }

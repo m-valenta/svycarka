@@ -42,7 +42,7 @@ export class Button extends b.Component<IData> {
   }
 
   onClick(): boolean {
-    appStore().headerStore.closeMenu();
+    appStore().resetPageState();
     this.data.onClick();
     return true;
   }
