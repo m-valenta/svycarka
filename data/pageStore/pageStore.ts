@@ -19,6 +19,9 @@ class PageStore implements IPageStore {
   @observable
   forceShowTree: boolean;
 
+  @observable 
+  showContactInformation: boolean = true;
+
   @observable
   mapOverlayActive: boolean = true;
 

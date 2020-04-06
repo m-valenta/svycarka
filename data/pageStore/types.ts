@@ -3,7 +3,8 @@ import { scrollSection } from "../../components/scrollToWrapper/utils";
 export enum Page {
   Home,
   Reservation,
-  Tips
+  Tips,
+  Error
 }
 
 export interface IScrollItem {
@@ -14,6 +15,7 @@ export interface IScrollItem {
 export interface IPageStore {
   readonly currentPage: Page;
   forceShowTree: boolean;  
+  showContactInformation: boolean;
   mapOverlayActive: boolean;
   goToPage(page: Page, scrollTo?: scrollSection): void;
   setPageInitialized(page: Page): void;

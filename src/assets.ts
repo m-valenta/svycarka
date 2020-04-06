@@ -10,6 +10,7 @@ export const close_svg = "../assets/close.svg";
 export const dateArrow_svg = "../assets/dateArrow.svg";
 export const edit_png = "../assets/edit.png";
 export const email_svg = "../assets/email.svg";
+export const errorBackground_png = "../assets/errorBackground.png";
 export const favicon_ico = "../assets/favicon.ico";
 export const fb_svg = "../assets/fb.svg";
 export const instagram_svg = "../assets/instagram.svg";

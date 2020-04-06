@@ -1,55 +1,54 @@
 import * as b from "bobril";
 import { appStore } from "../data/appStore";
-import { Page } from "../data/pageStore/types";
+import { Page, IPageStore } from "../data/pageStore/types";
 import { contentSize, colors } from "../styleConstants";
 import { t } from "bobril-g11n";
 
-const contentStyle = b.styleDef({
-  margin: "109px auto 0 auto"
-});
-
-const commonText = b.styleDef({
-  textAlign: "center",
-  fontSize: 16,
-  marginBottom: 25
-});
-
-const headerText = b.styleDefEx(commonText, {
-  fontSize: 30,
-  marginBottom: 15
-});
-
-const subHeaderText = b.styleDefEx(commonText, {
-  fontSize: 20,
-  marginBottom: 5
-});
-
-const listStyle = b.styleDef({
-  margin: 0,
-  padding: 0,
-  fontSize: 16,
-  display: "inline-block"
-});
-
-const linkStyle = b.styleDef(
-  {
-    textDecoration: "none",
-    cursor: "pointer",
-    color: "black"
-  },
-  {
-    hover: { color: colors.calendarSilver }
-  }
-);
+const styles = {
+  contentStyle: b.styleDef({
+    margin: "109px auto 0 auto",
+  }),
+  commonText: b.styleDef({
+    textAlign: "center",
+    fontSize: 16,
+    marginBottom: 25,
+  }),
+  headerText: b.styleDefEx(this.commonText, {
+    fontSize: 30,
+    marginBottom: 15,
+  }),
+  subHeaderText: b.styleDefEx(this.commonText, {
+    fontSize: 20,
+    marginBottom: 5,
+  }),
+  listStyle: b.styleDef({
+    margin: 0,
+    padding: 0,
+    fontSize: 16,
+    display: "inline-block",
+  }),
+  linkStyle: b.styleDef(
+    {
+      textDecoration: "none",
+      cursor: "pointer",
+      color: "black",
+    },
+    {
+      hover: { color: colors.calendarSilver },
+    }
+  ),
+};
 
 class TipsPage extends b.Component {
+  readonly pageStore: IPageStore = appStore().pageStore;
+
   init() {
-    appStore().pageStore.setPageInitialized(Page.Tips);
+    this.pageStore.setPageInitialized(Page.Tips);
   }
 
   render() {
     return (
-      <div style={[contentSize, contentStyle]}>
+      <div style={[contentSize, styles.contentStyle]}>
         <this.commonText>
           {t("The nearest food in Olešnice, 1.6 km from the cottage.")}
         </this.commonText>
@@ -73,7 +72,7 @@ class TipsPage extends b.Component {
             t("Ski center Říčky v Orlických horách (31.9km)"),
             t(
               "The possibility to visit even more distant ski resorts in the Giant Mountains: Areál Buky (60.1km), SkiResort ČERNÁ HORA - PEC (67.3km), Malá Úpa (81.7km) SKI Pec pod Snezkou (75km)"
-            )
+            ),
           ]}
         </this.section>
         <this.section header={t("Cross-country skiing ")}>
@@ -83,13 +82,13 @@ class TipsPage extends b.Component {
                 "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/"
               ),
               url:
-                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/"
+                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/",
             },
             {
               text: t(
                 "http://skimapa.cz/oblast/orlicke-hory - start of circuits from Olešnice crossroad (1.2km), or from Číhalka (1,7km)"
               ),
-              url: "http://skimapa.cz/oblast/orlicke-hory"
+              url: "http://skimapa.cz/oblast/orlicke-hory",
             },
             t(
               "To the highest peak of the Orlické Mountains - from Deštné via Luisino Údolí, Velká Deštná (1115 meters above sea level), Šerlišské sedlo, Masaryk chateau, Šerlišský mlýn-back to Deštné, route length 18km (12.4km)"
@@ -99,7 +98,7 @@ class TipsPage extends b.Component {
             ),
             t(
               "On the mountain ridges Olešnice in the Orlické Mountains (Číhalka-1.7km) - Otružník - Vrchmezí - Šerlich (13km from the cottage), route 8km Olešnice v Orlických horách (Číhalka- 1.7km) - Ostružník - Vrchmezí - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Olešnice v Orlických horách (crossroads 1.2km in the direction of náměstíčko), length of the route 16km (possibility to terminate the route at Masaryk Cottage and cross to Olešnice by bus)"
-            )
+            ),
           ]}
         </this.section>
         <this.section header={t("Cycling")}>
@@ -117,20 +116,20 @@ class TipsPage extends b.Component {
               text: t(
                 "Circuit: Olešnice v Oh through Borova to Pekelske udoli-Lookout Tower Sendraz-Ruins of Frymburk-Rokole Castle - track length 34km, link: https://mapy.cz/s/368g1"
               ),
-              url: "https://mapy.cz/s/368g1"
+              url: "https://mapy.cz/s/368g1",
             },
             {
               text: t(
                 "Circuit: Olesnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. - Sedloňovský vrch to Olešnice in O.h., route 34km, link: https://mapy.cz/s/368zq"
               ),
-              url: "https://mapy.cz/s/368zq"
+              url: "https://mapy.cz/s/368zq",
             },
             {
               text: t(
                 "Circuit: Olešnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. further to Kunštátská chapel - Anenský vrch - fortress Hanička and back through Deštná in o.h-Sedloňov - Polom to Olešnice in O.h., track length 73km, link: https://mapy.cz/s/368r7"
               ),
-              url: "https://mapy.cz/s/368r7"
-            }
+              url: "https://mapy.cz/s/368r7",
+            },
           ]}
         </this.section>
         <this.section header={t("Hiking ")}>
@@ -152,7 +151,7 @@ class TipsPage extends b.Component {
               "Japanese Garden (Ogród Japoński-PL), 10km distance Náchod (19km), Nové Město nad Metují (17km), Ratibořice near Česká Skalice (33km) and Opočno (23km) "
             ),
             t("Dobrošov - Jiráskova chata and artillery fortress, 14km away "),
-            t("Rozkoš Reservoir")
+            t("Rozkoš Reservoir"),
           ]}
         </this.section>
         <this.section header={t("More: ")}>
@@ -161,17 +160,17 @@ class TipsPage extends b.Component {
               text:
                 "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/hrebenove-trate/",
               url:
-                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/hrebenove-trate/"
+                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/hrebenove-trate/",
             },
             {
               text: "https://www.vychodni-cechy.info/priroda/ ",
-              url: "https://www.vychodni-cechy.info/priroda/ "
+              url: "https://www.vychodni-cechy.info/priroda/ ",
             },
             {
               text:
                 "http://www.olesnice.net/volny-cas/sport/turisticke-stezky/",
-              url: "http://www.olesnice.net/volny-cas/sport/turisticke-stezky/"
-            }
+              url: "http://www.olesnice.net/volny-cas/sport/turisticke-stezky/",
+            },
           ]}
         </this.section>
       </div>
@@ -179,15 +178,17 @@ class TipsPage extends b.Component {
   }
 
   postInitDom() {
-    appStore().pageStore.setPageRendered(Page.Tips);
+    this.pageStore.setPageRendered(Page.Tips);
   }
 
   commonText(data: { children: string }): b.IBobrilNode {
-    return <div style={commonText}>{data.children}</div>;
+    return <div style={styles.commonText}>{data.children}</div>;
   }
 
   headerText(data: { children: string }): b.IBobrilNode {
-    return <div style={[commonText, headerText]}>{data.children}</div>;
+    return (
+      <div style={[styles.commonText, styles.headerText]}>{data.children}</div>
+    );
   }
 
   section(data: {
@@ -195,24 +196,28 @@ class TipsPage extends b.Component {
     children: (string | { text: string; url: string })[];
   }): b.IBobrilNode {
     let children: b.IBobrilNode[] = [
-      <div style={[commonText, subHeaderText]}>{data.header}</div>
+      <div style={[styles.commonText, styles.subHeaderText]}>
+        {data.header}
+      </div>,
     ];
     children = children.concat(
-      data.children.map(child =>
+      data.children.map((child) =>
         typeof child !== "object" ? (
           <div>{`• ${child}`}</div>
         ) : (
           <div>
             {" "}
-            <a href={child.url} target="blank" style={linkStyle}>{`• ${
-              child.text
-            }`}</a>
+            <a
+              href={child.url}
+              target="blank"
+              style={styles.linkStyle}
+            >{`• ${child.text}`}</a>
           </div>
         )
       )
     );
 
-    return <div style={commonText}>{children}</div>;
+    return <div style={styles.commonText}>{children}</div>;
   }
 }
 

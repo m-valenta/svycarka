@@ -1,6 +1,6 @@
 import * as b from "bobril";
 import { HeaderComponent } from "../components/header/headerComponent";
-import { initAppStore, appStore } from "../data/appStore";
+import { initAppStore, appStore, IAppStore } from "../data/appStore";
 import { Page } from "../data/pageStore/types";
 import { Contact } from "../components/contact/component";
 import { CopyRight } from "../components/copyright/component";
@@ -11,6 +11,8 @@ export interface IDataWithActiveRouteHandler {
 }
 
 class MastePage extends b.Component<IDataWithActiveRouteHandler> {
+  private readonly store: IAppStore = appStore();
+
   render() {
     const children: b.IBobrilNode[] = [
       <HeaderComponent
@@ -18,24 +20,33 @@ class MastePage extends b.Component<IDataWithActiveRouteHandler> {
         showReservation={this.showReservation}
       />,
       this.data.activeRouteHandler(),
-      <ScrollToWrapper id="contact"><Contact /></ScrollToWrapper>,
-      <CopyRight />
+      <ScrollToWrapper id="contact" key="contactScrollWrapper">
+        {this.store.pageStore.showContactInformation ? (
+          <Contact key="contact" />
+        ) : (
+          b.withKey(<div></div>, "contactEmpty")
+        )}
+      </ScrollToWrapper>,
+      <CopyRight key="copyRight" />,
     ];
 
     return <div>{children}</div>;
   }
 
   onClick(): boolean {
-    appStore().headerStore.closeMenu();
+    this.store.headerStore.closeMenu();
     return false;
   }
 
   protected get showTree(): boolean {
-    return appStore().pageStore.forceShowTree || appStore().pageStore.currentPage !== Page.Home;
+    return (
+      this.store.pageStore.forceShowTree ||
+      this.store.pageStore.currentPage !== Page.Home
+    );
   }
 
   protected get showReservation(): boolean {
-    return appStore().pageStore.currentPage !== Page.Reservation;
+    return this.store.pageStore.currentPage !== Page.Reservation;
   }
 }
 

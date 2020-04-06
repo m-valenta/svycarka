@@ -15,6 +15,7 @@ import { reservationsPage } from "./pages/admin/reservations";
 import { accomodationRulesPage } from "./pages/accommodationRulesPage";
 import { gdprPage } from "./pages/gdpr";
 import { pageTitle } from "./components/Title/title";
+import { errorPage } from "./pages/error";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -34,7 +35,11 @@ initGlobalization({
         name: "reservation",
         handler: reservationPage
       }),
-      b.routeDefault({ handler: homePage, name: "home" })
+      b.routeDefault({ handler: homePage, name: "home" }),
+      b.routeNotFound({
+        url: "/error",
+        handler: errorPage
+      })
     ]),
     b.route({
       url: "/login",
@@ -66,7 +71,7 @@ initGlobalization({
         name: "adminReservations",
         handler: reservationsPage
       }),
-    ]),
+    ])
   ]);
   b.addRoot(() => {
     return [

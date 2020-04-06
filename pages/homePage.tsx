@@ -4,13 +4,14 @@ import { TipsSection } from "../components/tipsSection/component";
 import { ReservationSection } from "../components/reservationSection/component";
 import { MapSection } from "../components/mapSection/component";
 import { appStore } from "../data/appStore";
-import { Page } from "../data/pageStore/types";
+import { Page, IPageStore } from "../data/pageStore/types";
 import { Gallery } from "../components/gallery/component";
 import { ScrollToWrapper } from "../components/scrollToWrapper/component";
 
 class HomePage extends b.Component {
+  readonly pageStore: IPageStore = appStore().pageStore;
   init() {
-    appStore().pageStore.setPageInitialized(Page.Home);
+    this.pageStore.setPageInitialized(Page.Home);
   }
   
   render() {
@@ -26,7 +27,7 @@ class HomePage extends b.Component {
   }
 
   postInitDom() {
-    appStore().pageStore.setPageRendered(Page.Home);
+    this.pageStore.setPageRendered(Page.Home);
   }
 }
 

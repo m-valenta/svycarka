@@ -29,7 +29,8 @@ export const colors = {
   hover_menu: "#286140",
   selected_lang: "#D2C6B8",
   lang: "#EFEBE6",
-  menu: "#729882"
+  menu: "#729882",
+  errorBackground: " #D2C6B8"
 };
 
 const arrow = b.styleDef({
@@ -198,6 +199,7 @@ export const bookmarkOff = [tableButton, bookmarkOffBg];
 
 
 export const menuHeight = 50;
+export const copyrightSectionHeight = 45;
 
 b.injectCss(`
     @font-face {

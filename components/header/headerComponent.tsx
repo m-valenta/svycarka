@@ -6,7 +6,7 @@ import { socialBackgrounds, menuButton, closeButton } from "../../styleConstants
 import { locales } from "../../constants";
 import { observable } from "bobx";
 import { appStore } from "../../data/appStore";
-import { Page } from "../../data/pageStore/types";
+import { Page, IPageStore } from "../../data/pageStore/types";
 import { scrollToWrapper, scrollSection } from "../scrollToWrapper/utils";
 import { homePage } from "../../pages/homePage";
 import { getlocaleName } from "../../utils/localeUtils";
@@ -76,6 +76,8 @@ class SocialButton extends b.Component<ISocialButtonData> {
 }
 
 class MenuContent extends b.Component<{store: IHeaderStore}>{
+  readonly pageStore: IPageStore = appStore().pageStore;
+  
   render() {
     const children = [<MenuButton store={this.data.store}/>];
     if(this.data.store.isMenuOpen){
@@ -90,12 +92,15 @@ class MenuContent extends b.Component<{store: IHeaderStore}>{
   }
 
   scrollTo(sectionName: scrollSection): boolean {
-    scrollToWrapper(sectionName);
+    if(this.pageStore.currentPage === Page.Error)
+      this.navigateTo(Page.Home, "contact");
+    else
+      scrollToWrapper(sectionName);
     return true;
   }
 
   navigateTo(page: Page, sectionName?: scrollSection): boolean {
-    appStore().pageStore.goToPage(page, sectionName);
+    this.pageStore.goToPage(page, sectionName);
     return true;
   }
 

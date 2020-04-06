@@ -257,6 +257,18 @@
     0
   ],
   [
+    "Sorry, this door is locked, you will have to come back.",
+    null,
+    0,
+    "Litujeme tyto dveře jsou zamčené, budete se muset vrátit."
+  ],
+  [
+    "Go back",
+    null,
+    0,
+    "Vrátit se zpět"
+  ],
+  [
     "Cottage Švýcarka can be rented only as a whole object, just fill in the date of arrival and departure, and we will take care of everything else.",
     null,
     0,
