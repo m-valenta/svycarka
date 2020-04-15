@@ -4,7 +4,8 @@ import {
   colors,
   logo,
   buttonHover,
-  menuHeight
+  menuHeight,
+  headerContentSize
 } from "../../styleConstants";
 import { button } from "../button/buton";
 
@@ -17,7 +18,7 @@ export const wrapper = b.styleDef({
   backgroundColor: "white"
 });
 
-const contentStyle = b.styleDefEx(contentSize, {
+const contentStyle = b.styleDefEx(headerContentSize, {
   height: menuHeight,
   paddingLeft: 57,
   paddingRight: 43,
@@ -25,7 +26,7 @@ const contentStyle = b.styleDefEx(contentSize, {
   margin: "0 auto"
 });
 
-export const content = [contentSize, contentStyle];
+export const content = [headerContentSize, contentStyle];
 
 export const rezervationButton = b.styleDef(
   {

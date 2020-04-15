@@ -1,7 +1,7 @@
 import * as b from "bobril";
 import { IPageStore, Page } from "../data/pageStore/types";
 import { appStore } from "../data/appStore";
-import { colors, menuHeight, copyrightSectionHeight, contentSize } from "../styleConstants";
+import { colors, menuHeight, copyrightSectionHeight, contentSize, centerAbsoluteContent } from "../styleConstants";
 import { getResourceCssUrl } from "../utils/resourceUtils";
 import { errorBackground_png } from "../src/assets";
 import { t } from "bobril-g11n";
@@ -29,10 +29,9 @@ const styles = {
         backgroundImage: getResourceCssUrl(b.asset(errorBackground_png))
     }),
     errorInfo: b.styleDef({
-        width: "30%",
+        width: "330px",
         position: "absolute",
-        left: "35%",
-        top: 100,
+        top: 100
     }),
     textBase: b.styleDef({
         textAlign: "center",
@@ -62,10 +61,11 @@ export class ErrorPage extends b.Component {
         this.store.setPageInitialized(Page.Error);
     }
     render() {
+        console.log(b.getMedia());
         return <div style={styles.wrapperStyle}>
             <div style={styles.errorContent}>
                 <div style={styles.errorImage}></div>
-                <div style={styles.errorInfo}>
+                <div style={[styles.errorInfo, centerAbsoluteContent]}>
                     <div style={[styles.textBase, styles.textShadow, styles.text404]}>404</div>
                     <div style={[styles.textBase, styles.textShadow]}>{t("Sorry, this door is locked, you will have to come back.")}</div>
                     <div style={styles.buttonCenter}>

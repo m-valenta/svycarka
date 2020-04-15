@@ -15,7 +15,7 @@ import {
   remove_png,
   edit_png,
   bookmark_on_svg,
-  bookmark_off_svg
+  bookmark_off_svg,
 } from "./src/assets";
 import { getResourceCssUrl } from "./utils/resourceUtils";
 
@@ -30,64 +30,78 @@ export const colors = {
   selected_lang: "#D2C6B8",
   lang: "#EFEBE6",
   menu: "#729882",
-  errorBackground: " #D2C6B8"
+  errorBackground: " #D2C6B8",
 };
 
 const arrow = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(arrow_svg)),
   backgroundRepeat: "no-repeat",
   backgroundSize: "contain",
-  cursor: "pointer"
+  cursor: "pointer",
 });
 
 const arrow_right = b.styleDefEx(arrow, {
-  transform: "rotate(90deg)"
+  transform: "rotate(90deg)",
 });
 
 const arrow_left = b.styleDefEx(arrow, {
-  transform: "rotate(-90deg)"
+  transform: "rotate(-90deg)",
 });
 
 const hoverArrow = b.styleDef({
   background: colors.hover,
   "-webkit-mask": getResourceCssUrl(b.asset(arrow_svg)) + " no-repeat",
-  mask: getResourceCssUrl(b.asset(arrow_svg)) + " no-repeat",  
+  mask: getResourceCssUrl(b.asset(arrow_svg)) + " no-repeat",
 });
 
 export const rightArrow = b.styleDef([arrow, arrow_right], {
-  hover: [hoverArrow, { transform: "rotate(90deg)" }]
+  hover: [hoverArrow, { transform: "rotate(90deg)" }],
 });
 
 export const leftArrow = b.styleDef([arrow, arrow_left], {
-  hover: [hoverArrow, {transform: "rotate(-90deg)"}]
+  hover: [hoverArrow, { transform: "rotate(-90deg)" }],
 });
 
-export const closeButton = b.styleDef({
+export const closeButton = b.styleDef(
+  {
     background: getResourceCssUrl(b.asset(close_svg)) + " no-repeat",
-    cursor: "pointer"
-}, {
-  hover: {
-    background: colors.hover,
-    "-webkit-mask": getResourceCssUrl(b.asset(close_svg)) + " no-repeat",
-    mask: getResourceCssUrl(b.asset(close_svg)) + " no-repeat"  
+    cursor: "pointer",
+  },
+  {
+    hover: {
+      background: colors.hover,
+      "-webkit-mask": getResourceCssUrl(b.asset(close_svg)) + " no-repeat",
+      mask: getResourceCssUrl(b.asset(close_svg)) + " no-repeat",
+    },
   }
-})
+);
 
 export const lucida_sans_unicoderegular = "lucida_sans_unicoderegular";
 
 export const contentSize = b.styleDef({
-  width: "67%"
+  width: "67%",
+});
+
+// Measured :/
+export const headerContentSize = b.styleDef({
+  width: "67%",
+  minWidth: 1015
+})
+
+export const centerAbsoluteContent = b.styleDef({
+  left: "50%",
+  transform: "translate(-50%, 0)",
 });
 
 export const contentWrapper = b.styleDef({
   margin: "0 11% 0 14%",
-  padding: 0
+  padding: 0,
 });
 
 export const dateArrow = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(dateArrow_svg)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "contain"
+  backgroundSize: "contain",
 });
 
 const socialImage = b.styleDef({
@@ -95,47 +109,53 @@ const socialImage = b.styleDef({
   backgroundSize: "30px 30px",
 });
 
-
-
-const fbImage = b.styleDefEx(socialImage, {
-  backgroundImage: getResourceCssUrl(b.asset(fb_svg))
-}, {
-  hover: {
-    background: colors.hover,
-    "-webkit-mask": getResourceCssUrl(b.asset(fb_svg)) + "no-repeat",
-    mask: getResourceCssUrl(b.asset(fb_svg)) + "no-repeat" 
+const fbImage = b.styleDefEx(
+  socialImage,
+  {
+    backgroundImage: getResourceCssUrl(b.asset(fb_svg)),
+  },
+  {
+    hover: {
+      background: colors.hover,
+      "-webkit-mask": getResourceCssUrl(b.asset(fb_svg)) + "no-repeat",
+      mask: getResourceCssUrl(b.asset(fb_svg)) + "no-repeat",
+    },
   }
-});
+);
 
-const instagramImage = b.styleDefEx(socialImage, {
-  backgroundImage: getResourceCssUrl(b.asset(instagram_svg))
-}, {
-  hover: {
-    background: colors.hover,
-    "-webkit-mask": getResourceCssUrl(b.asset(instagram_svg)) +  "no-repeat",
-    mask: getResourceCssUrl(b.asset(instagram_svg))+ "no-repeat" 
+const instagramImage = b.styleDefEx(
+  socialImage,
+  {
+    backgroundImage: getResourceCssUrl(b.asset(instagram_svg)),
+  },
+  {
+    hover: {
+      background: colors.hover,
+      "-webkit-mask": getResourceCssUrl(b.asset(instagram_svg)) + "no-repeat",
+      mask: getResourceCssUrl(b.asset(instagram_svg)) + "no-repeat",
+    },
   }
-});
+);
 
 export const socialBackgrounds = {
   facebook: [socialImage, fbImage],
-  instagramImage: [socialImage, instagramImage]
+  instagramImage: [socialImage, instagramImage],
 };
 
 export const menuButton = {
   backgroundImage: getResourceCssUrl(b.asset(menu_svg)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "35px 30px"
+  backgroundSize: "35px 30px",
 };
 
 export const logo = b.styleDef({
   backgroundImage: getResourceCssUrl(b.asset(logo_svg)),
   backgroundRepeat: "no-repeat",
-  backgroundSize: "31px 35px"
+  backgroundSize: "31px 35px",
 });
 
 export const buttonHover = b.styleDef({
-    backgroundColor: colors.hover + " !important"
+  backgroundColor: colors.hover + " !important",
 });
 
 export const contacsBackgrounds = {
@@ -146,7 +166,7 @@ export const contacsBackgrounds = {
     backgroundPosition: "0 19%",
     width: 26,
     height: 28,
-    marginRight: 13
+    marginRight: 13,
   }),
   email: b.styleDef({
     backgroundImage: getResourceCssUrl(b.asset(email_svg)),
@@ -154,8 +174,8 @@ export const contacsBackgrounds = {
     backgroundSize: "26px 16px",
     width: 26,
     height: 16,
-    marginRight: 13
-  })
+    marginRight: 13,
+  }),
 };
 
 const tableButton = b.styleDef({
@@ -165,27 +185,27 @@ const tableButton = b.styleDef({
   backgroundSize: "20px 20px",
   cursor: "pointer",
   cssFloat: "left",
-  marginLeft: 5 
+  marginLeft: 5,
 });
 
 const addButtonBg = b.styleDefEx(tableButton, {
-  backgroundImage: getResourceCssUrl(b.asset(add_png))
+  backgroundImage: getResourceCssUrl(b.asset(add_png)),
 });
 
 const removeButtonBg = b.styleDefEx(tableButton, {
-  backgroundImage: getResourceCssUrl(b.asset(remove_png))
+  backgroundImage: getResourceCssUrl(b.asset(remove_png)),
 });
 
 const editButtonBg = b.styleDefEx(tableButton, {
-  backgroundImage: getResourceCssUrl(b.asset(edit_png))
+  backgroundImage: getResourceCssUrl(b.asset(edit_png)),
 });
 
 const bookmarkOnBg = b.styleDefEx(tableButton, {
-  backgroundImage: getResourceCssUrl(b.asset(bookmark_on_svg))
+  backgroundImage: getResourceCssUrl(b.asset(bookmark_on_svg)),
 });
 
 const bookmarkOffBg = b.styleDefEx(tableButton, {
-  backgroundImage: getResourceCssUrl(b.asset(bookmark_off_svg))
+  backgroundImage: getResourceCssUrl(b.asset(bookmark_off_svg)),
 });
 
 export const addButton = [tableButton, addButtonBg];
@@ -196,7 +216,6 @@ export const removeButton = [tableButton, removeButtonBg];
 
 export const bookmarkOn = [tableButton, bookmarkOnBg];
 export const bookmarkOff = [tableButton, bookmarkOffBg];
-
 
 export const menuHeight = 50;
 export const copyrightSectionHeight = 45;
@@ -225,34 +244,37 @@ export const zIndex = {
   overlay: 10,
   modal: 9999,
   buble: 10000,
-  loader: 11000
+  loader: 11000,
 };
 
 export const infoPagesStyle = {
-  wrapperStyle: b.styleDef([contentSize, {
+  wrapperStyle: b.styleDef([
+    contentSize,
+    {
       textAlign: "center",
-      margin: "0 auto"
-  }]),
+      margin: "0 auto",
+    },
+  ]),
   paragraphStyle: b.styleDef({
-      marginBottom: 20 
+    marginBottom: 20,
   }),
   h1Style: b.styleDef({
     fontSize: 18,
-    marginBottom: 20
+    marginBottom: 20,
   }),
   h2Style: b.styleDef({
     fontSize: 16,
-    marginBottom: 20
+    marginBottom: 20,
   }),
   h2StyleBold: b.styleDef({
     fontWeight: "bold",
     fontSize: 16,
-    marginBottom: 20
+    marginBottom: 20,
   }),
   h2StyleBoldUnderlined: b.styleDef({
     fontWeight: "bold",
     textDecoration: "underline",
     fontSize: 16,
-    marginBottom: 10
-  })
+    marginBottom: 10,
+  }),
 };
