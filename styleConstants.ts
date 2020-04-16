@@ -86,8 +86,8 @@ export const contentSize = b.styleDef({
 // Measured :/
 export const headerContentSize = b.styleDef({
   width: "67%",
-  minWidth: 1015
-})
+  minWidth: 1015,
+});
 
 export const centerAbsoluteContent = b.styleDef({
   left: "50%",
@@ -280,9 +280,14 @@ export const infoPagesStyle = {
   }),
 };
 
-export const invalidItemStyle = b.styleDef({
-  border: `solid 1px ${colors.buttonRed}`,
-  boxShadow: "2px 2px 8px 0px rgba(160,26,35,0.59)",
-  borderRadius: 2,
-  color: colors.buttonRed
-});
+export const invalidItemStyle = b.styleDef(
+  {
+    border: `solid 2px ${colors.buttonRed}  !important`,
+    color: colors.buttonRed,
+  },
+  {
+    ":placeholder": {
+      color: colors.buttonRed,
+    },
+  }
+);

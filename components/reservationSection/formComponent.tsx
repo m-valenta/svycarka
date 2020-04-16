@@ -23,39 +23,39 @@ export class ReservationForm extends b.Component<IData> {
     const isValidBeforeRevalidate = this.data.store.test();
 
     return (
-        <div style={styles.formWrapper}>
-          <TextSection>
-            {{
-              header: t("Reservation form"),
-              content: t(
-                "All data must be filled in to complete the reservation."
-              )
-            }}
-          </TextSection>
-          <DateInput store={this.data.store} />
-          <div style={styles.formInputsWrapper}>
-            <FormInput
-              placeholder={t("Name and surname")}
-              formItem={this.data.store.name}
-              type="text"
-            />
-            <FormInput
-              placeholder={t("Street, house number, city, postal code")}
-              formItem={this.data.store.address}
-              type="text"
-            />
-            <FormInput
-              placeholder={t("Email")}
-              formItem={this.data.store.email}
-              type="email"
-            />
-            <FormInput
-              placeholder={t("Phone")}
-              formItem={this.data.store.phone}
-              type="text"
-            />
-          </div>
-          {/* <Expander
+      <div style={styles.formWrapper}>
+        <TextSection>
+          {{
+            header: t("Reservation form"),
+            content: t(
+              "All data must be filled in to complete the reservation."
+            ),
+          }}
+        </TextSection>
+        <DateInput store={this.data.store} />
+        <div style={styles.formInputsWrapper}>
+          <FormInput
+            placeholder={t("Name and surname")}
+            formItem={this.data.store.name}
+            type="text"
+          />
+          <FormInput
+            placeholder={t("Street, house number, city, postal code")}
+            formItem={this.data.store.address}
+            type="text"
+          />
+          <FormInput
+            placeholder={t("Email")}
+            formItem={this.data.store.email}
+            type="email"
+          />
+          <FormInput
+            placeholder={t("Phone")}
+            formItem={this.data.store.phone}
+            type="text"
+          />
+        </div>
+        {/* <Expander
           headerText={t("I'm interested in additional services")}
           expandedWidth={440}
           expandedHeight={105}
@@ -77,38 +77,38 @@ export class ReservationForm extends b.Component<IData> {
             </div>
           </div>
         </Expander> */}
-          <Captcha
-            siteKey="6LfK768UAAAAAAjphbs9g6GErMGX3B7ZmYr9hk-R"
-            isValid={this.data.store.gc_Response.isValid}
-          />
-          <div style={styles.aggrementWrapper}>
-            <FormAgreement agreementItem={this.data.store.agreement} />
-          </div>
-          <div
-            style={[
-              buttonWrapper,
-              isValidBeforeRevalidate ? { paddingTop: 20 } : { marginTop: -17 }
-            ]}
-          >
-            {isValidBeforeRevalidate ? (
-              b.withKey(<></>, "valInfoEmpty")
-            ) : (
-              <div key="valInfo" style={styles.validationInfoStyle}>
-                {t("*Reservation form contains some validation errors.")}
-              </div>
-            )}
-            <Button
-              key="resBtn"
-              colorScheme={colors.buttonRed}
-              text={t("Reserve date")}
-              onClick={() => {
-                if (this.data.store.validate()) {
-                  this.data.store.storeReservation();
-                }
-              }}
-            />
-          </div>
+        <Captcha
+          siteKey="6LfK768UAAAAAAjphbs9g6GErMGX3B7ZmYr9hk-R"
+          isValid={this.data.store.gc_Response.isValid}
+        />
+        <div style={styles.aggrementWrapper}>
+          <FormAgreement agreementItem={this.data.store.agreement} />
         </div>
+        <div
+          style={[
+            buttonWrapper,
+            isValidBeforeRevalidate ? { paddingTop: 20 } : { marginTop: -17 },
+          ]}
+        >
+          {isValidBeforeRevalidate ? (
+            b.withKey(<></>, "valInfoEmpty")
+          ) : (
+            <div key="valInfo" style={styles.validationInfoStyle}>
+              {t("*Reservation form contains some validation errors.")}
+            </div>
+          )}
+          <Button
+            key="resBtn"
+            colorScheme={colors.buttonRed}
+            text={t("Reserve date")}
+            onClick={() => {
+              if (this.data.store.validate()) {
+                this.data.store.storeReservation();
+              }
+            }}
+          />
+        </div>
+      </div>
     );
   }
 }
@@ -156,7 +156,7 @@ class FormAgreement extends b.Component<{
     const checkboxStyle: b.IBobrilStyle[] = [styles.agreementCheckbox];
     const textStyle: b.IBobrilStyle[] = [styles.agreementTextWrapper];
     if (!this.data.agreementItem.isValid) {
-      checkboxStyle.push(styles.agreementCheckboxInvalid);
+      checkboxStyle.push(invalidItemStyle);
       textStyle.push(styles.agreementTextWrapperInvalid);
     }
 

@@ -123,17 +123,18 @@ class ReservationPage extends b.Component {
         </div>
         {this.reservationStore.reservationFormState ===
         ReservationFormState.visible ? (
-          <Modal
+          <Modal key="reservation_modal_form"
             close={() => {
+              this.reservationStore.clear();
               this.reservationStore.reservationFormState =
                 ReservationFormState.hidden;
             }}
           >
-            {<ReservationForm store={this.reservationStore} />}
+            {<ReservationForm key="reservation_form" store={this.reservationStore} />}
           </Modal>
         ) : this.reservationStore.reservationFormState ===
           ReservationFormState.finalized ? (
-          <Modal
+          <Modal key="reservation_modal_finalization"
             horizontalCentered={true}
             close={() => {
               this.reservationStore.clear();
@@ -141,7 +142,7 @@ class ReservationPage extends b.Component {
                 ReservationFormState.hidden;
             }}
           >
-            <FinalizedReservation />
+            <FinalizedReservation key="reservation_finalization" />
           </Modal>
         ) : (
           <></>
