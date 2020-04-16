@@ -28,19 +28,6 @@ initGlobalization({
   await setLocale(locales.czech);
   initAppStore();
   b.routes([
-    b.route({ handler: masterPage }, [
-      b.route({ url: "/tips", name: "tips", handler: tipsPage }),
-      b.route({
-        url: "/reservation",
-        name: "reservation",
-        handler: reservationPage
-      }),
-      b.routeDefault({ handler: homePage, name: "home" }),
-      b.routeNotFound({
-        url: "/error",
-        handler: errorPage
-      })
-    ]),
     b.route({
       url: "/login",
       name: "login",
@@ -71,7 +58,20 @@ initGlobalization({
         name: "adminReservations",
         handler: reservationsPage
       }),
-    ])
+    ]),
+    b.route({ handler: masterPage }, [
+      b.route({ url: "/tips", name: "tips", handler: tipsPage }),
+      b.route({
+        url: "/reservation",
+        name: "reservation",
+        handler: reservationPage
+      }),
+      b.routeDefault({ handler: homePage, name: "home" }),
+      b.routeNotFound({
+        url: "/error",
+        handler: errorPage
+      })
+    ]),
   ]);
   b.addRoot(() => {
     return [
