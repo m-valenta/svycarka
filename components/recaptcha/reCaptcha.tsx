@@ -3,6 +3,7 @@ import * as b from "bobril";
 import * as styles from "./style";
 import { IReservationStore } from "../../data/reservation/types";
 import { appStore } from "../../data/appStore";
+import { invalidItemStyle } from "../../styleConstants";
 
 export var utils = {
   getResponse(): string {
@@ -43,7 +44,7 @@ export class Captcha extends b.Component<IReCaptchaData> {
 
   render(): b.IBobrilNode {
     const usedStyles = [styles.base];
-    !this.store.gc_Response.isValid && usedStyles.push(styles.invalid);
+    !this.store.gc_Response.isValid && usedStyles.push(invalidItemStyle);
 
     return (
       <div>

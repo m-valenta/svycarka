@@ -8,6 +8,7 @@ import { Buble } from "../buble/component";
 import { Calendar } from "../calendar/component";
 import { basicReservationtrategy } from "../calendar/reservationStrategies/basicStrategy";
 import { appStore } from "../../data/appStore";
+import { invalidItemStyle } from "../../styleConstants";
 
 export interface IData {
   store: IReservationStore;
@@ -51,7 +52,7 @@ export class DateInput extends b.Component<IData> {
 
     const wrapperStyles: b.IBobrilStyle[] = [styles.wrapper];
     !this.data.store.currentReservation.isValid &&
-      wrapperStyles.push(styles.wrapperInvalid);
+      wrapperStyles.push(invalidItemStyle);
 
     return <div style={wrapperStyles}>{children}</div>;
   }

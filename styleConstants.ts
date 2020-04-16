@@ -20,6 +20,7 @@ import {
 import { getResourceCssUrl } from "./utils/resourceUtils";
 
 export const colors = {
+  text: "black",
   calendarSilver: "#8c8c8c",
   calendarRed: "#a01a22",
   inputSilver: "#d2c6b8",
@@ -278,3 +279,10 @@ export const infoPagesStyle = {
     marginBottom: 10,
   }),
 };
+
+export const invalidItemStyle = b.styleDef({
+  border: `solid 1px ${colors.buttonRed}`,
+  boxShadow: "2px 2px 8px 0px rgba(160,26,35,0.59)",
+  borderRadius: 2,
+  color: colors.buttonRed
+});

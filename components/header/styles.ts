@@ -1,6 +1,5 @@
 import * as b from "bobril";
 import {
-  contentSize,
   colors,
   logo,
   buttonHover,

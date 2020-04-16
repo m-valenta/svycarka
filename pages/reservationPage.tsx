@@ -134,6 +134,7 @@ class ReservationPage extends b.Component {
         ) : this.reservationStore.reservationFormState ===
           ReservationFormState.finalized ? (
           <Modal
+            horizontalCentered={true}
             close={() => {
               this.reservationStore.clear();
               this.reservationStore.reservationFormState =

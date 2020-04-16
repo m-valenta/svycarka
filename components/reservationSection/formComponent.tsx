@@ -9,7 +9,7 @@ import { Expander } from "../expander/component";
 import { Spinner } from "../spinner/component";
 import { appStore } from "../../data/appStore";
 import { buttonWrapper } from "../tipsSection/styles";
-import { colors } from "../../styleConstants";
+import { colors, invalidItemStyle } from "../../styleConstants";
 import { Button } from "../button/buton";
 import Captcha, { utils } from "../recaptcha/reCaptcha";
 import { gdprTransition } from "../../transitions";
@@ -132,7 +132,7 @@ class FormInput extends b.Component<{
     }
 
     if (!item.isValid) {
-      style.push(styles.formInputInvalid);
+      style.push(invalidItemStyle);
     }
 
     return (

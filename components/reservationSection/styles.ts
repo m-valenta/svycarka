@@ -58,8 +58,13 @@ export const textSpecialContent = b.styleDef({
 });
 
 export const formWrapper = b.styleDef({
-  width: 700,
-  margin: "10% auto"
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  display: "inline-block",
+  minWidth: 700,
+  transform: "translate(-50%, -25%)",
+  marginBottom: 20
 });
 
 export const formInputsWrapper = b.styleDef({
@@ -80,11 +85,6 @@ export const formInput = b.styleDef({
 
 export const formInputWithValue = b.styleDefEx(formInput, {
   color: "black"
-});
-
-export const formInputInvalid = b.styleDefEx([formInput, formInputWithValue], {
-  border: `solid 1px ${colors.buttonRed}`,
-  color: colors.buttonRed
 });
 
 export const spinnerWrapper = b.styleDef({

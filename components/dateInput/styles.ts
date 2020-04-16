@@ -19,10 +19,6 @@ export const wrapper = b.styleDef(
   }
 );
 
-export const wrapperInvalid = b.styleDefEx(wrapper, {
-  border: `solid 1px ${colors.buttonRed}`
-});
-
 export const date = b.styleDef({
   width: 116,
   height: 23,

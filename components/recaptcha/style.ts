@@ -6,7 +6,3 @@ export const base = b.styleDef({
     margin: "30px auto 0 auto",
     borderRadius: 2
 });
-
-export const invalid = b.styleDefEx(base, {
-    border: `solid 1px ${colors.buttonRed}`,
-});

@@ -3,7 +3,8 @@ import { colors } from "../../styleConstants";
 
 export const wrapperStyle = b.styleDef({
   width: "100%",
-  fontSize: 24
+  fontSize: 24,
+  color: colors.text
 });
 
 export const rowStyle = b.styleDef({

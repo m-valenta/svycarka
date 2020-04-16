@@ -25,7 +25,7 @@ export function validateEmail(email: string | undefined): boolean {
 
 export function validatePhone(phone: string | undefined): boolean {
   return (
-    phone !== undefined && phone.length > 0 && phoneNumberRegex.test(phone)
+    phone !== undefined && phone.length >= 9 && phoneNumberRegex.test(phone)
   );
 }
 
