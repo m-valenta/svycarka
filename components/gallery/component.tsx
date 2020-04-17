@@ -75,7 +75,7 @@ export class Gallery extends b.Component {
               </div>,
               <div>
                 {[
-                  t("if you add it to facebook or instagram under hastagem"),
+                  t("if you add it to facebook or instagram under hashtag"),
                   <span style={styles.hashtag}>#svycarka.com</span>
                 ]}
               </div>
@@ -455,7 +455,7 @@ class GallerySliderItem extends b.Component<ISliderItemData> {
         r={diameter}
         cx={this._startPosition}
         cy={this._verticalCenter - sliderSize.activeDiameter}
-        fill={active ? "black" : colors.inputSilver}
+        fill={active ? `${colors.hover_menu}` : colors.inputSilver}
         style={{ cursor: "pointer" }}
       />,
       this.tryGetLine()
@@ -532,7 +532,7 @@ function SliderProgressLine(data: {
       x2={data.startPosition + data.lineState.lineLength}
       y1={data.lineTop}
       y2={data.lineTop}
-      style={{ stroke: "rgb(0,0,0)", strokeWidth: 1 }}
+      style={{ stroke: `${colors.hover_menu}`, strokeWidth: 1 }}
     />
   );
 }
