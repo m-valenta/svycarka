@@ -37,8 +37,14 @@ export const hashtag = b.styleDef({
   color: colors.buttonYellow
 });
 
+/*
+  a) Original photos has dimensions: 1800 x 1080 (60% height:width ratio)
+  b) Gallery item takes 52.5% of overall width (50% page width + 105% width of parent item (50%))
+  c) padding (eq. photos height) = 60% * 0,525
+*/
+
 export const galleryWrapper = b.styleDef({
-  paddingBottom: "40%",
+  paddingBottom: "31.4%",
   marginBottom: 44
 });
 
