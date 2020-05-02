@@ -2,7 +2,7 @@ import { locales } from "../constants";
 
 export function getBackendLocaleId(locale: string): number {
   switch (locale) {
-    case locales.default:
+    case locales.english:
       return 0;
     default:
       return 1;
@@ -20,7 +20,7 @@ export function getLocaleCode(locale: number): string {
 
 export function getlocaleName(locale: string): string {
   switch (locale) {
-    case locales.default:
+    case locales.english:
       return "EN";
     default:
       return "CS";

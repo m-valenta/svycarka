@@ -1,5 +1,6 @@
 export const locales = {
     default: "en-US",
+    english: "en-GB",
     czech: "cs-CZ"
 };
 
