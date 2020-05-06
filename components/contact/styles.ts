@@ -1,6 +1,6 @@
 import * as b from "bobril";
 import { getResourceCssUrl } from "../../utils/resourceUtils";
-import { kontakt_background_png, jakub_jpg } from "../../src/assets";
+import { kontakt_background_png, jakub_png } from "../../src/assets";
 import { contentSize } from "../../styleConstants";
 
 export const wrapper = b.styleDef({
@@ -17,13 +17,12 @@ const contentStyle = b.styleDefEx(contentSize, {
 });
 
 export const kubaFoto = b.styleDef({
-  backgroundImage: getResourceCssUrl(b.asset(jakub_jpg)),
+  backgroundImage: getResourceCssUrl(b.asset(jakub_png)),
   backgroundRepeat: "no-repeat",
   backgroundSize: "159px 159px",
   width: 159,
   height: 159,
   borderRadius: "50%",
-  transform: "rotate(-35deg)",
   marginTop: 40.5,
   cssFloat: "left"
 });
