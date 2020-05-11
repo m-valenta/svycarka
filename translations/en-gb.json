@@ -41,6 +41,11 @@
     0
   ],
   [
+    "#svycarka.com",
+    null,
+    0
+  ],
+  [
     "Reservation",
     null,
     0
@@ -101,21 +106,6 @@
     0
   ],
   [
-    "New Year's Eve - we're still free",
-    null,
-    0
-  ],
-  [
-    "(As a bonus Christmas decor and a bottle of champagne)",
-    null,
-    0
-  ],
-  [
-    "44 500 Kč / per week including New Year's Eve and New Year's Eve",
-    null,
-    0
-  ],
-  [
     "Christmas",
     null,
     0
@@ -127,6 +117,21 @@
   ],
   [
     "19 500 CZK / for Christmas holidays including Christmas Eve",
+    null,
+    0
+  ],
+  [
+    "New Year's Eve - we're still free",
+    null,
+    0
+  ],
+  [
+    "(As a bonus Christmas decor and a bottle of champagne)",
+    null,
+    0
+  ],
+  [
+    "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0
   ],
@@ -432,7 +437,12 @@
     0
   ],
   [
-    "Hospitality directly in Olešnice: Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)",
+    "Restaurants and pubs: ",
+    null,
+    0
+  ],
+  [
+    "Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)",
     null,
     0
   ],
@@ -477,7 +487,7 @@
     0
   ],
   [
-    "Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná, Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)",
+    "Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná,@br@Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)",
     null,
     0
   ],
@@ -487,37 +497,32 @@
     0
   ],
   [
-    "The possibility to visit even more distant ski resorts in the Giant Mountains: Areál Buky (60.1km), SkiResort ČERNÁ HORA - PEC (67.3km), Malá Úpa (81.7km) SKI Pec pod Snezkou (75km)",
-    null,
-    0
-  ],
-  [
     "Cross-country skiing ",
     null,
     0
   ],
   [
-    "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/",
+    "Knížecí cesta - access to the track possible from Olešnice rozcestí (1.2 km from@br@the cottage) or from Číhalka (1.7 km from the cottage)",
     null,
     0
   ],
   [
-    "http://skimapa.cz/oblast/orlicke-hory - start of circuits from Olešnice crossroad (1.2km), or from Číhalka (1,7km)",
+    "To the highest peak of the Orlické Mountains - from Deštná in O. h. Via Luisino Údolí - Velká Deštná (1,115 m above sea level) - Šerlišské sedlo - Masaryk's cottage - Šerlišský mlýn and back to Deštná in O. h., Route length 18 km (distance from the cottage 12,4 km)",
     null,
     0
   ],
   [
-    "To the highest peak of the Orlické Mountains - from Deštné via Luisino Údolí, Velká Deštná (1115 meters above sea level), Šerlišské sedlo, Masaryk chateau, Šerlišský mlýn-back to Deštné, route length 18km (12.4km)",
+    "Orlické Záhoří - Illuminated cross-country ski circuit 5 km long (distance from the cottage 24.4 km)",
     null,
     0
   ],
   [
-    "Orlické záhoří - Illuminated cross-country skiing circuit (24.4km)",
+    "Along the ridges - start of the route from Číhalka (1.7 km away from the cottage) - Ostružník - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads (1.2 km from the cottage), length of the route 20 km (possibility to end the route in Masaryk cottage and go to Olešnice by bus",
     null,
     0
   ],
   [
-    "On the mountain ridges Olešnice in the Orlické Mountains (Číhalka-1.7km) - Otružník - Vrchmezí - Šerlich (13km from the cottage), route 8km Olešnice v Orlických horách (Číhalka- 1.7km) - Ostružník - Vrchmezí - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Olešnice v Orlických horách (crossroads 1.2km in the direction of náměstíčko), length of the route 16km (possibility to terminate the route at Masaryk Cottage and cross to Olešnice by bus)",
+    "Current state of cross-country trails",
     null,
     0
   ],
@@ -527,32 +532,32 @@
     0
   ],
   [
-    "Possibility of using the cyclobus on the route Olešnice v Orlických horách (9:05) - Sedloňov (9:14) - Deštné (9:22) - Masarykova chata (9:35) valley back to Olešnice v Orl.horách",
+    "Relaxation route - from Masaryk's cottage to Sedloňovský vrch or Ruské údolí to Olešnice in O. h. (Cycle bus on the route Olešnice in Orlické hory - Sedloňov - Deštné - Masaryk's cottage), approx. 12 km",
     null,
     0
   ],
   [
-    "The whole circuit: Olešnice v oh pezes Číhalka in Olešnice in O.h. - Zieleniec - Lasówka-Mostowice-Orlické Záhoří - Masaryk Chalet - Šerlišský Mill - Russian Valley - Olešnice in O.h. - Skutina Artillery Fortress in Sněžná - Ruské údolí - Olešnice v Oh, route length 12km, link: https://mapy.cz/s/368PL",
+    "Trasa po československém opevnění – Olešnice v O. h. – Dělostřelecká tvrz Skutina ve Sněžném – Stenka – Ruské údolí – Olešnice v Oh, délka trasy 12 km",
     null,
     0
   ],
   [
-    "Circuit: Olešnice v Orl.horách, Číhalka - Zieleniec - Orlické Záhoří - Šerliššký Mill - Sedloňovský vrch - Olešnice v Orl.horách, Horní Olešnice crossroad",
+    "Sightseeing route - from the cottage around Číhalka - Knížecí cesta (red cycle route 4071) - Rozc. Knížecí and Polomské - Pod Sedloňovským vrchem - Údolí Bělé - Polomský kopec - Spring Bělé - Vrchmezí - Ostružník - Nad Olešnicí, viewpoint, route length 19 km",
     null,
     0
   ],
   [
-    "Circuit: Olešnice v Oh through Borova to Pekelske udoli-Lookout Tower Sendraz-Ruins of Frymburk-Rokole Castle - track length 34km, link: https://mapy.cz/s/368g1",
+    "Route to Pekla - Olešnice in O. h. Via Borová - Pekelské údolí - Sendráž Lookout Tower - Frymburk Castle Ruins - Rokole - route length 35 km",
     null,
     0
   ],
   [
-    "Circuit: Olesnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. - Sedloňovský vrch to Olešnice in O.h., route 34km, link: https://mapy.cz/s/368zq",
+    "Long circuit - from the cottage around Číhalka - Zieleniec - Lasówka - Mostowice - Orlické Záhoří - Masaryk cottage - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads, route length 47 km",
     null,
     0
   ],
   [
-    "Circuit: Olešnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. further to Kunštátská chapel - Anenský vrch - fortress Hanička and back through Deštná in o.h-Sedloňov - Polom to Olešnice in O.h., track length 73km, link: https://mapy.cz/s/368r7",
+    "Route for able athletes - Olešnice in O. h. Through Číhalka - Masaryk cottage - Velká Deštná (1115 m asl) - Kunštát chapel - Anenský vrch - Hanička fortress - back through Deštná - Sedloňov - Polom - Olešnice in O. h., Length route 73 km",
     null,
     0
   ],
@@ -562,57 +567,72 @@
     0
   ],
   [
-    "From Masaryk Cottage (17km away) either to Šerlišský Mill or to Velká Deštná 1115 meters above sea level ",
+    "Panský kopec, 2.4 km from the cottage",
     null,
     0
   ],
   [
-    "Panský kopec, 2.4km from the cottage ",
+    "Lookout tower Feistův kopec, 2.8 km from the cottage",
     null,
     0
   ],
   [
-    "Jiráskova cesta - marked in red, coming to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice rising through Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds through the entire length of the Orlické Mountains ridge to Jablonné nad Orlicí. Jiraskova cesta is 100 km long. ",
+    "Jirásek's path - follow the red tourist sign (it comes to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice it rises via Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds over the entire length of the Orlické ridge to Jablonné nad Orlicí) the total length is 100 km",
     null,
     0
   ],
   [
-    "Rock town Hejšovina (Szczeliniec Wielki-PL), 28km away ",
+    "Masarykova chata (17 km away) - trip to Šerlišský mlýn or Velká Deštná (possibility to use the bus)",
     null,
     0
   ],
   [
-    "Broumovská vrchovina - Ostaš - distance 35km, Teplické skály - 42km away, Adršpašské skály - 48km, Chapel of Our Lady of the Snow (Hvězda) with view of Broumovsko - 37km in Neratov, microbrewery, café (recommended), 36km away ",
+    "Kudowa-Zdrój Spa, 14 km away",
     null,
     0
   ],
   [
-    "Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), 19km away ",
+    "Dobrošov - Jirásek's cottage and Hanička artillery fortress, distance 14 km",
     null,
     0
   ],
   [
-    "Kudowa-Zdrój Spa, 14km away ",
+    "Nové Město nad Metují Castle, distance 17 km",
     null,
     0
   ],
   [
-    "Japanese Garden (Ogród Japoński-PL), 10km distance Náchod (19km), Nové Město nad Metují (17km), Ratibořice near Česká Skalice (33km) and Opočno (23km) ",
+    "Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), distance 19 km",
     null,
     0
   ],
   [
-    "Dobrošov - Jiráskova chata and artillery fortress, 14km away ",
+    "Japanese Garden (Ogród Japoński - PL), distance 19 km",
     null,
     0
   ],
   [
-    "Rozkoš Reservoir",
+    "Water reservoir Rozkoš, distance 20 km",
+    null,
+    0
+  ],
+  [
+    "Hejšovina Rock City (Szczeliniec Wielki-PL), 28 km away",
+    null,
+    0
+  ],
+  [
+    "Broumov Highlands - Ostas - 35 km away",
     null,
     0
   ],
   [
     "More: ",
+    null,
+    0
+  ],
+  [
+    "Village website",
     null,
     0
   ],

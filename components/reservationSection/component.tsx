@@ -13,7 +13,6 @@ import {
 } from "../../src/assets";
 import { Button } from "../button/buton";
 import { colors } from "../../styleConstants";
-import { buttonStyle } from "../button/styles";
 import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";
 
@@ -118,6 +117,14 @@ export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
         {[t("Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu")]}
       </TextBlock>
       <TextBlock
+        header={t("Christmas")}
+        specialInfo={t(
+          "(As a bonus Christmas decor, candy, christmas tree and carp included)"
+        )}
+      >
+        {[t("19 500 CZK / for Christmas holidays including Christmas Eve")]}
+      </TextBlock>      
+      <TextBlock
         header={t("New Year's Eve - we're still free")}
         specialInfo={t(
           "(As a bonus Christmas decor and a bottle of champagne)"
@@ -126,14 +133,6 @@ export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
         {[
           t("44 500 Kč / per week including New Year's Eve and New Year's Eve")
         ]}
-      </TextBlock>
-      <TextBlock
-        header={t("Christmas")}
-        specialInfo={t(
-          "(As a bonus Christmas decor, candy, christmas tree and carp included)"
-        )}
-      >
-        {[t("19 500 CZK / for Christmas holidays including Christmas Eve")]}
       </TextBlock>
     </>
   );

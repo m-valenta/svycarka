@@ -141,6 +141,10 @@ class LanguageSection extends b.Component<{ store: IHeaderStore }> {
     if (this.data.store.isLanguageSelectionOpen) {
       for (let localeKey in locales) {
         let locale = locales[localeKey];
+
+        if(locale == locales.default)
+          continue;
+
         let isSelected = locale === this._currentLocale;
         children.push(
           <this.languageButton

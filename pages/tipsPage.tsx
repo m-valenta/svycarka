@@ -3,6 +3,7 @@ import { appStore } from "../data/appStore";
 import { Page, IPageStore } from "../data/pageStore/types";
 import { contentSize, colors } from "../styleConstants";
 import { t } from "bobril-g11n";
+import { addLineBreaks } from "../utils/textUtils";
 
 const styles = {
   contentStyle: b.styleDef({
@@ -13,6 +14,9 @@ const styles = {
     fontSize: 16,
     marginBottom: 25,
   }),
+  commonTextBoldPrefix: {
+    fontWeight: "bold",
+  },
   headerText: b.styleDefEx(this.commonText, {
     fontSize: 30,
     marginBottom: 15,
@@ -52,9 +56,9 @@ class TipsPage extends b.Component {
         <this.commonText>
           {t("The nearest food in Olešnice, 1.6 km from the cottage.")}
         </this.commonText>
-        <this.commonText>
+        <this.commonText boldPrefix={t("Restaurants and pubs: ")}>
           {t(
-            "Hospitality directly in Olešnice: Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)"
+            "Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)"
           )}
         </this.commonText>
         <this.headerText>{t("Trip Tips / Sports Activities")}</this.headerText>
@@ -67,110 +71,79 @@ class TipsPage extends b.Component {
             t("Ski center Deštné v Orlických horách (12,4km)"),
             t("Zieleniec Ski Arena (PL) (21.3km)"),
             t(
-              "Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná, Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)"
+              `Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná,@br@Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)`
             ),
-            t("Ski center Říčky v Orlických horách (31.9km)"),
-            t(
-              "The possibility to visit even more distant ski resorts in the Giant Mountains: Areál Buky (60.1km), SkiResort ČERNÁ HORA - PEC (67.3km), Malá Úpa (81.7km) SKI Pec pod Snezkou (75km)"
-            ),
+            t("Ski center Říčky v Orlických horách (31.9km)")
           ]}
         </this.section>
         <this.section header={t("Cross-country skiing ")}>
           {[
+            t("Knížecí cesta - access to the track possible from Olešnice rozcestí (1.2 km from@br@the cottage) or from Číhalka (1.7 km from the cottage)"),
             {
-              text: t(
-                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/"
-              ),
-              url:
-                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/",
+              text: t("To the highest peak of the Orlické Mountains - from Deštná in O. h. Via Luisino Údolí - Velká Deštná (1,115 m above sea level) - Šerlišské sedlo - Masaryk's cottage - Šerlišský mlýn and back to Deštná in O. h., Route length 18 km (distance from the cottage 12,4 km)"),
+              url: "https://mapy.cz/turisticka?planovani-trasy&x=16.3818075&y=50.3169199&z=12&rc=9l1bsxZITLl7YadBhoGkLVeFBxZOOpAFgs038Rg94dIyxZITL&rs=muni&rs=base&rs=base&rs=area&rs=base&rs=base&rs=muni&ri=2647&ri=1697644&ri=2026473&ri=21508&ri=2234749&ri=2214420&ri=2647&mrp=%7B%22c%22%3A141%7D&xc=%5B%22CZE%22%2C%22POL%22%5D"
             },
             {
-              text: t(
-                "http://skimapa.cz/oblast/orlicke-hory - start of circuits from Olešnice crossroad (1.2km), or from Číhalka (1,7km)"
-              ),
-              url: "http://skimapa.cz/oblast/orlicke-hory",
+              text: t("Orlické Záhoří - Illuminated cross-country ski circuit 5 km long (distance from the cottage 24.4 km)"),
+              url: "http://www.orlickezahori.eu/"
             },
-            t(
-              "To the highest peak of the Orlické Mountains - from Deštné via Luisino Údolí, Velká Deštná (1115 meters above sea level), Šerlišské sedlo, Masaryk chateau, Šerlišský mlýn-back to Deštné, route length 18km (12.4km)"
-            ),
-            t(
-              "Orlické záhoří - Illuminated cross-country skiing circuit (24.4km)"
-            ),
-            t(
-              "On the mountain ridges Olešnice in the Orlické Mountains (Číhalka-1.7km) - Otružník - Vrchmezí - Šerlich (13km from the cottage), route 8km Olešnice v Orlických horách (Číhalka- 1.7km) - Ostružník - Vrchmezí - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Olešnice v Orlických horách (crossroads 1.2km in the direction of náměstíčko), length of the route 16km (possibility to terminate the route at Masaryk Cottage and cross to Olešnice by bus)"
-            ),
+            {
+              text: t("Along the ridges - start of the route from Číhalka (1.7 km away from the cottage) - Ostružník - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads (1.2 km from the cottage), length of the route 20 km (possibility to end the route in Masaryk cottage and go to Olešnice by bus"),
+              url:"https://mapy.cz/turisticka?planovani-trasy&x=16.3369783&y=50.3611743&z=14&rc=9laGIxZdBjR3bm2j.5xZQnTe6JfVQdzSjDeaEJxZcn5&rs=coor&rs=base&rs=base&rs=area&rs=coor&rs=base&ri=&ri=2009553&ri=2025042&ri=21697&ri=&ri=1987591&mrp=%7B%22c%22%3A141%7D&xc=%5B%22CZE%22%2C%22POL%22%5D"
+            },
+            {
+              text: t("Current state of cross-country trails"),
+              url: "http://skimapa.cz/oblast/orlicke-hory"
+            }
           ]}
         </this.section>
         <this.section header={t("Cycling")}>
           {[
-            t(
-              "Possibility of using the cyclobus on the route Olešnice v Orlických horách (9:05) - Sedloňov (9:14) - Deštné (9:22) - Masarykova chata (9:35) valley back to Olešnice v Orl.horách"
-            ),
-            t(
-              "The whole circuit: Olešnice v oh pezes Číhalka in Olešnice in O.h. - Zieleniec - Lasówka-Mostowice-Orlické Záhoří - Masaryk Chalet - Šerlišský Mill - Russian Valley - Olešnice in O.h. - Skutina Artillery Fortress in Sněžná - Ruské údolí - Olešnice v Oh, route length 12km, link: https://mapy.cz/s/368PL"
-            ),
-            t(
-              "Circuit: Olešnice v Orl.horách, Číhalka - Zieleniec - Orlické Záhoří - Šerliššký Mill - Sedloňovský vrch - Olešnice v Orl.horách, Horní Olešnice crossroad"
-            ),
+            t("Relaxation route - from Masaryk's cottage to Sedloňovský vrch or Ruské údolí to Olešnice in O. h. (Cycle bus on the route Olešnice in Orlické hory - Sedloňov - Deštné - Masaryk's cottage), approx. 12 km"),
             {
-              text: t(
-                "Circuit: Olešnice v Oh through Borova to Pekelske udoli-Lookout Tower Sendraz-Ruins of Frymburk-Rokole Castle - track length 34km, link: https://mapy.cz/s/368g1"
-              ),
-              url: "https://mapy.cz/s/368g1",
+              text: t("Trasa po československém opevnění – Olešnice v O. h. – Dělostřelecká tvrz Skutina ve Sněžném – Stenka – Ruské údolí – Olešnice v Oh, délka trasy 12 km"),
+              url: "https://mapy.cz/zakladni?planovani-trasy&x=16.2991847&y=50.3621727&z=14&rc=9lYBhxZdqfa3n19cjN654B5lggSmfWcjeH&rs=addr&rs=base&rs=base&rs=base&rs=addr&ri=10999760&ri=1721023&ri=2022885&ri=2096741&ri=10999760&mrp=%7B%22c%22%3A121%7D&xc=%5B%5D"
             },
             {
-              text: t(
-                "Circuit: Olesnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. - Sedloňovský vrch to Olešnice in O.h., route 34km, link: https://mapy.cz/s/368zq"
-              ),
-              url: "https://mapy.cz/s/368zq",
+              text: t("Sightseeing route - from the cottage around Číhalka - Knížecí cesta (red cycle route 4071) - Rozc. Knížecí and Polomské - Pod Sedloňovským vrchem - Údolí Bělé - Polomský kopec - Spring Bělé - Vrchmezí - Ostružník - Nad Olešnicí, viewpoint, route length 19 km"),
+              url: "https://mapy.cz/turisticka?planovani-trasy&x=16.3216831&y=50.3741150&z=14&rc=9lYCCxZdr4j0XZ6hgngvzbsKxZW8EhESepe5pteGSgOEiFRggVhgXesfhkzcrPlCU&rs=firm&rs=addr&rs=coor&rs=coor&rs=coor&rs=coor&rs=base&rs=base&rs=base&rs=firm&ri=13193293&ri=10999661&ri=&ri=&ri=&ri=&ri=1993259&ri=2026323&ri=2009553&ri=13193293&mrp=%7B%22c%22%3A121%7D&xc=%5B%22CZE%22%2C%22POL%22%5D"
             },
             {
-              text: t(
-                "Circuit: Olešnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. further to Kunštátská chapel - Anenský vrch - fortress Hanička and back through Deštná in o.h-Sedloňov - Polom to Olešnice in O.h., track length 73km, link: https://mapy.cz/s/368r7"
-              ),
-              url: "https://mapy.cz/s/368r7",
+              text: t("Route to Pekla - Olešnice in O. h. Via Borová - Pekelské údolí - Sendráž Lookout Tower - Frymburk Castle Ruins - Rokole - route length 35 km"),
+              url: "https://mapy.cz/zakladni?planovani-trasy&x=16.2380515&y=50.3902527&z=15&rc=9lYB.xZdqo9lB8VhexiX-3gektUb-8gUVdIZkF9iwO9lYCBlHd&rs=addr&rs=stre&rs=base&rs=base&rs=area&rs=ward&rs=addr&ri=10999760&ri=106132&ri=1893530&ri=1701530&ri=12047&ri=7542&ri=10999760&mrp=%7B%22c%22%3A121%7D&xc=%5B%5D"
             },
+            {
+              text: t("Long circuit - from the cottage around Číhalka - Zieleniec - Lasówka - Mostowice - Orlické Záhoří - Masaryk cottage - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads, route length 47 km"),
+              url: "https://mapy.cz/turisticka?planovani-trasy&x=16.4066327&y=50.3283040&z=12&rc=9lYCCxZdr4j0QYekgYxZTlP9lpRPxZJELkMOxZ0OAeeNhf79lezdxZPGp38Rg943bCiYI15JxZcn5&rs=firm&rs=firm&rs=osm&rs=osm&rs=osm&rs=muni&rs=base&rs=base&rs=base&rs=base&ri=13193293&ri=13096073&ri=145228427&ri=721129&ri=443443&ri=2672&ri=2234749&ri=2214420&ri=2022927&ri=1987591&mrp=%7B%22c%22%3A121%7D&xc=%5B%22CZE%22%2C%22POL%22%5D"
+            },
+            {
+              text: t("Route for able athletes - Olešnice in O. h. Through Číhalka - Masaryk cottage - Velká Deštná (1115 m asl) - Kunštát chapel - Anenský vrch - Hanička fortress - back through Deštná - Sedloňov - Polom - Olešnice in O. h., Length route 73 km"),
+              url: "https://mapy.cz/zakladni?planovani-trasy&x=16.3351042&y=50.3204968&z=12&rc=9lYB.xZdqoj25YXhc3gxGjQ5xZPGh52cxZ4H59lolTxYtCS9lyzWxYiFcfcN1kI9l1bsxZITLaeQxZTf1fFwj7qi7xxZdqU&rs=addr&rs=base&rs=coor&rs=firm&rs=base&rs=base&rs=base&rs=base&rs=muni&rs=muni&rs=ward&rs=addr&ri=10999760&ri=1987592&ri=&ri=12970010&ri=2026473&ri=1890735&ri=2026474&ri=2062211&ri=2647&ri=2682&ri=9750&ri=10999760&mrp=%7B%22c%22%3A121%7D&xc=%5B%5D"
+            }
           ]}
         </this.section>
         <this.section header={t("Hiking ")}>
           {[
-            t(
-              "From Masaryk Cottage (17km away) either to Šerlišský Mill or to Velká Deštná 1115 meters above sea level "
-            ),
-            t("Panský kopec, 2.4km from the cottage "),
-            t(
-              "Jiráskova cesta - marked in red, coming to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice rising through Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds through the entire length of the Orlické Mountains ridge to Jablonné nad Orlicí. Jiraskova cesta is 100 km long. "
-            ),
-            t("Rock town Hejšovina (Szczeliniec Wielki-PL), 28km away "),
-            t(
-              "Broumovská vrchovina - Ostaš - distance 35km, Teplické skály - 42km away, Adršpašské skály - 48km, Chapel of Our Lady of the Snow (Hvězda) with view of Broumovsko - 37km in Neratov, microbrewery, café (recommended), 36km away "
-            ),
-            t("Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), 19km away "),
-            t("Kudowa-Zdrój Spa, 14km away "),
-            t(
-              "Japanese Garden (Ogród Japoński-PL), 10km distance Náchod (19km), Nové Město nad Metují (17km), Ratibořice near Česká Skalice (33km) and Opočno (23km) "
-            ),
-            t("Dobrošov - Jiráskova chata and artillery fortress, 14km away "),
-            t("Rozkoš Reservoir"),
+            t("Panský kopec, 2.4 km from the cottage"),
+            t("Lookout tower Feistův kopec, 2.8 km from the cottage"),
+            t("Jirásek's path - follow the red tourist sign (it comes to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice it rises via Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds over the entire length of the Orlické ridge to Jablonné nad Orlicí) the total length is 100 km"),
+            t("Masarykova chata (17 km away) - trip to Šerlišský mlýn or Velká Deštná (possibility to use the bus)"),            
+            t("Kudowa-Zdrój Spa, 14 km away"),
+            t("Dobrošov - Jirásek's cottage and Hanička artillery fortress, distance 14 km"),
+            t("Nové Město nad Metují Castle, distance 17 km"),
+            t("Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), distance 19 km"),            
+            t("Japanese Garden (Ogród Japoński - PL), distance 19 km"),
+            t("Water reservoir Rozkoš, distance 20 km"),
+            t("Hejšovina Rock City (Szczeliniec Wielki-PL), 28 km away"),
+            t("Broumov Highlands - Ostas - 35 km away"),
           ]}
         </this.section>
         <this.section header={t("More: ")}>
           {[
             {
-              text:
-                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/hrebenove-trate/",
-              url:
-                "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/hrebenove-trate/",
-            },
-            {
-              text: "https://www.vychodni-cechy.info/priroda/ ",
-              url: "https://www.vychodni-cechy.info/priroda/ ",
-            },
-            {
-              text:
-                "http://www.olesnice.net/volny-cas/sport/turisticke-stezky/",
+              text: t("Village website"),
               url: "http://www.olesnice.net/volny-cas/sport/turisticke-stezky/",
-            },
+            }
           ]}
         </this.section>
       </div>
@@ -181,8 +154,17 @@ class TipsPage extends b.Component {
     this.pageStore.setPageRendered(Page.Tips);
   }
 
-  commonText(data: { children: string }): b.IBobrilNode {
-    return <div style={styles.commonText}>{data.children}</div>;
+  commonText(data: { children: string; boldPrefix?: string }): b.IBobrilNode {
+    return (
+      <div style={styles.commonText}>
+        {data.boldPrefix !== undefined ? (
+          <span style={styles.commonTextBoldPrefix}>{data.boldPrefix}</span>
+        ) : (
+          <></>
+        )}
+        {data.children}
+      </div>
+    );
   }
 
   headerText(data: { children: string }): b.IBobrilNode {
@@ -203,7 +185,7 @@ class TipsPage extends b.Component {
     children = children.concat(
       data.children.map((child) =>
         typeof child !== "object" ? (
-          <div>{`• ${child}`}</div>
+          <div>• {addLineBreaks(child)}</div>
         ) : (
           <div>
             {" "}
@@ -211,7 +193,7 @@ class TipsPage extends b.Component {
               href={child.url}
               target="blank"
               style={styles.linkStyle}
-            >{`• ${child.text}`}</a>
+            >• {addLineBreaks(child.text)}</a>
           </div>
         )
       )

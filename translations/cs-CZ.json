@@ -4,7 +4,7 @@
     "Chalupa Švýcarka is located in the border village of Olešnice in the Orlické Mountains. We recognized her as an impoverished old lady who charmed us mainly with the surrounding nature and a certain genius loci. We would like you to discover her magic. That is why we have gradually reconstructed it and in 2018 opened the door to the first visitors. We will be glad when you visit us and feel the magic of it.",
     null,
     0,
-    "Chalupa Švýcarka se nachází v pohraniční vesničce Olešnice v Orlických horách, své jméno dostala od místních obyvatel. My jsme ji poznali jako zbídačenou starou dámu, která nás okouzlila hlavně okolní přírodou a jistým genius loci. Chtěli bychom, abyste její kouzlo objevili i vy. Proto jsme ji postupně zrekonstruovali a roku 2018 otevřeli dveře prvním návštěvníkům. Budeme rádi, když nás navštívíte a pocítíte na vlastní kůži její kouzlo."
+    "Chalupa Švýcarka se nachází v pohraniční vesničce Olešnice v Orlických horách, své jméno dostala od místních obyvatel. My jsme ji poznali jako zbídačenou starou dámu, která nás okouzlila hlavně okolní přírodou a jistým genius loci. Proto jsme ji postupně zrekonstruovali a roku 2018 otevřeli dveře prvním návštěvníkům. Chtěli bychom,@br@abyste její kouzlo objevili i vy."
   ],
   [
     "Contact",
@@ -40,13 +40,19 @@
     "If you missed some of the hilarious corners in our album, we will be happy",
     null,
     0,
-    "Pokud by vám některé povedené zákoutí v našem albu chybělo, budeme rádi,"
+    "Pokud by vám některá zákoutí v našem albu chyběla, budeme rádi,"
   ],
   [
     "if you add it to facebook or instagram under hashtag",
     null,
     0,
-    "když ho doplníte na facebook nebo instagram pod hastagem "
+    "když je doplníte na facebook nebo instagram pod hastagem "
+  ],
+  [
+    "#svycarka.com",
+    null,
+    0,
+    "#chalupasvycarka"
   ],
   [
     "Reservation",
@@ -88,25 +94,25 @@
     "Week price",
     null,
     0,
-    "Ceny za víkend"
+    "Ceny za týden"
   ],
   [
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
     0,
-    "Zimní sezona: 19 500 Kč/za chalupu (prosinec–březen)"
+    "Zimní sezona: 19 500 Kč/za chalupu (únor–březen)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
     null,
     0,
-    "Letní sezona: 17 000 Kč/za chalupu (červen–srpen)"
+    "Letní sezona: 18 000 Kč/za chalupu (červenec–srpen)"
   ],
   [
     "Out of seeson 19000 Kč / for cottage",
     null,
     0,
-    "Mimo sezónu: 19 000 Kč/za chalupu"
+    "Mimo sezónu: 15 000 Kč/za chalupu"
   ],
   [
     "Weekend price",
@@ -121,10 +127,28 @@
     "Rezervace možná pouze mimo sezónu: 8 000 Kč/za chalupu"
   ],
   [
+    "Christmas",
+    null,
+    0,
+    "Vánoce"
+  ],
+  [
+    "(As a bonus Christmas decor, candy, christmas tree and carp included)",
+    null,
+    0,
+    "(jako bonus vánoční výzdoba vč. ozdobeného stromečku a cukroví)"
+  ],
+  [
+    "19 500 CZK / for Christmas holidays including Christmas Eve",
+    null,
+    0,
+    "19 500 Kč/za Vánoční svátky vč. Štědrého dne"
+  ],
+  [
     "New Year's Eve - we're still free",
     null,
     0,
-    "Silvestr – máme ještě volno"
+    "Silvestr"
   ],
   [
     "(As a bonus Christmas decor and a bottle of champagne)",
@@ -136,25 +160,7 @@
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0,
-    "44 500 Kč/za týden vč. Silvestru a Nového roku"
-  ],
-  [
-    "Christmas",
-    null,
-    0,
-    "Vánoce"
-  ],
-  [
-    "(As a bonus Christmas decor, candy, christmas tree and carp included)",
-    null,
-    0,
-    "(jako bonus vánoční výzdoba, cukroví, ozdobený stromeček a kapr v ceně)"
-  ],
-  [
-    "19 500 CZK / for Christmas holidays including Christmas Eve",
-    null,
-    0,
-    "19 500 Kč/za Vánoční svátky vč. Štědrého dne"
+    "40 500 Kč/za týden vč. Silvestru a Nového roku"
   ],
   [
     "How much?",
@@ -166,13 +172,13 @@
     "Svýcarka is able to accommodate a group of 12 people, has 2 double rooms (one of them has an extra bed), 1 triple room and 1 quadruple. Features 1 bathroom with shower and 3 toilets throughout the property. The warmth of the electrically heated radiators warms you up or you can heat up in the main living room with wood. The shortest accommodation time is 2 nights.",
     null,
     0,
-    "Švýcarka je schopná ubytovat skupinu 12 osob, má 2 dvoulůžkové pokoje (v jednom z nich se nachází přistýlka), 1 třílůžkový pokoj a 1 čtyřlůžkový. Nabízí 1 koupelnu s bezbariéroovu sprchou a v rámci celého objektu 3 toalety. Zahřeje vás teplo z elektricky vytápěných radiátorů nebo si můžete v hlavní společenské místnosti přitopit dřevem. Nejkratší doba ubytování jsou 2 noci."
+    "Švýcarka je schopná ubytovat skupinu 12 osob, má 2 dvoulůžkové pokoje (v jednom z nich se nachází přistýlka), 1 třílůžkový pokoj a 1 čtyřlůžkový. Nabízí 1 koupelnu s bezbariérovou sprchou a v rámci celého objektu 3 toalety. Zahřeje vás teplo z elektricky vytápěných radiátorů nebo si můžete v hlavní společenské místnosti přitopit dřevem.@br@Nejkratší doba ubytování jsou 2 noci."
   ],
   [
     "O průběhu vaší rezervace a dalších důležitých informací vás budeme informovat e-mailem.",
     null,
     0,
-    "O průběhu vaší rezervace a dalších důležitých informací vás budeme informovat e-mailem."
+    "O průběhu vaší rezervace vás budeme informovat e-mailem."
   ],
   [
     "Reservation form",
@@ -214,7 +220,7 @@
     "*Reservation form contains some validation errors.",
     null,
     0,
-    "*Rezervační formulář obsahuje chybně vyplněné požky."
+    "*Rezervační formulář obsahuje chybně vyplněné položky."
   ],
   [
     "Reserve date",
@@ -226,12 +232,13 @@
     "I agree to process my personal data in accordance with ",
     null,
     0,
-    "Souhlasím se zpracováním osobních údajů v souladu s "
+    "Souhlasím se zpracováním osobních údajů podle "
   ],
   [
     "GDPR",
     null,
-    0
+    0,
+    "GDPR"
   ],
   [
     "Why to visit",
@@ -243,7 +250,7 @@
     "The Švýcarka offers not only a quiet environment, but also the possibility of an active holiday.@br@Would you like to visit nearby places of interest? Here we have recommendations that have reasonable range and are tested directly by the owner of Švýcarka. If you wish, we are able to arrange excellent meat from the organic farm or beer from the brewery.",
     null,
     0,
-    "Švýcarka nabízí nejen klidné prostředí, ale i možnost aktivní dovolené.@br@Rádi byste navštívili zajímavá místa v okolí? Zde pro vás máme doporučení, která mají rozumnou dojezdovou vzdálenost a jsou vyzkoušena přímo majiteli Švýcarky. Pokud si budete přát, jsme pro vás schopni zařídit výborné maso z biofarmy, nebo pivo z mikropivovaru."
+    "Švýcarka nabízí nejen klidné prostředí, ale i možnost aktivní dovolené.\n          Rádi byste navštívili zajímavá místa v okolí? Zde pro vás máme doporučení, která mají rozumnou dojezdovou vzdálenost a jsou vyzkoušena přímo majiteli Švýcarky."
   ],
   [
     "More informations",
@@ -254,117 +261,140 @@
   [
     "Chalupa ŠVÝCARKA v Orlických horách",
     "page title",
-    0
+    0,
+    "Chalupa ŠVÝCARKA v Orlických horách"
   ],
   [
     "Ubytovací řád objektu",
     null,
-    0
+    0,
+    "Ubytovací řád objektu"
   ],
   [
     "Host se při příjezdu prokazuje platným průkazem totožnosti (občanským\n          průkazem nebo cestovním pasem).",
     null,
-    0
+    0,
+    "Host se při příjezdu prokazuje platným průkazem totožnosti (občanským\n          průkazem nebo cestovním pasem)."
   ],
   [
     "Při nástupu obdrží klíče, žádáme vás o zamykání objektu. V případě\n          ztráty klíčů je host povinen zaplatit 2000 Kč.",
     null,
-    0
+    0,
+    "Při nástupu obdrží klíče, žádáme vás o zamykání objektu. V případě\n          ztráty klíčů je host povinen zaplatit 2000 Kč."
   ],
   [
     "Při předání chalupy vás žádáme o její úklid. Vše je zapotřebí uvést do\n          stavu, ve kterém se chalupa nacházela při vašem příjezdu. Pokud se tak\n          nestane, bude vám doúčtován poplatek 700 Kč za úklid.",
     null,
-    0
+    0,
+    "Při předání chalupy vás žádáme o její úklid. Vše je zapotřebí uvést do\n          stavu, ve kterém se chalupa nacházela při vašem příjezdu. Pokud se tak\n          nestane, bude vám doúčtován poplatek 700 Kč za úklid."
   ],
   [
     "Příjezd na chalupu při týdenním pobytu je v sobotu ve 14 hod. nebo dle\n          předchozí domluvy. Ukončení pobytu následující sobotu, s vyklizením\n          chalupy do 10 hod., nedodrží-li host tuto dobu, bude mu účtována cena\n          za další den pobytu (pokud není domluveno jinak). V případě zkráceného\n          pobytu je odjezd i příjezd po předchozí domluvě.",
     null,
-    0
+    0,
+    "Příjezd na chalupu při týdenním pobytu je v sobotu ve 14 hod. nebo dle\n          předchozí domluvy. Ukončení pobytu následující sobotu, s vyklizením\n          chalupy do 10 hod., nedodrží-li host tuto dobu, bude mu účtována cena\n          za další den pobytu (pokud není domluveno jinak). V případě zkráceného\n          pobytu je odjezd i příjezd po předchozí domluvě."
   ],
   [
     "V případě poškození majetku na ubytovacím zařízení host platí náhradu\n          v plné výši (za poškození inventáře se považuje také vaření na pokoji\n          nebo kouření v objektu). Dospělá osoba nese plnou odpovědnost za\n          případné škody způsobené dítětem. Právo na náhradu škody musí být\n          uplatněno v den odjezdu bez zbytečného odkladu, nejpozději však do 15\n          dnů po dni, kdy se poškozený o škodě dověděl.",
     null,
-    0
+    0,
+    "V případě poškození majetku na ubytovacím zařízení host platí náhradu\n          v plné výši (za poškození inventáře se považuje také vaření na pokoji\n          nebo kouření v objektu). Dospělá osoba nese plnou odpovědnost za\n          případné škody způsobené dítětem. Právo na náhradu škody musí být\n          uplatněno v den odjezdu bez zbytečného odkladu, nejpozději však do 15\n          dnů po dni, kdy se poškozený o škodě dověděl."
   ],
   [
     "Na pokojích je zakázáno přemíšťování nábytku a zásahy do elektrické či\n          jiné instalace.",
     null,
-    0
+    0,
+    "Na pokojích je zakázáno přemíšťování nábytku a zásahy do elektrické či\n          jiné instalace."
   ],
   [
     "V pokojích není dovoleno používat vlastních spotřebičů, kromě těch,\n          které slouží hostům k jejich osobní hygieně (holicí a masážní strojky,\n          vysoušeče vlasů apod.) a osobní počítače.",
     null,
-    0
+    0,
+    "V pokojích není dovoleno používat vlastních spotřebičů, kromě těch,\n          které slouží hostům k jejich osobní hygieně (holicí a masážní strojky,\n          vysoušeče vlasů apod.) a osobní počítače."
   ],
   [
     "Na pokojích nevařte, nejsou k tomuto účelu vybavené. Pro přípravu\n          pokrmů můžete využít zařízení kuchyně v přízemí.",
     null,
-    0
+    0,
+    "Na pokojích nevařte, nejsou k tomuto účelu vybavené. Pro přípravu\n          pokrmů můžete využít zařízení kuchyně v přízemí."
   ],
   [
     "Při odchodu z pokoje prosíme uzavřít okna, vodovodní kohoutky\n          a zhasnout světla.",
     null,
-    0
+    0,
+    "Při odchodu z pokoje prosíme uzavřít okna, vodovodní kohoutky\n          a zhasnout světla."
   ],
   [
     "Na pokojích a ve všech interiérech ubytování je přísně zakázáno\n          kouřit! Host je povinen chovat se v objektu tak, aby nevznikl požár.",
     null,
-    0
+    0,
+    "Na pokojích a ve všech interiérech ubytování je přísně zakázáno\n          kouřit! Host je povinen chovat se v objektu tak, aby nevznikl požár."
   ],
   [
     "Rodiče (popř. zák. zástupci) odpovídají za bezpečnost svých dětí ve\n          všech prostorech i v jeho venkovní části.",
     null,
-    0
+    0,
+    "Rodiče (popř. zák. zástupci) odpovídají za bezpečnost svých dětí ve\n          všech prostorech i v jeho venkovní části."
   ],
   [
     "V době od 22:00 do 6:00 je v objektu, včetně venkovních prostor, režim\n          nočního klidu, kdy je host povinen chovat se tak, aby nerušil ostatní\n          nadměrným hlukem.\n          ",
     null,
-    0
+    0,
+    "V době od 22:00 do 6:00 je v objektu, včetně venkovních prostor, režim\n          nočního klidu, kdy je host povinen chovat se tak, aby nerušil ostatní\n          nadměrným hlukem.\n          "
   ],
   [
     "Domácí mazlíčky prosím nechejte doma.",
     null,
-    0
+    0,
+    "Domácí mazlíčky prosím nechejte doma."
   ],
   [
     "Host je povinen uhradit cenu za ubytování dle platného ceníku.",
     null,
-    0
+    0,
+    "Host je povinen uhradit cenu za ubytování dle platného ceníku."
   ],
   [
     "Není povoleno ubytovat osoby, které nebyly ubytovateli řádně\n          přihlášeny k ubytování.\n          ",
     null,
-    0
+    0,
+    "Není povoleno ubytovat osoby, které nebyly ubytovateli řádně\n          přihlášeny k ubytování.\n          "
   ],
   [
     "Při ukončení pobytu host předá pokoj pověřené osobě.",
     null,
-    0
+    0,
+    "Při ukončení pobytu host předá pokoj pověřené osobě."
   ],
   [
     "Parkování vozidel hostů je možné na parkovišti u Švýcarky, ubytovatel\n          neručí za případné odcizení vozidla nebo věci v něm.",
     null,
-    0
+    0,
+    "Parkování vozidel hostů je možné na parkovišti u Švýcarky, ubytovatel\n          neručí za případné odcizení vozidla nebo věci v něm."
   ],
   [
     "Každý ubytovaný host, je povinen dodržovat tento ubytovací řád.\n          V případě, že jej závažným způsobem poruší, má majitel ubytování právo\n          od smlouvy o poskytnutí ubytovací služby odstoupit před uplynutím\n          dohodnuté doby, a to bez náhrady (za hrubé porušení se považuje\n          opakované porušování nočního klidu, ničení movitých a nemovitých částí\n          objektu, hrubé a nevhodné chování k ostatním hostům\n          a k provozovateli).",
     null,
-    0
+    0,
+    "Každý ubytovaný host, je povinen dodržovat tento ubytovací řád.\n          V případě, že jej závažným způsobem poruší, má majitel ubytování právo\n          od smlouvy o poskytnutí ubytovací služby odstoupit před uplynutím\n          dohodnuté doby, a to bez náhrady (za hrubé porušení se považuje\n          opakované porušování nočního klidu, ničení movitých a nemovitých částí\n          objektu, hrubé a nevhodné chování k ostatním hostům\n          a k provozovateli)."
   ],
   [
     "Uvítáme všechny návrhy na zlepšení provozu.",
     null,
-    0
+    0,
+    "Uvítáme všechny návrhy na zlepšení provozu."
   ],
   [
     "Kontakt na majitele:",
     null,
-    0
+    0,
+    "Kontakt na majitele:"
   ],
   [
     "Martin Jiráský &nbsp;&nbsp; +420 720 630 136",
     null,
-    0
+    0,
+    "Martin Jiráský &nbsp;&nbsp; +420 720 630 136"
   ],
   [
     "Sorry, this door is locked, you will have to come back.",
@@ -381,58 +411,68 @@
   [
     "Ochrana osobních údajů chalupa ŠVÝCARKA",
     null,
-    0
+    0,
+    "Ochrana osobních údajů chalupa ŠVÝCARKA"
   ],
   [
     "Prohlášení o ochraně osobních údajů",
     null,
-    0
+    0,
+    "Prohlášení o ochraně osobních údajů"
   ],
   [
     "Majitel chalupy ŠVÝCARKA a zřizovatel webu ",
     null,
-    0
+    0,
+    "Majitel chalupy ŠVÝCARKA a zřizovatel webu "
   ],
   [
     "Martin Jiráský prohlašuje, že všechny osobní údaje jsou chráněny v souladu se zákonem č. 101/2000 Sb., o ochraně osobních údajů.",
     null,
-    0
+    0,
+    "Martin Jiráský prohlašuje, že všechny osobní údaje jsou chráněny v souladu se zákonem č. 101/2000 Sb., o ochraně osobních údajů."
   ],
   [
     "Zabezpečení osobních údajů",
     null,
-    0
+    0,
+    "Zabezpečení osobních údajů"
   ],
   [
     " je povinna zabezpečit ochranu vašich osobních údajů. Pro ochranu vašich osobních údajů používáme požadované bezpečnostní prostředky a postupy před neoprávněným přístupem, používáním a dalším nakládáním s těmito záznamy. Po zadání vašich údajů do našeho systému se zavazujeme k nakládání s těmito údaji pouze pro komunikaci mezi vaší osobou a námi. <SelfLink /> žádným způsobem neposkytne záznamy třetí osobě pokud nedostaneme váš souhlas nebo pokud zákon nebude vyžadovat jinak, nebudeme sdílet vaše osobní data, která nám poskytnete online.",
     null,
-    0
+    0,
+    " je povinna zabezpečit ochranu vašich osobních údajů. Pro ochranu vašich osobních údajů používáme požadované bezpečnostní prostředky a postupy před neoprávněným přístupem, používáním a dalším nakládáním s těmito záznamy. Po zadání vašich údajů do našeho systému se zavazujeme k nakládání s těmito údaji pouze pro komunikaci mezi vaší osobou a námi. <SelfLink /> žádným způsobem neposkytne záznamy třetí osobě pokud nedostaneme váš souhlas nebo pokud zákon nebude vyžadovat jinak, nebudeme sdílet vaše osobní data, která nám poskytnete online."
   ],
   [
     " na svých webových stránkách zveřejňuje informace o objektu, službách, které nabízíme a kontaktních údaje.Ty základní informace jsou veřejné a dostupné všem návštěvníkům webových stránek bez potřeby zadávání vlastních osobních údajů. Rozdíl je při tvorbě poptávkového formuláře, který slouží při poptání ubytovacích služeb v tomto objektu. V tento okamžik je zapotřebí vyplnit základní osobní údaje (jméno, adresu trvalého bydliště, e-mail, telefon), díky kterým budou uloženy v našem rezervačním systému přes který s nimi budeme komunikovat. V případě potřeby vás budeme kontaktovat osobně. Záznamy jsou bezpečně uloženy u poskytovatele webhostingu v databázi na dobu nejméně 3 let, nebo do doby než náš host zažádá prostřednictvím e-mailu o vymazání z databáze hostů. Zadání dat je nezbytné pro vytvoření rezervace pronájmu chalupy, samozřejmě je možné rezervovat chalupu i osobně, bez vyplňování formuláře. V této situaci vaše záznamy nijak neukládáme. Uložené záznamy o vaší osobě je možné na základě zaslané žádosti o smazání (na info@svycarka.com) odstranit z naší databáze.",
     null,
-    0
+    0,
+    " na svých webových stránkách zveřejňuje informace o objektu, službách, které nabízíme a kontaktních údaje.Ty základní informace jsou veřejné a dostupné všem návštěvníkům webových stránek bez potřeby zadávání vlastních osobních údajů. Rozdíl je při tvorbě poptávkového formuláře, který slouží při poptání ubytovacích služeb v tomto objektu. V tento okamžik je zapotřebí vyplnit základní osobní údaje (jméno, adresu trvalého bydliště, e-mail, telefon), díky kterým budou uloženy v našem rezervačním systému přes který s nimi budeme komunikovat. V případě potřeby vás budeme kontaktovat osobně. Záznamy jsou bezpečně uloženy u poskytovatele webhostingu v databázi na dobu nejméně 3 let, nebo do doby než náš host zažádá prostřednictvím e-mailu o vymazání z databáze hostů. Zadání dat je nezbytné pro vytvoření rezervace pronájmu chalupy, samozřejmě je možné rezervovat chalupu i osobně, bez vyplňování formuláře. V této situaci vaše záznamy nijak neukládáme. Uložené záznamy o vaší osobě je možné na základě zaslané žádosti o smazání (na info@svycarka.com) odstranit z naší databáze."
   ],
   [
     " provozuje webové stránky na kterých lze poptat nabízené ubytovací služby. Osobní údaje, které shromažďujeme v naší databázi jsou jméno, adresa trvalého bydliště, e-mailová adresa a telefon. <SelfLink /> <b>nevyužívá žádné</b> technologie personalizovaného retargetingu RTB.",
     null,
-    0
+    0,
+    " provozuje webové stránky na kterých lze poptat nabízené ubytovací služby. Osobní údaje, které shromažďujeme v naší databázi jsou jméno, adresa trvalého bydliště, e-mailová adresa a telefon. <SelfLink /> <b>nevyužívá žádné</b> technologie personalizovaného retargetingu RTB."
   ],
   [
     " se zavazuje ke shromažďování a používání vašich osobních údajů po vašem odsouhlasení. Smíme využívat vaše údaje pro účely související s poskytováním služeb vaší osobě, což zahrnuje zpracování poptávky, poskytování služby, případně informací, které žádáte či odpovědí na vaše stížnosti nebo dotazy.",
     null,
-    0
+    0,
+    " se zavazuje ke shromažďování a používání vašich osobních údajů po vašem odsouhlasení. Smíme využívat vaše údaje pro účely související s poskytováním služeb vaší osobě, což zahrnuje zpracování poptávky, poskytování služby, případně informací, které žádáte či odpovědí na vaše stížnosti nebo dotazy."
   ],
   [
     " získává váše svolení se zahrnutí poskytnutých údajů do databáze společnosti a s jejich nakládáním spojených s poskytováním služeb (pronájem ubytovacích prostor). V případě, že se rozhodnete poskytnout nám osobní údaje (jakékoliv informace, podle kterých lze identifikovat vaši osobu), buďte si jisti, že budou využity pouze k vytvoření rezervace v nabízením objektu a další vzájemné komunikaci během poskytování nabízených služeb.",
     null,
-    0
+    0,
+    " získává váše svolení se zahrnutí poskytnutých údajů do databáze společnosti a s jejich nakládáním spojených s poskytováním služeb (pronájem ubytovacích prostor). V případě, že se rozhodnete poskytnout nám osobní údaje (jakékoliv informace, podle kterých lze identifikovat vaši osobu), buďte si jisti, že budou využity pouze k vytvoření rezervace v nabízením objektu a další vzájemné komunikaci během poskytování nabízených služeb."
   ],
   [
     "Cottage Švýcarka can be rented only as a whole object, just fill in the date of arrival and departure, and we will take care of everything else.",
     null,
     0,
-    "Rezervace Chalupa Švýcarka lze pronajmout pouze jako celý objekt, stačí vyplnit datum příjezdu a odjezdu, a o vše další se postaráme my."
+    "Chalupa Švýcarka lze pronajmout pouze jako celý objekt, stačí vyplnit datum příjezdu a odjezdu, a o vše další se postaráme my."
   ],
   [
     "You need to know",
@@ -444,13 +484,13 @@
     "The price for renting a Swiss cottage varies according to the length of stay and the current season. The shortest stay is 2 nights. When renting a cottage for the whole week you have a discounted price.",
     null,
     0,
-    "Cena za pronájem chalupy Švýcarky se liší dle délky pobytu a aktuální sezóny. Nejkratší délka pobytu jsou 2 noci. Při pronájmu chalupy na celý týden máte zvýhodněnou cenu."
+    "Cena za pronájem chalupy Švýcarky se liší dle délky pobytu a aktuální sezóny. Nejkratší doba pobytu jsou 2 noci. Při pronájmu chalupy na celý týden máte zvýhodněnou cenu."
   ],
   [
     "Upon arrival you will be charged a resort fee of 10 CZK / person per day and a refundable deposit of 4 000 CZK, which will be refunded on your departure day.",
     null,
     0,
-    "Při příjezdu vám bude započítán rekreační poplatek obci ve výši 10 Kč/osoba za den a vratná kauce 4 000 Kč, která vám bude vrácena v den vašeho odjezdu."
+    "Při příjezdu vám bude započítán rekreační poplatek obci ve výši 21 Kč/dospělá osoba za den a vratná kauce 4 000 Kč, která vám bude vrácena v den vašeho odjezdu."
   ],
   [
     "The price includes water, bedding, parking, WIFI and TV. The price does not include electricity consumption (will be charged on the day of departure according to the price list), firewood (you will be charged on the day of departure), the basic kitchen detergents, bathroom and toilet paper.",
@@ -462,13 +502,13 @@
     "Arrival at the cottage for a week's stay is always on Saturdays between 2 pm and 4 pm End of stay on the following Saturday, with the evacuation of the cottage till 10 am. In case of a shorter stay, departure and arrival are by appointment.",
     null,
     0,
-    "Příjezd na chalupu při týdenním pobytu je vždy v sobotu mezi 14–16 hod. Ukončení pobytu následující sobotu, s vyklizením chalupy do 10 hod. V případě zkráceného pobytu je odjezd i příjezd po předchozí domluvě."
+    "Příjezd na chalupu při týdenním pobytu je v sobotu ve 14 hod. nebo dle předchozí domluvy. Ukončení pobytu následující sobotu, s vyklizením chalupy do 10 hod. V případě zkráceného pobytu je odjezd i příjezd po předchozí domluvě."
   ],
   [
     "When handing over the cottage, we ask you to clean it. Everything needs to be put into the condition in which the cottage was on your arrival. If not, you will be charged a cleaning fee of CZK 700.",
     null,
     0,
-    "Při předání chalupy vás žádáme o její úklid. Vše je zapotřebí uvést do stavu, ve kterém se chalupa nacházela při vašem příjezdu. Pokud se tak nestane, bude vám doúčtován poplatek 700 Kč za úklid."
+    "Při předání chalupy vás žádáme o její úklid. Vše je zapotřebí uvést do stavu, ve kterém se chalupa nacházela při vašem příjezdu. Pokud se tak nestane, bude vám účtován poplatek 700 Kč za úklid."
   ],
   [
     "Smoking is strictly forbidden throughout the cottage and please leave your four-legged furry friends at home. Thank you in advance for your understanding.",
@@ -480,19 +520,25 @@
     "The nearest food in Olešnice, 1.6 km from the cottage.",
     null,
     0,
-    "Nejbližší potraviny přímo v Olešnici, vzdálené od chalupy 1,6km. "
+    "Nejbližší potraviny jsou vzdálené od chalupy 1,6 km."
   ],
   [
-    "Hospitality directly in Olešnice: Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)",
+    "Restaurants and pubs: ",
     null,
     0,
-    "Pohostinství přímo v Olešnici: Občertsvení Juráška (350 m)"
+    "Restaurace a hospody: "
+  ],
+  [
+    "Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)",
+    null,
+    0,
+    "Horská chata Juráška (350 m), Hospůdka U Anděla (1,8 km), Rodinný pivovar Agent (4 km, směrem na Rzy), Restaurace Kozí chlívek (12 km, Deštné v O. h.)"
   ],
   [
     "Trip Tips / Sports Activities",
     null,
     0,
-    "Tipy na výlet / Sportovní aktivity"
+    "Tipy na výlety"
   ],
   [
     "Skiing",
@@ -504,55 +550,49 @@
     "Kačenčina ski slope - Horská chata Juráška (350m)",
     null,
     0,
-    "Kačenčina sjezdovka – Horská chata Juráška (350m)"
+    "Kačenčina sjezdovka – u Horské chaty Juráška (350 m)"
   ],
   [
     "Ski Resort Hartman (2.3km)",
     null,
     0,
-    "Ski areál Hartman (2,3km)"
+    "Ski areál Hartman (2,3 km)"
   ],
   [
     "Ski Resort Olešnice in O.h. (3.0km)",
     null,
     0,
-    "Ski areál Olešnice v O.h. (3,0km)"
+    "Ski areál Olešnice v O. h. (3,0 km)"
   ],
   [
     "SkiSedloňov (6,4km)",
     null,
     0,
-    "Lyžařský areál a snowpark SkiSedloňov (6,4km)"
+    "Lyžařský areál a snowpark SkiSedloňov (6,4 km)"
   ],
   [
     "Ski center Deštné v Orlických horách (12,4km)",
     null,
     0,
-    "Skicentrum Deštné v Orlických horách (12,4km)"
+    "Skicentrum Deštné v Orlických horách (12,4 km)"
   ],
   [
     "Zieleniec Ski Arena (PL) (21.3km)",
     null,
     0,
-    "Zieleniec Ski Arena (PL) (21,3km)"
+    "Zieleniec Ski Arena (PL) (21,3 km)"
   ],
   [
-    "Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná, Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)",
+    "Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná,@br@Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)",
     null,
     0,
-    "Sjezdové tratě v Orlickém záhoří – Ski areál Bedřichovka, Orlické Záhoří Jadrná, Orlické Záhoří Černá voda (Orlické Záhoří 26,3km)"
+    "Sjezdové tratě v Orlickém Záhoří – Ski areál Bedřichovka, Orlické Záhoří Jadrná,@br@Orlické Záhoří Černá voda (Orlické Záhoří 26,3 km)"
   ],
   [
     "Ski center Říčky v Orlických horách (31.9km)",
     null,
     0,
-    "Ski centrum Říčky v Orlických horách (31,9km)"
-  ],
-  [
-    "The possibility to visit even more distant ski resorts in the Giant Mountains: Areál Buky (60.1km), SkiResort ČERNÁ HORA - PEC (67.3km), Malá Úpa (81.7km) SKI Pec pod Snezkou (75km)",
-    null,
-    0,
-    "Možnost navštívit i vzdálenější lyžařské areály v Krkonoších: Areál Mladé Buky (60,1km), SkiResort ČERNÁ HORA – PEC (67,3km), Malá Úpa (81,7km), SKI Pec pod Sněžkou (75km)"
+    "Ski centrum Říčky v Orlických horách (31,9 km)"
   ],
   [
     "Cross-country skiing ",
@@ -561,34 +601,34 @@
     "Běžecké lyžování"
   ],
   [
-    "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/",
+    "Knížecí cesta - access to the track possible from Olešnice rozcestí (1.2 km from@br@the cottage) or from Číhalka (1.7 km from the cottage)",
     null,
     0,
-    "https://www.region-orlickehory.cz/aktivni-vyziti/bezkarske-stezky/"
+    "Knížecí cesta – nástup na trať možný z Olešnice rozcestí (vzdálené 1,2 km@br@od chalupy) nebo od Číhalky (vzdálené 1,7 km od chalupy)"
   ],
   [
-    "http://skimapa.cz/oblast/orlicke-hory - start of circuits from Olešnice crossroad (1.2km), or from Číhalka (1,7km)",
+    "To the highest peak of the Orlické Mountains - from Deštná in O. h. Via Luisino Údolí - Velká Deštná (1,115 m above sea level) - Šerlišské sedlo - Masaryk's cottage - Šerlišský mlýn and back to Deštná in O. h., Route length 18 km (distance from the cottage 12,4 km)",
     null,
     0,
-    "http://skimapa.cz/oblast/orlicke-hory - začátek okruhů z Olešnice rozcestí (1,2km), nebo od Číhalky (1,7km)"
+    "Na nejvyšší vrchol Orlických hor – z Deštné v O. h. přes Luisino Údolí – Velkou Deštnou (1 115 m n. m.) – Šerlišské sedlo – Masarykovu chatu – Šerlišský mlýn a zpět do Deštné v O. h., délka trasy 18 km (vzdálenost od chalupy 12,4 km)"
   ],
   [
-    "To the highest peak of the Orlické Mountains - from Deštné via Luisino Údolí, Velká Deštná (1115 meters above sea level), Šerlišské sedlo, Masaryk chateau, Šerlišský mlýn-back to Deštné, route length 18km (12.4km)",
+    "Orlické Záhoří - Illuminated cross-country ski circuit 5 km long (distance from the cottage 24.4 km)",
     null,
     0,
-    "Na nejvyšší vrchol Orlických hor – z Deštné přes Luisino Údolí, Velkou Deštnou (1115 m n.m.), Šerlišské sedlo, Masarykovu chatu, Šerlišský mlýn-zpět do Deštné, délka trasy 18km (12,4km)"
+    "Orlické Záhoří – Osvětlený lyžařský běžecký okruh dlouhý 5 km (vzdálenost od chalupy 24,4 km)"
   ],
   [
-    "Orlické záhoří - Illuminated cross-country skiing circuit (24.4km)",
+    "Along the ridges - start of the route from Číhalka (1.7 km away from the cottage) - Ostružník - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads (1.2 km from the cottage), length of the route 20 km (possibility to end the route in Masaryk cottage and go to Olešnice by bus",
     null,
     0,
-    "Orlické záhoří - Osvětlený lyžařský běžecký okruh (24,4km)"
+    "Po hřebenech – začátek trasy od Číhalky (vzdálená od chalupy 1,7 km) – Ostružník – Šerlich – Šerlišský mlýn – Sedloňovský vrch – Horní Olešnice rozcestí (vzdálené 1,2 km od chalupy),@br@délka trasy 20 km (možnost ukončit trasu na Masarykově chatě a přejet do Olešnice autobusem)"
   ],
   [
-    "On the mountain ridges Olešnice in the Orlické Mountains (Číhalka-1.7km) - Otružník - Vrchmezí - Šerlich (13km from the cottage), route 8km Olešnice v Orlických horách (Číhalka- 1.7km) - Ostružník - Vrchmezí - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Olešnice v Orlických horách (crossroads 1.2km in the direction of náměstíčko), length of the route 16km (possibility to terminate the route at Masaryk Cottage and cross to Olešnice by bus)",
+    "Current state of cross-country trails",
     null,
     0,
-    "Po hřebenech hor Olešnice v Orlických horách (Číhalka-1,7km) - Otružník - Vrchmezí – Šerlich (vzdálen od chalupy 13km), délka trasy 8km Olešnice v Orlických horách (Číhalka-1,7km)- Ostružník - Vrchmezí - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Olešnice v Orlických horách (rozcestí vzdálené 1,2km směr náměstíčko), délka trasy 16km (možnost ukončit trasu na Masarykově chatě a přejet do Olešnice autobusem)"
+    "Aktuální stav běžkařských tras"
   ],
   [
     "Cycling",
@@ -597,39 +637,40 @@
     "Cyklistika"
   ],
   [
-    "Possibility of using the cyclobus on the route Olešnice v Orlických horách (9:05) - Sedloňov (9:14) - Deštné (9:22) - Masarykova chata (9:35) valley back to Olešnice v Orl.horách",
+    "Relaxation route - from Masaryk's cottage to Sedloňovský vrch or Ruské údolí to Olešnice in O. h. (Cycle bus on the route Olešnice in Orlické hory - Sedloňov - Deštné - Masaryk's cottage), approx. 12 km",
     null,
     0,
-    "Možnost využití cyklobusu na trase Olešnice v Orlických horách (9:05) – Sedloňov (9:14) – Deštné (9:22) – Masarykova chata (9:35) – z Masarykovi chaty možnost přes Sedloňovský vrch nebo Ruské údolí zpět do Olešnice v Orl.horách"
+    "Odpočinková trasa – z Masarykovi chaty na Sedloňovský vrch nebo Ruské údolí do Olešnice v O. h. (cyklobus na trase Olešnice v Orlických horách – Sedloňov – Deštné – Masarykova chata), cca 12 km"
   ],
   [
-    "The whole circuit: Olešnice v oh pezes Číhalka in Olešnice in O.h. - Zieleniec - Lasówka-Mostowice-Orlické Záhoří - Masaryk Chalet - Šerlišský Mill - Russian Valley - Olešnice in O.h. - Skutina Artillery Fortress in Sněžná - Ruské údolí - Olešnice v Oh, route length 12km, link: https://mapy.cz/s/368PL",
-    null,
-    0
-  ],
-  [
-    "Circuit: Olešnice v Orl.horách, Číhalka - Zieleniec - Orlické Záhoří - Šerliššký Mill - Sedloňovský vrch - Olešnice v Orl.horách, Horní Olešnice crossroad",
+    "Trasa po československém opevnění – Olešnice v O. h. – Dělostřelecká tvrz Skutina ve Sněžném – Stenka – Ruské údolí – Olešnice v Oh, délka trasy 12 km",
     null,
     0,
-    "Okruh: Olešnice v Orl.horách, Číhalka – Zieleniec – Orlické Záhoří – Masarykova chata – Šerliššký mlýn – Sedloňovský vrch - Olešnice v Orl.horách, Horní Olešnice rozcestí"
+    "Trasa po československém opevnění – Olešnice v O. h. – Dělostřelecká tvrz Skutina ve Sněžném – Stenka – Ruské údolí – Olešnice v Oh, délka trasy 12 km"
   ],
   [
-    "Circuit: Olešnice v Oh through Borova to Pekelske udoli-Lookout Tower Sendraz-Ruins of Frymburk-Rokole Castle - track length 34km, link: https://mapy.cz/s/368g1",
+    "Sightseeing route - from the cottage around Číhalka - Knížecí cesta (red cycle route 4071) - Rozc. Knížecí and Polomské - Pod Sedloňovským vrchem - Údolí Bělé - Polomský kopec - Spring Bělé - Vrchmezí - Ostružník - Nad Olešnicí, viewpoint, route length 19 km",
     null,
     0,
-    "Olešnice v O.h. přes Borovou do Pekelské údolí-Rozhledna Sendráž-Zřícenina hradu Frymburk-Rokole - délka tratě 34km link: https://mapy.cz/s/368g1"
+    "Vyhlídková trasa – od chalupy kolem Číhalky – Knížecí cesta (červená cyklotrasa 4071) – Rozc. Knížecí a Polomské – Pod Sedloňovským vrchem – Údolí Bělé – Polomský kopec – Pramen Bělé – Vrchmezí – Ostružník – Nad Olešnicí, vyhlídka, délka trasy 19 km"
   ],
   [
-    "Circuit: Olesnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. - Sedloňovský vrch to Olešnice in O.h., route 34km, link: https://mapy.cz/s/368zq",
+    "Route to Pekla - Olešnice in O. h. Via Borová - Pekelské údolí - Sendráž Lookout Tower - Frymburk Castle Ruins - Rokole - route length 35 km",
     null,
     0,
-    ""
+    "Trasa do Pekla – Olešnice v O. h. přes Borovou – Pekelské údolí – Rozhledna Sendráž – Zřícenina hradu Frymburk – Rokole – délka trasy 35 km"
   ],
   [
-    "Circuit: Olešnice in O.h. through Číhalka in Olešnice in O.h. - Masarykova chata - Velká Deštná 1115 m.n. further to Kunštátská chapel - Anenský vrch - fortress Hanička and back through Deštná in o.h-Sedloňov - Polom to Olešnice in O.h., track length 73km, link: https://mapy.cz/s/368r7",
+    "Long circuit - from the cottage around Číhalka - Zieleniec - Lasówka - Mostowice - Orlické Záhoří - Masaryk cottage - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads, route length 47 km",
     null,
     0,
-    "Okruh: Olešnice v O.h. přes Číhalka v Olešnici v O.h. – Masarykova chata – Velká Deštná 1115 m.n.m. dále na Kunštátská kaple - Anenský vrch – pevnost Hanička a zpět přes Deštnou v o.h-Sedloňov – Polom do Olešnice v O.h., délka tratě 73km, odkaz: https://mapy.cz/s/368r7"
+    "Dlouhý okruh – od chalupy kolem Číhalky – Zieleniec – Lasówka – Mostowice – Orlické Záhoří – Masarykova chata – Šerlišský mlýn – Sedloňovský vrch – Horní Olešnice rozcestí, délka trasy 47 km"
+  ],
+  [
+    "Route for able athletes - Olešnice in O. h. Through Číhalka - Masaryk cottage - Velká Deštná (1115 m asl) - Kunštát chapel - Anenský vrch - Hanička fortress - back through Deštná - Sedloňov - Polom - Olešnice in O. h., Length route 73 km",
+    null,
+    0,
+    "Trasa pro zdatné sportovce – Olešnice v O. h. přes Číhalku – Masarykova chata – Velká Deštná (1115 m n. m.) – Kunštátská kaple – Anenský vrch – pevnost Hanička – zpět přes Deštnou – Sedloňov – Polom – Olešnice v O. h., délka trasy 73 km"
   ],
   [
     "Hiking ",
@@ -638,70 +679,88 @@
     "Turistika"
   ],
   [
-    "From Masaryk Cottage (17km away) either to Šerlišský Mill or to Velká Deštná 1115 meters above sea level ",
+    "Panský kopec, 2.4 km from the cottage",
     null,
     0,
-    "Z Masarykovy chaty (vzdálena 17km) buď na Šerlišský mlýn nebo na Velkou Deštnou 1115 m.n.m"
+    "Panský kopec, 2,4 km od chalupy"
   ],
   [
-    "Panský kopec, 2.4km from the cottage ",
+    "Lookout tower Feistův kopec, 2.8 km from the cottage",
     null,
     0,
-    "Panský kopec, 2,4km od chalupy"
+    "Rozhledna Feistův kopec, 2,8 km od chalupy"
   ],
   [
-    "Jiráskova cesta - marked in red, coming to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice rising through Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds through the entire length of the Orlické Mountains ridge to Jablonné nad Orlicí. Jiraskova cesta is 100 km long. ",
+    "Jirásek's path - follow the red tourist sign (it comes to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice it rises via Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds over the entire length of the Orlické ridge to Jablonné nad Orlicí) the total length is 100 km",
     null,
     0,
-    "Jiráskova cesta - značená červeně, která do Olešnice přichází z Náchoda přes Peklo a Nový Hrádek, z Olešnice stoupá přes Ostružník na Vrchmezí, Šerlich a Velkou Deštnou a poté se vine přes celou délku hřebenu Orlických hor až do Jablonného nad Orlicí. Jiráskova cesta je celkem 100 km dlouhá."
+    "Jiráskova cesta – po červené turistické značce (do Olešnice přichází z Náchoda přes Peklo a Nový Hrádek, z Olešnice stoupá přes Ostružník na Vrchmezí, Šerlich a Velkou Deštnou a poté se vine přes celou délku hřebenu Orlických hor až do Jablonného nad Orlicí) celková délka je 100 km"
   ],
   [
-    "Rock town Hejšovina (Szczeliniec Wielki-PL), 28km away ",
+    "Masarykova chata (17 km away) - trip to Šerlišský mlýn or Velká Deštná (possibility to use the bus)",
     null,
     0,
-    "Skalní město Hejšovina (Szczeliniec Wielki-PL), vzdálené 28km"
+    "Masarykova chata (vzdálená 17 km) – výlet na Šerlišský mlýn nebo na Velkou Deštnou (možnost využít autobus)"
   ],
   [
-    "Broumovská vrchovina - Ostaš - distance 35km, Teplické skály - 42km away, Adršpašské skály - 48km, Chapel of Our Lady of the Snow (Hvězda) with view of Broumovsko - 37km in Neratov, microbrewery, café (recommended), 36km away ",
+    "Kudowa-Zdrój Spa, 14 km away",
     null,
     0,
-    "Broumovská vrchovina - Ostaš – vzdáleno 35km"
+    "Lázně Kudowa-Zdrój, vzdálené 14 km"
   ],
   [
-    "Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), 19km away ",
+    "Dobrošov - Jirásek's cottage and Hanička artillery fortress, distance 14 km",
     null,
     0,
-    "Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), vzdáleno 19km"
+    "Dobrošov – Jiráskova chata a dělostřelecká tvrz Hanička, vzdálenost 14 km"
   ],
   [
-    "Kudowa-Zdrój Spa, 14km away ",
+    "Nové Město nad Metují Castle, distance 17 km",
     null,
     0,
-    "Lázně Kudowa-Zdrój, vzdálené 14km"
+    "Zámek Nové Město nad Metují, vzdálenost 17 km"
   ],
   [
-    "Japanese Garden (Ogród Japoński-PL), 10km distance Náchod (19km), Nové Město nad Metují (17km), Ratibořice near Česká Skalice (33km) and Opočno (23km) ",
+    "Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), distance 19 km",
     null,
     0,
-    "Japonská zahrada (Ogród Japoński - PL), vzdálenost 19km"
+    "Pstrążna, Kudowa-Zdrój – Łowisko Pstrąga (PL), vzdálenost 19 km"
   ],
   [
-    "Dobrošov - Jiráskova chata and artillery fortress, 14km away ",
+    "Japanese Garden (Ogród Japoński - PL), distance 19 km",
     null,
     0,
-    "Dobrošov - Jiráskova chata a dělostřelecká tvrz, vzdálenost 14km"
+    "Japonská zahrada (Ogród Japoński - PL), vzdálenost 19 km"
   ],
   [
-    "Rozkoš Reservoir",
+    "Water reservoir Rozkoš, distance 20 km",
     null,
     0,
-    "Vodní nádrž Rozkoš"
+    "Vodní nádrž Rozkoš,  vzdálenost 20 km"
+  ],
+  [
+    "Hejšovina Rock City (Szczeliniec Wielki-PL), 28 km away",
+    null,
+    0,
+    "Skalní město Hejšovina (Szczeliniec Wielki-PL), vzdálené 28 km"
+  ],
+  [
+    "Broumov Highlands - Ostas - 35 km away",
+    null,
+    0,
+    "Broumovská vrchovina – Ostaš – vzdáleno 35 km"
   ],
   [
     "More: ",
     null,
     0,
     "Chci vědět více"
+  ],
+  [
+    "Village website",
+    null,
+    0,
+    "Web obce"
   ],
   [
     "Sun",

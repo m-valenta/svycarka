@@ -76,7 +76,7 @@ export class Gallery extends b.Component {
               <div>
                 {[
                   t("if you add it to facebook or instagram under hashtag"),
-                  <span style={styles.hashtag}>#svycarka.com</span>
+                  <span style={styles.hashtag}>{t("#svycarka.com")}.</span>
                 ]}
               </div>
             ]}

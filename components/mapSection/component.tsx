@@ -7,8 +7,7 @@ import { observable } from "bobx";
 import { IPageStore } from "../../data/pageStore/types";
 import { appStore } from "../../data/appStore";
 
-
-export class MapSection extends b.Component {  
+export class MapSection extends b.Component {
   private _pageStore: IPageStore = appStore().pageStore;
 
   render() {
@@ -25,11 +24,11 @@ export class MapSection extends b.Component {
             styles.mapIframeStyle,
             {
               height: mapHeight,
-            }
+            },
           ]}
         />
         <div style={styles.footer}>
-          Olešnice v Orlických horách 82, 517 83 Olešnice v Orlických horách.
+          Olešnice v Orlických horách č. ev. 82, 517 83 Olešnice v Orlických horách.
         </div>
         <Overlay height={mapHeight} store={this._pageStore}></Overlay>
       </div>
@@ -42,10 +41,19 @@ export class MapSection extends b.Component {
   }
 }
 
-class Overlay extends b.Component<{height: number, store: IPageStore}> {
-  
+class Overlay extends b.Component<{ height: number; store: IPageStore }> {
   render() {
-    return <div style={[styles.overlay, {height: this.data.height, pointerEvents: this.data.store.mapOverlayActive ? "auto": "none"}]} />
+    return (
+      <div
+        style={[
+          styles.overlay,
+          {
+            height: this.data.height,
+            pointerEvents: this.data.store.mapOverlayActive ? "auto" : "none",
+          },
+        ]}
+      />
+    );
   }
 
   onPointerDown() {

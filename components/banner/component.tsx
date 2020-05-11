@@ -3,6 +3,7 @@ import * as styles from "./styles";
 import { t } from "bobril-g11n";
 import { scrollToWrapper, debounce } from "../scrollToWrapper/utils";
 import { appStore } from "../../data/appStore";
+import { addLineBreaks } from "../../utils/textUtils";
 
 export class Banner extends b.Component {
   render() {
@@ -11,8 +12,10 @@ export class Banner extends b.Component {
         <Logo />
         <div style={styles.textWrapper}>
           <div style={styles.textContent}>
-            {t(
-              "Chalupa Švýcarka is located in the border village of Olešnice in the Orlické Mountains. We recognized her as an impoverished old lady who charmed us mainly with the surrounding nature and a certain genius loci. We would like you to discover her magic. That is why we have gradually reconstructed it and in 2018 opened the door to the first visitors. We will be glad when you visit us and feel the magic of it."
+            {addLineBreaks(
+              t(
+                "Chalupa Švýcarka is located in the border village of Olešnice in the Orlické Mountains. We recognized her as an impoverished old lady who charmed us mainly with the surrounding nature and a certain genius loci. We would like you to discover her magic. That is why we have gradually reconstructed it and in 2018 opened the door to the first visitors. We will be glad when you visit us and feel the magic of it."
+              )
             )}
           </div>
         </div>
