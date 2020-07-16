@@ -3,7 +3,8 @@
   [
     "Chalupa Švýcarka is located in the border village of Olešnice in the Orlické Mountains. We recognized her as an impoverished old lady who charmed us mainly with the surrounding nature and a certain genius loci. We would like you to discover her magic. That is why we have gradually reconstructed it and in 2018 opened the door to the first visitors. We will be glad when you visit us and feel the magic of it.",
     null,
-    0
+    0,
+    "SVYCARKA cottage is located in a small village Olesnice v Orlickych horach near the border with Poland. It has got its name from the local people. When we first saw it, it was a ruin, but despite that it captured our attention with it’s amazing surroudings so thoroughly that you will surely fall in love with it too. For that reason we reconstructed the cottage step by step and opened its door for the first guests in 2018. If you visit this place, we are sure you will appreciate its magic feel on your own."
   ],
   [
     "Contact",
@@ -23,12 +24,14 @@
   [
     "Take a look at us",
     null,
-    0
+    0,
+    "Look into the cottage"
   ],
   [
     "See photos to see if you like us.",
     null,
-    0
+    0,
+    "Look at the photos to make sure that we are your own opinion whether the cottage is suitable for you. You may share with us some other interesting photos of cottage SVYCARKA on facebook or instagram with hashtag "
   ],
   [
     "If you missed some of the hilarious corners in our album, we will be happy",
@@ -43,7 +46,8 @@
   [
     "#svycarka.com",
     null,
-    0
+    0,
+    "#cottagesvycarka"
   ],
   [
     "Reservation",
@@ -68,7 +72,8 @@
   [
     "Why",
     null,
-    0
+    0,
+    "Why should you visit us"
   ],
   [
     "Where to find us",
@@ -83,17 +88,20 @@
   [
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
-    0
+    0,
+    "Winter season: 19 500 CZK / cottage (February – March)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
     null,
-    0
+    0,
+    "Summer season: 18 000 CZK / cottage (July – August)",
   ],
   [
     "Out of seeson 19000 Kč / for cottage",
     null,
-    0
+    0,
+    "Out of season: 15 000 CZK / cottage"
   ],
   [
     "Weekend price",
@@ -103,7 +111,8 @@
   [
     "Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu",
     null,
-    0
+    0,
+    "The reservation is possible only out of season: 8 000 CZK / cottage"
   ],
   [
     "Christmas",
@@ -113,27 +122,32 @@
   [
     "(As a bonus Christmas decor, candy, christmas tree and carp included)",
     null,
-    0
+    0,
+    "(bonus: christmas decoration, candies, a christmas tree)"
   ],
   [
     "19 500 CZK / for Christmas holidays including Christmas Eve",
     null,
-    0
+    0,
+    "19 500 CZK / Christmas holiday including Christmas Eve"
   ],
   [
     "New Year's Eve - we're still free",
     null,
-    0
+    0,
+    "New Year´s Eve"
   ],
   [
     "(As a bonus Christmas decor and a bottle of champagne)",
     null,
-    0
+    0,
+    "(bonus: christmas decoration and a bottle of champagne)"
   ],
   [
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
-    0
+    0,
+    "44 500 CZK / a week including New Year´s Eve"
   ],
   [
     "How much?",
@@ -143,57 +157,68 @@
   [
     "Svýcarka is able to accommodate a group of 12 people, has 2 double rooms (one of them has an extra bed), 1 triple room and 1 quadruple. Features 1 bathroom with shower and 3 toilets throughout the property. The warmth of the electrically heated radiators warms you up or you can heat up in the main living room with wood. The shortest accommodation time is 2 nights.",
     null,
-    0
+    0,
+    "The Cottage SVYCARSKA is able to accommodate a group of 12 people. The cottage has got two double rooms (in one of them there is an extra bed). One triple room and one room with four beds are located in the attic. The cottage is equipped with one bathroom with barrier free access shower and a toilet. There are two extra toilets in the house, one of them is on the ground floor, the second is in the attic. Heat is provided by electric radiators or you can fire up the fireplace in the common room. There is limit of minimun of 2 nights stay."
   ],
   [
     "O průběhu vaší rezervace a dalších důležitých informací vás budeme informovat e-mailem.",
     null,
-    0
+    0,
+    "We will inform you about the reservation process by e-mail."
   ],
   [
     "Reservation form",
     null,
-    0
+    0,
+    "Booking form"
   ],
   [
     "All data must be filled in to complete the reservation.",
     null,
-    0
+    0,
+    "You need to specify all data for your successful booking"
   ],
   [
     "Name and surname",
     null,
-    0
+    0,
+    "Your name and surname"
   ],
   [
     "Street, house number, city, postal code",
     null,
-    0
+    0,
+    "Street with house number, post code"
   ],
   [
     "Email",
     null,
-    0
+    0,
+    "E-mail"
   ],
   [
     "Phone",
     null,
-    0
+    0,
+    "Phone number"
   ],
   [
     "*Reservation form contains some validation errors.",
     null,
-    0
+    0,
+    "*The booking form contains some mistakes."
   ],
   [
     "Reserve date",
     null,
-    0
+    0,
+    "Reservation date"
   ],
   [
     "I agree to process my personal data in accordance with ",
     null,
-    0
+    0,
+    "I agree with the processing of personal data according to the "
   ],
   [
     "GDPR",
@@ -203,12 +228,14 @@
   [
     "Why to visit",
     null,
-    0
+    0,
+    "To visit"
   ],
   [
     "The Švýcarka offers not only a quiet environment, but also the possibility of an active holiday.@br@Would you like to visit nearby places of interest? Here we have recommendations that have reasonable range and are tested directly by the owner of Švýcarka. If you wish, we are able to arrange excellent meat from the organic farm or beer from the brewery.",
     null,
-    0
+    0,
+    "SVYCARKA offers not only a quiet area but also option for actively-spent holidays. If you would like to visit interesting places around, we can recommend a lot of places which are not too far from the cottage"
   ],
   [
     "More informations",
@@ -394,7 +421,8 @@
   [
     "Cottage Švýcarka can be rented only as a whole object, just fill in the date of arrival and departure, and we will take care of everything else.",
     null,
-    0
+    0,
+    "You may rent only the whole cottage. You need to specify only the date of your arrival and departure, and the rest will be taken care of by us."
   ],
   [
     "You need to know",
@@ -404,17 +432,20 @@
   [
     "The price for renting a Swiss cottage varies according to the length of stay and the current season. The shortest stay is 2 nights. When renting a cottage for the whole week you have a discounted price.",
     null,
-    0
+    0,
+    "The rent price is variable, it depends on the length of your stay and the actual season. The possible shortest term of staying are two nights. We offer a discount price for the whole week rent."
   ],
   [
     "Upon arrival you will be charged a resort fee of 10 CZK / person per day and a refundable deposit of 4 000 CZK, which will be refunded on your departure day.",
     null,
-    0
+    0,
+    "When we receive the required deposit, your reservation will be locked in. The deposit must be sent into the following bank account...within three working days. Don´t forget to include words “Reservation Svycarka” and your surname on the payment order, please. On your arrival you will have to pay, the rest of the rental price, the tourist tax which is paid to the village (10 CZK/ adult person/ day) the refundable deposit which will be returned on departure."
   ],
   [
     "The price includes water, bedding, parking, WIFI and TV. The price does not include electricity consumption (will be charged on the day of departure according to the price list), firewood (you will be charged on the day of departure), the basic kitchen detergents, bathroom and toilet paper.",
     null,
-    0
+    0,
+    "The price of accommodation includes a water charge, bedclothes, parking, WIFI and TV.  There isn´t a fixed price for electricity and firewood that is why it will be subtracted from your refundable deposit when you check out. Please, take with you your own slippers and toiletries (toilet paper, towels, …), tea towels and detergents for the kitchen and bathroom. There is something, but in limited amount."
   ],
   [
     "Arrival at the cottage for a week's stay is always on Saturdays between 2 pm and 4 pm End of stay on the following Saturday, with the evacuation of the cottage till 10 am. In case of a shorter stay, departure and arrival are by appointment.",
@@ -424,17 +455,20 @@
   [
     "When handing over the cottage, we ask you to clean it. Everything needs to be put into the condition in which the cottage was on your arrival. If not, you will be charged a cleaning fee of CZK 700.",
     null,
-    0
+    0,
+    "It is necessary to clean up the cottage before you check out. In the case the cottage is not in the same condition as prior to your arrival, there will be an additional charge of 700 CZK for housekeeping."
   ],
   [
     "Smoking is strictly forbidden throughout the cottage and please leave your four-legged furry friends at home. Thank you in advance for your understanding.",
     null,
-    0
+    0,
+    "Please leave your pets at home. It is forbidden to have pets inside the cottage and additionally smoking inside is also not allowed. Thank you for your understanding."
   ],
   [
     "The nearest food in Olešnice, 1.6 km from the cottage.",
     null,
-    0
+    0,
+    "The nearest food shop is just 1.6 km away from the cottage."
   ],
   [
     "Restaurants and pubs: ",
@@ -444,187 +478,224 @@
   [
     "Jurášek (350 m), U Anděla pub (1,7km), planned microbrewery (4km, direction Rzy), Deštné in O.h. - Restaurant Kozí chlívek (12km)",
     null,
-    0
+    0,
+    "Cottage JURASKA (350 m), Restauration U ANDELA (1.8 km), Mini brewery AGENT (4 km, direction to Rzy village), Restauration KOZI CHLIVEK (12 km, DESTNE v ORLICKYCH HORACH)"
   ],
   [
     "Trip Tips / Sports Activities",
     null,
-    0
+    0,
+    "Tipy na výlety"
   ],
   [
     "Skiing",
     null,
-    0
+    0,
+    "Sjezdové lyžování"
   ],
   [
     "Kačenčina ski slope - Horská chata Juráška (350m)",
     null,
-    0
+    0,
+    "Kačenčina sjezdovka – u Horské chaty Juráška (350 m)"
   ],
   [
     "Ski Resort Hartman (2.3km)",
     null,
-    0
+    0,
+    "Ski areál Hartman (2,3 km)"
   ],
   [
     "Ski Resort Olešnice in O.h. (3.0km)",
     null,
-    0
+    0,
+    "Ski areál Olešnice v O. h. (3,0 km)"
   ],
   [
     "SkiSedloňov (6,4km)",
     null,
-    0
+    0,
+    "Lyžařský areál a snowpark SkiSedloňov (6,4 km)"
   ],
   [
     "Ski center Deštné v Orlických horách (12,4km)",
     null,
-    0
+    0,
+    "Skicentrum Deštné v Orlických horách (12,4 km)"
   ],
   [
     "Zieleniec Ski Arena (PL) (21.3km)",
     null,
-    0
+    0,
+    "Zieleniec Ski Arena (PL) (21,3 km)"
   ],
   [
     "Ski slopes in Orlické Záhoří - Ski Resort Bedřichovka, Orlické Záhoří Jadrná,@br@Orlické Záhoří Černá voda (Orlické Záhoří 26.3km)",
     null,
-    0
+    0,
+    "Sjezdové tratě v Orlickém Záhoří – Ski areál Bedřichovka, Orlické Záhoří Jadrná,@br@Orlické Záhoří Černá voda (Orlické Záhoří 26,3 km)"
   ],
   [
     "Ski center Říčky v Orlických horách (31.9km)",
     null,
-    0
+    0,
+    "Ski centrum Říčky v Orlických horách (31,9 km)"
   ],
   [
     "Cross-country skiing ",
     null,
-    0
+    0,
+    "Běžecké lyžování"
   ],
   [
     "Knížecí cesta - access to the track possible from Olešnice rozcestí (1.2 km from@br@the cottage) or from Číhalka (1.7 km from the cottage)",
     null,
-    0
+    0,
+    "Knížecí cesta – nástup na trať možný z Olešnice rozcestí (vzdálené 1,2 km@br@od chalupy) nebo od Číhalky (vzdálené 1,7 km od chalupy)"
   ],
   [
     "To the highest peak of the Orlické Mountains - from Deštná in O. h. Via Luisino Údolí - Velká Deštná (1,115 m above sea level) - Šerlišské sedlo - Masaryk's cottage - Šerlišský mlýn and back to Deštná in O. h., Route length 18 km (distance from the cottage 12,4 km)",
     null,
-    0
+    0,
+    "Na nejvyšší vrchol Orlických hor – z Deštné v O. h. přes Luisino Údolí – Velkou Deštnou (1 115 m n. m.) – Šerlišské sedlo – Masarykovu chatu – Šerlišský mlýn a zpět do Deštné v O. h., délka trasy 18 km (vzdálenost od chalupy 12,4 km)"
   ],
   [
     "Orlické Záhoří - Illuminated cross-country ski circuit 5 km long (distance from the cottage 24.4 km)",
     null,
-    0
+    0,
+    "Orlické Záhoří – Osvětlený lyžařský běžecký okruh dlouhý 5 km (vzdálenost od chalupy 24,4 km)"
   ],
   [
     "Along the ridges - start of the route from Číhalka (1.7 km away from the cottage) - Ostružník - Šerlich - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads (1.2 km from the cottage), length of the route 20 km (possibility to end the route in Masaryk cottage and go to Olešnice by bus",
     null,
-    0
+    0,
+    "Po hřebenech – začátek trasy od Číhalky (vzdálená od chalupy 1,7 km) – Ostružník – Šerlich – Šerlišský mlýn – Sedloňovský vrch – Horní Olešnice rozcestí (vzdálené 1,2 km od chalupy),@br@délka trasy 20 km (možnost ukončit trasu na Masarykově chatě a přejet do Olešnice autobusem)"
   ],
   [
     "Current state of cross-country trails",
     null,
-    0
+    0,
+    "Aktuální stav běžkařských tras"
   ],
   [
     "Cycling",
     null,
-    0
+    0,
+    "Cyklistika"
   ],
   [
     "Relaxation route - from Masaryk's cottage to Sedloňovský vrch or Ruské údolí to Olešnice in O. h. (Cycle bus on the route Olešnice in Orlické hory - Sedloňov - Deštné - Masaryk's cottage), approx. 12 km",
     null,
-    0
+    0,
+    "Odpočinková trasa – z Masarykovi chaty na Sedloňovský vrch nebo Ruské údolí do Olešnice v O. h. (cyklobus na trase Olešnice v Orlických horách – Sedloňov – Deštné – Masarykova chata), cca 12 km"
   ],
   [
     "Trasa po československém opevnění – Olešnice v O. h. – Dělostřelecká tvrz Skutina ve Sněžném – Stenka – Ruské údolí – Olešnice v Oh, délka trasy 12 km",
     null,
-    0
+    0,
+    "Trasa po československém opevnění – Olešnice v O. h. – Dělostřelecká tvrz Skutina ve Sněžném – Stenka – Ruské údolí – Olešnice v Oh, délka trasy 12 km"
   ],
   [
     "Sightseeing route - from the cottage around Číhalka - Knížecí cesta (red cycle route 4071) - Rozc. Knížecí and Polomské - Pod Sedloňovským vrchem - Údolí Bělé - Polomský kopec - Spring Bělé - Vrchmezí - Ostružník - Nad Olešnicí, viewpoint, route length 19 km",
     null,
-    0
+    0,
+    "Vyhlídková trasa – od chalupy kolem Číhalky – Knížecí cesta (červená cyklotrasa 4071) – Rozc. Knížecí a Polomské – Pod Sedloňovským vrchem – Údolí Bělé – Polomský kopec – Pramen Bělé – Vrchmezí – Ostružník – Nad Olešnicí, vyhlídka, délka trasy 19 km"
   ],
   [
     "Route to Pekla - Olešnice in O. h. Via Borová - Pekelské údolí - Sendráž Lookout Tower - Frymburk Castle Ruins - Rokole - route length 35 km",
     null,
-    0
+    0,
+    "Trasa do Pekla – Olešnice v O. h. přes Borovou – Pekelské údolí – Rozhledna Sendráž – Zřícenina hradu Frymburk – Rokole – délka trasy 35 km"
   ],
   [
     "Long circuit - from the cottage around Číhalka - Zieleniec - Lasówka - Mostowice - Orlické Záhoří - Masaryk cottage - Šerlišský mlýn - Sedloňovský vrch - Horní Olešnice crossroads, route length 47 km",
     null,
-    0
+    0,
+    "Dlouhý okruh – od chalupy kolem Číhalky – Zieleniec – Lasówka – Mostowice – Orlické Záhoří – Masarykova chata – Šerlišský mlýn – Sedloňovský vrch – Horní Olešnice rozcestí, délka trasy 47 km"
   ],
   [
     "Route for able athletes - Olešnice in O. h. Through Číhalka - Masaryk cottage - Velká Deštná (1115 m asl) - Kunštát chapel - Anenský vrch - Hanička fortress - back through Deštná - Sedloňov - Polom - Olešnice in O. h., Length route 73 km",
     null,
-    0
+    0,
+    "Trasa pro zdatné sportovce – Olešnice v O. h. přes Číhalku – Masarykova chata – Velká Deštná (1115 m n. m.) – Kunštátská kaple – Anenský vrch – pevnost Hanička – zpět přes Deštnou – Sedloňov – Polom – Olešnice v O. h., délka trasy 73 km"
   ],
   [
     "Hiking ",
     null,
-    0
+    0,
+    "Turistika"
   ],
   [
     "Panský kopec, 2.4 km from the cottage",
     null,
-    0
+    0,
+    "Panský kopec, 2,4 km od chalupy"
   ],
   [
     "Lookout tower Feistův kopec, 2.8 km from the cottage",
     null,
-    0
+    0,
+    "Rozhledna Feistův kopec, 2,8 km od chalupy"
   ],
   [
     "Jirásek's path - follow the red tourist sign (it comes to Olešnice from Náchod via Peklo and Nový Hrádek, from Olešnice it rises via Ostružník to Vrchmezí, Šerlich and Velká Deštná and then winds over the entire length of the Orlické ridge to Jablonné nad Orlicí) the total length is 100 km",
     null,
-    0
+    0,
+    "Jiráskova cesta – po červené turistické značce (do Olešnice přichází z Náchoda přes Peklo a Nový Hrádek, z Olešnice stoupá přes Ostružník na Vrchmezí, Šerlich a Velkou Deštnou a poté se vine přes celou délku hřebenu Orlických hor až do Jablonného nad Orlicí) celková délka je 100 km"
   ],
   [
     "Masarykova chata (17 km away) - trip to Šerlišský mlýn or Velká Deštná (possibility to use the bus)",
     null,
-    0
+    0,
+    "Masarykova chata (vzdálená 17 km) – výlet na Šerlišský mlýn nebo na Velkou Deštnou (možnost využít autobus)"
   ],
   [
     "Kudowa-Zdrój Spa, 14 km away",
     null,
-    0
+    0,
+    "Lázně Kudowa-Zdrój, vzdálené 14 km"
   ],
   [
     "Dobrošov - Jirásek's cottage and Hanička artillery fortress, distance 14 km",
     null,
-    0
+    0,
+    "Dobrošov – Jiráskova chata a dělostřelecká tvrz Hanička, vzdálenost 14 km"
   ],
   [
     "Nové Město nad Metují Castle, distance 17 km",
     null,
-    0
+    0,
+    "Zámek Nové Město nad Metují, vzdálenost 17 km"
   ],
   [
     "Pstrążna, Kudowa-Zdrój - Łowisko Pstrąga (PL), distance 19 km",
     null,
-    0
+    0,
+    "Pstrążna, Kudowa-Zdrój – Łowisko Pstrąga (PL), vzdálenost 19 km"
   ],
   [
     "Japanese Garden (Ogród Japoński - PL), distance 19 km",
     null,
-    0
+    0,
+    "Japonská zahrada (Ogród Japoński - PL), vzdálenost 19 km"
   ],
   [
     "Water reservoir Rozkoš, distance 20 km",
     null,
-    0
+    0,
+    "Vodní nádrž Rozkoš,  vzdálenost 20 km"
   ],
   [
     "Hejšovina Rock City (Szczeliniec Wielki-PL), 28 km away",
     null,
-    0
+    0,
+    "Skalní město Hejšovina (Szczeliniec Wielki-PL), vzdálené 28 km"
   ],
   [
     "Broumov Highlands - Ostas - 35 km away",
     null,
-    0
+    0,
+    "Broumovská vrchovina – Ostaš – vzdáleno 35 km"
   ],
   [
     "More: ",
