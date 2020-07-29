@@ -18,6 +18,7 @@ import {
   bookmark_off_svg,
 } from "./src/assets";
 import { getResourceCssUrl } from "./utils/resourceUtils";
+import { fullWidth } from "./constants";
 
 export const colors = {
   text: "black",
@@ -86,7 +87,7 @@ export const contentSize = b.styleDef({
 // Measured :/
 export const headerContentSize = b.styleDef({
   width: "67%",
-  minWidth: 1015,
+  minWidth: fullWidth,
 });
 
 export const centerAbsoluteContent = b.styleDef({

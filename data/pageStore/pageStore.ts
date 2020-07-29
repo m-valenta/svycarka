@@ -5,16 +5,17 @@ import {
   reservationTransition,
   tipsTransition
 } from "../../transitions";
-import { Page, IPageStore, IScrollItem } from "./types";
+import { Page, IPageStore, IScrollItem, IResolution } from "./types";
 import {
   scrollSection,
   scrollToWrapper
 } from "../../components/scrollToWrapper/utils";
 import { IAppStore } from "../appStore";
+import { ResolutionStore } from "./resolution";
 
 class PageStore implements IPageStore {
   @observable
-  protected _currentPagePage: Page;
+  private _currentPagePage: Page;
 
   @observable
   forceShowTree: boolean;
@@ -25,15 +26,22 @@ class PageStore implements IPageStore {
   @observable
   mapOverlayActive: boolean = true;
 
-  protected _scrollItems: Map<string, number>;
-  protected _lastScrollTo?: scrollSection;
-  protected readonly _parentStore: IAppStore;
+  private _scrollItems: Map<string, number>;
+  private _lastScrollTo?: scrollSection;
+  private readonly _parentStore: IAppStore;
+  private readonly _resolution: IResolution;
 
-  constructor(parentStore: IAppStore) {
+  constructor(parentStore: IAppStore, resolution: IResolution) {
     this._parentStore = parentStore;
     this._currentPagePage = Page.Home;
     this.forceShowTree = false;
     this.clearScrollItems();
+
+    this._resolution = resolution;
+  }
+
+  get currentResolution(): IResolution {
+    return this._resolution;
   }
 
   get currentPage(): Page {
@@ -97,5 +105,8 @@ class PageStore implements IPageStore {
 }
 
 export function pageStoreFactory(parentStore: IAppStore): IPageStore {
-  return new PageStore(parentStore);
+  let resolution = new ResolutionStore();
+  resolution.init();
+
+  return new PageStore(parentStore, resolution);
 }

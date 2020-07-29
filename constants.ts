@@ -6,3 +6,5 @@ export const locales = {
 
 export const resourceVersion = 2;
 export const debug = true;
+
+export const fullWidth: number = 1280;

@@ -26,6 +26,7 @@ export interface IAppStore {
 const appStoreKey = "$appStore";
 window[appStoreKey] = {};
 
+
 export function initAppStore(): void {
   const appStore: IAppStore = window[appStoreKey]; 
   

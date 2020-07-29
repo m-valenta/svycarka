@@ -12,8 +12,18 @@ export interface IScrollItem {
   y: number;
 }
 
+
+export interface IResolution {
+  readonly width: number;
+  readonly height: number;
+  readonly windowWidth: number;
+  readonly windowHeight: number;
+  readonly isMobile: boolean;
+}
+
 export interface IPageStore {
   readonly currentPage: Page;
+  readonly currentResolution: IResolution;
   forceShowTree: boolean;  
   showContactInformation: boolean;
   mapOverlayActive: boolean;

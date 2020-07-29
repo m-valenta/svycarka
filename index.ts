@@ -10,7 +10,7 @@ import { favIconLink } from "./components/links/faviconlink";
 import { CaptchaScript } from "./components/recaptcha/reCaptcha";
 import { loginPage } from "./pages/admin/login";
 import { adminHomePage } from "./pages/admin/home";
-import { UsersPage, usersPage } from "./pages/admin/users";
+import { usersPage } from "./pages/admin/users";
 import { reservationsPage } from "./pages/admin/reservations";
 import { accomodationRulesPage } from "./pages/accommodationRulesPage";
 import { gdprPage } from "./pages/gdpr";
@@ -24,7 +24,6 @@ initGlobalization({
   defaultLocale: locales.default
 }).then(async () => {
   document.title = "Švýcarka";
-
   await setLocale(locales.czech);
   initAppStore();
   b.routes([
