@@ -1,6 +1,6 @@
 import * as b from "bobril";
 import { appStore } from "../../data/appStore";
-import { Button } from "../../components/button/buton";
+import { Button } from "../../components/button/button";
 import { colors } from "../../styleConstants";
 import { IDataWithActiveRouteHandler } from "../masterPage";
 import {

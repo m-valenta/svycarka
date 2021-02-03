@@ -2,27 +2,27 @@
 # yarn lockfile v1
 
 
-bobril-g11n@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/bobril-g11n/-/bobril-g11n-4.4.1.tgz#4b43684a13cd8f8b1707a4bede837ec6bc82c939"
+bobril-g11n@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/bobril-g11n/-/bobril-g11n-5.0.3.tgz#ad9a462e8f22f67d947187d8c1d730002a8c7a61"
+  integrity sha512-gFriM3mnWfx+uvy9OQL/MGV9zdNd4U6qx8a4PAwicEjYjq3ENn+D/iTeBAnkdd5A+Q1Xt1NGC3vGNMXxz7DU+g==
   dependencies:
+    bobril "*"
     moment "^2.10.6"
 
-bobril@*:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/bobril/-/bobril-10.1.1.tgz#7626c4785fb356dc396806cc87e7e0593e6e9576"
+bobril@*, bobril@^15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/bobril/-/bobril-15.0.1.tgz#a9aadae82cfe2f7d0acb8ffed2111038500de373"
+  integrity sha512-pudQMh83yYnhKqEUJyeW28dXeqKxfzlbKZHL+f1M+zDfnQX3FhmNd6djhAnGDkzuFptTVZEANyuXaQS/0wSRpA==
 
-bobril@^14.0.1:
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/bobril/-/bobril-14.0.1.tgz#06e242557a8da3aaae192fe3c2bfb86f49534921"
-  integrity sha512-BYWJHmI5eMdvvbMhvEO/hd9Qfd6WFgwJjs3QSWP7UDkNszNqhvqwctRQQTx6j/Zh1x/gWRPeIWPcR6jxmOsW+w==
-
-bobx@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/bobx/-/bobx-0.19.0.tgz#448c8436bd3b669a2eb789a56338d6a52dd344b4"
+bobx@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/bobx/-/bobx-0.29.0.tgz#d980f4006468bcc01fb8342d186ba162f85fbd6f"
+  integrity sha512-ni+fbKz5WnP6pWzYoTrnJ54ePg5nBoBWyalDnAqZRaFuODZwPSVqGmMVWqk0C8x3puJAEscMXVQWY/ZiTcWaZw==
   dependencies:
     bobril "*"
 
 moment@^2.10.6:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==

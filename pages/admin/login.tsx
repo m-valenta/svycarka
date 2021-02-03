@@ -2,7 +2,7 @@ import * as b from "bobril";
 import { observable, observableProp } from "bobx";
 import { appStore } from "../../data/appStore";
 import { colors } from "../../styleConstants";
-import { Button } from "../../components/button/buton";
+import { Button } from "../../components/button/button";
 
 const styles = {
     loginWrapper: b.styleDef({

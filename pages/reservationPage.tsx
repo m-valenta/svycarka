@@ -5,7 +5,7 @@ import { contentSize, colors } from "../styleConstants";
 import { TextSection } from "../components/textSection/component";
 import { t } from "bobril-g11n";
 import { DateInput } from "../components/dateInput/component";
-import { Button } from "../components/button/buton";
+import { Button } from "../components/button/button";
 import {
   PriceInfo,
   ReservationIconSet,

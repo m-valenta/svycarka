@@ -2,8 +2,8 @@
 
 export const add_png = "../assets/add.png";
 export const arrow_svg = "../assets/arrow.svg";
-export const banner_jpg = "../assets/banner.jpg";
 export const bannerArrow_svg = "../assets/bannerArrow.svg";
+export const banner_jpg = "../assets/banner.jpg";
 export const bookmark_off_svg = "../assets/bookmark_off.svg";
 export const bookmark_on_svg = "../assets/bookmark_on.svg";
 export const close_svg = "../assets/close.svg";

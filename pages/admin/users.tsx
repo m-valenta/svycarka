@@ -8,7 +8,7 @@ import {
   colors
 } from "../../styleConstants";
 import { observable, observableProp } from "bobx";
-import { Button } from "../../components/button/buton";
+import { Button } from "../../components/button/button";
 import { IUserDto, IAdminUserStore } from "../../data/admin/types";
 
 interface IEditableUser extends IUserDto {

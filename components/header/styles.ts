@@ -6,7 +6,7 @@ import {
   menuHeight,
   headerContentSize
 } from "../../styleConstants";
-import { button } from "../button/buton";
+import { button } from "../button/button";
 
 export const wrapper = b.styleDef({
   position: "fixed",

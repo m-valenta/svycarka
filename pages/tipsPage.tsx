@@ -4,44 +4,7 @@ import { Page, IPageStore } from "../data/pageStore/types";
 import { contentSize, colors } from "../styleConstants";
 import { t } from "bobril-g11n";
 import { addLineBreaks } from "../utils/textUtils";
-
-const styles = {
-  contentStyle: b.styleDef({
-    margin: "109px auto 0 auto",
-  }),
-  commonText: b.styleDef({
-    textAlign: "center",
-    fontSize: 16,
-    marginBottom: 25,
-  }),
-  commonTextBoldPrefix: {
-    fontWeight: "bold",
-  },
-  headerText: b.styleDefEx(this.commonText, {
-    fontSize: 30,
-    marginBottom: 15,
-  }),
-  subHeaderText: b.styleDefEx(this.commonText, {
-    fontSize: 20,
-    marginBottom: 5,
-  }),
-  listStyle: b.styleDef({
-    margin: 0,
-    padding: 0,
-    fontSize: 16,
-    display: "inline-block",
-  }),
-  linkStyle: b.styleDef(
-    {
-      textDecoration: "none",
-      cursor: "pointer",
-      color: "black",
-    },
-    {
-      hover: { color: colors.calendarSilver },
-    }
-  ),
-};
+import * as styles from "./tipPage_styles";
 
 class TipsPage extends b.Component {
   readonly pageStore: IPageStore = appStore().pageStore;

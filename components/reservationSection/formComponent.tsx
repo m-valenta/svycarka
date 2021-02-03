@@ -10,7 +10,7 @@ import { Spinner } from "../spinner/component";
 import { appStore } from "../../data/appStore";
 import { buttonWrapper } from "../tipsSection/styles";
 import { colors, invalidItemStyle } from "../../styleConstants";
-import { Button } from "../button/buton";
+import { Button } from "../button/button";
 import Captcha, { utils } from "../recaptcha/reCaptcha";
 import { gdprTransition } from "../../transitions";
 import { Loader } from "../loader/loader";

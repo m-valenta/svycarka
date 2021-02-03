@@ -11,7 +11,7 @@ import {
   nodog_svg,
   nosmoke_svg
 } from "../../src/assets";
-import { Button } from "../button/buton";
+import { Button } from "../button/button";
 import { colors } from "../../styleConstants";
 import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";

@@ -2,23 +2,23 @@ import * as b from "bobril";
 import {
   IAdminReservationStore,
   IAdminReservation,
-  IReservationEditRequest
+  IReservationEditRequest,
 } from "../../data/admin/types";
 import { appStore } from "../../data/appStore";
 import * as tableStyles from "./tableStyles";
 import { getMoment } from "bobril-g11n";
 import {
   reservationStateToString,
-  ReservationState
+  ReservationState,
 } from "../../utils/stateUtils";
 import {
   editButton,
   removeButton,
   colors,
   bookmarkOn,
-  bookmarkOff
+  bookmarkOff,
 } from "../../styleConstants";
-import { Button } from "../../components/button/buton";
+import { Button } from "../../components/button/button";
 import { translateMonth, czechDateToJsDate } from "../../utils/dateUtils";
 import { observableProp, observable } from "bobx";
 import { getLocaleCode, formateToCzechDate } from "../../utils/localeUtils";
@@ -52,7 +52,7 @@ class Table extends b.Component<{
 }> {
   render(): b.IBobrilNode {
     const selectedReservation = this.data.store.selectedReservation;
-    const lines: b.IBobrilNode[] = this.data.store.Reservations.map(res => (
+    const lines: b.IBobrilNode[] = this.data.store.Reservations.map((res) => (
       <this.Row
         row={res}
         isSelected={res.id === selectedReservation?.ReservationData.id}
@@ -89,7 +89,7 @@ class Table extends b.Component<{
   }): b.IBobrilNode {
     const tableLineStyle: b.IBobrilStyles = [
       tableStyles.tableLine,
-      { cursor: "pointer" }
+      { cursor: "pointer" },
     ];
     data.isSelected && tableLineStyle.push({ fontWeight: "bold" });
 
@@ -122,8 +122,8 @@ class Table extends b.Component<{
                 data.row.state === ReservationState.WaitForApproval
                   ? "Red"
                   : "Black"
-              }`
-            }
+              }`,
+            },
           ]}
         >
           {reservationStateToString(data.row.state)}
@@ -139,6 +139,13 @@ class Table extends b.Component<{
               return true;
             }}
           />
+          <div
+            style={removeButton}
+            onClick={() => {
+              data.store.deleteReservation(data.row.id);
+              return true;
+            }}
+          />
           <div style={{ clear: "both" }} />
         </div>
         <div style={{ clear: "both" }} />
@@ -151,7 +158,7 @@ class Table extends b.Component<{
       <>
         {[
           tableRow,
-          <EditSection key={`adm_rez_es_${data.row.id}`} store={data.store} />
+          <EditSection key={`adm_rez_es_${data.row.id}`} store={data.store} />,
         ]}
       </>
     );
@@ -160,7 +167,7 @@ class Table extends b.Component<{
 
 const selectorButtonConfigurations = {
   explicitMargin: "0 2px",
-  explicitPadding: "15px 10px 0 10px"
+  explicitPadding: "15px 10px 0 10px",
 };
 
 class MonthSelector extends b.Component<{ store: IAdminReservationStore }> {
@@ -179,7 +186,7 @@ class MonthSelector extends b.Component<{ store: IAdminReservationStore }> {
           explicitMargin={selectorButtonConfigurations.explicitMargin}
           explicitPadding={selectorButtonConfigurations.explicitPadding}
         />
-      </div>
+      </div>,
     ];
     for (let i = 0; i < 12; i++) {
       content.push(
@@ -245,7 +252,7 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
           marginBottom: 10,
           padding: "5px",
           border: `solid 1px ${colors.calendarSilver}`,
-          borderRadius: 3
+          borderRadius: 3,
         }}
       >
         <ScrollToWrapper id="admin_edit">
@@ -337,7 +344,7 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
           <textarea
             rows="5"
             style={{ width: "100%" }}
-            onChange={value => {
+            onChange={(value) => {
               rez.Message = value;
             }}
           >
@@ -398,7 +405,7 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
 
     return (
       <select
-        onChange={value => {
+        onChange={(value) => {
           data.rowData.ReservationData.state = value;
         }}
       >
@@ -477,12 +484,12 @@ class NumberInput<T> extends b.Component<{
         max={this.data.max}
         min={this.data.min}
         value={this.valueStr}
-        onChange={value => this.onChange(value)}
+        onChange={(value) => this.onChange(value)}
       ></input>
     );
   }
 
-  private onChange(value: string): void {
+  onChange(value: string): void {
     this.valueStr = value;
     this.observableNumber = parseInt(this.valueStr);
   }

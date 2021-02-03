@@ -3,7 +3,7 @@ import { TextSection } from "../textSection/component";
 import * as styles from "./styles";
 import { t } from "bobril-g11n";
 import { colors } from "../../styleConstants";
-import { Button } from "../button/buton";
+import { Button } from "../button/button";
 import { appStore } from "../../data/appStore";
 import { Page } from "../../data/pageStore/types";
 import { addLineBreaks } from "../../utils/textUtils";

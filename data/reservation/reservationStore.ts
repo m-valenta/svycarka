@@ -172,7 +172,7 @@ class ReservationStore implements IReservationStore {
         0
       ),
       duration: this.currentReservation.value.duration - 1,
-      name: this.email.value,
+      name: this.name.value,
       phone: this.phone.value,
       email: this.email.value,
       address: this.address.value,

@@ -5,53 +5,10 @@ import { colors, menuHeight, copyrightSectionHeight, contentSize, centerAbsolute
 import { getResourceCssUrl } from "../utils/resourceUtils";
 import { errorBackground_png } from "../src/assets";
 import { t } from "bobril-g11n";
-import { Button } from "../components/button/buton";
+import { Button } from "../components/button/button";
 import { defaultTransition } from "../transitions";
+import * as styles from "./error_styles";
 
-const otherContentHeight = menuHeight + copyrightSectionHeight;
-
-const styles = {
-    wrapperStyle: b.styleDef({
-        backgroundColor: colors.errorBackground,
-        height: `calc(100vh - ${otherContentHeight}px)`
-    }),
-    errorContent: b.styleDef([{
-            paddingTop: 60,
-            paddingLeft: 57,
-            paddingRight: 43,
-            position: "relative",
-            margin: "0 auto",
-    }, contentSize]), 
-    errorImage: b.styleDef({
-        width: "45%",
-        paddingBottom: "38%", 
-        backgroundSize: "cover",
-        backgroundImage: getResourceCssUrl(b.asset(errorBackground_png))
-    }),
-    errorInfo: b.styleDef({
-        width: "330px",
-        position: "absolute",
-        top: 100
-    }),
-    textBase: b.styleDef({
-        textAlign: "center",
-        color: colors.menu,
-        display: "inline-block",
-        marginBottom: 35
-    }),
-    textShadow: b.styleDef({        
-        color: "white",
-        textShadow: "0px 3px 6px #00000029"
-    }),
-    text404: b.styleDefEx(this.textBase, {
-        fontSize: "163px",
-        margin: "63px 0 -78px 0" 
-    }),
-    buttonCenter: b.styleDef({
-        display: "table",
-        margin: "0 auto"
-    })
-};
 
 export class ErrorPage extends b.Component {
     private readonly store: IPageStore = appStore().pageStore;
