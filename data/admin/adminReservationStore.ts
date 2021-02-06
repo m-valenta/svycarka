@@ -7,9 +7,87 @@ import {
   IAdminReservationListResponse,
   IAdminReservation,
   IReservationEditRequest,
-  IReservationBookmarkRequest
+  IReservationBookmarkRequest,
+  IFilter,
+  IAdminReservationRequest,
 } from "./types";
 import { strDateToJsDate } from "../../utils/dateUtils";
+import { ReservationState } from "../../utils/stateUtils";
+import { bind } from "bobril";
+
+class Filter implements IFilter {
+  _sourceFilterChangedChanged: () => void;
+  _dataFilterChanged: () => void;
+
+  constructor(sourceFilterChangedChanged: () => void,  dataFilterChanged: () => void) {
+    this._sourceFilterChangedChanged = sourceFilterChangedChanged;
+    this._dataFilterChanged = dataFilterChanged;
+  }
+
+  @observable
+  private _year: number = 0;
+  @observable
+  private _month: number | undefined;
+  @observable
+  private _showBookMarkedOnly: boolean = false;
+  @observable
+  private _state: ReservationState = ReservationState.All;
+
+  get Month(): number {
+    return this._month;
+  }
+
+  get Year(): number {
+    return this._year;
+  }
+
+  get ShowBookMarkedOnly(): boolean {
+    return this._showBookMarkedOnly;
+  }
+
+  get State(): ReservationState {
+    return this._state;
+  }
+
+  set Month(month: number) {
+    this._month = month;
+    this._sourceFilterChangedChanged();
+  }
+
+  set Year(year: number) {
+    this._year = year;
+    this._month = undefined;
+    this._sourceFilterChangedChanged();
+  }
+
+  set ShowBookMarkedOnly(show: boolean) {
+    this._showBookMarkedOnly = show;
+    this._dataFilterChanged();
+  }
+
+  set State(state: ReservationState) {
+    this._state = state;
+    this._dataFilterChanged();
+  }
+
+  includeReservation(reservation: IAdminReservation | IAdminReservationRequest): boolean {
+    const bookmarked =  reservation["bookmarked"] ?? true;
+    
+    return (
+      (!this._showBookMarkedOnly || bookmarked) &&
+      (this._state == ReservationState.All || reservation.state == this._state)
+    );
+  }
+
+
+  reset(): void {
+    const date = new Date();
+    this._year = date.getFullYear();
+    this._month = undefined; // date.getMonth();
+    this._showBookMarkedOnly = false;
+    this._state = ReservationState.All;
+  }
+}
 
 class AdminReservationStore implements IAdminReservationStore {
   protected _reservationListConnector: IAjaxConnector | undefined;
@@ -18,54 +96,33 @@ class AdminReservationStore implements IAdminReservationStore {
   protected _bookMarkConnector: IAjaxConnector | undefined;
 
   @observable
-  private _year: number = 0;
-  @observable
-  private _month: number | undefined;
-  @observable
   private _selectedReservation?: IReservationEditRequest = undefined;
   @observable.ref
   private _reservations: IAdminReservation[] = [];
 
-  set Year(year: number) {
-    this._year = year;
-    this._month = undefined;
-    this._selectedReservation = undefined;
-    this.loadReservations();
-  }
-
-  get Year(): number {
-    return this._year;
-  }
-
-  set Month(month: number) {
-    this._month = month;
-    this._selectedReservation = undefined;
-    this.loadReservations();
-  }
-
-  get Month(): number {
-    return this._month;
-  }
+  private _filter: IFilter = new Filter(this.sourceFilterChangedChangedHandler, this.dataFilterChangedHandler);
 
   get Reservations(): IAdminReservation[] {
     return this._reservations;
   }
 
-  get selectedReservation(): IReservationEditRequest {
+  get SelectedReservation(): IReservationEditRequest {
     return this._selectedReservation;
   }
 
+  get Filter(): IFilter {
+    return this._filter;
+  }
+
   reset(): void {
-    const date = new Date();
-    this._year = date.getFullYear();
-    this._month = undefined; // date.getMonth();
+    this._filter.reset();
     this.loadReservations();
   }
 
   getReservationListUrl(listRequest: IAdminReservationListRequest): string {
-    return `api/reservations/getAdminReservations/${
-      listRequest.year
-    }/${listRequest.month ?? ""}`;
+    return `api/reservations/getAdminReservations/${listRequest.year}/${
+      listRequest.month ?? ""
+    }`;
   }
 
   attachListConnector(connector: IAjaxConnector): void {
@@ -79,8 +136,8 @@ class AdminReservationStore implements IAdminReservationStore {
 
   loadReservations(): void {
     this._reservationListConnector.sendRequest({
-      year: this._year,
-      month: this._month
+      year: this._filter.Year,
+      month: this._filter.Month,
     });
   }
 
@@ -111,6 +168,7 @@ class AdminReservationStore implements IAdminReservationStore {
         address: reservation.address,
         beer: reservation.beer,
         dateFrom: strDateToJsDate(reservation.dateFrom),
+        created: strDateToJsDate(reservation.created),
         duration: reservation.duration,
         arrival: reservation.arrival,
         email: reservation.email,
@@ -120,8 +178,8 @@ class AdminReservationStore implements IAdminReservationStore {
         phone: reservation.phone,
         price: reservation.price,
         state: reservation.state,
-        usedCulture: reservation.usedCulture
-      }
+        usedCulture: reservation.usedCulture,
+      },
     };
   }
 
@@ -151,8 +209,24 @@ class AdminReservationStore implements IAdminReservationStore {
   setReservationBookmark(reservationId: number, isSet: boolean) {
     this._bookMarkConnector.sendRequest(<IReservationBookmarkRequest>{
       ReservationId: reservationId,
-      IsBookmarked: isSet
+      IsBookmarked: isSet,
     });
+  }
+
+  @b.bind
+  private sourceFilterChangedChangedHandler() {
+    this._selectedReservation = undefined;
+    this.loadReservations();
+  }
+
+  @bind
+  private dataFilterChangedHandler() {
+    if (
+      this._filter.includeReservation(this._selectedReservation.ReservationData)
+    )
+      return;
+
+    this._selectedReservation = undefined;
   }
 }
 

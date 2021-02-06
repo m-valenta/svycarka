@@ -37,8 +37,32 @@ export class ReservationsPage extends b.Component {
   render() {
     return (
       <div>
-        Rok:
-        <YearSelector key="adm_rez_ys" store={this.store} />
+        <FilterWrapper>
+          <div>
+            Rok:
+            <YearSelector key="adm_rez_ys" store={this.store} />
+          </div>
+          <div>
+            Bookmark:
+            <div>
+              <BoolCheckBoxInput
+                label="Pouze bookmarked"
+                dataObj={this.store.Filter}
+                observablePropKey="ShowBookMarkedOnly"
+              />
+            </div>
+          </div>
+          <div>
+            Stav:
+            <div>
+              <StateSelection
+                dataObj={this.store.Filter}
+                stateProperty="State"
+                includeAll={true}
+              />
+            </div>
+          </div>
+        </FilterWrapper>
         {/* Měsíc:
         <MonthSelector key="adm_rez_ms" store={this.store} /> */}
         <Table key="adm_rez_ts" store={this.store} />
@@ -51,14 +75,20 @@ class Table extends b.Component<{
   store: IAdminReservationStore;
 }> {
   render(): b.IBobrilNode {
-    const selectedReservation = this.data.store.selectedReservation;
-    const lines: b.IBobrilNode[] = this.data.store.Reservations.map((res) => (
-      <this.Row
-        row={res}
-        isSelected={res.id === selectedReservation?.ReservationData.id}
-        store={this.data.store}
-      />
-    ));
+    const selectedReservation = this.data.store.SelectedReservation;
+    const lines = [];
+
+    for (let res of this.data.store.Reservations) {
+      if (!this.data.store.Filter.includeReservation(res)) continue;
+
+      lines.push(
+        <this.Row
+          row={res}
+          isSelected={res.id === selectedReservation?.ReservationData.id}
+          store={this.data.store}
+        />
+      );
+    }
 
     return (
       <div style={[tableStyles.tableWrapper, { width: "100%" }]}>
@@ -91,7 +121,7 @@ class Table extends b.Component<{
       tableStyles.tableLine,
       { cursor: "pointer" },
     ];
-    data.isSelected && tableLineStyle.push({ fontWeight: "bold" });
+    data.isSelected && tableLineStyle.push(tableStyles.boldText);
 
     var tableRow = (
       <div
@@ -170,9 +200,30 @@ const selectorButtonConfigurations = {
   explicitPadding: "15px 10px 0 10px",
 };
 
+class FilterWrapper extends b.Component<{
+  children: b.IBobrilNode[];
+}> {
+  render() {
+    const filters = [];
+
+    for (let child of this.data.children) {
+      filters.push(
+        <div style={{ float: "left", marginRight: "10px" }}>{child}</div>
+      );
+    }
+
+    return (
+      <div>
+        {filters}
+        <div style={{ clear: "both" }} />
+      </div>
+    );
+  }
+}
+
 class MonthSelector extends b.Component<{ store: IAdminReservationStore }> {
   render() {
-    const selectedMonth = this.data.store.Month;
+    const selectedMonth = this.data.store.Filter.Month;
     const content = [
       <div style={{ cssFloat: "left" }}>
         <Button
@@ -181,7 +232,7 @@ class MonthSelector extends b.Component<{ store: IAdminReservationStore }> {
           }
           text="Celý rok"
           onClick={() => {
-            this.data.store.Month = undefined;
+            this.data.store.Filter.Month = undefined;
           }}
           explicitMargin={selectorButtonConfigurations.explicitMargin}
           explicitPadding={selectorButtonConfigurations.explicitPadding}
@@ -197,7 +248,7 @@ class MonthSelector extends b.Component<{ store: IAdminReservationStore }> {
             }
             text={translateMonth(i)}
             onClick={() => {
-              this.data.store.Month = i;
+              this.data.store.Filter.Month = i;
             }}
             explicitMargin="0 2px"
             explicitPadding="15px 10px 0 10px"
@@ -213,7 +264,7 @@ class MonthSelector extends b.Component<{ store: IAdminReservationStore }> {
 
 class YearSelector extends b.Component<{ store: IAdminReservationStore }> {
   render() {
-    const selectedYear = this.data.store.Year;
+    const selectedYear = this.data.store.Filter.Year;
     const content = [];
     for (let i = selectedYear - 1; i <= selectedYear + 1; i++) {
       content.push(
@@ -224,7 +275,7 @@ class YearSelector extends b.Component<{ store: IAdminReservationStore }> {
             }
             text={i + ""}
             onClick={() => {
-              this.data.store.Year = i;
+              this.data.store.Filter.Year = i;
             }}
             explicitMargin={selectorButtonConfigurations.explicitMargin}
             explicitPadding={selectorButtonConfigurations.explicitPadding}
@@ -240,7 +291,7 @@ class YearSelector extends b.Component<{ store: IAdminReservationStore }> {
 
 class EditSection extends b.Component<{ store: IAdminReservationStore }> {
   render() {
-    const rez = this.data.store.selectedReservation;
+    const rez = this.data.store.SelectedReservation;
 
     if (rez === undefined) {
       return <></>;
@@ -256,9 +307,11 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
         }}
       >
         <ScrollToWrapper id="admin_edit">
-          <span
-            style={{ fontWeight: "bold" }}
-          >{`Editace rezervace (${rez.ReservationData.id})`}</span>
+          <span style={{ fontWeight: "bold" }}>{`Editace rezervace (id: ${
+            rez.ReservationData.id
+          }, vložena: ${formateToCzechDate(
+            rez.ReservationData.created
+          )})`}</span>
         </ScrollToWrapper>
         <this.Section label="Termín (od-do)">
           <DateInput dateObj={rez.ReservationData} observableProp="dateFrom" />
@@ -333,7 +386,11 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
         <this.Section label="Změna stavu">
           Stav
           <br />
-          <this.StateSelection rowData={rez} />
+          <StateSelection
+            dataObj={rez.ReservationData}
+            stateProperty="state"
+            includeAll={false}
+          />
           <br />
           Předmět (volitelné)
           <br />
@@ -385,35 +442,6 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
     );
   }
 
-  StateSelection(data: { rowData: IReservationEditRequest }): b.IBobrilNode {
-    const selectedValue = data.rowData.ReservationData.state;
-
-    const options = [];
-    for (let stateKey in ReservationState) {
-      const state = Number.parseInt(stateKey, 10);
-      if (isNaN(state)) continue;
-
-      options.push(
-        <option
-          value={state}
-          selected={state === selectedValue ? "selected" : ""}
-        >
-          {reservationStateToString(state)}
-        </option>
-      );
-    }
-
-    return (
-      <select
-        onChange={(value) => {
-          data.rowData.ReservationData.state = value;
-        }}
-      >
-        {options}
-      </select>
-    );
-  }
-
   postInitDom() {
     scrollToWrapper("admin_edit");
   }
@@ -457,6 +485,95 @@ class DateInput<T> extends b.Component<{
     this.currentDateStr = formateToCzechDate(this.ObservableDate);
 
     alert(this.ObservableDate.toDateString());
+  }
+}
+
+class StateSelection<T> extends b.Component<{
+  includeAll: boolean;
+  dataObj: T;
+  stateProperty: keyof T;
+}> {
+  render() {
+    const options = [];
+    const selectedValue = this.observableState;
+
+    if (this.data.includeAll) {
+      options.push(
+        <option
+          value={ReservationState.All}
+          selected={ReservationState.All === selectedValue ? "selected" : ""}
+        >
+          {reservationStateToString(ReservationState.All)}
+        </option>
+      );
+    }
+
+    for (let stateKey in ReservationState) {
+      const state = Number.parseInt(stateKey, 10);
+      if (isNaN(state)) continue;
+
+      if (state < 0) continue;
+
+      options.push(
+        <option
+          value={state}
+          selected={state === selectedValue ? "selected" : ""}
+        >
+          {reservationStateToString(state)}
+        </option>
+      );
+    }
+
+    return (
+      <select
+        onChange={(value) => {
+          this.observableState = value;
+        }}
+      >
+        {options}
+      </select>
+    );
+  }
+
+  private get observableState(): ReservationState {
+    return (this.data.dataObj as any)[
+      this.data.stateProperty
+    ] as ReservationState;
+  }
+
+  private set observableState(state: ReservationState) {
+    ((this.data.dataObj as any)[
+      this.data.stateProperty
+    ] as ReservationState) = state;
+  }
+}
+
+class BoolCheckBoxInput<T> extends b.Component<{
+  label: string;
+  dataObj: T;
+  observablePropKey: keyof T;
+}> {
+  render() {
+    const value = this.ObservableBool ? "checked" : "";
+
+    return (
+      <div>
+        {this.data.label}
+        <input
+          type="checkbox"
+          checked={value}
+          onChange={(value: boolean) => (this.ObservableBool = value)}
+        />
+      </div>
+    );
+  }
+
+  private get ObservableBool(): boolean {
+    return (this.data.dataObj[this.data.observablePropKey] as any) as boolean;
+  }
+
+  private set ObservableBool(value: boolean) {
+    (this.data.dataObj[this.data.observablePropKey] as any) = value;
   }
 }
 

@@ -1,6 +1,10 @@
 import * as b from "bobril";
 import { colors } from "../../styleConstants";
 
+export const boldText = b.styleDef({
+    fontWeight: "bold"
+});
+
 export const tableWrapper = b.styleDef({
     margin: "10px auto 10px auto",
     border: `solid 1px ${colors.calendarSilver}`,

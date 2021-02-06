@@ -35,11 +35,19 @@ export interface ILoginRequest extends IAjaxRequest {
   Password: string;
 }
 
-export interface IAdminReservationStore {
+export interface IFilter {
   Year: number;
   Month: number | undefined;
+  ShowBookMarkedOnly: boolean;
+  State: ReservationState;
+  includeReservation(reservation: IAdminReservation | IAdminReservationRequest): boolean;
+  reset(): void;
+}
+
+export interface IAdminReservationStore {
+  readonly Filter: IFilter;
   readonly Reservations: IAdminReservation[],
-  readonly selectedReservation?: IReservationEditRequest;
+  readonly SelectedReservation?: IReservationEditRequest;
   reset(): void;
   deleteReservation(idReservation: number);
   selectReservation(reservation?: IAdminReservation): void;
@@ -69,6 +77,7 @@ export interface IAdminReservation extends IServerReservation {
   state: ReservationState;
   arrival: string;
   bookmarked: boolean
+  created:string;
 }
 
 export interface IAdminReservationRequest {
@@ -85,6 +94,7 @@ export interface IAdminReservationRequest {
   arrival: string;
   dateFrom: Date,
   duration: number,
+  created: Date; 
 }
 
 
