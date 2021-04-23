@@ -15,11 +15,32 @@ import { strDateToJsDate } from "../../utils/dateUtils";
 import { ReservationState } from "../../utils/stateUtils";
 import { bind } from "bobril";
 
+class OrderInfo {
+  private _columnKey: keyof IAdminReservation;
+  private _desc: boolean;
+
+  constructor(columnKey: keyof IAdminReservation, desc: boolean) {
+    this._columnKey = columnKey;
+    this._desc = desc;
+  }
+
+  hasOrder(columnKey: keyof IAdminReservation): boolean {
+    return this._columnKey == columnKey;
+  }
+
+  get Desc(): boolean {
+    return this._desc;
+  }
+}
+
 class Filter implements IFilter {
   _sourceFilterChangedChanged: () => void;
   _dataFilterChanged: () => void;
 
-  constructor(sourceFilterChangedChanged: () => void,  dataFilterChanged: () => void) {
+  constructor(
+    sourceFilterChangedChanged: () => void,
+    dataFilterChanged: () => void
+  ) {
     this._sourceFilterChangedChanged = sourceFilterChangedChanged;
     this._dataFilterChanged = dataFilterChanged;
   }
@@ -33,7 +54,7 @@ class Filter implements IFilter {
   @observable
   private _state: ReservationState = ReservationState.All;
 
-  get Month(): number {
+  get Month(): number | undefined {
     return this._month;
   }
 
@@ -49,7 +70,7 @@ class Filter implements IFilter {
     return this._state;
   }
 
-  set Month(month: number) {
+  set Month(month: number | undefined) {
     this._month = month;
     this._sourceFilterChangedChanged();
   }
@@ -70,15 +91,16 @@ class Filter implements IFilter {
     this._dataFilterChanged();
   }
 
-  includeReservation(reservation: IAdminReservation | IAdminReservationRequest): boolean {
-    const bookmarked =  reservation["bookmarked"] ?? true;
-    
+  includeReservation(
+    reservation: IAdminReservation | IAdminReservationRequest
+  ): boolean {
+    const bookmarked = (reservation as IAdminReservation)?.bookmarked ?? true;
+
     return (
       (!this._showBookMarkedOnly || bookmarked) &&
       (this._state == ReservationState.All || reservation.state == this._state)
     );
   }
-
 
   reset(): void {
     const date = new Date();
@@ -97,16 +119,23 @@ class AdminReservationStore implements IAdminReservationStore {
 
   @observable
   private _selectedReservation?: IReservationEditRequest = undefined;
+
   @observable.ref
   private _reservations: IAdminReservation[] = [];
 
-  private _filter: IFilter = new Filter(this.sourceFilterChangedChangedHandler, this.dataFilterChangedHandler);
+  @observable.ref
+  private _orderInfo: OrderInfo = new OrderInfo("created", false);
+
+  private _filter: IFilter = new Filter(
+    this.sourceFilterChangedChangedHandler,
+    this.dataFilterChangedHandler
+  );
 
   get Reservations(): IAdminReservation[] {
     return this._reservations;
   }
 
-  get SelectedReservation(): IReservationEditRequest {
+  get SelectedReservation(): IReservationEditRequest | undefined {
     return this._selectedReservation;
   }
 
@@ -116,6 +145,7 @@ class AdminReservationStore implements IAdminReservationStore {
 
   reset(): void {
     this._filter.reset();
+    this._orderInfo = new OrderInfo("created", false);
     this.loadReservations();
   }
 
@@ -130,12 +160,14 @@ class AdminReservationStore implements IAdminReservationStore {
   }
 
   @b.bind
-  completeReservationLoading(reservations: IAdminReservationListResponse) {
-    this._reservations = reservations.reservations;
+  completeReservationLoading(
+    reservations: IAdminReservationListResponse | undefined
+  ) {
+    this._reservations = reservations?.reservations ?? [];
   }
 
   loadReservations(): void {
-    this._reservationListConnector.sendRequest({
+    this._reservationListConnector?.sendRequest({
       year: this._filter.Year,
       month: this._filter.Month,
     });
@@ -151,7 +183,7 @@ class AdminReservationStore implements IAdminReservationStore {
 
   @b.bind
   deleteReservation(idReservation: number) {
-    this._deleteReservationConnector.sendRequest(idReservation);
+    this._deleteReservationConnector?.sendRequest(idReservation);
   }
 
   @b.bind
@@ -194,7 +226,7 @@ class AdminReservationStore implements IAdminReservationStore {
   @b.bind
   saveReservation() {
     if (this._selectedReservation === undefined) return;
-    this._editReservationConnector.sendRequest(this._selectedReservation);
+    this._editReservationConnector?.sendRequest(this._selectedReservation);
   }
 
   attachBookmarkConnector(connector: IAjaxConnector) {
@@ -207,10 +239,60 @@ class AdminReservationStore implements IAdminReservationStore {
 
   @b.bind
   setReservationBookmark(reservationId: number, isSet: boolean) {
-    this._bookMarkConnector.sendRequest(<IReservationBookmarkRequest>{
+    this._bookMarkConnector?.sendRequest(<IReservationBookmarkRequest>{
       ReservationId: reservationId,
       IsBookmarked: isSet,
     });
+  }
+
+  orderReservationsByDate(
+    columnKey:
+      | (keyof IAdminReservation & "created")
+      | (keyof IAdminReservation & "dateFrom")
+  ): void {
+    this.orderReservations(columnKey, (a, b) => {
+      let aDate = Date.parse(a[columnKey] as string);
+      let bDate = Date.parse(b[columnKey] as string);
+      return aDate - bDate;
+    });
+  }
+
+  orderReservationByState(
+    columnKey: keyof IAdminReservation & "state"
+  ): void {
+    this.orderReservations(columnKey, (a, b) => {
+      let aE = (a[columnKey] as ReservationState);
+      let bE = (b[columnKey] as ReservationState);
+      return aE - bE;
+    });
+  }
+
+  isOrderingColumn(column: keyof IAdminReservation): boolean {
+    return this._orderInfo.hasOrder(column);
+  }
+
+  isDesc(): boolean {
+    return this._orderInfo.Desc;
+  }
+
+  private orderReservations(
+    columnKey: keyof IAdminReservation,
+    orderFunc: (a: IAdminReservation, b: IAdminReservation) => number
+  ): void {
+    var newDesc = !this._orderInfo.Desc;
+    if (this._reservations.length == 0) {
+      this._orderInfo = new OrderInfo(columnKey, newDesc);
+      return;
+    }
+
+    let newReservations = Array.from(this._reservations);
+
+    if (!newDesc) newReservations.sort(orderFunc);
+    else newReservations.sort((a, b) => orderFunc(a, b) * -1);
+
+    // reset ref.
+    this._orderInfo = new OrderInfo(columnKey, newDesc);
+    this._reservations = newReservations;
   }
 
   @b.bind
@@ -222,6 +304,7 @@ class AdminReservationStore implements IAdminReservationStore {
   @bind
   private dataFilterChangedHandler() {
     if (
+      this._selectedReservation &&
       this._filter.includeReservation(this._selectedReservation.ReservationData)
     )
       return;

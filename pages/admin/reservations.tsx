@@ -2,7 +2,6 @@ import * as b from "bobril";
 import {
   IAdminReservationStore,
   IAdminReservation,
-  IReservationEditRequest,
 } from "../../data/admin/types";
 import { appStore } from "../../data/appStore";
 import * as tableStyles from "./tableStyles";
@@ -28,13 +27,15 @@ import { TipsSection } from "../../components/tipsSection/component";
 import { date } from "../../components/dateInput/styles";
 
 export class ReservationsPage extends b.Component {
-  store: IAdminReservationStore;
+  store: IAdminReservationStore | undefined;
 
   init() {
     this.store = appStore().adminReservationStore;
     this.store.reset();
   }
   render() {
+    if(this.store == undefined)
+      return <></>;
     return (
       <div>
         <FilterWrapper>
@@ -92,24 +93,32 @@ class Table extends b.Component<{
 
     return (
       <div style={[tableStyles.tableWrapper, { width: "100%" }]}>
-        <this.HeaderRow />
+        <this.HeaderRow store={this.data.store} orderingMarkFunc={this.getOrderingMark} />
         {lines}
       </div>
     );
   }
 
-  protected HeaderRow(): b.IBobrilNode {
+  protected HeaderRow(data: {store: IAdminReservationStore, orderingMarkFunc: (column: keyof IAdminReservation) => string}): b.IBobrilNode {
     return (
       <div style={[tableStyles.tableLine, tableStyles.headerLine]}>
-        <div style={[tableStyles.tableColumn, { width: "13%" }]}>Datum od</div>
+        <div style={[tableStyles.tableColumn, { width: "12%", cursor: "pointer" }]} onClick={() => data.store.orderReservationsByDate("dateFrom")}>Datum od{data.orderingMarkFunc("dateFrom")}</div>
+        <div style={[tableStyles.tableColumn, { width: "11%", cursor: "pointer" }]} onClick={() => data.store.orderReservationsByDate("created")}>Vytvořeno{data.orderingMarkFunc("created")}</div>
         <div style={[tableStyles.tableColumn, { width: "5%" }]}>Délka</div>
         <div style={[tableStyles.tableColumn, { width: "25%" }]}>Email</div>
         <div style={[tableStyles.tableColumn, { width: "25%" }]}>Jméno</div>
-        <div style={[tableStyles.lastTableColumn, { width: "15%" }]}>Stav</div>
-        <div style={[tableStyles.lastTableColumn, { width: "15%" }]} />
+        <div style={[tableStyles.lastTableColumn, { width: "15%", cursor: "pointer" }]} onClick={() => data.store.orderReservationByState("state")}>Stav{data.orderingMarkFunc("state")}</div>
+        <div style={[tableStyles.lastTableColumn, { width: "5%" }]} />
         <div style={{ clear: "both" }} />
       </div>
     );
+  }
+
+  @b.bind
+  protected getOrderingMark(column: keyof IAdminReservation): string {
+      if(!this.data.store.isOrderingColumn(column)) return " ➖";
+
+      return this.data.store.isDesc() ? " ⬆" : " ⬇";
   }
 
   protected Row(data: {
@@ -131,8 +140,11 @@ class Table extends b.Component<{
           return true;
         }}
       >
-        <div style={[tableStyles.tableColumn, { width: "13%" }]}>
+        <div style={[tableStyles.tableColumn, { width: "12%" }]}>
           {getMoment(data.row.dateFrom).format("DD.MM.YYYY")}
+        </div>
+        <div style={[tableStyles.tableColumn, { width: "11%" }]}>
+          {getMoment(data.row.created).format("DD.MM.YYYY")}
         </div>
         <div style={[tableStyles.tableColumn, { width: "5%" }]}>
           {data.row.duration}
@@ -158,7 +170,7 @@ class Table extends b.Component<{
         >
           {reservationStateToString(data.row.state)}
         </div>
-        <div style={[tableStyles.lastTableColumn, { width: "15%" }]}>
+        <div style={[tableStyles.lastTableColumn, { width: "5%" }]}>
           <div
             style={data.row.bookmarked ? bookmarkOn : bookmarkOff}
             onClick={() => {

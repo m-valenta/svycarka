@@ -17,7 +17,7 @@ const styles = {
     cssFloat: "left",
     backgroundColor: "black",
     padding: "10px 5px 10px 5px",
-    width: 250,
+    width: 200,
     height: "100vh",
     borderTop: `solid 1px ${colors.calendarSilver}`
   }),
@@ -25,7 +25,7 @@ const styles = {
     cssFloat: "left",
     minHeight: "100vh",
     backgroundColor: "white",
-    width: "calc(100% - 260px)",
+    width: "calc(100% - 210px)",
     paddingTop: 1
   }),
   menuLine: b.styleDef({
@@ -71,7 +71,7 @@ export class AdminHomePage extends b.Component<IDataWithActiveRouteHandler> {
         <div style={styles.leftColumn}>
           <div style={styles.menuLine}>
             <Button
-              explicitWidth={240}
+              explicitWidth={190}
               onClick={() => this.runTrunsition(adminUsersTransition)}
               text="Uzivatelé"
               colorScheme={
@@ -83,7 +83,7 @@ export class AdminHomePage extends b.Component<IDataWithActiveRouteHandler> {
           </div>
           <div style={styles.menuLine}>
             <Button
-              explicitWidth={240}
+              explicitWidth={190}
               onClick={() => this.runTrunsition(adminReservationsTransition)}
               text="Rezervace"
               colorScheme={
