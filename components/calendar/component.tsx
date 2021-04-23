@@ -315,6 +315,9 @@ export class Calendar extends b.Component<ICalendarData> {
       this.data.store.reservations
     );
 
+    if(computedReservation == undefined)
+      return;
+
     if(computedReservation.duration == 1 || computedReservation.duration > 2){
       this.data.store.currentReservation.value = computedReservation;
       this.clearSelection(clearPreviewMask);
@@ -518,7 +521,7 @@ export interface ICalendarReservationStrategy {
     selectedDay: MonthDay,
     currentMonth: IMonthInfo,
     currentDate: [number, number, number],
-    currentReservation: IReservation,
+    currentReservation: IReservation | undefined,
     reservations: IObservableMap<
       number,
       IObservableMap<number, ReadonlyArray<IReservation>>

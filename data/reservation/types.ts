@@ -50,7 +50,7 @@ export interface IReservationSaveResponse extends IAjaxResponse {
 }
 
 export interface IReservationStore {
-  reservations: IObservableMap<number, IObservableMap<number, IReservation[]>>;
+  reservations: IObservableMap<number, IObservableMap<number, ReadonlyArray<IReservation>>>;
   // form
   currentReservation: IFormItem<IReservation>;
   name: IFormItem<string>;
@@ -81,7 +81,7 @@ export interface IReservation {
 }
 
 export interface IFormItem<T> {
-  value: T;
+  value?: T;
   readonly isValid: boolean;
 
   validate(): boolean;
@@ -103,7 +103,7 @@ export class FormItem<T> implements IFormItem<T> {
     return this._isValid;
   }
 
-  get value(): T {
+  get value(): T | undefined {
     return this._value;
   }
 

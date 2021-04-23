@@ -1,6 +1,11 @@
 [
   "en-gb",
   [
+    "Chalupa ŠVÝCARKA v Orlických horách",
+    "page title",
+    0
+  ],
+  [
     "Chalupa Švýcarka is located in the border village of Olešnice in the Orlické Mountains. We recognized her as an impoverished old lady who charmed us mainly with the surrounding nature and a certain genius loci. We would like you to discover her magic. That is why we have gradually reconstructed it and in 2018 opened the door to the first visitors. We will be glad when you visit us and feel the magic of it.",
     null,
     0,
@@ -89,19 +94,19 @@
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
     0,
-    "Winter season: 19 500 CZK / cottage (February – March)"
+    "Winter season: 21 500 CZK / cottage (February – March)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
     null,
     0,
-    "Summer season: 18 000 CZK / cottage (July – August)",
+    "Summer season: 18 000 CZK / cottage (July – August)"
   ],
   [
     "Out of seeson 19000 Kč / for cottage",
     null,
     0,
-    "Out of season: 15 000 CZK / cottage"
+    "Out of season: 16 000 CZK / cottage"
   ],
   [
     "Weekend price",
@@ -129,7 +134,7 @@
     "19 500 CZK / for Christmas holidays including Christmas Eve",
     null,
     0,
-    "19 500 CZK / Christmas holiday including Christmas Eve"
+    "21 500 CZK / Christmas holiday including Christmas Eve"
   ],
   [
     "New Year's Eve - we're still free",
@@ -147,7 +152,17 @@
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0,
-    "44 500 CZK / a week including New Year´s Eve"
+    "45 500 CZK / a week including New Year´s Eve"
+  ],
+  [
+    "Easter",
+    null,
+    0
+  ],
+  [
+    "16 000 Kč",
+    null,
+    0
   ],
   [
     "How much?",
@@ -240,11 +255,6 @@
   [
     "More informations",
     null,
-    0
-  ],
-  [
-    "Chalupa ŠVÝCARKA v Orlických horách",
-    "page title",
     0
   ],
   [

@@ -26,7 +26,7 @@ class AnimationStageDispatcher {
   @observable
   private _stage: stage = stage.slowMovement;
 
-  targetIndex: number;
+  targetIndex: number = 0
 
   get stage(): stage {
     return this._stage;
@@ -39,9 +39,9 @@ class AnimationStageDispatcher {
 }
 
 export class Gallery extends b.Component {
-  protected _dataStore: IGalleryStore;
-  protected _animationStageDispatcher: AnimationStageDispatcher;
-  protected _animationHandler: AnimationHandler;
+  protected _dataStore: IGalleryStore | undefined;
+  protected _animationStageDispatcher: AnimationStageDispatcher | undefined;
+  protected _animationHandler: AnimationHandler | undefined;
   init() {
     this._dataStore = appStore().galleryStore;
     this._dataStore.loadContent();
@@ -51,6 +51,8 @@ export class Gallery extends b.Component {
     b.addDisposable(this, this._animationHandler);
   }
   render() {
+    if(this._dataStore == undefined || this._animationStageDispatcher == undefined || this._animationHandler == undefined)
+      return <></>;
     return (
       <Loader storeWithLoading={this._dataStore}>
         <div style={styles.wrapper}>
@@ -87,7 +89,7 @@ export class Gallery extends b.Component {
   }
 
   postInitDom() {
-    this._animationHandler.start();
+    this._animationHandler?.start();
   }
 }
 
@@ -243,9 +245,9 @@ class GalleryContentImage extends b.Component<{
   idx: number;
   store: IGalleryContentStore;
 }> {
-  _initialLeft: number;
-  _initialStep: number;
-  _idx: number;
+  _initialLeft: number = 0;
+  _initialStep: number = 0;
+  _idx: number = 0;
   init() {
     this._initialLeft = initialLefts[this.data.idx];
     this._initialStep = this.data.store.step;

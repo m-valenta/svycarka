@@ -1,6 +1,12 @@
 [
   "cs-CZ",
   [
+    "Chalupa ŠVÝCARKA v Orlických horách",
+    "page title",
+    0,
+    "Chalupa ŠVÝCARKA v Orlických horách"
+  ],
+  [
     "Chalupa Švýcarka is located in the border village of Olešnice in the Orlické Mountains. We recognized her as an impoverished old lady who charmed us mainly with the surrounding nature and a certain genius loci. We would like you to discover her magic. That is why we have gradually reconstructed it and in 2018 opened the door to the first visitors. We will be glad when you visit us and feel the magic of it.",
     null,
     0,
@@ -100,7 +106,7 @@
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
     0,
-    "Zimní sezona: 19 500 Kč/za chalupu (únor–březen)"
+    "Zimní sezona: 21 500 Kč/za chalupu (únor–březen)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
@@ -112,7 +118,7 @@
     "Out of seeson 19000 Kč / for cottage",
     null,
     0,
-    "Mimo sezónu: 15 000 Kč/za chalupu"
+    "Mimo sezónu: 16 000 Kč/za chalupu"
   ],
   [
     "Weekend price",
@@ -142,7 +148,7 @@
     "19 500 CZK / for Christmas holidays including Christmas Eve",
     null,
     0,
-    "19 500 Kč/za Vánoční svátky vč. Štědrého dne"
+    "21 500 Kč/za Vánoční svátky vč. Štědrého dne"
   ],
   [
     "New Year's Eve - we're still free",
@@ -160,7 +166,18 @@
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0,
-    "40 500 Kč/za týden vč. Silvestru a Nového roku"
+    "45 500 Kč/za týden vč. Silvestru a Nového roku"
+  ],
+  [
+    "Easter",
+    null,
+    0,
+    "Velikonoce"
+  ],
+  [
+    "16 000 Kč",
+    null,
+    0
   ],
   [
     "How much?",
@@ -257,12 +274,6 @@
     null,
     0,
     "Chci vědět více"
-  ],
-  [
-    "Chalupa ŠVÝCARKA v Orlických horách",
-    "page title",
-    0,
-    "Chalupa ŠVÝCARKA v Orlických horách"
   ],
   [
     "Ubytovací řád objektu",

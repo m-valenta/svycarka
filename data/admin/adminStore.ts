@@ -55,18 +55,18 @@ class AdminStore implements IAdminStore {
   }
 
   CheckAuthentication(): void {
-    this._authTestConnector.sendRequest(undefined);
+    this._authTestConnector?.sendRequest(undefined);
   }
 
   SignIn(login: string, password: string): void {
-    this._signInConnector.sendRequest(<ILoginRequest>{
+    this._signInConnector?.sendRequest(<ILoginRequest>{
       Login: login,
       Password: password
     });
   }
 
   SignOut(): void {
-      this._signOutConnector.sendRequest(undefined);
+      this._signOutConnector?.sendRequest(undefined);
   }
 }
 

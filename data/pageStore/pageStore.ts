@@ -26,7 +26,7 @@ class PageStore implements IPageStore {
   @observable
   mapOverlayActive: boolean = true;
 
-  private _scrollItems: Map<string, number>;
+  private _scrollItems?: Map<string, number>;
   private _lastScrollTo?: scrollSection;
   private readonly _parentStore: IAppStore;
   private readonly _resolution: IResolution;
@@ -84,11 +84,11 @@ class PageStore implements IPageStore {
   }
 
   setScrollItemPosition(id: string, yPosition: number) {
-    this._scrollItems.set(id, yPosition);
+    this._scrollItems?.set(id, yPosition);
   }
 
   getScrollItemPosition(id: string): number | undefined {
-    return this._scrollItems.get(id);
+    return this._scrollItems?.get(id);
   }
 
   setPageRendered(_page: Page) {

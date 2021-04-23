@@ -22,19 +22,19 @@ export class ResolutionStore implements IResolution, IDisposable {
     private readonly UpdateDelegate: () => void;
 
     @observable
-    private _width: number;
+    private _width: number = 0;
     
     @observable
-    private _height: number;
+    private _height: number = 0;
     
     @observable
-    private _windowWidth: number;
+    private _windowWidth: number = 0;
     
     @observable
-    private _windowHeight: number;
+    private _windowHeight: number = 0;
     
     @observable
-    private _isMobile: boolean;
+    private _isMobile: boolean = false;
 
     get width(): number {
         return this._width;

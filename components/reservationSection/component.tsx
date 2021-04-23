@@ -134,6 +134,13 @@ export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
           t("44 500 Kč / per week including New Year's Eve and New Year's Eve")
         ]}
       </TextBlock>
+      <TextBlock
+        header={t("Easter")}
+      >
+        {[
+          t("16 000 Kč")
+        ]}
+      </TextBlock>
     </>
   );
 }

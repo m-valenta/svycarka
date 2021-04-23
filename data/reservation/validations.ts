@@ -33,6 +33,6 @@ export function validateAgreement(agreement: boolean | undefined): boolean {
   return agreement !== undefined && agreement;
 }
 
-export function validateGC(gcResponse: string): boolean {
+export function validateGC(gcResponse: string | undefined): boolean {
   return gcResponse !== undefined && gcResponse !== "";
 }

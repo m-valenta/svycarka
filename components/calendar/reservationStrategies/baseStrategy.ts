@@ -11,7 +11,7 @@ import {
   compareDateItem,
   getMonthInfoFromDateItem,
   getNextMonthInfo,
-  getNextDayItem
+  getNextDayItem,
 } from "../../../utils/dateUtils";
 import { IReservation } from "../../../data/reservation/types";
 import { observable, IObservableMap } from "bobx";
@@ -23,7 +23,7 @@ export enum SelectionState {
   previewLast = 4,
   selected = 8,
   selectedFirst = 16,
-  selectedLast = 32
+  selectedLast = 32,
 }
 
 export interface IRangeState {
@@ -85,25 +85,27 @@ export abstract class BaseReservationtrategy
     day: number,
     monthInfo: IMonthInfo,
     monthReservations: ReadonlyArray<IReservation> | undefined,
-    prevMonthReservations: ReadonlyArray<IReservation> | undefined,
+    prevMonthReservations: ReadonlyArray<IReservation> | undefined
   ): boolean {
     if (monthReservations == undefined && prevMonthReservations == undefined) {
-      return null;
+      return false;
     }
 
     const yearNumber = monthInfo.year;
     const monthNumber = monthInfo.month;
 
-    const prevMonthResLength = prevMonthReservations === undefined ? 0 : prevMonthReservations.length; 
-    const currentMonthResLength = monthReservations === undefined ? 0 : monthReservations.length;
+    const prevMonthResLength =
+      prevMonthReservations === undefined ? 0 : prevMonthReservations.length;
+    const currentMonthResLength =
+      monthReservations === undefined ? 0 : monthReservations.length;
 
-    if(prevMonthResLength + currentMonthResLength === 0)
-      return;
+    if (prevMonthResLength + currentMonthResLength === 0) return false;
 
     for (let i = 0; i < prevMonthResLength + currentMonthResLength; i++) {
-      const currentReservation = i < prevMonthResLength 
-        ? prevMonthReservations[i]
-        : monthReservations[i - prevMonthResLength]
+      const currentReservation =
+        i < prevMonthResLength
+          ? prevMonthReservations![i]
+          : monthReservations![i - prevMonthResLength];
       const currentReservationStart = currentReservation.dateItem;
 
       if (
@@ -121,7 +123,9 @@ export abstract class BaseReservationtrategy
                 currentReservation.duration)
         )
           return true;
-      } else if (monthNumber > currentReservation.dateItem[dateItemParts.month]) {
+      } else if (
+        monthNumber > currentReservation.dateItem[dateItemParts.month]
+      ) {
         const currentReservationMonth = getMonthInfo(
           new Date(
             currentReservationStart[dateItemParts.year],
@@ -171,7 +175,7 @@ export abstract class BaseReservationtrategy
       day,
       monthInfo,
       this.getMonthReservations(monthInfo, reservations),
-      this.getMonthReservations(getPreviousMonthInfo(monthInfo),reservations)
+      this.getMonthReservations(getPreviousMonthInfo(monthInfo), reservations)
     );
 
     const mDay = new MonthDay(
@@ -197,18 +201,19 @@ export abstract class BaseReservationtrategy
       if (
         currentReservation.dateItem[dateItemParts.year] === monthInfo.year &&
         currentReservation.dateItem[dateItemParts.month] === monthInfo.month &&
-        (day >= currentReservation.dateItem[dateItemParts.day] &&
-          day <
-            currentReservation.dateItem[dateItemParts.day] +
-              currentReservation.duration)
+        day >= currentReservation.dateItem[dateItemParts.day] &&
+        day <
+          currentReservation.dateItem[dateItemParts.day] +
+            currentReservation.duration
       ) {
         return true;
       }
 
       if (
-        (monthInfo.year - currentReservation.dateItem[dateItemParts.year] === 1 
-        && currentReservation.dateItem[dateItemParts.month] === Month.December
-        && monthInfo.month === Month.January) ||
+        (monthInfo.year - currentReservation.dateItem[dateItemParts.year] ===
+          1 &&
+          currentReservation.dateItem[dateItemParts.month] === Month.December &&
+          monthInfo.month === Month.January) ||
         monthInfo.month - currentReservation.dateItem[dateItemParts.month] === 1
       ) {
         let previousMonth = getPreviousMonthInfo(monthInfo);

@@ -29,7 +29,7 @@ export interface IPageStore {
   mapOverlayActive: boolean;
   goToPage(page: Page, scrollTo?: scrollSection): void;
   setPageInitialized(page: Page): void;
-  setPageRendered(page: Page);  
-  setScrollItemPosition(id: string, yPosition: number);
+  setPageRendered(page: Page): void;  
+  setScrollItemPosition(id: string, yPosition: number): void;
   getScrollItemPosition(id: string): number | undefined;
 }

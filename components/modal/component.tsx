@@ -9,7 +9,7 @@ export interface IData {
 
 export class Modal extends b.Component<IData> {
   init() {
-    document.body.style["overflow-y"] = "hidden";
+    (document.body.style as any)["overflow-y"] = "hidden";
   }
 
   render() {
@@ -33,7 +33,7 @@ export class Modal extends b.Component<IData> {
   }
 
   destroy() {
-    document.body.style["overflow-y"] = "auto";
+    (document.body.style as any)["overflow-y"] = "auto";
   }
 }
 

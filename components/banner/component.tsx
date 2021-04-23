@@ -33,7 +33,7 @@ export class Banner extends b.Component {
 
 class Logo extends b.Component {
   private endPosition: number = 0;
-  private debouncedWindowScroll: () => void;
+  private debouncedWindowScroll?: () => void;
 
   init() {
     this.endPosition = 0;
@@ -42,7 +42,7 @@ class Logo extends b.Component {
   }
 
   destroy() {
-    window.removeEventListener("scroll", this.debouncedWindowScroll);
+    this.debouncedWindowScroll && window.removeEventListener("scroll", this.debouncedWindowScroll);
     appStore().pageStore.forceShowTree = false;
   }
 

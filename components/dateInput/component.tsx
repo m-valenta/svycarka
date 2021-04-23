@@ -16,11 +16,11 @@ export interface IData {
 
 export class DateInput extends b.Component<IData> {
   @observable
-  protected left: number;
+  protected left: number = 0;
   @observable
-  protected top: number;
+  protected top: number = 0;
   @observable
-  protected isSelectionOpen: boolean;
+  protected isSelectionOpen: boolean = false;
 
   render(): b.IBobrilChildren {
     const children = [

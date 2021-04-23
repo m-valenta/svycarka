@@ -54,7 +54,11 @@ export class Captcha extends b.Component<IReCaptchaData> {
   }
 
   postInitDom() {
-    grecaptcha.render(document.getElementById(this.captchaFieldId), {
+    let captchaElement = document.getElementById(this.captchaFieldId);
+    if(captchaElement == null)
+      return;
+
+    grecaptcha.render(captchaElement, {
       sitekey: this.data.siteKey,
       theme: "light",
       callback: response => (this.store.gc_Response.value = response)

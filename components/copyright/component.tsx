@@ -10,7 +10,7 @@ const style = b.styleDef({
 });
 
 export class CopyRight extends b.Component {
-  protected text: string;
+  protected text: string = "";
   init() {
     this.text = `Copyright © ${new Date().getFullYear()} kachnapult@gmail.com, All rights reserved.`;
   }

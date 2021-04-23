@@ -15,7 +15,7 @@ class GalleryStore implements IGalleryStore {
   currentIndex: number = 0;
 
   @observable
-  _isLoading: boolean;
+  _isLoading: boolean = false;
 
   get galleryFiles(): string[] {
     return this._contentFiles;
@@ -27,7 +27,7 @@ class GalleryStore implements IGalleryStore {
 
   loadContent() {
     this._isLoading = true;
-    this._contentConnector.sendRequest(undefined);
+    this._contentConnector?.sendRequest(undefined);
   }
 
   attachContentConnector(connector: IAjaxConnector): void {
@@ -65,10 +65,10 @@ export function galletyStoreFactory(): IGalleryStore {
   var store = new GalleryStore();
 
   store.attachContentConnector(
-    new AjaxConnector<undefined, IGalleryContentResponse>(
+    new AjaxConnector<any, IGalleryContentResponse>(
       "GET",
       store.getContentUrl,
-      store.completeContentLoading
+      resp => resp && store.completeContentLoading(resp)
     )
   );
 

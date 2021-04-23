@@ -130,7 +130,7 @@ class MenuButton extends b.Component<{store: IHeaderStore}> {
 
 class LanguageSection extends b.Component<{ store: IHeaderStore }> {
   @observable
-  protected _currentLocale: string;
+  protected _currentLocale: string = "";
 
   init() {
     this._currentLocale = getLocale();
@@ -140,7 +140,7 @@ class LanguageSection extends b.Component<{ store: IHeaderStore }> {
     const children: b.IBobrilNode[] = [];
     if (this.data.store.isLanguageSelectionOpen) {
       for (let localeKey in locales) {
-        let locale = locales[localeKey];
+        let locale = (locales as any)[localeKey];
 
         if(locale == locales.default)
           continue;

@@ -2,8 +2,8 @@ export interface IHeaderStore {
   readonly isMenuOpen: boolean;
   readonly isLanguageSelectionOpen: boolean;
 
-  openMenu();
-  closeMenu();
-  openLanguageSection();
-  closeLanguageSection();
+  openMenu(): void;
+  closeMenu(): void;
+  openLanguageSection(): void;
+  closeLanguageSection(): void;
 }

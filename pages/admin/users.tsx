@@ -5,7 +5,7 @@ import {
   addButton,
   editButton,
   removeButton,
-  colors
+  colors,
 } from "../../styleConstants";
 import { observable, observableProp } from "bobx";
 import { Button } from "../../components/button/button";
@@ -16,14 +16,14 @@ interface IEditableUser extends IUserDto {
 }
 
 export class UsersPage extends b.Component {
-  protected _store: IAdminUserStore;
+  protected _store: IAdminUserStore | undefined;
 
   @observable
   protected _user: IEditableUser = {
     id: undefined,
     login: "",
     password: "",
-    show: false
+    show: false,
   };
 
   init() {
@@ -32,6 +32,8 @@ export class UsersPage extends b.Component {
   }
 
   render() {
+    if (this._store == undefined) return <></>;
+
     if (this._store.Users.length == 0) {
       return <h2>Loading ...</h2>;
     }
@@ -39,7 +41,11 @@ export class UsersPage extends b.Component {
     if (this._user.show) {
       return (
         <div>
-          <EditSection user={this._user} saveHandler={this.save} cancelHandler={this.cancel} />
+          <EditSection
+            user={this._user}
+            saveHandler={this.save}
+            cancelHandler={this.cancel}
+          />
           <Table
             users={this._store.Users}
             addUserHandler={this.add}
@@ -62,8 +68,7 @@ export class UsersPage extends b.Component {
 
   @b.bind
   protected add() {
-    if(this._user.show)
-        return;
+    if (this._user.show) return;
 
     this.clear();
     this._user.show = true;
@@ -71,8 +76,7 @@ export class UsersPage extends b.Component {
 
   @b.bind
   protected edit(user: IUserDto) {
-    if(this._user.show)
-        return;
+    if (this._user.show) return;
 
     this._user.login = user.login;
     this._user.password = user.password;
@@ -82,23 +86,25 @@ export class UsersPage extends b.Component {
 
   @b.bind
   protected delete(user: IUserDto) {
-    if (user.id === undefined) return;
+    if (this._store == undefined || user.id === undefined) return;
     this._store.deleteUser(user.id);
   }
 
   @b.bind
   protected save() {
-    if(this._user.id !== undefined) {
-        this._store.editUser({
-            id: this._user.id,
-            login: this._user.login,
-            password: this._user.password
-        });
+    if(this._store == undefined) return;
+
+    if (this._user.id !== undefined) {
+      this._store.editUser({
+        id: this._user.id,
+        login: this._user.login,
+        password: this._user.password,
+      });
     } else {
-        this._store.addUser({
-            login: this._user.login,
-            password: this._user.password
-        });
+      this._store.addUser({
+        login: this._user.login,
+        password: this._user.password,
+      });
     }
 
     this.clear();
@@ -107,12 +113,12 @@ export class UsersPage extends b.Component {
 
   @b.bind
   protected cancel() {
-      this.clear();
-      this._user.show = false;
+    this.clear();
+    this._user.show = false;
   }
 
   protected clear() {
-    this._user.id= undefined;
+    this._user.id = undefined;
     this._user.login = "";
     this._user.password = "";
   }
@@ -138,7 +144,7 @@ interface ITableHeaderData {
 class Table extends b.Component<ITableData> {
   render() {
     const lines: b.IBobrilNode[] = [
-      <this.HeaderLine addUserHandler={this.data.addUserHandler} />
+      <this.HeaderLine addUserHandler={this.data.addUserHandler} />,
     ];
     for (let user of this.data.users) {
       lines.push(
@@ -205,7 +211,7 @@ class Table extends b.Component<ITableData> {
 interface IEditSectionData {
   user: IUserDto;
   saveHandler(): void;
-  cancelHandler(): void; 
+  cancelHandler(): void;
 }
 
 const editSectionStyle = {
@@ -214,14 +220,14 @@ const editSectionStyle = {
     margin: "10px auto 0 auto",
     border: `solid 1px ${colors.calendarSilver}`,
     borderRadius: 3,
-    padding: 5
+    padding: 5,
   }),
   leftColumn: { cssFloat: "left", width: 100 },
   rightColumn: { cssFloat: "left" },
   columnLine: {
     height: 25,
-    marginBottom: 1
-  }
+    marginBottom: 1,
+  },
 };
 
 class EditSection extends b.Component<IEditSectionData> {

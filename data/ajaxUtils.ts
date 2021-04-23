@@ -4,7 +4,7 @@ export function fetchToBlob(url: string): Promise<string> {
     let xhr = new XMLHttpRequest();    
     xhr.responseType = 'blob';
     
-    return new Promise(function(resolve: (value: string) => void, reject: (error) => void) {
+    return new Promise(function(resolve: (value: string) => void, reject: (error: any) => void) {
 
 		// Setup our listener to process compeleted requests
 		xhr.onreadystatechange = function () {
@@ -39,7 +39,7 @@ export interface IAjaxRequest {};
 export interface IAjaxResponse {};
 
 export interface IAjaxConnector {
-    sendRequest(request: IAjaxRequest | undefined);
+    sendRequest(request: IAjaxRequest | undefined): void;
 }
 
 export class StaticConnector<TRequest extends IAjaxRequest, TResponse extends IAjaxResponse> implements IAjaxConnector {
@@ -102,7 +102,7 @@ interface IError {
 }
 
 function Send<T>(data: T, url: string | undefined, method: HttpMethod = "POST"): Promise<string> {
-    url = url !== undefined 
+    let urlDef = url !== undefined 
         ? url 
         : window.location.pathname;
 
@@ -124,18 +124,18 @@ function Send<T>(data: T, url: string | undefined, method: HttpMethod = "POST"):
 			} else {
 				// If failed
 				reject({
-                    url,
+                    urlDef,
                     method,
 					status: xhr.status,
                     statusText: xhr.statusText,
                     providedText: xhr.responseText
-				});
+				} as any);
 			}
 
 		};
 
 		// Setup our HTTP request
-        xhr.open(method, url, true);
+        xhr.open(method, urlDef, true);
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
         // Send the request

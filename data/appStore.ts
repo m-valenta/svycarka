@@ -24,11 +24,11 @@ export interface IAppStore {
 }
 
 const appStoreKey = "$appStore";
-window[appStoreKey] = {};
+(window as any)[appStoreKey] = {};
 
 
 export function initAppStore(): void {
-  const appStore: IAppStore = window[appStoreKey]; 
+  const appStore: IAppStore = (window as any)[appStoreKey]; 
   
   appStore.reservationStore = reservationStoreFactory();
   appStore.pageStore = pageStoreFactory(appStore);
@@ -45,5 +45,5 @@ export function initAppStore(): void {
 }
 
 export function appStore(): IAppStore {
-  return window[appStoreKey];
+  return (window as any)[appStoreKey];
 }

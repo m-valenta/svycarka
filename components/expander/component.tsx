@@ -11,13 +11,13 @@ export interface IData {
 
 export class Expander extends b.Component<IData> {
   @observable
-  protected isExpanded: boolean;
+  protected isExpanded: boolean = false;
 
   @observable
-  protected step: number;
+  protected step: number = 0;
 
-  protected widthStepChange: number;
-  protected heightStepChange: number;
+  protected widthStepChange: number = 0;
+  protected heightStepChange: number = 0;
 
   init() {
     this.step = 0;

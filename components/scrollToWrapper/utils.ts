@@ -18,17 +18,18 @@ export function scrollToWrapper(id: scrollSection): void {
 }
 
 export function debounce(func: () => void, wait: number, immediate: boolean): () => void {
-	let timeout: number;
-	return function() {
-		let context = this, args = arguments;
+	let timeout: number | undefined;
+	return function(this: any) {
+		let context = this; 
+		let args = arguments;
 		let later: () => void = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
+			timeout = undefined;
+			if (!immediate) func.apply(context, args as any);
 		};
 		let callNow: boolean = immediate && !timeout;
 		window.clearTimeout(timeout);
 		timeout = window.setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
+		if (callNow) func.apply(context, args as any);
 	};
 };
 

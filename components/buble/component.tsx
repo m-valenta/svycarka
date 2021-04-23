@@ -15,9 +15,9 @@ export interface IData {
 
 export class Buble extends b.Component<IData> {
   @observable
-  step: number;
+  step: number = 0;
 
-  heightStep: number;
+  heightStep: number = 0;
 
   init() {
     this.step = 0;

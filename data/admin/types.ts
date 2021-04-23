@@ -6,7 +6,7 @@ import {
 import { ReservationState } from "../../utils/stateUtils";
 
 export interface IAdminStore {
-  IsLogged: boolean;
+  IsLogged: boolean | undefined;
   CheckAuthentication(): void;
   SignIn(login: string, password: string): void;
   SignOut(): void;
@@ -49,10 +49,20 @@ export interface IAdminReservationStore {
   readonly Reservations: IAdminReservation[],
   readonly SelectedReservation?: IReservationEditRequest;
   reset(): void;
-  deleteReservation(idReservation: number);
+  deleteReservation(idReservation: number): void;
   selectReservation(reservation?: IAdminReservation): void;
-  setReservationBookmark(idReservation: number, isSet: boolean);
+  setReservationBookmark(idReservation: number, isSet: boolean): void;
   saveReservation(): void;
+  orderReservationsByDate(
+    columnKey:
+      | (keyof IAdminReservation & "created")
+      | (keyof IAdminReservation & "dateFrom")
+  ): void;
+  orderReservationByState(
+    columnKey: keyof IAdminReservation & "state"
+  ): void;
+  isOrderingColumn(column: keyof IAdminReservation): boolean;
+  isDesc(): boolean;
 }
 
 export interface IAdminReservationListRequest extends IAjaxRequest {

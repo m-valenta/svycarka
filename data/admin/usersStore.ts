@@ -43,19 +43,19 @@ class UsersStore implements IAdminUserStore {
     }
 
     loadUserList() {
-        this._usersListConnector.sendRequest(undefined);
+        this._usersListConnector?.sendRequest(undefined);
     }
 
     addUser(userDto: IUserDto) {
-        this._usersAddConnector.sendRequest(userDto);
+        this._usersAddConnector?.sendRequest(userDto);
     }
 
     editUser(userDto: IUserDto) {
-        this._usersEditConnector.sendRequest(userDto);
+        this._usersEditConnector?.sendRequest(userDto);
     }
 
     deleteUser(userId: number) {
-        this._usersDeleteConnector.sendRequest(userId);
+        this._usersDeleteConnector?.sendRequest(userId);
     }
 
     completeUserListLoading(users: IUserDto[]) {
@@ -70,15 +70,15 @@ class UsersStore implements IAdminUserStore {
 export function adminUserStoreFactory(): IAdminUserStore {
     const store = new UsersStore();
     
-    store.attachUsersListConnector(new AjaxConnector("GET", store.getUsersListUrl, (response: IUserListResponse) => {
-        store.completeUserListLoading(response.users);
+    store.attachUsersListConnector(new AjaxConnector("GET", store.getUsersListUrl, (response: IUserListResponse | undefined) => {
+        store.completeUserListLoading(response?.users ?? []);
     }));
 
-    store.attachUsersAddConnector(new AjaxConnector("POST", store.getUsersAddUrl, (response: IUserListResponse) => {
+    store.attachUsersAddConnector(new AjaxConnector("POST", store.getUsersAddUrl, (response: IUserListResponse | undefined) => {
         store.loadUserList();
     }));
 
-    store.attachUsersEditConnector(new AjaxConnector("POST", store.getUsersEditUrl, (response: IUserListResponse) => {
+    store.attachUsersEditConnector(new AjaxConnector("POST", store.getUsersEditUrl, (response: IUserListResponse | undefined) => {
         store.loadUserList();
     }));
 

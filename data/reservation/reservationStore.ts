@@ -3,7 +3,7 @@ import {
   AjaxConnector,
   StaticConnector,
   IAjaxRequest,
-  IAjaxResponse
+  IAjaxResponse,
 } from "../ajaxUtils";
 import {
   IReservation,
@@ -15,32 +15,45 @@ import {
   IReservationSaveRequest,
   IReservationSaveResponse,
   ReservationResponseState,
-  IFormItem
+  IFormItem,
 } from "./types";
 import { observable, IObservableMap, computed } from "bobx";
 import {
   Month,
   datItemParts,
-  getDateItemFromDate
+  getDateItemFromDate,
 } from "../../utils/dateUtils";
 import { utils } from "../../components/recaptcha/reCaptcha";
 import { getBackendLocaleId } from "../../utils/localeUtils";
 import { getLocale } from "bobril-g11n";
-import { validateReservation, validateName, validateAddress, validateEmail, validatePhone, validateAgreement, validateGC } from "./validations";
+import {
+  validateReservation,
+  validateName,
+  validateAddress,
+  validateEmail,
+  validatePhone,
+  validateAgreement,
+  validateGC,
+} from "./validations";
 
 class ReservationStore implements IReservationStore {
   @observable
-  private _isLoading: boolean;
+  private _isLoading: boolean = false;
 
   private _loadConnector: IAjaxConnector | undefined;
   private _saveConnector: IAjaxConnector | undefined;
 
   _reservations: IObservableMap<
     number,
-    IObservableMap<number, IReservation[]>
-  > = observable.map<number, IObservableMap<number, IReservation[]>>();
+    IObservableMap<number, ReadonlyArray<IReservation>>
+  > = observable.map<
+    number,
+    IObservableMap<number, ReadonlyArray<IReservation>>
+  >();
 
-  currentReservation: FormItem<IReservation> = new FormItem(validateReservation);
+  currentReservation: FormItem<IReservation> = new FormItem(
+    validateReservation
+  );
 
   name: IFormItem<string> = new FormItem(validateName);
 
@@ -56,14 +69,21 @@ class ReservationStore implements IReservationStore {
 
   meat: IFormItem<number> = new FormItem(() => true);
 
-  gc_Response: IFormItem<string> = new FormItem(
-    validateGC,
-    utils.reset
-  );
+  gc_Response: IFormItem<string> = new FormItem(validateGC, utils.reset);
 
   protected get allInputFields(): IFormItem<unknown>[] {
-    return [ this.currentReservation, this.name, this.address, this.email, this.phone, this.agreement, this.beer, this.meat, this.gc_Response ];
-  }  
+    return [
+      this.currentReservation,
+      this.name,
+      this.address,
+      this.email,
+      this.phone,
+      this.agreement,
+      this.beer,
+      this.meat,
+      this.gc_Response,
+    ];
+  }
 
   @observable
   reservationFormState: ReservationFormState = ReservationFormState.hidden;
@@ -72,7 +92,10 @@ class ReservationStore implements IReservationStore {
     return this._isLoading;
   }
 
-  get reservations() {
+  get reservations(): IObservableMap<
+    number,
+    IObservableMap<number, ReadonlyArray<IReservation>>
+  > {
     return this._reservations;
   }
 
@@ -109,10 +132,10 @@ class ReservationStore implements IReservationStore {
     yearReservations.set(
       response.month,
       response.reservations.map(
-        res =>
+        (res) =>
           <IReservation>{
             duration: res.duration,
-            dateItem: getDateItemFromDate(new Date(res.dateFrom))
+            dateItem: getDateItemFromDate(new Date(res.dateFrom)),
           }
       )
     );
@@ -128,7 +151,7 @@ class ReservationStore implements IReservationStore {
     this._isLoading = true;
     this._loadConnector.sendRequest(<IReservationListRequest>{
       month,
-      year
+      year,
     });
   }
 
@@ -157,9 +180,12 @@ class ReservationStore implements IReservationStore {
       throw "Data connector is not provided";
     }
 
+    if (this.currentReservation?.value == undefined) return;
+
+    const currentReservation = this.currentReservation?.value?.dateItem;
+
     this._isLoading = true;
 
-    const currentReservation = this.currentReservation.value.dateItem;
     this._saveConnector.sendRequest(<IReservationSaveRequest>{
       captchaResponse: this.gc_Response.value,
       dateFrom: new Date(
@@ -178,32 +204,31 @@ class ReservationStore implements IReservationStore {
       address: this.address.value,
       beer: this.beer.value,
       meat: this.meat.value,
-      usedCulture: getBackendLocaleId(getLocale())
+      usedCulture: getBackendLocaleId(getLocale()),
     });
   }
 
   clear(): void {
-    this.allInputFields.forEach(input => input.clear());
+    this.allInputFields.forEach((input) => input.clear());
   }
 
   validate(): boolean {
     let isValid = true;
-    this.allInputFields.forEach(input => {
+    this.allInputFields.forEach((input) => {
       let inputResult = input.validate();
       isValid = isValid && inputResult;
-    });  
+    });
     return isValid;
   }
 
   @computed
   test(): boolean {
     let isValid = true;
-    this.allInputFields.forEach(input => {
+    this.allInputFields.forEach((input) => {
       isValid = isValid && input.isValid;
-    });  
+    });
     return isValid;
   }
-
 }
 
 export function reservationStoreFactory(): IReservationStore {
@@ -212,7 +237,7 @@ export function reservationStoreFactory(): IReservationStore {
     new AjaxConnector(
       "GET",
       (request: IReservationListRequest) => store.getUrl(request),
-      (response: IReservationListResponse) =>
+      (response: IReservationListResponse | undefined) =>
         store.processReservationListResponse(response)
     )
   );
