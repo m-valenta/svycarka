@@ -183,6 +183,8 @@ class AdminReservationStore implements IAdminReservationStore {
 
   @b.bind
   deleteReservation(idReservation: number) {
+    if(!confirm(`Opravdu chcete smazat rezervaci (id: ${idReservation})?`))
+      return;
     this._deleteReservationConnector?.sendRequest(idReservation);
   }
 
