@@ -1,12 +1,13 @@
 import * as b from "bobril";
-import { FormItem } from "../../data/reservation/types";
+import { IFormItem } from "../../data/reservation/types";
+import { invalidItemStyle } from "../../styleConstants";
 import * as styles from "./styles";
-import { observableProp } from "bobx";
 
 export class Spinner extends b.Component<{
   text: string;
-  item: FormItem<number>;
+  item: IFormItem<number>;
   explicitWidth?: number;
+  max? : number;
 }> {
   render() {
     const item = this.data.item;
@@ -15,16 +16,27 @@ export class Spinner extends b.Component<{
     this.data.explicitWidth !== undefined &&
       textWrapperStyle.push({ width: this.data.explicitWidth });
 
+
+      let inputStyles = [styles.input];
+      if (item.value !== undefined) {
+        inputStyles.push(styles.inputWithValue);
+      }
+  
+      if (!item.isValid) {
+        inputStyles.push(invalidItemStyle);
+      }
+
     return (
       <div style={styles.wrapper}>
         <div style={textWrapperStyle}>{this.data.text}</div>
         <div style={styles.inputWrapper}>
           <input
-            style={styles.input}
+            style={inputStyles}
             type="number"
             min={0}
+            max={this.data.max ?? Number.MAX_VALUE}
             value={item.value}
-            onChange={value => (item.value = value)}
+            onChange={value => (item.value = parseInt(value))}
           />
         </div>
         <div style={{ clear: "both" }} />

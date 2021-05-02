@@ -414,12 +414,35 @@ class EditSection extends b.Component<{ store: IAdminReservationStore }> {
             type="text"
             value={observableProp(rez.ReservationData, "price")}
           />
+          <input 
+            type="text"
+            disabled
+            style={{ marginLeft: 5, colors: colors.calendarSilver }}
+            value={this.data.store.computeDeposit()}
+          />
         </this.Section>
         <this.Section label="Příjezd">
           <input
             type="text"
             maxlength="10"
             value={observableProp(rez.ReservationData, "arrival")}
+          />
+        </this.Section>
+        <hr />
+        <this.Section label="Počet dospělých">
+          <input
+            type="number"
+            min="0"
+            max="12"
+            value={observableProp(rez.ReservationData, "adults")}
+          />
+        </this.Section>
+        <this.Section label="Počet dětí">
+          <input
+            type="number"
+            min="0"
+            max="12"
+            value={observableProp(rez.ReservationData, "kids")}
           />
         </this.Section>
         <hr />

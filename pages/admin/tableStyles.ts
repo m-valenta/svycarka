@@ -75,7 +75,6 @@ export function getRowColorDueState(
         color = "#86BE9D";
         break;
       case ReservationState.Denied:
-      case ReservationState.NoCapacity:
       case ReservationState.Concluded:
         color = "#D2C6B8";
         break;

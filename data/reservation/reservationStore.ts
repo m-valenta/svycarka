@@ -35,6 +35,7 @@ import {
   validateAgreement,
   validateGC,
 } from "./validations";
+import { bind } from "bobril";
 
 class ReservationStore implements IReservationStore {
   @observable
@@ -65,6 +66,10 @@ class ReservationStore implements IReservationStore {
 
   agreement: IFormItem<boolean> = new FormItem(validateAgreement);
 
+  adults: IFormItem<number> = new FormItem(this.validateAllOccupants);
+
+  kids: IFormItem<number> = new FormItem(this.validateAllOccupants);
+
   beer: IFormItem<number> = new FormItem(() => true);
 
   meat: IFormItem<number> = new FormItem(() => true);
@@ -82,6 +87,8 @@ class ReservationStore implements IReservationStore {
       this.beer,
       this.meat,
       this.gc_Response,
+      this.kids,
+      this.adults
     ];
   }
 
@@ -169,7 +176,7 @@ class ReservationStore implements IReservationStore {
       return;
     } else if (response.state === ReservationResponseState.CaptchaError) {
       this.gc_Response.setInvalid();
-    } else if (response.state === ReservationResponseState.StorageError) {
+    } else if (response.state === ReservationResponseState.StorageError || response.state == ReservationResponseState.DataError ) {
       this.currentReservation.setInvalid();
     }
     this._isLoading = false;
@@ -205,6 +212,8 @@ class ReservationStore implements IReservationStore {
       beer: this.beer.value,
       meat: this.meat.value,
       usedCulture: getBackendLocaleId(getLocale()),
+      adults: this.adults.value,
+      kids: this.kids.value
     });
   }
 
@@ -228,6 +237,12 @@ class ReservationStore implements IReservationStore {
       isValid = isValid && input.isValid;
     });
     return isValid;
+  }
+
+  @bind
+  private validateAllOccupants(): boolean {
+    let totalOccupants = (this.kids.value ?? 0) + (this.adults.value ?? 0);
+    return totalOccupants >= 1 && totalOccupants <= 12;
   }
 }
 

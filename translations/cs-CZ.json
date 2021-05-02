@@ -234,6 +234,24 @@
     "Telefon"
   ],
   [
+    "Select number of occupants (capacity is 12 persons).",
+    null,
+    0,
+    "Vyberte počet ubytovaných osob (kapacita je 12 osob)."
+  ],
+  [
+    "Adults:",
+    null,
+    0,
+    "Dospělí:"
+  ],
+  [
+    "Kids:",
+    null,
+    0,
+    "Děti:"
+  ],
+  [
     "*Reservation form contains some validation errors.",
     null,
     0,

@@ -5,15 +5,14 @@ import { TextSection } from "../textSection/component";
 import { t } from "bobril-g11n";
 import { DateInput } from "../dateInput/component";
 import { observable } from "bobx";
-import { Expander } from "../expander/component";
 import { Spinner } from "../spinner/component";
 import { appStore } from "../../data/appStore";
 import { buttonWrapper } from "../tipsSection/styles";
 import { colors, invalidItemStyle } from "../../styleConstants";
 import { Button } from "../button/button";
-import Captcha, { utils } from "../recaptcha/reCaptcha";
-import { gdprTransition } from "../../transitions";
-import { Loader } from "../loader/loader";
+import Captcha from "../recaptcha/reCaptcha";
+import { openRouteInNewTab } from "../../transitions";
+import { FormSectionHeader } from "../formSectionHeader/component";
 export interface IData {
   store: IReservationStore;
 }
@@ -54,6 +53,27 @@ export class ReservationForm extends b.Component<IData> {
             formItem={this.data.store.phone}
             type="text"
           />
+          <div>
+            <FormSectionHeader
+              text={t("Select number of occupants (capacity is 12 persons).")}
+            />
+            <div style={styles.spinnerWrapper}>
+              <Spinner
+                item={this.data.store.adults}
+                text={t("Adults:")}
+                explicitWidth={230}
+                max={12}
+              />
+            </div>
+            <div style={styles.spinnerWrapper}>
+              <Spinner
+                item={this.data.store.kids}
+                text={t("Kids:")}
+                explicitWidth={230}
+                max={12}
+              />
+            </div>
+          </div>
         </div>
         {/* <Expander
           headerText={t("I'm interested in additional services")}
@@ -117,7 +137,7 @@ declare type InputType = "type" | "email" | "number" | "text";
 
 class FormInput extends b.Component<{
   placeholder: string;
-  formItem: IFormItem<string>;
+  formItem: IFormItem<string | number>;
   type: InputType;
 }> {
   @observable
@@ -188,6 +208,6 @@ class GdprLink extends b.Component<{}> {
     return <span style={styles.linkStyle}>{t("GDPR")}</span>;
   }
   onClick() {
-    b.runTransition(gdprTransition);
+    openRouteInNewTab("gdpr");
   }
 }

@@ -36,12 +36,15 @@ export interface IReservationSaveRequest extends IAjaxRequest {
   beer?: number;
   meat?: number;
   usedCulture: number;
+  adults: number;
+  kids: number;
 }
 
 
 export enum ReservationResponseState {
   Ok = 0,
   CaptchaError,
+  DataError,
   StorageError
 };
 
@@ -58,6 +61,8 @@ export interface IReservationStore {
   email: IFormItem<string>;
   phone: IFormItem<string>;
   agreement: IFormItem<boolean>;
+  adults: IFormItem<number>
+  kids: IFormItem<number>
   // form-optional
   beer: IFormItem<number>;
   meat: IFormItem<number>;

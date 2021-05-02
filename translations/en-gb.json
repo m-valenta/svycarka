@@ -218,6 +218,21 @@
     "Phone number"
   ],
   [
+    "Select number of occupants (capacity is 12 persons).",
+    null,
+    0
+  ],
+  [
+    "Adults:",
+    null,
+    0
+  ],
+  [
+    "Kids:",
+    null,
+    0
+  ],
+  [
     "*Reservation form contains some validation errors.",
     null,
     0,

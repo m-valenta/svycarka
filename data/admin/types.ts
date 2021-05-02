@@ -63,6 +63,7 @@ export interface IAdminReservationStore {
   ): void;
   isOrderingColumn(column: keyof IAdminReservation): boolean;
   isDesc(): boolean;
+  computeDeposit(): number | undefined;
 }
 
 export interface IAdminReservationListRequest extends IAjaxRequest {
@@ -88,6 +89,8 @@ export interface IAdminReservation extends IServerReservation {
   arrival: string;
   bookmarked: boolean
   created:string;
+  kids: number;
+  adults: number;
 }
 
 export interface IAdminReservationRequest {
@@ -105,6 +108,8 @@ export interface IAdminReservationRequest {
   dateFrom: Date,
   duration: number,
   created: Date; 
+  kids: number;
+  adults: number;
 }
 
 

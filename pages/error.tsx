@@ -1,9 +1,7 @@
 import * as b from "bobril";
 import { IPageStore, Page } from "../data/pageStore/types";
 import { appStore } from "../data/appStore";
-import { colors, menuHeight, copyrightSectionHeight, contentSize, centerAbsoluteContent } from "../styleConstants";
-import { getResourceCssUrl } from "../utils/resourceUtils";
-import { errorBackground_png } from "../src/assets";
+import { colors, centerAbsoluteContent } from "../styleConstants";
 import { t } from "bobril-g11n";
 import { Button } from "../components/button/button";
 import { defaultTransition } from "../transitions";
@@ -18,7 +16,6 @@ export class ErrorPage extends b.Component {
         this.store.setPageInitialized(Page.Error);
     }
     render() {
-        console.log(b.getMedia());
         return <div style={styles.wrapperStyle}>
             <div style={styles.errorContent}>
                 <div style={styles.errorImage}></div>

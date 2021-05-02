@@ -1,5 +1,5 @@
 import * as b from "bobril";
-import { observable } from "bobx";
+import { computed, observable } from "bobx";
 import { IAjaxConnector, AjaxConnector } from "../ajaxUtils";
 import {
   IAdminReservationStore,
@@ -213,6 +213,8 @@ class AdminReservationStore implements IAdminReservationStore {
         price: reservation.price,
         state: reservation.state,
         usedCulture: reservation.usedCulture,
+        kids: reservation.kids,
+        adults: reservation.adults
       },
     };
   }
@@ -275,6 +277,23 @@ class AdminReservationStore implements IAdminReservationStore {
 
   isDesc(): boolean {
     return this._orderInfo.Desc;
+  }
+
+  @computed
+  computeDeposit(): number | undefined {
+    if(this.SelectedReservation === undefined) return undefined;
+
+    let price = this.SelectedReservation.ReservationData.price;
+    if(price === undefined) return undefined;
+
+    if(price < 1000)
+      return price;
+
+    let halfPrice = Math.floor(price/2);
+    if(halfPrice % 500 === 0)
+      return halfPrice;
+
+    return halfPrice = halfPrice + (500 - halfPrice % 500);
   }
 
   private orderReservations(

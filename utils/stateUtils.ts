@@ -5,11 +5,10 @@ export enum ReservationState {
   WaitForPayment = 2,
   Ready = 3,
   Denied = 4,
-  NoCapacity = 5,
-  Concluded = 10
+  Concluded = 5
 }
 
-const translations = ["Vše", "Nová rezervace", "Čeká na schválení", "Čeká na zálohu", "Aktivní", "Odmítnutá", "Není kapacita", "Dokončená"];
+const translations = ["Vše", "Nová rezervace", "Čeká na schválení", "Čeká na zálohu", "Schválená", "Odmítnutá", "Dokončená"];
 
 export function reservationStateToString(state: ReservationState): string {
   let cState = state + 1; 
