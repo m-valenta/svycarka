@@ -148,7 +148,7 @@ export class Calendar extends b.Component<ICalendarData> {
     const monthDays: MonthDay[] = [];
 
     let day = this._startDay;
-    const prevDays = Math.abs(this._startDay - this._currentMonth.startDay);
+    const prevDays = Math.abs((this._startDay != 0 ? this._startDay : 7) - (this._currentMonth.startDay != 0 ? this.currentMonth.startDay : 7));
     for (
       let i = this._previousMonth.daysCount - prevDays + 1;
       i <= this._previousMonth.daysCount;
