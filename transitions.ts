@@ -8,7 +8,19 @@ export const loginTransition = b.createRedirectReplace("login");
 
 export const adminHomeTransition = b.createRedirectReplace("adminHome");
 export const adminUsersTransition = b.createRedirectReplace("adminUsers");
-export const adminRegistrationsTransition = b.createRedirectReplace("adminReservations");
+export const adminRegistrationsTransition = b.createRedirectReplace(
+  "adminReservations"
+);
 
-export const accomodationRulesTransition = b.createRedirectReplace("accomodationRules");
+export const accommodationRulesTransition = b.createRedirectReplace(
+  "accommodationRules"
+);
 export const gdprTransition = b.createRedirectReplace("gdpr");
+
+
+export function openRouteInNewTab(routeName: "gdpr" | "accommodationRules" | "reservation" | "tips" | "home"): void {
+  let routeUrl = b.getRoutes().find((route) => route.name == routeName)
+    ?.url;
+  if (routeUrl === undefined) return;
+  window.open(`/#${routeUrl}`, "_blank")?.focus();
+}
