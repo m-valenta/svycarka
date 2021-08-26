@@ -114,7 +114,9 @@ export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
         ]}
       </TextBlock>
       <TextBlock header={t("Weekend price")}>
-        {[t("Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu")]}
+        {[
+          t("Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu")
+        ]}
       </TextBlock>
       <TextBlock
         header={t("Christmas")}
@@ -132,6 +134,13 @@ export function PriceInfo(data: { fontSize?: number }): b.IBobrilNode {
       >
         {[
           t("44 500 Kč / per week including New Year's Eve and New Year's Eve")
+        ]}
+      </TextBlock>
+      <TextBlock
+        header={t("Spring holiday")}
+      >
+        {[
+          t("22 900 Kč")
         ]}
       </TextBlock>
       <TextBlock

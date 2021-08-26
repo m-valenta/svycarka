@@ -94,19 +94,19 @@
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
     0,
-    "Winter season: 21 500 CZK / cottage (February – March)"
+    "Winter season: 22 900 CZK / cottage (February – March)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
     null,
     0,
-    "Summer season: 18 000 CZK / cottage (July – August)"
+    "Summer season: 19 900 CZK / cottage (July – August)"
   ],
   [
     "Out of seeson 19000 Kč / for cottage",
     null,
     0,
-    "Out of season: 16 000 CZK / cottage"
+    "Out of season: 16 900 CZK / cottage"
   ],
   [
     "Weekend price",
@@ -117,7 +117,7 @@
     "Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu",
     null,
     0,
-    "The reservation is possible only out of season: 8 000 CZK / cottage"
+    "The reservation is possible only out of season: 8 900 CZK / cottage"
   ],
   [
     "Christmas",
@@ -134,7 +134,7 @@
     "19 500 CZK / for Christmas holidays including Christmas Eve",
     null,
     0,
-    "21 500 CZK / Christmas holiday including Christmas Eve"
+    "22 900 CZK / Christmas holiday including Christmas Eve"
   ],
   [
     "New Year's Eve - we're still free",
@@ -152,7 +152,18 @@
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0,
-    "45 500 CZK / a week including New Year´s Eve"
+    "45 900 CZK / a week including New Year´s Eve"
+  ],
+  [
+    "Spring holiday",
+    null,
+    0
+  ],
+  [
+    "22 900 Kč",
+    null,
+    0,
+    "22 900 CZK"
   ],
   [
     "Easter",
@@ -162,7 +173,8 @@
   [
     "16 000 Kč",
     null,
-    0
+    0,
+    "16 900 CZK"
   ],
   [
     "How much?",
@@ -291,7 +303,8 @@
   [
     "Při předání chalupy vás žádáme o její úklid. Vše je zapotřebí uvést do\n          stavu, ve kterém se chalupa nacházela při vašem příjezdu. Pokud se tak\n          nestane, bude vám doúčtován poplatek 700 Kč za úklid.",
     null,
-    0
+    0,
+    "Při předání chalupy vás žádáme o její úklid. Vše je zapotřebí uvést do\n          stavu, ve kterém se chalupa nacházela při vašem příjezdu. Pokud se tak\n          nestane, bude vám doúčtován poplatek 2000 Kč za úklid."
   ],
   [
     "Příjezd na chalupu při týdenním pobytu je v sobotu ve 14 hod. nebo dle\n          předchozí domluvy. Ukončení pobytu následující sobotu, s vyklizením\n          chalupy do 10 hod., nedodrží-li host tuto dobu, bude mu účtována cena\n          za další den pobytu (pokud není domluveno jinak). V případě zkráceného\n          pobytu je odjezd i příjezd po předchozí domluvě.",
@@ -481,7 +494,7 @@
     "When handing over the cottage, we ask you to clean it. Everything needs to be put into the condition in which the cottage was on your arrival. If not, you will be charged a cleaning fee of CZK 700.",
     null,
     0,
-    "It is necessary to clean up the cottage before you check out. In the case the cottage is not in the same condition as prior to your arrival, there will be an additional charge of 700 CZK for housekeeping."
+    "It is necessary to clean up the cottage before you check out. In the case the cottage is not in the same condition as prior to your arrival, there will be an additional charge of 2000 CZK for housekeeping."
   ],
   [
     "Smoking is strictly forbidden throughout the cottage and please leave your four-legged furry friends at home. Thank you in advance for your understanding.",
