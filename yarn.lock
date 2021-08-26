@@ -3,17 +3,17 @@
 
 
 bobril-g11n@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/bobril-g11n/-/bobril-g11n-5.0.3.tgz#ad9a462e8f22f67d947187d8c1d730002a8c7a61"
-  integrity sha512-gFriM3mnWfx+uvy9OQL/MGV9zdNd4U6qx8a4PAwicEjYjq3ENn+D/iTeBAnkdd5A+Q1Xt1NGC3vGNMXxz7DU+g==
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/bobril-g11n/-/bobril-g11n-5.0.4.tgz#4ed9789a67a2453927dfd268b3239d93fb22afce"
+  integrity sha512-y8Fw7Y4dNCHCtvapKmEPmgq1/owyeXHQecdk1TyV0tOOYjYLPdGGKBMvqAaq0TJ/i3pfB9xh1YlvGALJ/zl1GQ==
   dependencies:
     bobril "*"
     moment "^2.10.6"
 
-bobril@*, bobril@^15.0.1:
-  version "15.0.1"
-  resolved "https://registry.yarnpkg.com/bobril/-/bobril-15.0.1.tgz#a9aadae82cfe2f7d0acb8ffed2111038500de373"
-  integrity sha512-pudQMh83yYnhKqEUJyeW28dXeqKxfzlbKZHL+f1M+zDfnQX3FhmNd6djhAnGDkzuFptTVZEANyuXaQS/0wSRpA==
+bobril@*, bobril@^17.10.0:
+  version "17.10.0"
+  resolved "https://registry.yarnpkg.com/bobril/-/bobril-17.10.0.tgz#d5d3960520a97889839d3e97e7bb17bed250b7b3"
+  integrity sha512-HbVvpx+2Ywo8iYBQR9dvjeLbxUe3dS9xbwNsbwc5Vx1jZK8P8FtRyGWN979VwA0c6B4OYS+KXpSs51HfXa334A==
 
 bobx@^0.29.0:
   version "0.29.0"
