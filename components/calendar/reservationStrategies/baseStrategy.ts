@@ -86,9 +86,9 @@ export abstract class BaseReservationtrategy
     monthInfo: IMonthInfo,
     monthReservations: ReadonlyArray<IReservation> | undefined,
     prevMonthReservations: ReadonlyArray<IReservation> | undefined
-  ): boolean {
+  ): [boolean, boolean | undefined] /* isReserved, isOnBorderOfReservation */ {
     if (monthReservations == undefined && prevMonthReservations == undefined) {
-      return false;
+      return [false, undefined];
     }
 
     const yearNumber = monthInfo.year;
@@ -99,7 +99,7 @@ export abstract class BaseReservationtrategy
     const currentMonthResLength =
       monthReservations === undefined ? 0 : monthReservations.length;
 
-    if (prevMonthResLength + currentMonthResLength === 0) return false;
+    if (prevMonthResLength + currentMonthResLength === 0) return [false, undefined];
 
     for (let i = 0; i < prevMonthResLength + currentMonthResLength; i++) {
       const currentReservation =
@@ -115,14 +115,13 @@ export abstract class BaseReservationtrategy
         continue;
 
       if (monthNumber === currentReservationStart[dateItemParts.month]) {
-        if (
-          day === currentReservationStart[dateItemParts.day] ||
-          (day > currentReservationStart[dateItemParts.day] &&
-            day <=
-              currentReservationStart[dateItemParts.day] +
-                currentReservation.duration)
-        )
-          return true;
+        if (day === currentReservationStart[dateItemParts.day])
+          return [true, true];
+        
+        let endDay = currentReservationStart[dateItemParts.day] + currentReservation.duration;
+        if (day > currentReservationStart[dateItemParts.day] && day <= endDay)
+          return [true, day === endDay];
+
       } else if (
         monthNumber > currentReservation.dateItem[dateItemParts.month]
       ) {
@@ -137,13 +136,13 @@ export abstract class BaseReservationtrategy
           (currentReservationMonth.daysCount -
             currentReservationStart[dateItemParts.day]);
         if (day <= daysRemaining) {
-          return true;
+          return [true, day == daysRemaining];
         }
       }
       continue;
     }
 
-    return false;
+    return [false, undefined];
   }
 
   protected getMonthReservations(
@@ -171,7 +170,7 @@ export abstract class BaseReservationtrategy
     >,
     currentReservation: IReservation | undefined
   ): MonthDay {
-    const isReserved = this.dateIsReserved(
+    let reservationState = this.dateIsReserved(
       day,
       monthInfo,
       this.getMonthReservations(monthInfo, reservations),
@@ -183,8 +182,8 @@ export abstract class BaseReservationtrategy
       this.dayFormater(day),
       dayOfWeek,
       isInCurrentMonth,
-      isReserved,
-      !isReserved && !this.dateIsInHistory(day, monthInfo, currentDateItem)
+      reservationState[0],
+      this.isSelectable(day, monthInfo, currentDateItem, reservationState)
     );
 
     mDay.selectionState = isInCurrentReservationRange()
@@ -233,6 +232,13 @@ export abstract class BaseReservationtrategy
 
       return false;
     }
+  }
+
+  isSelectable(day: number, monthInfo: IMonthInfo, currentDateItem: dateItem, isReserved: [boolean, boolean | undefined]): boolean {
+    if(this.dateIsInHistory(day, monthInfo, currentDateItem))
+      return false;
+    
+    return !isReserved[0] || (isReserved[1] ?? false);
   }
 
   getSelectedReservation(
@@ -286,14 +292,15 @@ export abstract class BaseReservationtrategy
     );
 
     while (compareDateItem(workingDate, endDate) <= 0) {
-      if (
-        this.dateIsReserved(
-          workingDate[datItemParts.day],
-          workingMonth,
-          workingReservations,
-          workingPrevReservations
-        )
-      ) {
+      
+      const [isReserved, _] = this.dateIsReserved(
+        workingDate[datItemParts.day],
+        workingMonth,
+        workingReservations,
+        workingPrevReservations
+      );
+
+      if (isReserved) {
         return compareDateItem(workingDate, selectedDay.date) !== 0
           ? { dateItem: selectedDay.date, duration: 1 }
           : undefined;
