@@ -1,14 +1,14 @@
-import { BaseReservationtrategy } from "./baseStrategy";
+import { BaseReservationStrategy as BaseReservationStrategy } from "./baseStrategy";
 import { IMonthInfo, DayOfWeek, Month } from "../../../utils/dateUtils";
 
-class BasicReservationtrategy extends BaseReservationtrategy {
+class BasicReservationStrategy extends BaseReservationStrategy {
   constructor() {
     super();
   }
 
-  protected dayFormater(day: number): string {
+  protected dayFormatter(day: number): string {
     return `${day}.`;
   }
 }
 
-export const basicReservationtrategy = new BasicReservationtrategy();
+export const basicReservationStrategy = new BasicReservationStrategy();

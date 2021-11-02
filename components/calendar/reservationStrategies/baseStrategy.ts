@@ -63,9 +63,9 @@ export class MonthDay {
   }
 }
 
-export abstract class BaseReservationtrategy
+export abstract class BaseReservationStrategy
   implements ICalendarReservationStrategy {
-  protected abstract dayFormater(day: number): string;
+  protected abstract dayFormatter(day: number): string;
 
   protected dateIsInHistory(
     day: number,
@@ -179,7 +179,7 @@ export abstract class BaseReservationtrategy
 
     const mDay = new MonthDay(
       [monthInfo.year, monthInfo.month, day],
-      this.dayFormater(day),
+      this.dayFormatter(day),
       dayOfWeek,
       isInCurrentMonth,
       reservationState[0],
@@ -293,14 +293,14 @@ export abstract class BaseReservationtrategy
 
     while (compareDateItem(workingDate, endDate) <= 0) {
       
-      const [isReserved, _] = this.dateIsReserved(
+      const [isReserved, onBorderOfReservation] = this.dateIsReserved(
         workingDate[datItemParts.day],
         workingMonth,
         workingReservations,
         workingPrevReservations
       );
 
-      if (isReserved) {
+      if (isReserved && !onBorderOfReservation) {
         return compareDateItem(workingDate, selectedDay.date) !== 0
           ? { dateItem: selectedDay.date, duration: 1 }
           : undefined;

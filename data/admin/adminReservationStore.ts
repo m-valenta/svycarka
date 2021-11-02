@@ -230,7 +230,24 @@ class AdminReservationStore implements IAdminReservationStore {
   @b.bind
   saveReservation() {
     if (this._selectedReservation === undefined) return;
-    this._editReservationConnector?.sendRequest(this._selectedReservation);
+
+    let selectedDate = this._selectedReservation.ReservationData.dateFrom;
+    let selectedData = Object.assign({}, this._selectedReservation.ReservationData);
+    selectedData.dateFrom = new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        12,
+        0,
+        0,
+        0
+      );
+
+    this._editReservationConnector?.sendRequest(<IReservationEditRequest>{
+      Message: this._selectedReservation.Message,
+      Subject: this._selectedReservation.Subject,
+      ReservationData: selectedData    
+    });
   }
 
   attachBookmarkConnector(connector: IAjaxConnector) {

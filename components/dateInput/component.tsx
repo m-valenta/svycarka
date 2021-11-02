@@ -6,7 +6,7 @@ import * as styles from "./styles";
 import { observable } from "bobx";
 import { Buble } from "../buble/component";
 import { Calendar } from "../calendar/component";
-import { basicReservationtrategy } from "../calendar/reservationStrategies/basicStrategy";
+import { basicReservationStrategy } from "../calendar/reservationStrategies/basicStrategy";
 import { appStore } from "../../data/appStore";
 import { invalidItemStyle } from "../../styleConstants";
 
@@ -41,7 +41,7 @@ export class DateInput extends b.Component<IData> {
             mainContent: (
               <Calendar
                 store={this.data.store}
-                reservationStrategy={basicReservationtrategy}
+                reservationStrategy={basicReservationStrategy}
                 onClose={() => (this.isSelectionOpen = false)}
               />
             )
