@@ -94,19 +94,19 @@
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
     0,
-    "Winter season: 22 900 CZK / cottage (February – March)"
+    "Winter season: 24 900 CZK / cottage (February – March)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
     null,
     0,
-    "Summer season: 19 900 CZK / cottage (July – August)"
+    "Summer season: 24 900 CZK / cottage (July – August)"
   ],
   [
     "Out of seeson 19000 Kč / for cottage",
     null,
     0,
-    "Out of season: 16 900 CZK / cottage"
+    "Out of season: 19 900 CZK / cottage"
   ],
   [
     "Weekend price",
@@ -117,7 +117,7 @@
     "Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu",
     null,
     0,
-    "The reservation is possible only out of season: 8 900 CZK / cottage"
+    "The reservation is possible only out of season: 9 900 CZK / cottage"
   ],
   [
     "Christmas",
@@ -134,7 +134,7 @@
     "19 500 CZK / for Christmas holidays including Christmas Eve",
     null,
     0,
-    "22 900 CZK / Christmas holiday including Christmas Eve"
+    "24 900 CZK / Christmas holiday including Christmas Eve"
   ],
   [
     "New Year's Eve - we're still free",
@@ -152,7 +152,7 @@
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0,
-    "45 900 CZK / a week including New Year´s Eve"
+    "54 900 CZK / a week including New Year´s Eve"
   ],
   [
     "Spring holiday",
@@ -163,7 +163,7 @@
     "22 900 Kč",
     null,
     0,
-    "22 900 CZK"
+    "24 900 CZK"
   ],
   [
     "Easter",
@@ -174,7 +174,7 @@
     "16 000 Kč",
     null,
     0,
-    "16 900 CZK"
+    "19 900 CZK"
   ],
   [
     "How much?",

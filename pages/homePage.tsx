@@ -7,6 +7,7 @@ import { appStore } from "../data/appStore";
 import { Page, IPageStore } from "../data/pageStore/types";
 import { Gallery } from "../components/gallery/component";
 import { ScrollToWrapper } from "../components/scrollToWrapper/component";
+import { t } from "bobril-g11n";
 
 class HomePage extends b.Component {
   readonly pageStore: IPageStore = appStore().pageStore;

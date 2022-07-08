@@ -106,19 +106,19 @@
     "Winter season: 19 500Kč / for cottage (december - march)",
     null,
     0,
-    "Zimní sezona: 22 900 Kč/za chalupu (únor–březen)"
+    "Zimní sezona: 24 900 Kč/za chalupu (únor–březen)"
   ],
   [
     "Summer season: 17 000Kč / for cottage (july - august)",
     null,
     0,
-    "Letní sezona: 19 900 Kč/za chalupu (červenec–srpen)"
+    "Letní sezona: 24 900 Kč/za chalupu (červenec–srpen)"
   ],
   [
     "Out of seeson 19000 Kč / for cottage",
     null,
     0,
-    "Mimo sezónu: 16 900 Kč/za chalupu"
+    "Mimo sezónu: 19 900 Kč/za chalupu"
   ],
   [
     "Weekend price",
@@ -130,7 +130,7 @@
     "Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu",
     null,
     0,
-    "Rezervace možná pouze mimo sezónu: 8 900 Kč/za chalupu"
+    "Rezervace možná pouze mimo sezónu: 9 900 Kč/za chalupu"
   ],
   [
     "Christmas",
@@ -148,7 +148,7 @@
     "19 500 CZK / for Christmas holidays including Christmas Eve",
     null,
     0,
-    "22 900 Kč/za Vánoční svátky vč. Štědrého dne"
+    "24 900 Kč/za Vánoční svátky vč. Štědrého dne"
   ],
   [
     "New Year's Eve - we're still free",
@@ -166,7 +166,7 @@
     "44 500 Kč / per week including New Year's Eve and New Year's Eve",
     null,
     0,
-    "45 900 Kč/za týden vč. Silvestru a Nového roku"
+    "54 900 Kč/za týden vč. Silvestru a Nového roku"
   ],
   [
     "Spring holiday",
@@ -177,7 +177,8 @@
   [
     "22 900 Kč",
     null,
-    0
+    0,
+    "24 900 Kč"
   ],
   [
     "Easter",
@@ -189,7 +190,7 @@
     "16 000 Kč",
     null,
     0,
-    "16 900 Kč"
+    "19 900 Kč"
   ],
   [
     "How much?",
@@ -531,7 +532,7 @@
     "Upon arrival you will be charged a resort fee of 10 CZK / person per day and a refundable deposit of 4 000 CZK, which will be refunded on your departure day.",
     null,
     0,
-    "Při příjezdu vám bude započítán rekreační poplatek obci ve výši 21 Kč/dospělá osoba za den a vratná kauce 4 000 Kč, která vám bude vrácena v den vašeho odjezdu."
+    "Při příjezdu vám bude započítán rekreační poplatek obci ve výši 21 Kč/dospělá osoba za den a vratná kauce 5 000 Kč, která vám bude vrácena v den vašeho odjezdu."
   ],
   [
     "The price includes water, bedding, parking, WIFI and TV. The price does not include electricity consumption (will be charged on the day of departure according to the price list), firewood (you will be charged on the day of departure), the basic kitchen detergents, bathroom and toilet paper.",
