@@ -8,9 +8,9 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "bobril": "^17.10.0",
-    "bobril-g11n": "^5.0.3",
-    "bobx": "^0.29.0"
+    "bobril": "^20.3.2",
+    "bobril-g11n": "^5.0.4",
+    "bobx": "^1.0.7"
   },
   "bobril": {
     "title": "Švýcarka",

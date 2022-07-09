@@ -91,22 +91,22 @@
     0
   ],
   [
-    "Winter season: 19 500Kč / for cottage (december - march)",
+    "Winter season: {value_0} Kč / for cottage (december - march)",
     null,
-    0,
-    "Winter season: 24 900 CZK / cottage (February – March)"
+    1,
+    "Winter season: {value_0} CZK / cottage (February – March)"
   ],
   [
-    "Summer season: 17 000Kč / for cottage (july - august)",
+    "Summer season: {value_0} Kč / for cottage (july - august)",
     null,
-    0,
-    "Summer season: 24 900 CZK / cottage (July – August)"
+    1,
+    "Summer season: {value_0} CZK / cottage (July – August)"
   ],
   [
-    "Out of seeson 19000 Kč / for cottage",
+    "Out of seeson {value_0} Kč / for cottage",
     null,
-    0,
-    "Out of season: 19 900 CZK / cottage"
+    1,
+    "Out of season: {value_0} CZK / cottage"
   ],
   [
     "Weekend price",
@@ -114,10 +114,10 @@
     0
   ],
   [
-    "Rezervace je možná pouze mimo sezónu: 8 000Kč / za chalupu",
+    "Rezervace je možná pouze mimo sezónu: {value_0} Kč / za chalupu",
     null,
-    0,
-    "The reservation is possible only out of season: 9 900 CZK / cottage"
+    1,
+    "The reservation is possible only out of season: {value_0} CZK / cottage"
   ],
   [
     "Christmas",
@@ -131,10 +131,10 @@
     "(bonus: christmas decoration, candies, a christmas tree)"
   ],
   [
-    "19 500 CZK / for Christmas holidays including Christmas Eve",
+    "{value_0} CZK / for Christmas holidays including Christmas Eve",
     null,
-    0,
-    "24 900 CZK / Christmas holiday including Christmas Eve"
+    1,
+    "{value_0} CZK / Christmas holiday including Christmas Eve"
   ],
   [
     "New Year's Eve - we're still free",
@@ -149,10 +149,10 @@
     "(bonus: christmas decoration and a bottle of champagne)"
   ],
   [
-    "44 500 Kč / per week including New Year's Eve and New Year's Eve",
+    "{value_0} Kč / per week including New Year's Eve and New Year's Eve",
     null,
-    0,
-    "54 900 CZK / a week including New Year´s Eve"
+    1,
+    "{value_0} CZK / a week including New Year´s Eve"
   ],
   [
     "Spring holiday",
@@ -160,10 +160,10 @@
     0
   ],
   [
-    "22 900 Kč",
+    "spring: {value_0} Kč",
     null,
-    0,
-    "24 900 CZK"
+    1,
+    "{value_0} CZK"
   ],
   [
     "Easter",
@@ -171,10 +171,10 @@
     0
   ],
   [
-    "16 000 Kč",
+    "easters: {value_0} Kč",
     null,
-    0,
-    "19 900 CZK"
+    1,
+    "{value_0} CZK"
   ],
   [
     "How much?",
@@ -474,10 +474,10 @@
     "The rent price is variable, it depends on the length of your stay and the actual season. The possible shortest term of staying are two nights. We offer a discount price for the whole week rent."
   ],
   [
-    "Upon arrival you will be charged a resort fee of 10 CZK / person per day and a refundable deposit of 4 000 CZK, which will be refunded on your departure day.",
+    "Upon arrival you will be charged a resort fee of {value_0} CZK / person per day and a refundable deposit of {value_1} CZK, which will be refunded on your departure day.",
     null,
-    0,
-    "When we receive the required deposit, your reservation will be locked in. The deposit must be sent into the following bank account...within three working days. Don´t forget to include words “Reservation Svycarka” and your surname on the payment order, please. On your arrival you will have to pay, the rest of the rental price, the tourist tax which is paid to the village (10 CZK/ adult person/ day) the refundable deposit which will be returned on departure."
+    1,
+    "When we receive the required deposit, your reservation will be locked in. The deposit must be sent into the following bank account...within three working days. Don´t forget to include words “Reservation Svycarka” and your surname on the payment order, please. On your arrival you will have to pay, the rest of the rental price, the tourist tax which is paid to the village ({value_0} CZK/ adult person/ day) the refundable deposit which will be returned on departure."
   ],
   [
     "The price includes water, bedding, parking, WIFI and TV. The price does not include electricity consumption (will be charged on the day of departure according to the price list), firewood (you will be charged on the day of departure), the basic kitchen detergents, bathroom and toilet paper.",

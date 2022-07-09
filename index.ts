@@ -16,6 +16,7 @@ import { accomodationRulesPage } from "./pages/accommodationRulesPage";
 import { gdprPage } from "./pages/gdpr";
 import { pageTitle } from "./components/Title/title";
 import { errorPage } from "./pages/error";
+import { configurationPage } from "./pages/admin/configuration";
 
 // CSS files
 b.asset("./css/reset.css");
@@ -56,6 +57,11 @@ initGlobalization({
         url: "/admin/resevations",
         name: "adminReservations",
         handler: reservationsPage
+      }),
+      b.route({
+        url: "/admin/configuration",
+        name: "adminConfiguration",
+        handler: configurationPage
       }),
     ]),
     b.route({ handler: masterPage }, [

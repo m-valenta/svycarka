@@ -17,6 +17,7 @@ import {
 import { Modal } from "../components/modal/component";
 import { ReservationForm } from "../components/reservationSection/formComponent";
 import { FinalizedReservation } from "../components/reservationSection/finalizedComponent";
+import { getConfigValues } from "../utils/localeUtils";
 
 const styles = {
   contentStyle: b.styleDef({
@@ -87,9 +88,16 @@ class ReservationPage extends b.Component {
         </TextSection>
         <PriceInfo fontSize={16} />
         <div style={styles.textBlockInternal}>
-          {t(
-            "Upon arrival you will be charged a resort fee of 10 CZK / person per day and a refundable deposit of 4 000 CZK, which will be refunded on your departure day."
-          )}
+          {
+            //t("Upon arrival you will be charged a resort fee of 10 CZK / person per day and a refundable deposit of 4 000 CZK, which will be refunded on your departure day.")
+            t(
+              "Upon arrival you will be charged a resort fee of {value_0} CZK / person per day and a refundable deposit of {value_1} CZK, which will be refunded on your departure day.",
+              getConfigValues([
+                { key: "rekreacni_poplatek", defaultValue: "21" },
+                { key: "kauce", defaultValue: "5000" },
+              ])
+            )
+          }
         </div>
         <div style={styles.iconSetWrapper}>
           <ReservationIconSet />
@@ -123,18 +131,25 @@ class ReservationPage extends b.Component {
         </div>
         {this.reservationStore.reservationFormState ===
         ReservationFormState.visible ? (
-          <Modal key="reservation_modal_form"
+          <Modal
+            key="reservation_modal_form"
             close={() => {
               this.reservationStore.clear();
               this.reservationStore.reservationFormState =
                 ReservationFormState.hidden;
             }}
           >
-            {<ReservationForm key="reservation_form" store={this.reservationStore} />}
+            {
+              <ReservationForm
+                key="reservation_form"
+                store={this.reservationStore}
+              />
+            }
           </Modal>
         ) : this.reservationStore.reservationFormState ===
           ReservationFormState.finalized ? (
-          <Modal key="reservation_modal_finalization"
+          <Modal
+            key="reservation_modal_finalization"
             horizontalCentered={true}
             close={() => {
               this.reservationStore.clear();

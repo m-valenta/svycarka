@@ -61,7 +61,7 @@ class GalleryStore implements IGalleryStore {
   }
 }
 
-export function galletyStoreFactory(): IGalleryStore {
+export function galleryStoreFactory(): IGalleryStore {
   var store = new GalleryStore();
 
   store.attachContentConnector(

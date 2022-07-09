@@ -5,7 +5,8 @@ import { colors } from "../../styleConstants";
 import { IDataWithActiveRouteHandler } from "../masterPage";
 import {
   adminUsersTransition,
-  adminRegistrationsTransition as adminReservationsTransition
+  adminRegistrationsTransition as adminReservationsTransition,
+  adminConfigurationTransition
 } from "../../transitions";
 
 const styles = {
@@ -45,7 +46,7 @@ export class AdminHomePage extends b.Component<IDataWithActiveRouteHandler> {
     return true;
   }
 
-  protected runTrunsition(transition: b.IRouteTransition) {
+  protected runTransition(transition: b.IRouteTransition) {
     b.runTransition(transition);
     return true;
   }
@@ -72,7 +73,7 @@ export class AdminHomePage extends b.Component<IDataWithActiveRouteHandler> {
           <div style={styles.menuLine}>
             <Button
               explicitWidth={190}
-              onClick={() => this.runTrunsition(adminUsersTransition)}
+              onClick={() => this.runTransition(adminUsersTransition)}
               text="Uzivatelé"
               colorScheme={
                 activeRouteName === adminUsersTransition.name
@@ -84,10 +85,22 @@ export class AdminHomePage extends b.Component<IDataWithActiveRouteHandler> {
           <div style={styles.menuLine}>
             <Button
               explicitWidth={190}
-              onClick={() => this.runTrunsition(adminReservationsTransition)}
+              onClick={() => this.runTransition(adminReservationsTransition)}
               text="Rezervace"
               colorScheme={
                 activeRouteName === adminReservationsTransition.name
+                  ? colors.buttonRed
+                  : colors.buttonYellow
+              }
+            />
+          </div>
+          <div style={styles.menuLine}>
+            <Button
+              explicitWidth={190}
+              onClick={() => this.runTransition(adminConfigurationTransition)}
+              text="Nastavení"
+              colorScheme={
+                activeRouteName === adminConfigurationTransition.name
                   ? colors.buttonRed
                   : colors.buttonYellow
               }

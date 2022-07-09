@@ -11,6 +11,9 @@ export const adminUsersTransition = b.createRedirectReplace("adminUsers");
 export const adminRegistrationsTransition = b.createRedirectReplace(
   "adminReservations"
 );
+export const adminConfigurationTransition = b.createRedirectReplace(
+  "adminConfiguration"
+);
 
 export const accommodationRulesTransition = b.createRedirectReplace(
   "accommodationRules"
